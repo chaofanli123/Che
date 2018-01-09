@@ -9,7 +9,6 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('E:/demo/Che/资料/aichegongjiang-debug.jks')
         }
     }
     compileSdkVersion 25
@@ -163,6 +162,6 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
     //compile 'com.pgyersdk:sdk:2.5.6'
-    compile project(":signature-pad")
+    compile project(':signature-pad')
 }
 

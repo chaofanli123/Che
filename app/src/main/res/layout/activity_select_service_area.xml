@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_select_service_area"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.victor.che.ui.SelectServiceAreaActivity">
+<include layout="@layout/top_bar_commom"/>
+    <me.yokeyword.indexablerv.IndexableLayout
+        android:id="@+id/indexableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:indexBar_background="#08000000"
+        app:indexBar_layout_width="30dp"
+        app:indexBar_textColor="@color/black_text"
+        app:indexBar_textSpace="8dp"/>
+</LinearLayout>

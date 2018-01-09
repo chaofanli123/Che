@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 订单类型列表子项 -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/tv_name"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:drawableRight="@drawable/ic_checked"
+          android:ellipsize="end"
+          android:gravity="center_vertical"
+          android:minHeight="50dp"
+          android:paddingLeft="20dp"
+          android:paddingRight="20dp"
+          android:text="全部"
+          android:textColor="@color/black_text"
+          android:textSize="18sp"/>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <!--<in.srain.cube.views.ptr.PtrClassicFrameLayout-->
+        <!--android:id="@+id/mPtrFrame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="22dp"
+                    android:drawableTop="@drawable/ic_receipt_result"
+                    android:gravity="center"
+                    android:paddingBottom="32px"
+                    android:paddingTop="88px"
+                    android:text="收款成功"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="32px"/>
+
+                <LinearLayout
+                    android:id="@+id/area_perfect_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="64px"
+                    android:paddingLeft="@dimen/common_padding2"
+                    android:paddingRight="@dimen/common_padding2"
+                    android:paddingTop="64px">
+
+                    <include layout="@layout/common_divider"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="64px"
+                        android:text="该用户信息不完整，可能对以后服务造成不便，建议完善用户信息！"
+                        android:textColor="#ff6d00"
+                        android:textSize="32px"/>
+
+                    <Button
+                        android:id="@+id/btn_perfect"
+                        android:layout_width="260px"
+                        android:layout_height="70px"
+                        android:layout_marginBottom="64px"
+                        android:layout_marginTop="64px"
+                        android:background="@drawable/sl_btn_perfect_userinfo"
+                        android:text="完善信息"
+                        android:textColor="@color/white"
+                        android:textSize="32px"/>
+
+                    <include layout="@layout/common_divider"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80px"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_goto_receipt"
+                        android:layout_width="260px"
+                        android:layout_height="70px"
+                        android:layout_marginLeft="60px"
+                        android:background="@drawable/sl_btn_goto_receipt"
+                        android:text="继续收款"
+                        android:textColor="@color/theme_color"
+                        android:textSize="32px"/>
+
+                    <Button
+                        android:id="@+id/btn_goto_index"
+                        android:layout_width="260px"
+                        android:layout_height="70px"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="60px"
+                        android:background="@drawable/sl_btn_goto_index"
+                        android:text="回到首页"
+                        android:textColor="@color/light_gray_text"
+                        android:textSize="32px"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/common_bg"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可赠送优惠券"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="13sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants">
+                <com.victor.che.widget.MyRecyclerView
+                    android:id="@+id/mRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    />
+            </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+    <!--</in.srain.cube.views.ptr.PtrClassicFrameLayout>-->
+</LinearLayout>

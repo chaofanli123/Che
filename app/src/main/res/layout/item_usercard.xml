@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?><!--会员卡列表子项-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sl_bg_car_item"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_padding2">
+
+        <ImageView
+            android:id="@+id/img_carpic"
+            android:layout_width="104px"
+            android:layout_height="104px"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/def_baoxian"
+            android:scaleType="center"
+            />
+        <TextView
+            android:id="@+id/tv_usercard_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32px"
+            android:layout_toRightOf="@id/img_carpic"
+            android:maxLines="1"
+            android:textColor="@color/black_text"
+            android:textSize="30px"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_usercar_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_carpic"
+            android:layout_below="@id/tv_usercard_name"
+            android:layout_marginLeft="32px"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:textColor="@color/light_gray_text"
+            android:textSize="28px"/>
+
+        <TextView
+            android:id="@+id/tv_cardrving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="查看行驶证"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textColor="@color/theme_color"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96px"
+        android:layout_marginLeft="16dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_gravity="center"
+            android:layout_marginLeft="32px"
+            android:layout_marginRight="32px"
+            android:layout_toLeftOf="@id/tv_recharge"
+            android:background="@drawable/sl_btn_goto_index"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:text="编辑"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="26px"/>
+
+        <TextView
+            android:id="@+id/tv_twocar_values"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/common_padding2"
+            android:background="@drawable/sl_btn_recharge"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:text="二手车估值"
+            android:textColor="@color/textcolor_theme_color_pressed"
+            android:textSize="26px"/>
+
+        <TextView
+            android:id="@+id/tv_baoxian_query"
+            android:layout_width="wrap_content"
+            android:layout_height="50px"
+            android:layout_gravity="center"
+            android:background="@drawable/sl_btn_recharge"
+            android:layout_marginRight="@dimen/common_padding2"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:text="查保险"
+            android:textColor="@color/textcolor_theme_color_pressed"
+            android:textSize="26px"/>
+
+    </LinearLayout>
+
+</LinearLayout>

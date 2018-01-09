@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_push_notification_settings"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="30px"
+                android:background="@drawable/sl_common_white_btn"
+                android:drawableLeft="@drawable/ic_push_notification"
+                android:drawablePadding="15dp"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding"
+                android:text="消息提醒设置"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"
+                android:visibility="gone"/>
+
+            <include
+                layout="@layout/common_divider"
+                android:visibility="gone"/>
+
+            <RelativeLayout
+                android:id="@+id/area_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="30px"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="清除缓存"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:id="@+id/tv_cache_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center"
+                    android:text="0M"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/area_function"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="30px"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="功能介绍"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_arrow_right"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/area_check_update"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="当前版本"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:id="@+id/tv_version_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center"
+                    android:text="v1.0.0"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/area_contact_us"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="30px"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="客服电话"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center"
+                    android:text="@string/service_phone"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/sl_common_white_btn"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding"
+                android:text="意见反馈"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"/>
+
+
+            <TextView
+                android:id="@+id/tv_about_us"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/sl_common_white_btn"
+                android:drawablePadding="15dp"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding"
+                android:text="关于我们"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"/>
+
+            <TextView
+                android:id="@id/btn_operate"
+                android:layout_width="match_parent"
+                android:layout_height="96px"
+                android:layout_marginLeft="@dimen/common_padding2"
+                android:layout_marginRight="@dimen/common_padding2"
+                android:layout_marginTop="30px"
+                android:background="@drawable/bg_login_button"
+                android:gravity="center"
+                android:text="退出登录"
+                android:textColor="@color/textcolor_white_pressed"
+                android:textSize="@dimen/large_font_size"
+                android:textStyle="bold"/>
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

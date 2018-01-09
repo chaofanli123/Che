@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <!-- 车牌归属地键盘默认的边框颜色 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <stroke
+        android:width="0.5dp"
+        android:color="#5f7182" />
+
+</shape>

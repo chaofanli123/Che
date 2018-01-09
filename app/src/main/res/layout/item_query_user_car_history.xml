@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_marginLeft="@dimen/common_padding2"
+              android:layout_marginRight="@dimen/common_padding2"
+              android:layout_marginTop="@dimen/item_margin"
+              android:background="@drawable/shp_user_car_history_top"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/common_padding2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="路虎 揽胜"
+                android:textSize="@dimen/font_size_26px"
+                android:textColor="@color/black_text"
+                android:id="@+id/car_model"
+                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="豫A12345"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/light_gray_text"
+            android:id="@+id/car_plate_no"
+            android:layout_below="@+id/car_model"
+            android:layout_marginTop="@dimen/item_margin"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/light_gray_text"
+            android:text="郑州"
+            android:layout_below="@+id/car_model"
+            android:layout_alignParentRight="true"
+            android:paddingTop="@dimen/item_margin"
+            android:id="@+id/tv_city"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_city"
+            android:textSize="@dimen/little_font_size"
+            android:paddingTop="@dimen/item_margin"
+            android:textColor="@color/light_gray_text"
+            android:text="2017-04-13"
+            android:id="@+id/tv_time"
+            />
+    </RelativeLayout>
+    <include layout="@layout/common_divider"/>
+    <LinearLayout
+        android:id="@+id/ll_user_car_success"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="@dimen/common_topbar_height">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收："
+                android:textSize="@dimen/little_font_size"
+                android:textColor="@color/light_gray_text"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/large_font_size"
+                android:textColor="@color/theme_color"
+                android:text="4.55万"
+                android:id="@+id/tv_car_purchase_price"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销："
+                android:textSize="@dimen/little_font_size"
+                android:textColor="@color/light_gray_text"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/large_font_size"
+                android:textColor="@color/on_sale"
+                android:text="4.55万"
+                android:id="@+id/tv_deal_price"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:id="@+id/ll_user_car_error"
+        android:visibility="gone"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="估值失败，请重新提交！"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/c_ef5350"
+            android:id="@+id/tv_user_car_error_msg"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

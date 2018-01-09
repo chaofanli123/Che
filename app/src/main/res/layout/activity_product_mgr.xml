@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><!--产品管理的界面-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:background="@color/theme_color">
+
+        <ImageView
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:scaleType="center"
+            android:src="@drawable/sl_topbar_back"/>
+
+        <RadioGroup
+            android:id="@+id/mRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rdo_in_sale"
+                android:layout_width="150px"
+                android:layout_height="56px"
+                android:background="@drawable/sl_on_sale"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="在售"
+                android:textColor="@color/textcolor_on_off_sale"
+                android:textSize="@dimen/font_size_28px" />
+
+            <RadioButton
+                android:id="@+id/rdo_off_sale"
+                android:layout_width="150px"
+                android:layout_height="56px"
+                android:background="@drawable/sl_off_sale"
+                android:button="@null"
+                android:gravity="center"
+                android:text="下架"
+                android:textColor="@color/textcolor_on_off_sale"
+                android:textSize="@dimen/font_size_28px"/>
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/topbar_right"
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/sl_topbar_more"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:orientation="horizontal"
+        >
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/pager_tab"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="80px"
+            android:background="@color/white"
+            app:pstsDividerColor="@color/transparent"
+            app:pstsDividerPadding="20px"
+            app:pstsIndicatorColor="@color/theme_color"
+            app:pstsIndicatorHeight="4dp"
+            app:pstsShouldExpand="false"
+            app:pstsTabPaddingLeftRight="32dp"
+            app:pstsUnderlineColor="@color/divider"
+            app:pstsUnderlineHeight="1dp"/>
+        <ImageView
+            android:id="@+id/icon_category"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_server_manger"
+            android:paddingLeft="5dp"
+            android:scaleType="center"
+            android:src="@drawable/icon_server_manger"
+            />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@id/mViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

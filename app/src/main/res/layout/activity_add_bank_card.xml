@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/top_bar_commom"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingBottom="@dimen/item_margin"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingTop="@dimen/item_margin"
+            android:text="请添加您的储值卡,不支持信用卡"
+            android:textColor="@color/bule"
+            android:textSize="@dimen/little_font_size"
+            />
+
+        <LinearLayout
+            style="@style/style_receipt_liner">
+
+            <TextView
+                android:id="@+id/tv_label_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/common_padding2"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/font_size_28px"
+                android:text="持卡人 "
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:textColor="#e53930"
+                android:text="*"
+                android:textSize="15dp"
+                />
+            <com.victor.che.widget.ClearEditText
+                android:id="@+id/et_card_user_name"
+                style="@style/common_edittext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:cursorVisible="true"
+                android:layout_marginLeft="92px"
+                android:hint="请输入持卡人姓名"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textColor="@color/black_text"
+                android:textColorHint="@color/gray_text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/font_size_28px"/>
+
+            <ImageView
+
+                android:id="@+id/iv_choose_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/common_padding2"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_hint"/>
+        </LinearLayout>
+
+        <include layout="@layout/common_divider"/>
+
+        <LinearLayout
+            style="@style/style_receipt_liner">
+            <TextView
+                android:id="@+id/tv_label_bank_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/common_padding2"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/font_size_28px"
+                android:text="银行"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:textColor="#e53930"
+                android:text="*"
+                android:textSize="15dp"
+                />
+            <com.victor.che.widget.ClearEditText
+                android:id="@+id/et_bank_name"
+                style="@style/common_edittext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:cursorVisible="true"
+                android:layout_marginLeft="122px"
+                android:hint="请输入银行名称"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textColor="@color/black_text"
+                android:textColorHint="@color/gray_text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/font_size_28px"/>
+        </LinearLayout>
+
+        <include layout="@layout/common_divider"/>
+
+        <LinearLayout
+            style="@style/style_receipt_liner">
+
+            <TextView
+                android:id="@+id/tv_label_card_id"
+                android:text="卡号"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/common_padding2"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/font_size_28px"
+                android:inputType="number"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="6dp"
+                android:textColor="#e53930"
+                android:text="*"
+                android:textSize="15dp"
+                />
+            <com.victor.che.widget.ClearEditText
+                android:id="@+id/et_bank_card_id"
+                style="@style/common_edittext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:cursorVisible="true"
+                android:inputType="phone"
+                android:hint="请输入银行卡卡号"
+                android:layout_marginLeft="122px"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textColor="@color/black_text"
+                android:textColorHint="@color/gray_text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/font_size_28px"/>
+        </LinearLayout>
+
+        <include layout="@layout/common_divider"/>
+
+        <LinearLayout
+            style="@style/style_receipt_liner">
+
+            <TextView
+                style="@style/style_receipt_text"
+                android:text="分行"
+                />
+
+            <com.victor.che.widget.ClearEditText
+                android:id="@+id/et_bank_branch"
+                style="@style/common_edittext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:cursorVisible="true"
+                android:hint="请输入分行名称"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textColor="@color/black_text"
+                android:textColorHint="@color/gray_text"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="@dimen/font_size_28px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        >
+        <Button
+            android:id="@id/btn_operate"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/sl_confirm_pay"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="32px"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

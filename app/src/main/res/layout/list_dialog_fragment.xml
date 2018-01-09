@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自定义单选列表对话框 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/shp_alert_dialog"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/shp_dialog_title"
+        android:gravity="center"
+        android:text="请选择"
+        android:textColor="@color/white"
+        android:textSize="36px"/>
+
+    <cn.carbs.android.maxheightview.library.MaxHeightView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mhv_HeightDimen="450dp">
+
+        <!--此处ListView使用透明背景，是为了与外层的圆角矩形不冲突-->
+        <ListView
+            android:id="@+id/mListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:divider="@color/light_gray_text"
+            android:dividerHeight="0.5dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"/>
+    </cn.carbs.android.maxheightview.library.MaxHeightView>
+
+</LinearLayout>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?><!--同用的下拉刷新界面-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+    <include layout="@layout/common_topbar"/>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/tv_shopping_car_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="豫A12345"
+            android:textSize="@dimen/shopping_font_size"
+            android:textColor="@color/on_sale"
+            />
+        <TextView
+            android:id="@+id/tv_shopping_car_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/13812345678"
+            android:textSize="@dimen/shopping_font_size"
+            android:textColor="@color/on_sale"
+            />
+        <TextView
+            android:id="@+id/tv_shopping_car_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/2017-04-27"
+            android:textSize="@dimen/shopping_font_size"
+            android:textColor="@color/on_sale"
+            />
+    </LinearLayout>-->
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:paddingRight="@dimen/common_padding2"
+        android:paddingLeft="@dimen/common_padding2"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_all_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="总计:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_all_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200.00元"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/theme_color"
+            android:layout_marginLeft="@dimen/item_margin"
+            android:layout_toRightOf="@+id/tv_all_text"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+
+            <View
+                android:layout_width="2px"
+                android:layout_height="50px"
+                android:background="@color/common_bg"
+                />
+
+            <ImageView
+                android:id="@+id/iv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_clear_shopping_car"
+                android:layout_marginLeft="@dimen/common_padding2"
+                />
+
+            <TextView
+                android:layout_marginLeft="10px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="清空"
+                android:textSize="@dimen/font_size_26px"
+                android:textColor="@color/dark_gray_text"
+                android:id="@+id/tv_clear_text"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/ll_shopping_car"
+            android:layout_width="140px"
+            android:layout_height="match_parent"
+            android:background="@color/bg_shopping_car"
+            >
+            <ImageView
+                android:id="@+id/iv_shopping_car"
+                android:layout_width="40px"
+                android:layout_height="40px"
+                android:background="@drawable/sl_shopping_car"
+                android:layout_centerInParent="true"
+                />
+
+            <TextView
+                android:id="@+id/tv_shopping_car_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/common_padding2"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@drawable/bg_shopping_car_num"
+                android:textColor="@color/white"
+                android:textSize="@dimen/little_font_size"
+                android:gravity="center"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btn_pending_order"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/bg_pending"
+            android:text="提交订单暂不收银"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@id/btn_operate"
+            android:layout_width="250px"
+            android:layout_height="match_parent"
+            android:background="@color/theme_color"
+            android:text="确认收款"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_28px"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                layout="@layout/fragment_insurance_datail"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/item_margin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="@dimen/common_padding2"
+                android:paddingRight="@dimen/common_padding2"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/padding_40px">
+                    <TextView
+                        android:layout_width="230px"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="收件人"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="张三"
+                        android:id="@+id/tv_consignee_name"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        android:gravity="right"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/common_padding2"
+                    >
+
+                    <TextView
+                        android:layout_width="230px"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="收件人手机号"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="张三"
+                        android:gravity="right"
+                        android:id="@+id/tv_consignee_mobile"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/common_padding2"
+                    android:paddingBottom="@dimen/padding_40px"
+                    >
+
+                    <TextView
+                        android:layout_width="230px"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="收件地址"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="收件地址"
+                        android:gravity="right"
+                        android:id="@+id/tv_consignee_address"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:paddingRight="@dimen/common_padding2"
+                android:paddingLeft="@dimen/common_padding2">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="实付"
+                    android:textSize="@dimen/font_size_28px"
+                    android:textColor="@color/black_text"
+                    android:layout_centerVertical="true"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100.00元"
+                    android:textSize="@dimen/font_size_28px"
+                    android:textColor="@color/c_ef5350"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/tv_actual_pay"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

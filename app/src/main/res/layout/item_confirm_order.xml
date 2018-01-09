@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/common_padding2">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="轿车普洗"
+        android:textSize="@dimen/font_size_28px"
+        android:textColor="@color/black_text"
+        android:id="@+id/tv_goods_category_name"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="x2"
+        android:layout_alignParentRight="true"
+        android:textSize="@dimen/little_font_size"
+        android:textColor="@color/dark_gray_text"
+        android:id="@+id/tv_buy_num"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="19.00元"
+        android:textSize="@dimen/little_font_size"
+        android:textColor="@color/dark_gray_text"
+        android:id="@+id/tv_product_price"
+        android:layout_toLeftOf="@+id/tv_buy_num"
+        android:layout_marginRight="@dimen/common_padding2"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="合计:"
+        android:textSize="@dimen/little_font_size"
+        android:textColor="@color/dark_gray_text"
+        android:id="@+id/tv_all_price_text"
+        android:layout_below="@+id/tv_goods_category_name"
+        android:layout_marginTop="@dimen/common_padding2"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100.00元"
+        android:textSize="@dimen/little_font_size"
+        android:textColor="@color/dark_gray_text"
+        android:id="@+id/tv_all_price"
+        android:layout_below="@+id/tv_goods_category_name"
+        android:layout_marginTop="@dimen/common_padding2"
+        android:layout_toRightOf="@+id/tv_all_price_text"
+        />
+</RelativeLayout>

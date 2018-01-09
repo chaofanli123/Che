@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 会员卡列表分割线样式 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--透明颜色，高度15dp-->
+    <solid android:color="@color/transparent"/>
+
+    <size android:height="15dp"/>
+
+</shape>

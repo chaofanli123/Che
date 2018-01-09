@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:background="@color/theme_color">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:scaleType="center"
+            android:src="@drawable/sl_topbar_back"/>
+
+        <TextView
+            android:id="@id/tv_topbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/topbar_font_size"/>
+
+        <ImageView
+            android:id="@+id/iv_reload"
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="20px"
+            android:src="@drawable/sl_reload"/>
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/common_network_error"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/page_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/mProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6px"
+            android:max="100"
+            android:paddingTop="0dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress_horizontal_img"
+            android:visibility="gone"/>
+
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/mWebview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mProgressBar"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?><!--日报-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/common_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/area_customer_report"
+            android:layout_width="match_parent"
+            android:layout_height="65px"
+            android:layout_marginTop="@dimen/item_margin"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/ic_daily_customer"
+            android:drawablePadding="20px"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="用户"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/middle_font_size"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="今日用户(人)"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/tv_current_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="65px"
+            android:paddingTop="30px"
+            android:text="0"
+            android:textColor="@color/theme_color"
+            android:textSize="80px"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3345c018"
+            android:orientation="horizontal"
+            android:paddingTop="15px">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="昨日用户(人)"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="增长率(%)"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3345c018"
+            android:orientation="horizontal"
+            android:paddingBottom="15px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:id="@+id/tv_last_count"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="0"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/large_font_size"/>
+
+            <TextView
+                android:id="@+id/tv_increase_rate1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="0%"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/large_font_size"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/area_sales_report"
+            android:layout_width="match_parent"
+            android:layout_height="65px"
+            android:layout_marginTop="@dimen/item_margin"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/ic_daily_sales"
+            android:drawablePadding="20px"
+            android:drawableRight="@drawable/ic_arrow_right"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="营业额"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/middle_font_size"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="今日营业额(元)"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/tv_current_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="65px"
+            android:paddingTop="30px"
+            android:text="0"
+            android:textColor="@color/theme_color"
+            android:textSize="80px"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3345c018"
+            android:orientation="horizontal"
+            android:paddingTop="15px">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="昨日营业额(元)"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="增长率(%)"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3345c018"
+            android:orientation="horizontal"
+            android:paddingBottom="15px"
+            android:paddingTop="10px">
+
+            <TextView
+                android:id="@+id/tv_last_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="0"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/large_font_size"/>
+
+            <TextView
+                android:id="@+id/tv_increase_rate2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="0%"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/large_font_size"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

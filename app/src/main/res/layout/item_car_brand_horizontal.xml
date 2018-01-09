@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选择汽车品牌列表子项 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:background="@drawable/sl_common_white_btn"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingLeft="16dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_car_logo"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/def_logo"
+        app:civ_border_color="@color/divider"
+        app:civ_border_width="0.5dp"/>
+
+    <TextView
+        android:id="@+id/tv_car_brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="汽车品牌名"
+        android:textColor="@color/black_text"
+        android:textSize="16sp"/>
+</LinearLayout>

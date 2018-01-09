@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?><!--车辆列表子项-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               android:orientation="vertical"
+    android:background="@color/white"
+                >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        >
+    <RelativeLayout
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray_bg"
+        android:layout_alignParentLeft="true"
+       >
+        <TextView
+            android:id="@+id/tv_coupon_number"
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:maxLines="1"
+            android:text="034567"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/theme_color"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+       android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="2017-6-20  12:30:30"
+            android:textColor="@color/light_gray_text"
+            android:layout_marginTop="16dp"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:text="13140198027"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/tv_chepai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:maxLines="1"
+            android:text="预A12345"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="14sp"/>
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+   android:layout_alignParentRight="true"
+    android:layout_marginRight="16dp"
+    android:layout_centerVertical="true"
+    >
+    <TextView
+        android:id="@+id/tv_send_coupon_style"
+        android:layout_width="wrap_content"
+        android:layout_height="50px"
+        android:background="@drawable/sl_btn_goto_index"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:gravity="center"
+        android:text="已使用"
+        android:textColor="@color/dark_gray_text"
+        android:textSize="26px"
+        />
+</RelativeLayout>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_bg"/>
+</LinearLayout>

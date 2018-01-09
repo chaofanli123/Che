@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 意见反馈界面 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_bg"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/label_height"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_40px"
+                android:text="问题和意见"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_input_area"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/sl_feedback_edittext"
+                    android:gravity="left|top"
+                    android:hint="请简要描述您的意见和问题"
+                    android:maxLength="200"
+                    android:maxLines="10"
+                    android:minHeight="200dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/light_gray_text"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_word_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="0/500"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <Button
+                android:id="@id/btn_operate"
+                style="@style/common_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80px"
+                android:enabled="false"
+                android:text="提交"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

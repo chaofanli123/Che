@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:background="@color/theme_color"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:scaleType="center"
+            android:src="@drawable/sl_topbar_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="收银"
+            android:textColor="@color/white"
+            android:textSize="@dimen/topbar_font_size"/>
+
+        <ImageView
+            android:id="@id/topbar_right"
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/sl_topbar_scan"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择用户"
+                    android:textColor="@color/theme_color"
+                    android:textSize="@dimen/common_padding"
+                    />
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="手机号"
+                    />
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_search"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:cursorVisible="true"
+                    android:hint="请输入手机号"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:id="@+id/iv_choose_customer"
+                    android:layout_width="88px"
+                    android:layout_height="88px"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_choose_customer"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="车牌号"
+                    />
+
+                <com.victor.che.widget.PlnAddrButton
+                    android:id="@+id/btn_pln_addr"
+                    android:layout_width="56px"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:drawableRight="@drawable/ic_drop_car_location"
+                    android:gravity="center"
+                    android:text="豫"
+                    android:textColor="@color/theme_color"
+                    android:textSize="14sp"
+                    app:iconPadding="10px"/>
+
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_search_car_number"
+                    style="@style/common_edittext"
+                    android:layout_marginLeft="@dimen/common_padding2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:cursorVisible="true"
+                    android:hint="请输入车牌号"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textCursorDrawable="@drawable/color_cursor"/>
+
+                <ImageView
+                    android:id="@+id/iv_choose_car_no"
+                    android:layout_width="88px"
+                    android:layout_height="88px"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_check_car"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                android:id="@+id/ll_use_name"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="姓名"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding2"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择服务"
+                    android:textColor="@color/theme_color"
+                    android:textSize="@dimen/common_padding"
+                    />
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                android:id="@+id/area_category"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="类别"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请选择类别"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                android:id="@+id/area_product"
+                style="@style/style_receipt_liner">
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="服务"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_product"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请选择服务类型"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                style="@style/style_receipt_liner">
+
+                <TextView
+                    android:id="@+id/textView"
+                    style="@style/style_receipt_text"
+                    android:text="数量"
+                    />
+
+                <com.victor.che.widget.AmountView
+                    android:id="@+id/amount_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    app:btnTextSize="@dimen/middle_font_size"
+                    app:tvWidth="75dp"/>
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+            <LinearLayout
+                android:id="@+id/area_selling_price"
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="售价"
+                    />
+
+                <EditText
+                    android:id="@+id/et_sale_price"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:cursorVisible="true"
+                    android:ellipsize="end"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:textColor="@color/c_ef5350"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_size_28px"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:layout_marginRight="16dp"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="@dimen/font_size_28px"
+                    />
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/common_padding2"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="其他信息"
+                    android:textColor="@color/theme_color"
+                    android:textSize="@dimen/common_padding"
+                    />
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+
+            <LinearLayout
+                android:id="@+id/area_worker"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="服务师傅"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_worker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="请选择服务师傅"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+            <LinearLayout
+                android:id="@+id/area_coupon"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="优惠券"
+                    />
+                <TextView
+                    android:id="@+id/tv_coupon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="@color/c_ef5350"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+
+            <include layout="@layout/common_divider"/>
+
+            <LinearLayout
+                android:id="@+id/lin_baoyang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/light_gray_bg"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <LinearLayout
+                    style="@style/style_receipt_liner">
+
+                    <TextView
+                        style="@style/style_receipt_text"
+                        android:text="行驶里程"
+                        />
+
+                    <com.victor.che.widget.ClearEditText
+                        android:id="@+id/tv_baoyang_distance"
+                        style="@style/common_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:hint="请输入行驶里程数"
+                        android:inputType="numberDecimal"
+                        android:maxLength="7"
+                        android:singleLine="true"
+                        android:textColor="@color/black_text"
+                        android:textColorHint="@color/gray_text"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <LinearLayout
+                    android:id="@+id/area_first_time"
+                    style="@style/style_receipt_liner">
+
+                    <TextView
+                        style="@style/style_receipt_text"
+                        android:text="下次保养时间"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_car_next_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入下次保养时间"
+                        android:textColor="@color/black_text"
+                        android:textColorHint="@color/gray_text"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#fafafa"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+     >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务金额"
+
+            android:textSize="12sp"
+            android:textColor="@color/dark_gray_text"
+            android:layout_marginLeft="16dp"
+
+            />
+        <TextView
+            android:id="@+id/tv_sum_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="¥0.00"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="优惠券"
+            android:textSize="12sp"
+            android:textColor="@color/dark_gray_text"
+            android:layout_marginLeft="24dp"
+            />
+        <TextView
+            android:id="@+id/tv_coutop_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-¥0.00"
+            android:textSize="12sp"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+       <RelativeLayout
+            android:id="@+id/ll_shopping_car"
+            android:layout_width="0dp"
+           android:layout_weight="1"
+            android:layout_height="50dp"
+           android:layout_marginLeft="16dp"
+            >
+            <TextView
+                android:id="@+id/tv_pice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+              android:text="实收款"
+                android:textSize="12sp"
+                android:textColor="@color/black_text"
+                />
+           <TextView
+               android:id="@+id/tv_reality_price"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="@dimen/item_margin"
+               android:text="¥0.00"
+               android:layout_toRightOf="@id/tv_pice"
+               android:textColor="@color/c_ef5350"
+               android:textSize="15sp"
+               android:layout_centerVertical="true"
+               android:textStyle="bold"
+               />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btn_pending_order"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:background="@drawable/sl_btn_get_captcha"
+            android:text="暂不收银"
+            android:textColor="@color/theme_color"
+            android:gravity="center"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@id/btn_operate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:background="@drawable/sl_common_theme_btn_corner"
+            android:text="确认收银"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

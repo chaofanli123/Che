@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?><!--日报，周报，月报-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color"
+        android:orientation="horizontal"
+        android:paddingTop="50px">
+
+        <TextView
+            android:id="@+id/tv_last_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="30px"
+            android:drawableTop="@drawable/ic_customer_count"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="昨日新增：0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/middle_font_size"/>
+
+        <TextView
+            android:id="@+id/tv_last_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="30px"
+            android:drawableTop="@drawable/ic_sales_amount"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="昨天营业额：0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/middle_font_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color"
+        android:orientation="horizontal"
+        android:paddingBottom="50px"
+        android:paddingTop="30px">
+
+        <TextView
+            android:id="@+id/tv_current_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="今日新增：0人"
+            android:textColor="@color/white"
+            android:textSize="@dimen/middle_font_size"/>
+
+        <TextView
+            android:id="@+id/tv_current_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/common_padding"
+            android:paddingRight="@dimen/common_padding"
+            android:text="今天营业额：0元"
+            android:textColor="@color/white"
+            android:textSize="@dimen/middle_font_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_marginTop="20px"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10px"
+            android:drawableTop="@drawable/ic_date"
+            android:gravity="center"
+            android:text="日期"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/little_font_size"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10px"
+            android:drawableTop="@drawable/ic_customer_count2"
+            android:gravity="center"
+            android:text="用户数量"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/little_font_size"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="10px"
+            android:drawableTop="@drawable/ic_sales_amount2"
+            android:gravity="center"
+            android:text="交易额"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/little_font_size"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/common_divider"/>
+
+    <com.victor.che.widget.PtrlMeiTuanFrameLayout
+        android:id="@id/mPtrFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/mRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.victor.che.widget.PtrlMeiTuanFrameLayout>
+
+</LinearLayout>

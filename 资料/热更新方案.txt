@@ -1,0 +1,9 @@
+热更新方案
+
+1、阿里
+	Dexposed	淘宝
+ 	Andfix		支付宝
+2、美团		Robust
+3、大众点评	Nuwa（女娲）
+4、微信		Tinker
+	qq空间	ClassLoader

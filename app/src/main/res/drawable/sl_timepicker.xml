@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 日报界面日期选择器 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按下状态 -->
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#CC000000"/>
+
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+    <!-- 正常状态 -->
+    <item>
+        <shape>
+            <solid android:color="#66000000"/>
+
+            <corners android:radius="30dp"/>
+        </shape>
+    </item>
+
+</selector>

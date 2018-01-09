@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">水产执法项目</string>
+    <string name="service_phone">15537326767</string>
+    <string name="rationale_camera">请在设置中允许本应用使用相机权限</string>
+    <string name="rationale_storage">请在设置中允许本应用使用存储权限</string>
+    <string name="sdcard_storage">请在设置中允许本应用使用读取sdcard权限</string>
+    <string name="rationale_shebei">请在设置中允许本应用访问设备信息权限</string>
+
+    <string name="loading">加载中</string>
+    <string name="choose_product_range">请选择可用服务</string>
+    <string name="search_hint">手机号 车牌号 会员卡号</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+
+    <string name="load_full_nofrends">非好友只能查看十条动态</string>
+    <string name="load_more">更多</string>
+    <string name="load_ing">正在加载···</string>
+    <string name="load_full">已 加 载 完 毕</string>
+    <string name="load_empty">暂无数据</string>
+    <string name="re_load_empty">暂无数据</string>
+    <string name="load_error">加载数据出错</string>
+    <string name="re_load_error">加载失败了，点击重试下</string>
+
+
+    <string name="cube_ptr_pull_down_to_refresh">下拉刷新</string>
+    <string name="cube_ptr_release_to_refresh">释放刷新</string>
+    <string name="cube_ptr_refreshing">加载中...</string>
+    <string name="cube_ptr_refresh_complete">更新完成.</string>
+
+
+</resources>

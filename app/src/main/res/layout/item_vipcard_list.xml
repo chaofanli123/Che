@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选择会员卡子项 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/root"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/common_padding2"
+              android:layout_marginRight="@dimen/common_padding2"
+              android:layout_marginTop="10px"
+              android:background="@drawable/bg_vipcard_valid"
+              android:gravity="center_vertical"
+              android:orientation="vertical"
+              android:paddingTop="48px">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2">
+
+        <ImageView
+            android:id="@+id/iv_vipcard_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_vipcard_valid"/>
+
+        <TextView
+            android:id="@+id/tv_card_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14px"
+            android:layout_toRightOf="@id/iv_vipcard_logo"
+            android:maxLines="1"
+            android:text="会员充值卡"
+            android:textColor="@color/black_text"
+            android:textSize="32px"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_cardno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:text="C1245678"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/label_available_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70px"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:text="可用服务:"
+        android:textColor="#9a9a9a"
+        android:textSize="@dimen/little_font_size"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16px"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2">
+
+        <TextView
+            android:id="@+id/tv_service_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="90px"
+            android:layout_weight="1"
+            android:text="轿车普洗、轿车精洗、面包车/越野车普洗轿车普洗、轿车精洗、面包车/越野车普洗"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/little_font_size"/>
+
+        <ImageView
+            android:id="@+id/iv_show_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_hide_content"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2">
+
+        <TextView
+            android:id="@+id/label_remain_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="余额："
+            android:textColor="#9a9a9a"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/tv_remain_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:maxLines="1"
+            android:text="200次"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/label_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="有效期："
+            android:textColor="#9a9a9a"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:maxLines="1"
+            android:text="2018-2-21"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_divider_height"
+        android:layout_marginTop="30px"
+        android:background="@color/divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/tv_recharge"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/sl_alert_dialog_left_button"
+            android:gravity="center"
+            android:text="充值"
+            android:textColor="@color/textcolor_recharge"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="30px"
+            android:background="@color/divider"/>
+
+        <Button
+            android:id="@+id/tv_edit"
+            android:layout_width="0.0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/sl_alert_dialog_right_button"
+            android:gravity="center"
+            android:text="编辑"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="@dimen/font_size_28px"/>
+    </LinearLayout>
+
+</LinearLayout>

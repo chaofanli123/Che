@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?><!--用户列表子项-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@color/white"
+                  android:gravity="center_vertical"
+                  android:orientation="horizontal"
+                  android:paddingBottom="20px"
+                  android:paddingLeft="@dimen/common_padding2"
+                  android:paddingRight="@dimen/common_padding2"
+                  android:paddingTop="20px">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="104px"
+            android:layout_height="104px"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/common_padding2"
+            android:scaleType="centerInside"
+            android:src="@drawable/def_customer_avatar"
+            android:visibility="gone"
+            app:riv_corner_radius="2dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_car_brand_series"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:maxLines="1"
+                android:text="法拉利"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"/>
+
+            <TextView
+                android:id="@+id/tv_customer_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/item_margin"
+                android:maxLines="1"
+                android:text="京A88888"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pln"
+            android:layout_width="140px"
+            android:layout_height="40px"
+            android:background="@drawable/shp_pln"
+            android:gravity="center"
+            android:text="aaaa"
+            android:layout_marginRight="24dp"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/little_font_size"/>
+
+        <ImageView
+            android:id="@+id/img_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:drawablePadding="10dp"
+            android:layout_marginLeft="@dimen/common_padding2"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider"/>
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 自定义的确认对话框 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/shp_alert_dialog"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26.669983dp"
+        android:gravity="center_horizontal"
+        android:text="标题"
+        android:textColor="@color/theme_color"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26.669983dp"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="消息内容"
+        android:textColor="@color/black_text"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33000004dp"
+        android:layout_marginTop="26.669983dp"
+        android:background="#ffe8e9eb"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="43.329987dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_negative"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/sl_alert_dialog_left_button"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="17.329987sp"/>
+
+        <View
+            android:layout_width="0.33000004dp"
+            android:layout_height="20.669983dp"
+            android:background="#ffe8e9eb"/>
+
+        <Button
+            android:id="@+id/btn_positive"
+            android:layout_width="0.0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/sl_alert_dialog_right_button"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/theme_color"
+            android:textSize="17.329987sp"/>
+    </LinearLayout>
+</LinearLayout>

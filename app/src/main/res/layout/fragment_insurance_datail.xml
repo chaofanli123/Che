@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="144px"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        >
+
+        <ImageView
+            android:id="@+id/iv_insurance_name"
+            android:layout_width="154px"
+            android:layout_height="64px"
+            android:scaleType="centerInside"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_taipingyang_insurance"
+            />
+
+        <TextView
+            android:id="@+id/tv_insurance_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="太平洋保险"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/common_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/common_padding2"
+        >
+
+        <TextView
+            android:id="@+id/tv_car_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="豫A12345"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="@dimen/little_font_size"
+            />
+
+        <TextView
+            android:id="@+id/tv_car_brand_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_car_no"
+            android:layout_marginTop="@dimen/item_margin"
+            android:text="宝马"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="@dimen/little_font_size"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="张三"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="@dimen/little_font_size"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_insurance_compulsory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="强制险"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/font_size_28px"
+                />
+
+            <TextView
+                android:id="@+id/tv_jqy_all_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="1000.00元"
+                android:textColor="@color/c_ef5350"
+                android:textSize="@dimen/font_size_26px"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tv_jqy_all_price"
+                android:text="保费小计:"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/font_size_26px"
+                />
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8px"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:paddingTop="@dimen/common_padding2"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="险种"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="保额"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />
+
+            <!--<TextView
+                android:id="@+id/tv_is_free1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="不计免赔"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />-->
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="保费"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ry_jqx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_40px"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_insurance_commercial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商业险"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/font_size_28px"
+                />
+
+            <TextView
+                android:id="@+id/tv_syx_all_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="1000.00元"
+                android:textColor="@color/c_ef5350"
+                android:textSize="@dimen/font_size_26px"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/tv_syx_all_price"
+                android:text="保费小计:"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/font_size_26px"
+                />
+
+        </RelativeLayout>
+
+        <include layout="@layout/common_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8px"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:paddingTop="@dimen/common_padding2"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="险种"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="保额"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />
+
+            <TextView
+                android:id="@+id/tv_is_free2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="不计免赔"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="保费"
+                android:textColor="@color/dark_gray_text"
+                android:textSize="@dimen/little_font_size"/>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ry_syx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_40px"
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/padding_40px"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:paddingTop="@dimen/padding_40px"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保费合计"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            />
+
+        <TextView
+            android:id="@+id/tv_insurance_all_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="100.00元"
+            android:textColor="@color/c_ef5350"
+            android:textSize="@dimen/font_size_28px"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_insurance_all_price"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:text="折扣"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            />
+
+        <TextView
+            android:id="@+id/tv_insurance_save_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_insurance_all_price"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:text="100.00元"
+            android:textColor="@color/c_ef5350"
+            android:textSize="@dimen/little_font_size"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_40px"
+        android:background="@color/white"
+        >
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/ry_insurance_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+
+</LinearLayout>

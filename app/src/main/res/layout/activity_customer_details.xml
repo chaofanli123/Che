@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 会员详情界面 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/common_bg"
+    android:id="@+id/lin_user_details"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:background="@color/theme_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:onClick="back"
+            android:scaleType="center"
+
+            android:src="@drawable/sl_topbar_back"/>
+
+        <TextView
+            android:id="@id/tv_topbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="用户详情"
+            android:textColor="@color/white"
+            android:textSize="@dimen/topbar_font_size"/>
+
+        <ImageView
+            android:id="@+id/topbar_right"
+            android:layout_width="@dimen/common_topbar_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/sl_delete_customer"/>
+
+    </RelativeLayout>
+
+    <com.victor.che.widget.PtrlMeiTuanFrameLayout
+        android:id="@+id/mPtrFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/activity_usercar_info"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+                    <com.victor.che.widget.MyRecyclerView
+                        android:id="@+id/mRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </RelativeLayout>
+                <Button
+                    android:id="@id/btn_operate"
+                    android:layout_width="match_parent"
+                    android:layout_height="90px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="80px"
+                    android:layout_marginLeft="@dimen/common_padding2"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:layout_marginTop="64px"
+                    android:background="@drawable/sl_common_theme_btn_corner"
+                    android:text="开卡"
+                    android:textColor="@color/white"
+                    android:textSize="32px"/>
+            </LinearLayout>
+        </ScrollView>
+    </com.victor.che.widget.PtrlMeiTuanFrameLayout>
+
+
+</LinearLayout>

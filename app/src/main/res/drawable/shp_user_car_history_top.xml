@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 可清空的EditText -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/white"/>
+
+    <stroke
+        android:width="@dimen/common_stroke_width"
+        android:color="@color/border"/>
+
+    <corners
+        android:radius="4px"/>
+
+</shape>

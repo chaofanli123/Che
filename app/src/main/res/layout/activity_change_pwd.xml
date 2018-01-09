@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 修改密码界面 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_old_pwd"
+                    style="@style/common_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入6-16位旧密码(必填)"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="#cccccc"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/divider"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_new_pwd"
+                    style="@style/common_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入6-16位新密码(必填)"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="#cccccc"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/divider"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_confirm_pwd"
+                    style="@style/common_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="100px"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="请输入确认密码(必填)"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="#cccccc"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@id/btn_operate"
+                style="@style/common_button"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80px"
+                android:text="确认修改"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

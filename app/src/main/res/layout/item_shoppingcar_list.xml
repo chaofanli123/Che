@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 购物车列表子项 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
+              android:layout_marginTop="@dimen/item_margin"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        >
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="轿车普洗"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <com.victor.che.widget.AmountView
+            android:id="@+id/amount_view"
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_order_time"
+            app:btnTextSize="@dimen/middle_font_size"
+            android:layout_centerVertical="true"
+            app:tvWidth="100px"/>
+
+        <TextView
+            android:id="@+id/tv_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100.00元"
+            android:textColor="@color/light_gray_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_toLeftOf="@+id/amount_view"
+            android:layout_marginRight="@dimen/common_padding2"
+            android:layout_centerVertical="true"
+            />
+
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/common_divider"/>
+
+    <LinearLayout
+        style="@style/style_receipt_liner"
+        >
+        <TextView
+            style="@style/style_receipt_text"
+            android:text="销售价"
+            />
+        <EditText
+            android:id="@+id/et_sale_price"
+            style="@style/common_edittext"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:cursorVisible="true"
+            android:ellipsize="end"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:text="0"
+            android:textColor="@color/c_ef5350"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:imeOptions="actionDone"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/dark_gray_text"
+            android:layout_marginRight="@dimen/common_padding2"/>
+    </LinearLayout>
+
+    <include layout="@layout/common_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingRight="@dimen/common_padding2"
+        android:layout_height="@dimen/item_height">
+        <TextView
+            android:id="@+id/tv_order_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="100.00元"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/item_margin"
+            android:layout_toLeftOf="@+id/tv_order_sum"
+            android:text="合计"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+    </RelativeLayout>
+
+<!--
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20px"
+            android:layout_toLeftOf="@id/tv_order_sum"
+            android:maxLines="1"
+            android:text="合计："
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_26px"/>-->
+
+
+
+
+</LinearLayout>

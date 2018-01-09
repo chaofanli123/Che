@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLyaout"
+    android:fitsSystemWindows="true"
+   >
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+    <com.victor.che.widget.FixRequestDisallowTouchEventPtrFrameLayout
+        android:id="@id/mPtrFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="332px"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    >
+                    <cn.bingoogolapple.bgabanner.BGABanner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_padding2"
+                        android:layout_marginLeft="@dimen/common_padding2"
+                        android:layout_marginRight="@dimen/common_padding2"
+                        app:banner_pointDrawable="@drawable/bga_banner_selector_point_"
+                        app:banner_pointContainerBackground="#00000000"
+                        app:banner_transitionEffect="alpha"
+                        app:banner_isNeedShowIndicatorOnOnlyOnePage="true"
+                        app:banner_indicatorGravity="bottom"
+                        app:banner_pointAutoPlayAble="true"
+                        app:banner_pageChangeDuration="1000"
+                        app:banner_pointAutoPlayInterval="5000"/>
+                </LinearLayout>
+                <com.victor.che.widget.DisallowParentTouchViewPager
+                    android:id="@+id/guidePages"
+                    android:layout_width="fill_parent"
+                    android:layout_height="436px"/>
+                    <LinearLayout
+                        android:id="@+id/viewGroup"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40px"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:paddingRight="10dp"
+                        android:orientation="horizontal" >
+                    </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20px"
+                    android:background="@color/common_bg"/>
+
+            </LinearLayout>
+    </com.victor.che.widget.FixRequestDisallowTouchEventPtrFrameLayout>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/img_putup_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+      />
+</RelativeLayout>

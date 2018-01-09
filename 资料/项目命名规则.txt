@@ -1,0 +1,25 @@
+项目命名规则是： 
+一、drawable资源
+bg开头表示背景图， 
+def开头表示默认图（占位图），
+其余都是ic开头，表示icon， 
+selector资源以sl_开头， 
+shape资源以shp_开头。
+正常状态以_normal结尾，按下状态以_pressed结尾
+
+二、color资源
+textcolor_开头表示动态的点击文字小国
+
+三、layout资源
+activity_开头表示Activity布局文件
+fragment开头表示Fragment的布局文件
+ppw_开头表示Popwindow布局文件
+widget_开头表示自定义控件的布局文件
+common_开头表示通用的布局，有标题栏、下拉刷新、无数据、分隔线、网络失败五种，其中标题栏有2种common_topbar和common_topbar2
+item_开头表示供ListView、GirdView或RecyclerView使用的布局子项文件
+_dialog_fragment结尾的文件，表示DialogFragment弹窗的布局文件，项目中使用的有底部弹窗，确认对话框等
+
+
+
+四、屏幕适配
+目前使用的是张鸿洋的AutoLayout（compile 'com.zhy:autolayout:1.4.5'），单位都是px，效果图标注的也是px，会自动缩放    

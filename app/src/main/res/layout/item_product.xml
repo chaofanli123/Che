@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?><!--选择可用服务子项-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f6f6f6"
+    android:gravity="center_vertical"
+    android:minHeight="100px"
+    android:orientation="horizontal"
+    android:paddingRight="50px">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="100px"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="洗车"
+        android:textColor="@color/dark_gray_text"
+        android:textSize="24px"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_unchecked"/>
+
+</LinearLayout>

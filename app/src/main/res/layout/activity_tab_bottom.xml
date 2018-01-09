@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <include layout="@layout/common_divider"/>
+
+    <com.victor.che.widget.AutoRadioGroup
+        android:id="@+id/mRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_bottombar_height"
+        android:layout_gravity="bottom"
+        android:background="#fafafa"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/tab_bottom_0"
+            style="@style/tab_bottom"
+            android:checked="true"
+            android:drawableTop="@drawable/sl_tab_bottom0"
+            android:text="首页"/>
+
+        <RadioButton
+            android:id="@+id/tab_bottom_1"
+            style="@style/tab_bottom"
+            android:drawableTop="@drawable/sl_tab_bottom1"
+            android:text="执法"/>
+        <RadioButton
+            android:id="@+id/tab_bottom_2"
+            style="@style/tab_bottom"
+            android:drawableTop="@drawable/sl_tab_bottom1"
+            android:text="辖区档案"/>
+
+        <RadioButton
+            android:id="@+id/tab_bottom_3"
+            style="@style/tab_bottom"
+            android:drawableTop="@drawable/sl_tab_bottom3"
+            android:text="个人中心"/>
+    </com.victor.che.widget.AutoRadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!--下拉列表的样式-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_dropdown_pressed" android:state_focused="true"/>
+    <item android:drawable="@drawable/ic_dropdown_pressed" android:state_focused="true"/>
+    <item android:drawable="@drawable/ic_dropdown_normal"/>
+</selector>

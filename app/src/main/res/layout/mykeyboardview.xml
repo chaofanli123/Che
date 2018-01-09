@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.victor.che.widget.MyKeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/keyboard_bg_color"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:keyBackground="@drawable/sl_plat_num_keyboard_key"
+    android:keyTextColor="@color/black"
+    android:paddingTop="1px" />

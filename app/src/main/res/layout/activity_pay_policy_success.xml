@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="22dp"
+                    android:drawableTop="@drawable/ic_active_vipcard_success"
+                    android:gravity="center"
+                    android:paddingBottom="32px"
+                    android:paddingTop="88px"
+                    android:text="支付成功"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="32px"/>
+
+                <LinearLayout
+                    android:id="@+id/area_perfect_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingBottom="64px"
+                    android:paddingLeft="@dimen/common_padding2"
+                    android:paddingRight="@dimen/common_padding2"
+                    android:paddingTop="@dimen/common_padding2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="已成功购买车险，保险公司将立即为受保人邮寄保单。请耐心等候..."
+                        android:textColor="@color/dark_gray_text"
+                        android:textSize="32px"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="80px"
+                    android:layout_marginTop="64px"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_goto_receipt"
+                        android:layout_width="260px"
+                        android:layout_height="70px"
+                        android:layout_marginLeft="60px"
+                        android:background="@drawable/sl_btn_goto_receipt"
+                        android:text="继续询价"
+                        android:textColor="@color/theme_color"
+                        android:textSize="32px"/>
+
+                    <Button
+                        android:id="@+id/btn_goto_index"
+                        android:layout_width="260px"
+                        android:layout_height="70px"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="60px"
+                        android:background="@drawable/sl_btn_goto_index"
+                        android:text="回到首页"
+                        android:textColor="@color/light_gray_text"
+                        android:textSize="32px"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

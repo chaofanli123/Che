@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_topbar_height"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_query_history"
+            android:src="@drawable/icon_query_history"
+            />
+        <TextView
+            android:id="@+id/tv_car_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="豫A12345"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/black_text"
+            android:layout_marginLeft="@dimen/item_margin"
+            android:layout_toRightOf="@+id/iv_query_history"
+            />
+
+        <TextView
+            android:id="@+id/tv_query_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="出保中"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/dark_gray_text"
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/common_divider"/>
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="@dimen/common_padding2"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingTop="@dimen/padding_40px"
+        android:paddingBottom="@dimen/padding_40px"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_car_user_name"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/dark_gray_text"
+            android:text="张三"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_car_brand_name"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/light_gray_text"
+            android:text="宝马"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/dark_gray_text"
+            android:text="阳光车险"
+            android:layout_below="@+id/tv_car_user_name"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:id="@+id/tv_insurance_name"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/c_ef5350"
+            android:text="100.00元"
+            android:layout_below="@+id/tv_car_user_name"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:id="@+id/tv_actual_pay"
+            android:layout_alignParentRight="true"
+            />
+
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="生效日期:"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/dark_gray_text"
+            android:layout_below="@+id/tv_actual_pay"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:id="@+id/tv_time_text"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_query_time"
+            android:text="2017-05-08"
+            android:textSize="@dimen/little_font_size"
+            android:textColor="@color/dark_gray_text"
+            android:layout_below="@+id/tv_actual_pay"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:layout_toRightOf="@+id/tv_time_text"
+            android:layout_marginLeft="@dimen/item_margin"
+            />-->
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_query_other"
+        android:layout_width="match_parent"
+        android:layout_height="88px"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:background="@color/light_gray_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="查看保单详情"
+            android:textSize="@dimen/font_size_28px"
+            android:textColor="@color/light_gray_text"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

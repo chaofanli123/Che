@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="topbar" type="id"/>
+    <item name="tv_topbar_title" type="id"/>
+    <item name="mPtrFrame" type="id"/>
+    <item name="et_mobile" type="id"/>
+    <item name="et_captcha" type="id"/>
+    <item name="btn_get_captcha" type="id"/>
+    <item name="btn_operate" type="id"/>
+    <item name="mRecyclerView" type="id"/>
+    <item name="mViewPager" type="id"/>
+    <item name="mListView" type="id"/>
+    <item name="common_no_data" type="id"/>
+    <item name="iv_avatar" type="id"/>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 订单页导航工具栏 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/theme_color"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="3px">
+
+    <RelativeLayout
+        android:id="@+id/tab0"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RadioButton
+            android:id="@+id/rdobtn0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sl_pager_tab_indicator"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:singleLine="true"
+            android:text="用户"
+            android:textColor="@color/textcolor_pager"
+            android:textSize="@dimen/font_size_28px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tab1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RadioButton
+            android:id="@+id/rdobtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sl_pager_tab_indicator"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:text="车辆"
+            android:textColor="@color/textcolor_pager"
+            android:textSize="@dimen/font_size_28px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/tab2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RadioButton
+            android:id="@+id/rdobtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sl_pager_tab_indicator"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:text="会员卡"
+            android:textColor="@color/textcolor_pager"
+            android:textSize="@dimen/font_size_28px"/>
+    </RelativeLayout>
+
+</LinearLayout>

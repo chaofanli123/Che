@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.victor.che">
+
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 网络通信 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取MAC地址 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取日志 -->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- 使用相机 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- shareSDK 配置 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 蓝牙分享所需的权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- 必选 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序录制音频 -->
+    <uses-permission android:name="com.company.app.fileprovider.READ" />
+
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
+    <application
+        android:name=".app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- 必选 -->
+        <!-- <meta-data -->
+        <!-- android:name="PGYER_APPID" -->
+        <!-- android:value="65b75aa0d08cd4826f64affcd4d4310f" /> -->
+
+
+        <!-- <activity android:name="com.pgyersdk.activity.FeedbackActivity" /> -->
+
+
+        <!--
+     <provider android:name="android.support.v4.content.FileProvider"
+         android:authorities="com.pgyersdk.lcf.fileProvider"
+         android:exported="false"
+         android:grantUriPermissions="true">
+         <meta-data
+             android:name="android.support.FILE_PROVIDER_PATHS"
+             android:resource="@xml/provider_paths"/>
+     </provider>
+        -->
+        <!-- 引导页界面 -->
+        <activity
+            android:name=".ui.SplashActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 底部导航菜单 -->
+        <activity
+            android:name=".ui.TabBottomActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <!-- 登录界面 -->
+        <activity
+            android:name=".ui.LoginActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wxff87f02dac93ce58" />
+            </intent-filter>
+        </activity>
+
+        <!-- 设置界面 -->
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 扫一扫界面 -->
+
+
+        <!-- 搜索界面 -->
+        <activity
+            android:name=".ui.CustomerListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 收款界面 -->
+        <activity
+            android:name=".ui.ReceiptActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!-- 产品管理界面 -->
+
+
+        <!-- 产品管理界面 -->
+        <activity
+            android:name=".ui.ProductMgrActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 报表界面 -->
+        <activity
+            android:name=".ui.ReportActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 网页界面 -->
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- Image Selector Entry -->
+        <activity
+            android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <!-- 会员卡洗车界面 -->
+
+
+        <!-- 绑定手机号界面 -->
+
+
+        <!-- 购买结果界面 -->
+        <activity
+            android:name=".ui.PurchaseResultActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 意见反馈界面 -->
+        <activity
+            android:name=".ui.FeedbackActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员详情界面 -->
+        <activity
+            android:name=".ui.CustomerDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 发布产品界面 -->
+
+
+        <!-- 发布服务-选择产品界面 -->
+
+
+        <!-- 消息提醒设置界面 -->
+
+
+        <!-- 我的账户界面 -->
+        <activity
+            android:name=".ui.MyAccountActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 店面信息界面 -->
+        <activity
+            android:name=".ui.StoreInfoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 订单界面 -->
+
+
+        <!-- 订单详情界面 -->
+        <activity
+            android:name=".ui.OrderDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 二维码界面 -->
+        <activity
+            android:name=".ui.QrcodeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 编辑界面 -->
+        <activity
+            android:name=".ui.EditCustomerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 选择会员卡界面 -->
+        <activity
+            android:name=".ui.ChooseReceiptVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡管理界面 -->
+        <activity
+            android:name=".ui.VipcardMgrActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡开卡界面 -->
+        <activity
+            android:name=".ui.ActiveVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!-- 新增会员卡界面 -->
+        <activity
+            android:name=".ui.AddVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 订单列表界面 -->
+        <activity
+            android:name=".ui.OrderListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 客户列表界面 -->
+
+
+        <!-- 商品详情界面 -->
+        <activity
+            android:name=".ui.ProductDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 新增商品界面 -->
+        <activity
+            android:name=".ui.AddProductActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 添加客户界面 -->
+        <activity
+            android:name=".ui.AddCustomerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 个人信息界面 -->
+        <activity
+            android:name=".ui.AccountInfoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 修改密码界面 -->
+        <activity
+            android:name=".ui.ChangePwdActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 选择汽车品牌界面 -->
+        <activity
+            android:name=".ui.SelectCarBrandActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡列表界面 -->
+        <activity
+            android:name=".ui.VipcardListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 车辆列表界面 -->
+        <activity
+            android:name=".ui.CarListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 编辑会员卡界面 -->
+        <activity
+            android:name=".ui.EditVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡充值界面 -->
+        <activity
+            android:name=".ui.RechargeVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 服务商信息编辑界面 -->
+        <activity
+            android:name=".ui.ProvEditActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 图片裁剪界面 -->
+        <activity
+            android:name=".ui.CropImageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 欢迎界面 -->
+        <activity
+            android:name=".ui.GuideActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 收款二维码界面 -->
+        <activity
+            android:name=".ui.ReceiptQrcodeActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 用户报表界面 -->
+        <activity
+            android:name=".ui.CustomerReportActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 营业额报表界面 -->
+        <activity
+            android:name=".ui.SalesReportActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 选择可用服务界面 -->
+        <activity
+            android:name=".ui.ChooseProductActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 车辆详情界面 -->
+        <activity
+            android:name=".ui.CarDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 收款结果界面 -->
+        <activity
+            android:name=".ui.ReceiptResultActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 搜索界面 -->
+        <activity
+            android:name=".ui.SearchActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 冲突界面 -->
+        <activity
+            android:name=".ui.ConflictActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 冲突用户详情界面 -->
+        <activity
+            android:name=".ui.ConflictDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡统计界面 -->
+        <activity
+            android:name=".ui.VipcardStatisticActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 会员卡详情界面 -->
+        <activity
+            android:name=".ui.VipcardDetailsActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 编辑会员卡具体信息界面 -->
+        <activity
+            android:name=".ui.EditVipcardInfoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 选择用户界面 -->
+        <activity
+            android:name=".ui.ChooseCustomerActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 自定义开卡界面 -->
+        <activity
+            android:name=".ui.CustomActiveVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <!-- 开卡时选择会员卡界面 -->
+        <activity
+            android:name=".ui.ChooseActiveVipcardActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 选择赠品界面 -->
+        <activity
+            android:name=".ui.ChooseGiftActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 赠品核销列表界面 -->
+        <activity
+            android:name=".ui.GiftListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 二手车估值详情界面 -->
+        <activity
+            android:name=".ui.UserCarDetailActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <!-- 效果图尺寸 -->
+        <meta-data
+            android:name="design_width"
+            android:value="720" />
+        <meta-data
+            android:name="design_height"
+            android:value="1280" />
+
+        <activity android:name=".ui.MarketingActivity" />
+        <!--
+ATTENTION: This was auto-generated to add Google Play services to your project for
+ App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".ui.QueryBaoxianActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.QueryjieguoActivity" />
+        /**挂单界面*/
+        <activity android:name=".ui.PendingOrderActivity" />
+        <activity
+            android:name=".ui.ChooseCarActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.ShoppingCarActivity" />
+        <activity
+            android:name=".ui.ConfirmOrderActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.QueryHistoryActivity" />
+        <activity android:name=".ui.QueryQuoteActivity" />
+        <activity android:name=".ui.QuoteDetailActivity" />
+        <activity
+            android:name=".ui.CommitPolicyActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.QueryPolicyHistoryActivity" />
+        <activity android:name=".ui.PolicyDetailActivity" />
+        <activity android:name=".ui.PayPolicySuccessActivity" />
+        <activity android:name=".ui.StoreActivity" />
+        android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.QueryPolicyHistoryActivity" />
+        <activity android:name=".ui.PolicyDetailActivity" />
+        <activity android:name=".ui.PayPolicySuccessActivity" />
+        <!-- shareSDK配置开始 -->
+        <!--
+    <activity
+        android:name="com.mob.tools.MobUIShell"
+        android:configChanges="keyboardHidden|orientation|screenSize"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar"
+        android:windowSoftInputMode="stateHidden|adjustResize">
+        <intent-filter>
+            <data android:scheme="tencent100371282" />
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
+        &lt;!&ndash; 调用新浪原生SDK，需要注册的回调activity &ndash;&gt;
+        <intent-filter>
+            <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+
+        &lt;!&ndash; 集成line客户端登录授权，需要添如下格式的过滤器 &ndash;&gt;
+        <intent-filter>
+            <data android:scheme="line.1477692153" />
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+    </activity>
+        -->
+        <activity android:name=".ui.AboutusActivity" />
+        <activity android:name=".ui.UsedCarValuesActivity" />
+
+        <!-- 微信支付SDK start -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <receiver android:name=".pay.wxpay.wxpay.AppRegister">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 微信支付SDK end -->
+        <!-- 支付宝支付SDK start -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!-- 支付宝支付SDK end -->
+        <activity android:name=".ui.ShoppingWebActivity" />
+        <activity android:name=".ui.SelectServiceAreaActivity" />
+        <activity android:name=".ui.SelectCarNumActivity" />
+        <activity android:name=".ui.CarxingActivity" />
+        <activity android:name=".ui.AppointResultActivity" />
+        <activity android:name=".ui.PayResultActivity" />
+        <activity android:name=".ui.EndtimeUsercardrActivity" />
+        <activity android:name=".ui.ScreeningActivity" />
+        <activity android:name=".ui.CustomEndtimeActivity" />
+        <activity android:name=".ui.EndMoneyUsercardActivity" />
+        <activity android:name=".ui.NocommingUsercardActivity" />
+        <activity android:name=".ui.CustomEndMoneyActivity" />
+        <activity android:name=".ui.CustomEndtimesActivity" />
+        <activity android:name=".ui.CustomNocommingActivity" />
+        <activity android:name=".ui.WebDataAnalysisActivity" />
+        <activity android:name=".ui.GuanggaoWebActivity" />
+        <activity android:name=".ui.TakePhoto1Activity" />
+        <activity android:name=".ui.BigPicActivity" />
+        <activity android:name=".ui.ToubaoCaseActivity" />
+        <activity android:name=".ui.AddFanganActivity" />
+        <activity android:name=".ui.SelectBaoxianCompanyActivity" />
+        <activity android:name=".ui.ClipImageActivity" />
+        <activity
+            android:name=".ui.SanzheBaoxianActivity"
+            android:theme="@style/MyDialogStyle" />
+        <activity
+            android:name=".ui.BaoxianOtherActivity"
+            android:theme="@style/MyDialogStyle" />
+        <activity
+            android:name=".ui.NoBaoeActivity"
+            android:theme="@style/MyDialogStyle" />
+        <activity android:name=".ui.TixianDetailsActivity" />
+        <activity android:name=".ui.ApplytixianActivity" />
+        <activity android:name=".ui.SelectBankActivity" />
+        <activity android:name=".ui.BandBanksActivity" />
+        <activity android:name=".ui.AddBankcardActivity" />
+        <activity android:name=".ui.StoresdetailsActivity" />
+        <activity android:name=".ui.edit.EditStoresRunTimeActivity" />
+        <activity android:name=".ui.CouponActivity" />
+        <activity android:name=".ui.ProductMgrHeadActivity" />
+        <activity android:name=".ui.ChannelActivity" />
+        <activity android:name=".ui.Coupon.CouponListActivity" />
+        <activity android:name=".ui.Coupon.NewAddCouponActivity" />
+        <activity android:name=".ui.Coupon.SelectUserActivity" />
+        <activity android:name=".ui.Coupon.SendCouponListActivity" />
+        <activity android:name=".ui.my.ShouXieQianMingActivity"></activity>
+    </application>
+
+</manifest>

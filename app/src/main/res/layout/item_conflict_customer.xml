@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?><!--车辆列表子项-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:gravity="center_vertical"
+              android:paddingBottom="20px"
+              android:paddingLeft="@dimen/common_padding2"
+              android:paddingRight="@dimen/common_padding2"
+              android:paddingTop="20px">
+
+    <ImageView
+        android:id="@+id/iv_checked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_common_unchecked"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_customer_avatar"
+        android:layout_width="104px"
+        android:layout_height="104px"
+        android:layout_marginLeft="@dimen/common_padding2"
+        android:src="@drawable/ic_def_avatar"
+        app:riv_corner_radius="2dp"/>
+
+    <LinearLayout
+        android:id="@+id/area_car"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/common_padding2"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="法拉利"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin"
+            android:maxLines="1"
+            android:text="京A88888"
+            android:textColor="@color/dark_gray_text"
+            android:textSize="@dimen/little_font_size"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pln"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:text="aaaa"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/little_font_size"/>
+
+</LinearLayout>

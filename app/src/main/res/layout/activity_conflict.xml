@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_topbar"/>
+
+    <RelativeLayout
+        android:id="@+id/area_tips"
+        android:layout_width="match_parent"
+        android:layout_height="50px"
+        android:background="#ffe0b2"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:text="删除一位用户，并把信息合并到另一位用户中！"
+            android:textColor="#e65100"
+            android:textSize="@dimen/little_font_size"/>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="center"
+            android:src="@drawable/ic_close_tip"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@id/mRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/common_bg"
+        android:paddingTop="20px"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="10px"
+        android:paddingTop="30px">
+
+        <CheckBox
+            android:id="@+id/chk_merge_vipcard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80px"
+            android:button="@null"
+            android:drawableLeft="@drawable/sl_checkbox1"
+            android:drawablePadding="16dp"
+            android:text="合并会员卡"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <CheckBox
+            android:id="@+id/chk_merge_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100px"
+            android:layout_toRightOf="@id/chk_merge_vipcard"
+            android:button="@null"
+            android:drawableLeft="@drawable/sl_checkbox1"
+            android:drawablePadding="16dp"
+            android:text="合并车辆"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <View
+            android:id="@id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/chk_merge_vipcard"
+            android:layout_marginTop="30px"
+            android:background="@color/divider"/>
+
+        <Button
+            android:id="@id/btn_operate"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_below="@id/divider"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/common_padding2"
+            android:layout_marginRight="@dimen/common_padding2"
+            android:layout_marginTop="10px"
+            android:background="@drawable/sl_confirm_pay"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="32px"/>
+    </RelativeLayout>
+
+</LinearLayout>

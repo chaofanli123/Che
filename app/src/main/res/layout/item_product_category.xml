@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--选择可用服务分类子项-->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/text"
+          android:layout_width="match_parent"
+          android:layout_height="100px"
+          android:gravity="center"
+          android:minHeight="100px"
+          android:minWidth="40dp"
+          android:text="洗车"
+          android:textColor="@color/black_text"
+          android:textSize="15sp"/>

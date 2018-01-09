@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_topbar2"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/common_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding2"
+                android:paddingRight="@dimen/common_padding2">
+
+                <TextView
+                    android:id="@+id/label_product_name"
+                    android:layout_width="230px"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="名称"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_product_name"
+                    style="@style/common_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/common_padding"
+                    android:hint="请输入商品名称"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/middle_font_size"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding2"
+                android:paddingRight="@dimen/common_padding2">
+
+                <TextView
+                    android:id="@+id/label_original_price"
+                    android:layout_width="230px"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="原价"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_original_price"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/common_padding"
+                    android:layout_marginRight="@dimen/common_padding"
+                    android:layout_weight="1"
+                    android:hint="请输入原价"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding2"
+                android:paddingRight="@dimen/common_padding2">
+
+                <TextView
+                    android:id="@+id/label_sale_price"
+                    android:layout_width="230px"
+                    android:layout_height="wrap_content"
+                    android:text="售价"
+                    android:textColor="@color/dark_gray_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_sale_price"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/common_padding"
+                    android:layout_marginRight="@dimen/common_padding"
+                    android:layout_weight="1"
+                    android:hint="请输入售价"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动价"/>
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_act_price"
+                    style="@style/common_edittext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="单行输入"
+                    android:textCursorDrawable="@drawable/color_cursor"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动开始时间"/>
+
+                <TextView
+                    android:id="@+id/tv_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-12-12"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="活动结束时间"/>
+
+                <TextView
+                    android:id="@+id/tv_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-12-12"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

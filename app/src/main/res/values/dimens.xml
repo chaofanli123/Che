@@ -1,0 +1,45 @@
+<resources>
+    <!-- 标题栏高度 -->
+    <dimen name="common_topbar_height">96px</dimen>
+    <!-- 底部Tab导航栏高度 -->
+    <dimen name="common_bottombar_height">96px</dimen>
+    <!-- 标题栏文字的字体大小 -->
+    <dimen name="topbar_font_size">36px</dimen>
+
+    <!-- 内边距 -->
+    <dimen name="common_padding">30px</dimen>
+    <!-- 内边距 -->
+    <dimen name="common_padding2">32px</dimen>
+
+    <!--圆角大小-->
+    <dimen name="common_stroke_width">1dp</dimen>
+
+    <dimen name="font_size_28px">28px</dimen>
+    <dimen name="font_size_26px">26px</dimen>
+    <!--购物车信息字体-->
+    <!--小字体-->
+    <dimen name="little_font_size">24px</dimen>
+    <!--中字体-->
+    <dimen name="middle_font_size">30px</dimen>
+    <!--大字体-->
+    <dimen name="large_font_size">36px</dimen>
+    <!--行高度-->
+    <dimen name="item_height">80px</dimen>
+    <dimen name="item_myheight">100px</dimen>
+    <!--行间隔-->
+    <dimen name="item_margin">20px</dimen>
+    <!--分隔线的高度-->
+    <dimen name="common_divider_height">1px</dimen>
+    <!--分隔线的高度-->
+    <dimen name="common_divider_dp">0.5dp</dimen>
+    <!--label的高度-->
+    <dimen name="label_height">80px</dimen>
+
+    <!-- slidingmenu配置 -->
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="shadow_width">1dp</dimen>
+    <dimen name="padding_40px">40px</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

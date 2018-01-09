@@ -1,0 +1,53 @@
+墨刀
+ljwking@icloud.com
+密码 123456
+
+账号:popen0929@qq.com
+密码:39955584
+
+
+keystore密码  cheweifang123
+alias   cheweifang
+alias密码     cheweifang123
+
+
+keystore签名 0854bf6ed21a035b0341d8951741e83c
+小写
+
+
+腾讯、360、小米、豌豆荚、联想、shareSDK
+账号：cheweifang@cheweifang.cn
+密码：cheweifang123
+
+百度、乐视
+账号：18538767759
+密码：cheweifang123
+
+华为、VIVO
+账号：cheweifang@cheweifang.cn
+密码：Cheweifang123
+
+魅族
+账号：cheweifang@flyme.cn
+密码：cheweifang123
+
+
+蒲公英
+734907441@qq.com
+660924
+
+
+爱车工匠app微信开放平台
+AppID：wxff87f02dac93ce58
+AppSecret：c5b9afbed29cfa8d96190e2cda935d66
+
+
+wxopen@cheweifang.cn
+密码acgj1234
+
+
+cessdeewa
+
+
+
+

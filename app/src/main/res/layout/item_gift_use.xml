@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 核销赠品子项 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/iv_car_logo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:padding="@dimen/common_padding2"
+        android:src="@drawable/def_logo"
+        app:civ_border_color="@color/divider"
+        app:civ_border_width="0.5dp">
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="小车普洗"
+            android:textColor="@color/black"
+            android:textSize="@dimen/middle_font_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_available_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="1px"
+            android:maxLines="1"
+            android:text="2次"
+            android:textColor="@color/on_sale"
+            android:textSize="26px"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_product_name"
+            android:layout_marginTop="@dimen/common_padding2"
+            android:maxLines="1"
+            android:text="赠送时间："
+            android:textColor="@color/light_gray_text"
+            android:textSize="@dimen/little_font_size"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@id/tv_operate"
+        android:layout_width="110px"
+        android:layout_height="match_parent"
+        android:background="#fafafa"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="核销"
+        android:textColor="@color/theme_color"
+        android:textSize="28px"/>
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>  <!-- 车牌归属地键盘被选中的边框颜色 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <stroke
+        android:width="0.5dp"
+        android:color="#e9423c" />
+
+
+</shape>

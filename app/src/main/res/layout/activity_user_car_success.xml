@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/common_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <include layout="@layout/common_topbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/item_margin"
+                android:background="@color/white"
+                android:orientation="vertical">
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车商收购价"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="12.00万元"
+                        android:id="@+id/tv_car_purchase_price"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="个人交易价"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/on_sale"
+                        android:text="12.50万元"
+                        android:id="@+id/tv_car_sale_price"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginTop="@dimen/item_margin">
+                <LinearLayout
+                    style="@style/common_relativeLayout"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="车辆型号"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="路虎 揽胜 1.8L"
+                        android:id="@+id/tv_car_model_name"
+                        />
+
+                </LinearLayout>
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="所在城市"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="郑州"
+                        android:id="@+id/tv_city_name"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="首次上牌"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="2017-01"
+                        android:id="@+id/tv_used_date"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="行驶里程"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="12.50万公里"
+                        android:id="@+id/tv_mileage"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车况"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="良好"
+                        android:id="@+id/tv_car_status"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车辆用途"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="自用"
+                        android:id="@+id/tv_car_purpose"
+                        />
+
+                </RelativeLayout>
+
+                <include layout="@layout/common_divider"/>
+
+                <RelativeLayout
+                    style="@style/common_relativeLayout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="车辆购入价"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/dark_gray_text"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textSize="@dimen/font_size_28px"
+                        android:textColor="@color/black_text"
+                        android:text="12.50万元"
+                        android:id="@+id/tv_car_buy_price"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

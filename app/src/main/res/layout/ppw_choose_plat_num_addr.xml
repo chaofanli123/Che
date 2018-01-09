@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选择车牌号归属地的弹窗，类似自定义键盘 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23e6e6e6"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <GridView
+        android:id="@+id/keyboardGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#3b404c"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:horizontalSpacing="0.5dp"
+        android:numColumns="9"
+        android:verticalSpacing="0.5dp" />
+
+</LinearLayout>

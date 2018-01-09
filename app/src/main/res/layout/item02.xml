@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="42px"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:paddingTop="42px">
+
+        <TextView
+            android:id="@+id/area_report"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/common_padding2"
+            android:paddingRight="@dimen/common_padding2"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_baobing"
+            android:gravity="center"
+            android:text="数据分析"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/area_myzhanghu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_zhanghu"
+            android:gravity="center"
+            android:text="账户"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/area_mendian"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_mendian"
+            android:gravity="center"
+            android:text="门店"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/common_padding2"
+        android:paddingRight="@dimen/common_padding2"
+        android:paddingTop="42px">
+        <TextView
+            android:id="@+id/area_shopping"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_index_reports"
+            android:gravity="center"
+            android:text="批发商城"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"/>
+
+        <TextView
+            android:id="@+id/area_marketing"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_index_marketing"
+            android:gravity="center"
+            android:text="营销"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:visibility="invisible"
+            />
+        <TextView
+            android:id="@+id/area_shopping1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="12dp"
+            android:drawableTop="@drawable/ic_index_reports"
+            android:gravity="center"
+            android:text="批发商城"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:visibility="invisible"
+            />
+    </LinearLayout>
+</LinearLayout>

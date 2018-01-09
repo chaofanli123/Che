@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 引导页3 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/transparent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingTop="100px">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/guide3"
+        android:scaleType="center"/>
+
+
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="300px"
+        android:layout_height="80px"
+        android:layout_marginTop="2px"
+        android:background="@drawable/sl_common_white_btn_corner"
+        android:text="开始使用"
+        android:textColor="@color/theme_color"
+        android:textSize="32px"/>
+
+</LinearLayout>

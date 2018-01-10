@@ -76,7 +76,7 @@ public class MyApplication extends BaseApplication {
         /**
          * sdk日志开关，正式发布需要去掉
          */
-//        EZOpenSDK.showSDKLog(true);
+  // EZOpenSDK.showSDKLog(DEBUG);
 /**
  * 设置是否支持P2P取流,详见api
  */

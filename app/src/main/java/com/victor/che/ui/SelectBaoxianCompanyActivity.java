@@ -2,8 +2,6 @@ package com.victor.che.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -27,8 +25,6 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.BaoxianCompany;
 import com.victor.che.domain.Xingshizheng;
 import com.victor.che.util.CollectionUtil;
-import com.victor.che.util.ListToString;
-import com.victor.che.util.PicassoUtils;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -36,11 +32,9 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**

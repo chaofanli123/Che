@@ -10,16 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.victor.che.R;
 import com.victor.che.adapter.BottomDialogListAdapter;
 import com.victor.che.util.ViewUtil;
-
-import org.w3c.dom.Text;
 
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 

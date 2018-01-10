@@ -1,13 +1,11 @@
 package com.victor.che.ui;
 
-import android.os.Bundle;
 import android.widget.TextView;
 
 import com.victor.che.R;
 import com.victor.che.base.BaseActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 支付结果界面

@@ -3,7 +3,6 @@ package com.victor.che.event;
 import com.victor.che.domain.Gift;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 选择赠品事件

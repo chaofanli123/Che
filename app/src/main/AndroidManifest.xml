@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.victor.che">
-
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -53,9 +52,7 @@
         <!-- android:name="PGYER_APPID" -->
         <!-- android:value="65b75aa0d08cd4826f64affcd4d4310f" /> -->
 
-
         <!-- <activity android:name="com.pgyersdk.activity.FeedbackActivity" /> -->
-
 
         <!--
      <provider android:name="android.support.v4.content.FileProvider"

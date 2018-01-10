@@ -1,6 +1,5 @@
 package com.victor.che.ui.Coupon;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -30,7 +29,6 @@ import com.victor.che.base.SimpleTextWatcher;
 import com.victor.che.domain.Customer;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.MessageEvent;
-import com.victor.che.ui.CustomerDetailsActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.ImageLoaderUtil;
 import com.victor.che.util.PtrHelper;
@@ -44,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 

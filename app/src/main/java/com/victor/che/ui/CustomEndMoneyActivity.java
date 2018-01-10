@@ -1,8 +1,5 @@
 package com.victor.che.ui;
 
-import android.app.usage.UsageEvents;
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,10 +7,6 @@ import android.widget.EditText;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
 import com.victor.che.api.BaseHttpCallbackListener;
@@ -39,7 +32,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class CustomEndMoneyActivity extends BaseActivity {

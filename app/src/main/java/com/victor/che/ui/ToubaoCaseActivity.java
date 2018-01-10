@@ -32,7 +32,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.finalteam.rxgalleryfinal.ui.widget.HorizontalDividerItemDecoration;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**

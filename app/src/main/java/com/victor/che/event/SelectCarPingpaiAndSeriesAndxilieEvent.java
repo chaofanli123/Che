@@ -4,7 +4,6 @@ package com.victor.che.event;
         import com.victor.che.domain.CarChexi;
         import com.victor.che.domain.CarChexing;
         import com.victor.che.domain.CarPingpai;
-        import com.victor.che.domain.SubCarPinpai;
 
 /**
  * 选择车品牌和车系事件

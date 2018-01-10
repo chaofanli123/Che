@@ -1,7 +1,6 @@
 package com.victor.che.ui;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,24 +16,17 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.base.VictorBaseListAdapter;
-import com.victor.che.domain.CarBrand;
 import com.victor.che.domain.CarChexi;
 import com.victor.che.domain.CarChexing;
 import com.victor.che.domain.CarPingpai;
-import com.victor.che.domain.CarSeries;
 import com.victor.che.domain.SubCarBrand;
-import com.victor.che.domain.SubCarPinpai;
 import com.victor.che.domain.SubCardata;
-import com.victor.che.event.SelectCarBrandAndSeriesEvent;
 import com.victor.che.event.SelectCarPingpaiAndSeriesAndxilieEvent;
-import com.victor.che.ui.fragment.SelectCarPinpaiSeriesFragment;
-import com.victor.che.ui.fragment.SelectCarSeriesFragment;
 import com.victor.che.util.AbViewHolder;
 import com.victor.che.util.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

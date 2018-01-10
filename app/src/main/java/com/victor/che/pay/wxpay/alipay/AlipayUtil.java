@@ -2,11 +2,9 @@ package com.victor.che.pay.wxpay.alipay;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.victor.che.app.ConstantValue;

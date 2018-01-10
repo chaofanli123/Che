@@ -233,7 +233,6 @@ public class VictorHttpUtil {
                     return lhs.key.compareTo(rhs.key);
                 }
             });
-
             int size = paramsList.size();
             for (int i = 0; i < size; i++) {
                 KeyValue pair = paramsList.get(i);

@@ -24,7 +24,6 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.base.VictorBaseListAdapter;
-import com.victor.che.domain.UserDetalis;
 import com.victor.che.event.Region;
 import com.victor.che.event.SelectCarPingpaiAndSeriesAndxilieEvent;
 import com.victor.che.ui.SelectCarNumActivity;

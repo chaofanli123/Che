@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 
 import com.victor.che.R;
-import com.victor.che.base.BaseActivity;
 
 public class NoBaoeActivity extends Activity {
 

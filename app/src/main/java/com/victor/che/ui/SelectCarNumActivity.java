@@ -1,13 +1,9 @@
 package com.victor.che.ui;
 
-import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.victor.che.R;
-import com.victor.che.adapter.CarBrandListAdapter;
 import com.victor.che.adapter.CarPinpaiListAdapter;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
@@ -16,29 +12,21 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
-import com.victor.che.domain.CarBrand;
 import com.victor.che.domain.CarPingpai;
-import com.victor.che.domain.SubCarBrand;
 import com.victor.che.domain.SubCarPinpai;
-import com.victor.che.event.Region;
 import com.victor.che.slidingmenu.SlidingMenu;
 import com.victor.che.ui.fragment.SelectCarPinpaiSeriesFragment;
-import com.victor.che.ui.fragment.SelectCarSeriesFragment;
 import com.victor.che.util.CollectionUtil;
-import com.victor.che.util.ListUtils;
 import com.victor.che.util.StringUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import me.yokeyword.indexablerv.IndexableAdapter;
 import me.yokeyword.indexablerv.IndexableLayout;
-
-import static com.victor.che.app.MyApplication.spUtil;
 //, IndexableAdapter.OnItemContentClickListener<CarPingpai>
 
 public class SelectCarNumActivity extends BaseActivity implements IndexableAdapter.OnItemContentClickListener<CarPingpai>{

@@ -14,18 +14,18 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.0'
     defaultConfig {
-        applicationId "com.victor.che"
+        applicationId "com.hnzh.che"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 13
         versionName "1.1.4 bate2 "
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        externalNativeBuild {// ndk配置
-            cmake {
-                cppFlags ""
-            }
-        }
+//        externalNativeBuild {// ndk配置
+//            cmake {
+//                cppFlags ""
+//            }
+//        }
         // 集成腾讯bugly，JPush
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -44,11 +44,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    externalNativeBuild {// ndk配置
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+//    externalNativeBuild {// ndk配置
+//        cmake {
+//            path "CMakeLists.txt"
+//        }
+//    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')

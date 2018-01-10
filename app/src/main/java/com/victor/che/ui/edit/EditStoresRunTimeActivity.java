@@ -1,6 +1,5 @@
 package com.victor.che.ui.edit;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,7 +25,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**

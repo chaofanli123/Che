@@ -1,6 +1,5 @@
 package com.victor.che.ui;
 
-        import android.os.Bundle;
         import android.view.View;
         import android.widget.TextView;
 
@@ -18,10 +17,8 @@ package com.victor.che.ui;
         import org.greenrobot.eventbus.EventBus;
 
         import java.util.ArrayList;
-        import java.util.List;
 
         import butterknife.BindView;
-        import butterknife.ButterKnife;
         import me.yokeyword.indexablerv.IndexableAdapter;
         import me.yokeyword.indexablerv.IndexableLayout;
 

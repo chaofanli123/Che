@@ -578,10 +578,6 @@ ATTENTION: This was auto-generated to add Google Play services to your project f
         <activity android:name=".ui.PolicyDetailActivity" />
         <activity android:name=".ui.PayPolicySuccessActivity" />
         <activity android:name=".ui.StoreActivity" />
-        android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.QueryPolicyHistoryActivity" />
-        <activity android:name=".ui.PolicyDetailActivity" />
-        <activity android:name=".ui.PayPolicySuccessActivity" />
         <!-- shareSDK配置开始 -->
         <!--
     <activity

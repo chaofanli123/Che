@@ -290,6 +290,9 @@ public class LoginActivity extends BaseActivity {
                 mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.staff_user_id));
 
              MyApplication.openActivity(mContext, TabBottomActivity.class);
+             //设置acToken
+//             MyApplication.getOpenSDK().setAccessToken("at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
+
                 // 关闭本页
                 finish();
             }

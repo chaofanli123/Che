@@ -29,6 +29,7 @@ import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.DateUtil;
 import com.victor.che.util.SharedPreferencesUtil;
 import com.victor.che.util.StringUtil;
+import com.videogo.openapi.EZOpenSDK;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -71,6 +72,21 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        /**
+         * sdk日志开关，正式发布需要去掉
+         */
+//        EZOpenSDK.showSDKLog(true);
+/**
+ * 设置是否支持P2P取流,详见api
+ */
+        EZOpenSDK.enableP2P(false);
+
+/**
+ * APP_KEY请替换成自己申请的
+ */
+        EZOpenSDK.initLib(this, "566fb0a1d274443f8d32d74212c570e7", "");
+
 //初始化shareSdk
         //   ShareSDK.initSDK(this);
         // 获取版本信息
@@ -323,4 +339,8 @@ public class MyApplication extends BaseApplication {
     public static User getUser() {
         return (User) spUtil.getObject("CURRENT_USER", User.class);
     }
+
+//    public static EZOpenSDK getOpenSDK() {
+//        return EZOpenSDK.getInstance();
+//    }
 }

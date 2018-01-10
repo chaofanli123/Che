@@ -7,6 +7,15 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+
     signingConfigs {
         debug {
         }
@@ -16,7 +25,7 @@ android {
     defaultConfig {
         applicationId "com.hnzh.che"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 13
         versionName "1.1.4 bate2 "
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,7 +38,7 @@ android {
         // 集成腾讯bugly，JPush
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a'
+            abiFilters 'armeabi-v7a'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
         manifestPlaceholders = [
@@ -163,5 +172,7 @@ dependencies {
     }
     //compile 'com.pgyersdk:sdk:2.5.6'
     compile project(':signature-pad')
+//    compile 'com.hikvision.ezviz:ezviz-sdk:4.7.1'
+
 }
 

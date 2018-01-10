@@ -1,9 +1,6 @@
 package com.victor.che.domain;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 优惠券实体

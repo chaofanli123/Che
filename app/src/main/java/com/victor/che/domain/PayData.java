@@ -1,7 +1,6 @@
 package com.victor.che.domain;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 

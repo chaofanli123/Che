@@ -28,14 +28,12 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 
 import org.greenrobot.eventbus.EventBus;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class CustomEndtimeActivity extends BaseActivity {

@@ -9,7 +9,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
@@ -21,9 +20,7 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.Coupon;
-import com.victor.che.ui.fragment.CouponUsableFragment;
 import com.victor.che.util.CollectionUtil;
-import com.victor.che.util.MathUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
 import com.victor.che.util.ViewUtil;
@@ -37,10 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 
 import static com.alibaba.fastjson.JSON.parseObject;
 

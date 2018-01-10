@@ -1,12 +1,8 @@
 package com.victor.che.ui;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoActivity;
@@ -17,9 +13,8 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
-import com.victor.che.R;
 import com.victor.che.base.Base1Activity;
-import com.victor.che.base.BaseActivity;
+
 /**
  * 继承这个类来让Activity获取拍照的能力<br>
  * Author: crazycodeboy

@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-
 /**
  * Author Victor
  * Email 468034043@qq.com

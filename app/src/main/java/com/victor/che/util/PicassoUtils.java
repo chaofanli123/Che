@@ -1,7 +1,6 @@
 package com.victor.che.util;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.DrawableRequestBuilder;

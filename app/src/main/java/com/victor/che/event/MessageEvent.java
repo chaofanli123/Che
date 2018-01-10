@@ -1,9 +1,5 @@
 package com.victor.che.event;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
-import java.io.Serializable;
-
 /**
  * Created by Administrator on 2017/4/13.
  */

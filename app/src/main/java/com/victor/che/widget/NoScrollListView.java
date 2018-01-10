@@ -3,7 +3,6 @@ package com.victor.che.widget;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.widget.ListView;
 
 
 public class NoScrollListView extends RecyclerView {

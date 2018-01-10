@@ -1,22 +1,13 @@
 package com.victor.che.ui.Coupon;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.jzxiang.pickerview.TimePickerDialog;
-import com.jzxiang.pickerview.data.Type;
-import com.jzxiang.pickerview.listener.OnDateSetListener;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
 import com.victor.che.api.BaseHttpCallbackListener;
@@ -26,38 +17,21 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.base.VictorBaseListAdapter;
-import com.victor.che.domain.QueryUserCarHistory;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.MessageEvent;
-import com.victor.che.event.Region;
-import com.victor.che.event.SelectCarPingpaiAndSeriesAndxilieEvent;
-import com.victor.che.ui.SelectCarNumActivity;
-import com.victor.che.ui.SelectServiceAreaActivity;
-import com.victor.che.ui.UserCarDetailActivity;
 import com.victor.che.util.CollectionUtil;
-import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
-import com.victor.che.util.ToastUtils;
 import com.victor.che.widget.AlertDialogFragment;
-import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 

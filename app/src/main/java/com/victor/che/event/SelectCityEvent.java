@@ -1,9 +1,6 @@
 package com.victor.che.event;
 
 
-import com.victor.che.domain.CarBrand;
-import com.victor.che.domain.CarSeries;
-
 /**
  * 选择车品牌和车系事件
  *

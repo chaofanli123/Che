@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Base64;
 
-import com.victor.che.domain.CarPingpai;
 import com.victor.che.domain.User;
 
 import java.io.ByteArrayInputStream;

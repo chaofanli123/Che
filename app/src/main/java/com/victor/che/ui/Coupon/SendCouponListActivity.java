@@ -1,7 +1,6 @@
 package com.victor.che.ui.Coupon;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.view.KeyEvent;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,11 +26,8 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.base.SimpleTextWatcher;
 import com.victor.che.base.VictorBaseListAdapter;
-import com.victor.che.domain.Order;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.domain.UserCoupon;
-import com.victor.che.domain.Vipcard;
-import com.victor.che.ui.VipcardMgrActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
@@ -47,8 +42,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import static com.victor.che.R.id.tv_prov_vipcard_type;
 
 /**
  * 发券记录

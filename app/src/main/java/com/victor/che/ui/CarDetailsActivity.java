@@ -1,6 +1,5 @@
 package com.victor.che.ui;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,8 +17,6 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
-import com.victor.che.domain.Car;
-import com.victor.che.domain.UserCar;
 import com.victor.che.domain.UserDetalis;
 import com.victor.che.event.SelectCarBrandAndSeriesEvent;
 import com.victor.che.util.ImageLoaderUtil;

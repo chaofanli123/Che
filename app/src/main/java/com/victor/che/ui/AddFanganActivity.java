@@ -24,7 +24,6 @@ import com.victor.che.api.Define;
 import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
-import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.BaoxianStyle;
 import com.victor.che.util.CollectionUtil;
@@ -38,7 +37,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**

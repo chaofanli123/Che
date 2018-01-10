@@ -4,7 +4,6 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -22,10 +21,8 @@ import com.victor.che.R;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.js.JavaScriptObject;
 import com.victor.che.util.AbAppUtil;
-import com.victor.che.util.AppUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GuanggaoWebActivity extends BaseActivity {

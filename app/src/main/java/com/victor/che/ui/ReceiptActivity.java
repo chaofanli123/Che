@@ -737,7 +737,6 @@ public class ReceiptActivity extends BaseActivity {
         actual_pay = MathUtil.mul(sale_price, count);
         return actual_pay;
     }
-
     /**
      * 去扫一扫界面
      */

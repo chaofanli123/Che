@@ -1,7 +1,6 @@
 package com.victor.che.ui;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.UserCarDetail;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * @autor Victor

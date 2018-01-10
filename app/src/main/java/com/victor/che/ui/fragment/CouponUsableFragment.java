@@ -26,7 +26,6 @@ import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.MathUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
-import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.victor.che.widget.TipDialogFragment;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -40,7 +39,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 import static com.alibaba.fastjson.JSON.parseObject;

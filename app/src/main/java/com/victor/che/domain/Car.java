@@ -1,7 +1,6 @@
 package com.victor.che.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 车辆实体

@@ -52,10 +52,6 @@ public class MyApplication extends BaseApplication {
     public static String versionCode = "1";// 版本号
     public static String versionName = "1.0.0";// 版本名称
 
-    native String getAppKey();//读取appkey
-
-    native String getAppSecret();//读取appsecret
-
     private  static boolean isLogin = false; // 登录状态
 
     public static String APP_KEY;
@@ -68,9 +64,9 @@ public class MyApplication extends BaseApplication {
 
     public static  Context context;
 
-    static {
-        System.loadLibrary("appconfig");
-    }
+//    static {
+//        System.loadLibrary("appconfig");
+//    }
 
     @Override
     public void onCreate() {
@@ -150,8 +146,6 @@ public class MyApplication extends BaseApplication {
         }
         // 获取已经登录的用户
         CURRENT_USER = getUser();
-        APP_KEY = getAppKey();
-        APP_SECRET = getAppSecret();
         // checkToken();
         /* 界面唤醒的时候checktoken */
         registerCheckToken();

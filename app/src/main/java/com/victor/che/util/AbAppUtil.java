@@ -40,8 +40,6 @@ import android.util.DisplayMetrics;
 import android.util.Xml;
 import android.view.inputmethod.InputMethodManager;
 
-import com.victor.che.app.MyApplication;
-
 import org.xmlpull.v1.XmlPullParser;
 
 import java.io.BufferedReader;

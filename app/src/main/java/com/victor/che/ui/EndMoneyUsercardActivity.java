@@ -1,16 +1,13 @@
 package com.victor.che.ui;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.victor.che.R;
 import com.victor.che.base.BaseActivity;
-import com.victor.che.domain.UserCustomMessage;
 import com.victor.che.event.EndMoneyNumEvent;
 import com.victor.che.ui.fragment.EndMoneyFragment;
 import com.victor.che.ui.fragment.EndTimesFragment;

@@ -1,6 +1,5 @@
 package com.victor.che.ui.Coupon;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.TextView;
@@ -16,20 +15,15 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.domain.QueryUserCarHistory;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.MessageEvent;
-import com.victor.che.ui.UserCarDetailActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
-import com.victor.che.util.ToastUtils;
-import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;

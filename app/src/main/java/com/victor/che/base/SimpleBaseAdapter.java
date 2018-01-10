@@ -4,9 +4,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.victor.che.domain.SubCarPinpai;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,7 +1,6 @@
 
 package com.victor.che.api;
 
-
 /**
  * 类说明: 定义网络请求的url
  *

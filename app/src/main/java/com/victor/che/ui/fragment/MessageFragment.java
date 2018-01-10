@@ -55,7 +55,6 @@ public class MessageFragment extends BaseFragment {
     @Override
     protected void initView() {
         super.initView();
-
         // 设置标题
         ((TextView) findViewById(R.id.tv_topbar_title)).setText("消息");
         findViewById(R.id.iv_back).setVisibility(View.GONE);

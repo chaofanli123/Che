@@ -1,8 +1,11 @@
 package com.victor.che.ui.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,10 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
- * 消息界面
+ * 执法界面
  * Author Victor
  * Email 468034043@qq.com
  * Time 2016/12/27 0027 9:45
@@ -41,6 +47,9 @@ public class MessageFragment extends BaseFragment {
 
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.topbar_right)
+    ImageView topbarRight;
+    Unbinder unbinder;
 
     private List<Message> mList = new ArrayList<>();
     private MessageListAdapter mAdapter;
@@ -56,9 +65,9 @@ public class MessageFragment extends BaseFragment {
     protected void initView() {
         super.initView();
         // 设置标题
-        ((TextView) findViewById(R.id.tv_topbar_title)).setText("消息");
+        ((TextView) findViewById(R.id.tv_topbar_title)).setText("执法");
         findViewById(R.id.iv_back).setVisibility(View.GONE);
-
+        topbarRight.setImageResource(R.drawable.sl_topbar_more);
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器
         mAdapter = new MessageListAdapter(R.layout.item_message, mList);
         mRecyclerView.setAdapter(mAdapter);
@@ -72,7 +81,6 @@ public class MessageFragment extends BaseFragment {
                 _reqData(pullToRefresh, curpage, pageSize);
             }
         });
-
         mPtrHelper.autoRefresh(true);
 //        startActivity(new Intent(getActivity(), WoDeSheBeiListActivity.class));
     }
@@ -124,6 +132,29 @@ public class MessageFragment extends BaseFragment {
                     }
 
                 });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    /**
+     * 执法
+     */
+    @OnClick(R.id.topbar_right)
+    public void onaddClicked() {
+        //跳转到执法界面
+
     }
 
     /**

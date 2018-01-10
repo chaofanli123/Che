@@ -7,7 +7,7 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/common_topbar"/>
+    <include layout="@layout/top_bar_commom_img"/>
 
     <com.victor.che.widget.PtrlMeiTuanFrameLayout
         android:id="@id/mPtrFrame"

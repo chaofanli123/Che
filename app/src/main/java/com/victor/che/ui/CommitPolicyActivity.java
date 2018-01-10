@@ -209,7 +209,6 @@ public class CommitPolicyActivity extends BaseActivity {
 
                     @Override
                     public void callbackSuccess(String url, Element element) {
-
                         if(pay_method_id==1){
                             //支付宝支付
                             PayPolicyAliData payPolicyAliData = JSON.parseObject(element.data, PayPolicyAliData.class);
@@ -238,7 +237,6 @@ public class CommitPolicyActivity extends BaseActivity {
                             WXPayParams wxparams = payPolicyWXData.payStr;
                             WXPayUtil.startWXPay(mContext,wxparams,order_id+"");
                         }
-
                     }
                 });
     }

@@ -76,7 +76,7 @@ public class MyApplication extends BaseApplication {
         /**
          * sdk日志开关，正式发布需要去掉
          */
-  // EZOpenSDK.showSDKLog(DEBUG);
+ EZOpenSDK.showSDKLog(DEBUG);
 /**
  * 设置是否支持P2P取流,详见api
  */
@@ -91,12 +91,9 @@ public class MyApplication extends BaseApplication {
         //   ShareSDK.initSDK(this);
         // 获取版本信息
         context=getApplicationContext();
-
         versionName = AppUtil.getVersionName(this);
         versionCode = String.valueOf(AppUtil.getVersionCode(this));
-
         //   PgyCrashManager.register(context);
-
         // 开启极光推送
         JPushInterface.setDebugMode(DEBUG);// 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);

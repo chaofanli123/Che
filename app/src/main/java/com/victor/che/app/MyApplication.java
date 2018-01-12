@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
@@ -174,7 +175,11 @@ public class MyApplication extends BaseApplication {
     public  static List<Region> getRegionList() {
         return spUtil.getObject("REGION_LIST", List.class);
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     /**
      * 保存服务城市列表
      */

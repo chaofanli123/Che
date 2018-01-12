@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
 import com.victor.che.app.MyApplication;
@@ -27,6 +28,8 @@ public class BaseApplication extends Application {
 
         CONTEXT = getApplicationContext();
     }
+
+
 
     /**
      * 短土司

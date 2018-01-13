@@ -110,7 +110,7 @@ public class EditCustomerActivity extends BaseActivity {
                         @Override
                         public void callbackSuccess(String url, Element element) {
 
-                            JSONObject jsonobj = JSON.parseObject(element.data);
+                            JSONObject jsonobj = JSON.parseObject(element.body);
                             if (jsonobj == null) {
                                 MyApplication.showToast("修改成功");
 

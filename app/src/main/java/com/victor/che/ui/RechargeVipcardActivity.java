@@ -142,7 +142,7 @@ public class RechargeVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        workerList = JSON.parseArray(element.data, User.class);
+                        workerList = JSON.parseArray(element.body, User.class);
                         if (CollectionUtil.isEmpty(workerList)) {
                             MyApplication.showToast("服务师傅列表为空");
                             return;
@@ -284,7 +284,7 @@ public class RechargeVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        if (StringUtil.isEmpty(element.data)) {//现金支付
+                        if (StringUtil.isEmpty(element.body)) {//现金支付
                             MyApplication.showToast("修改成功");
                             // 通知用户会员卡列表某一项改变
                             mVipcard.num += num;
@@ -297,7 +297,7 @@ public class RechargeVipcardActivity extends BaseActivity {
                             }
 
                         } else {
-                            JSONObject jsonobj = JSON.parseObject(element.data);
+                            JSONObject jsonobj = JSON.parseObject(element.body);
                             if (jsonobj == null) {
                                 MyApplication.showToast("订单返回数据异常");
                                 return;

@@ -103,7 +103,7 @@ public class VipcardListActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Vipcard> temp = JSON.parseArray(element.data, Vipcard.class);
+                        List<Vipcard> temp = JSON.parseArray(element.body, Vipcard.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

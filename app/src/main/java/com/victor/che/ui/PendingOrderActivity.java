@@ -115,7 +115,7 @@ public class PendingOrderActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Pending> temp = JSON.parseArray(element.data, Pending.class);
+                        List<Pending> temp = JSON.parseArray(element.body, Pending.class);
 
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
@@ -226,10 +226,10 @@ public class PendingOrderActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        if (element.code == 0 && element.msg.equals("删除成功")) {
-                            //刷新界面
-                            mPtrHelper.autoRefresh(true);
-                        }
+//                        if (element.code == 0 && element.msg.equals("删除成功")) {
+//                            //刷新界面
+//                            mPtrHelper.autoRefresh(true);
+//                        }
                     }
                 });
     }

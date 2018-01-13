@@ -149,7 +149,7 @@ public class SendCouponListActivity extends BaseActivity {
             new BaseHttpCallbackListener<Element>() {
                 @Override
                 public void callbackSuccess(String url, Element element) {
-                    list = JSON.parseArray(element.data, ShopsCoupon.class);
+                    list = JSON.parseArray(element.body, ShopsCoupon.class);
                     if (CollectionUtil.isEmpty(list)) {
                         MyApplication.showToast("优惠券列表为空");
                         return;
@@ -201,7 +201,7 @@ public class SendCouponListActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<UserCoupon> temp = JSON.parseArray(element.data, UserCoupon.class);
+                        List<UserCoupon> temp = JSON.parseArray(element.body, UserCoupon.class);
                         if (pullToRefresh) {// 下拉刷新
                             messageArrayList.clear();//清空数据
                             messageListAdapter.setNewData(messageArrayList);

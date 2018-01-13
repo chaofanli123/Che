@@ -256,7 +256,7 @@ public class ReceiptResultActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        messageArrayList = JSON.parseArray(element.data, Coupon.class);// 会员卡列表
+                        messageArrayList = JSON.parseArray(element.body, Coupon.class);// 会员卡列表
                         if (CollectionUtil.isEmpty(messageArrayList)) {
                             MyApplication.showToast("优惠券列表为空");
                             return;

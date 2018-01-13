@@ -128,7 +128,7 @@ public class QueryPolicyHistoryActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<QueryPolicyHistory> queryPolicyHistories = JSON.parseArray(element.data, QueryPolicyHistory.class);
+                        List<QueryPolicyHistory> queryPolicyHistories = JSON.parseArray(element.body, QueryPolicyHistory.class);
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             if (CollectionUtil.isEmpty(queryPolicyHistories)) {  //无数

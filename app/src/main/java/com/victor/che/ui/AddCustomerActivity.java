@@ -130,7 +130,7 @@ public class AddCustomerActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        provVipcardList = JSON.parseArray(element.data, Vipcard.class);
+                        provVipcardList = JSON.parseArray(element.body, Vipcard.class);
                         if (CollectionUtil.isEmpty(provVipcardList)) {
                             MyApplication.showToast("服务商没有添加任何会员卡");
                             return;
@@ -238,7 +238,7 @@ public class AddCustomerActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
                         if (jsonobj == null) {
                             MyApplication.showToast("添加用户成功");
 

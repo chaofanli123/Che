@@ -98,7 +98,7 @@ public class QueryQuoteActivity extends BaseActivity {
 
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        quotePrograms = JSON.parseArray(element.data, QuoteProgram.class);
+                        quotePrograms = JSON.parseArray(element.body, QuoteProgram.class);
 
                         if (CollectionUtil.isEmpty(quotePrograms)) {
                             MyApplication.showToast("报价列表为空");

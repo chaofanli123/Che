@@ -157,7 +157,7 @@ public class OrderDetailsActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
 
                         /****用户信息****/
                         JSONObject user_info = jsonobj.getJSONObject("user_info");

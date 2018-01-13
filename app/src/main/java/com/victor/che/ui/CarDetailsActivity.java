@@ -124,7 +124,7 @@ public class CarDetailsActivity extends BaseActivity {
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
-                            _doAddEditCar(1, element.data);
+                            _doAddEditCar(1, element.body);
                         }
                     });
         } else {//修改车辆
@@ -139,7 +139,7 @@ public class CarDetailsActivity extends BaseActivity {
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
-                            _doAddEditCar(2, element.data);
+                            _doAddEditCar(2, element.body);
                         }
                     });
         }

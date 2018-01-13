@@ -68,7 +68,7 @@ public class UserCarDetailActivity extends BaseActivity {
                 super.callbackSuccess(url, element);
 
                 Gson gson = new Gson();
-                UserCarDetail userCarDetail = gson.fromJson(element.data, UserCarDetail.class);
+                UserCarDetail userCarDetail = gson.fromJson(element.body, UserCarDetail.class);
                 if (userCarDetail == null) {//查询失败
 
                     showDialog();

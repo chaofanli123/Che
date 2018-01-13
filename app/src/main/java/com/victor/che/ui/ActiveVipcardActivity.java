@@ -184,7 +184,7 @@ public class ActiveVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        categoryList = (ArrayList<Channel>) JSON.parseArray(element.data, Channel.class);
+                        categoryList = (ArrayList<Channel>) JSON.parseArray(element.body, Channel.class);
 
                         if (CollectionUtil.isEmpty(categoryList)) {
                             MyApplication.showToast("服务类型为空");
@@ -216,7 +216,7 @@ public class ActiveVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
 
                         // 车牌号
                         if (jsonobj != null) {
@@ -237,7 +237,7 @@ public class ActiveVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        workerList = JSON.parseArray(element.data, User.class);
+                        workerList = JSON.parseArray(element.body, User.class);
                         if (CollectionUtil.isEmpty(workerList)) {
                             MyApplication.showToast("服务师傅列表为空");
                             return;
@@ -491,14 +491,14 @@ public class ActiveVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        if (StringUtil.isEmpty(element.data)) {//开卡无冲突
+                        if (StringUtil.isEmpty(element.body)) {//开卡无冲突
                             MyApplication.showToast("开卡成功");
                             EventBus.getDefault().post(ConstantValue.Event.ACTIVE_VIPCARD);
                             if (pay_method_id == 6) {//现金支付
                                 _gotoReceiptResult();
                             }
                         } else {
-                            JSONObject jsonobj = JSON.parseObject(element.data);
+                            JSONObject jsonobj = JSON.parseObject(element.body);
                             if (jsonobj == null) {
                                 MyApplication.showToast("订单返回数据异常");
                                 return;

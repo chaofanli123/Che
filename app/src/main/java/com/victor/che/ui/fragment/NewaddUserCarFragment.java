@@ -237,12 +237,12 @@ public class NewaddUserCarFragment extends BaseFragment {
         VictorHttpUtil.doPost(mContext, Define.url_usedcar_assess_car_assess_v1, params, true, null, new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                if (element.code == 0) {
-                    //跳转到历史估值界面
-                    EventBus.getDefault().post("UsercarHistoryValuesFragment");// 发送信息给webview
-                }else {
-                    MyApplication.showToast(element.msg);
-                }
+//                if (element.code == 0) {
+//                    //跳转到历史估值界面
+//                    EventBus.getDefault().post("UsercarHistoryValuesFragment");// 发送信息给webview
+//                }else {
+//                    MyApplication.showToast(element.msg);
+//                }
 
                // MyApplication.openActivity(mContext, UsercarHistoryValuesFragment.class);
             }

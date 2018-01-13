@@ -122,7 +122,7 @@ public class AddBankcardActivity extends BaseActivity {
                     return;
                 }
                 Gson gson = new Gson();
-                BankId bankId = gson.fromJson(element.data, BankId.class);
+                BankId bankId = gson.fromJson(element.body, BankId.class);
                 int provider_bank_account_id = bankId.getProvider_bank_account_id();
                 Bundle bundle = new Bundle();
                 bundle.putString("money", money);

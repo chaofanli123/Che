@@ -115,7 +115,7 @@ public class ChooseCarActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<ChooseCar> temp = JSON.parseArray(element.data, ChooseCar.class);
+                        List<ChooseCar> temp = JSON.parseArray(element.body, ChooseCar.class);
                         if (pullToRefresh) {//刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

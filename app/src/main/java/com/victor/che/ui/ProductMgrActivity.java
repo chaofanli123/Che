@@ -89,7 +89,7 @@ public class ProductMgrActivity extends BaseActivity {
                         category.name = "全部";
                         categoryList.add(0, category);
 
-                        GoodCategory goodCategory = JSON.parseObject(element.data, GoodCategory.class);
+                        GoodCategory goodCategory = JSON.parseObject(element.body, GoodCategory.class);
                         mSelectedDatas = goodCategory.getUsed_goods_category();
                         mUnSelectedDatas = goodCategory.getUnUsed_goods_category();
 //                        if (CollectionUtil.isEmpty(mSelectedDatas)) {

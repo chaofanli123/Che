@@ -112,7 +112,7 @@ public class CouponDisableFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = parseObject(element.data);
+                        JSONObject jsonobj = parseObject(element.body);
                         if (jsonobj != null) {
                             List<Coupon> coupons = JSON.parseArray(jsonobj.getString("coupons"), Coupon.class);// 会员卡列表
                             if (pullToRefresh) {////刷新

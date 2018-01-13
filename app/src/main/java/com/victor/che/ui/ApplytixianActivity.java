@@ -57,7 +57,7 @@ public class ApplytixianActivity extends BaseActivity {
             VictorHttpUtil.doGet(mContext, Define.url_provider_bank_account_list_v1, params, false, null, new BaseHttpCallbackListener<Element>() {
                 @Override
                 public void callbackSuccess(String url, Element element) {
-                    bank = JSON.parseObject(element.data, Bank.class);
+                    bank = JSON.parseObject(element.body, Bank.class);
                     defaultX = bank.getDefaultX();
                     if (defaultX != null) {
                         tvBankName.setText(defaultX.getBank());
@@ -87,9 +87,9 @@ public class ApplytixianActivity extends BaseActivity {
                 VictorHttpUtil.doPost(mContext, Define.URL_PROVIDER_WITHDRAW, params, true, "申请中...", new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        if (element.code==1) {
-                            showDialog();
-                        }
+//                        if (element.code==1) {
+//                            showDialog();
+//                        }
                         MyApplication.openActivity(mContext,MyAccountActivity.class);
                         // 关闭本页
                         finish();

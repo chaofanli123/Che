@@ -161,8 +161,8 @@ public class CustomerDetailsActivity extends BaseActivity implements View.OnClic
              new BaseHttpCallbackListener<Element>() {
                  @Override
                  public void callbackSuccess(String url, Element element) {
-                     JSONObject jsonobj = JSON.parseObject(element.data);
-                     UserDetalis userDetalis = JSON.parseObject(element.data, UserDetalis.class);
+                     JSONObject jsonobj = JSON.parseObject(element.body);
+                     UserDetalis userDetalis = JSON.parseObject(element.body, UserDetalis.class);
                      if (userDetalis != null) {
                          mList = userDetalis.getCar();
                          if (!CollectionUtil.isEmpty(mList)) {

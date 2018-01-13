@@ -14,20 +14,30 @@ import java.util.Date;
  */
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    //    "provider_id" 1  #服务商id,
-    //            "name" "测试商家"  #服务商名称,
-    //            "address" "郑州蓝宝万"  #服务商地址,
-    //            "thumb_image_url" "http//image.cheweifang.cn/"  #门店缩略图,
-    //            "service_tel" "13021960147"  #服务商联系方式,
-    //            "wxmp_qrcode" ""  #微信公众号图片,
-    //            "wxpay_collection_qrcode" ""  #服务商微信支付二维码,
-    //            "alipay_collection_qrcode" ""  #服务商支付宝支付二维码,
-    //            "login_token" "fd986f645eaac22ba512a69e4695c30d"  #login_token,
-    //            "staff_user_id" 1  #登陆者id
-    //    "user_name" "张三"  #登录者的名称,
-    //            "create_time" "2017-02-21 11:13:45"  #服务商注册时间
+//        "provider_id" 1  #服务商id,
+//                "name" "测试商家"  #服务商名称,
+//                "address" "郑州蓝宝万"  #服务商地址,
+//                "thumb_image_url" "http//image.cheweifang.cn/"  #门店缩略图,
+//                "service_tel" "13021960147"  #服务商联系方式,
+//                "wxmp_qrcode" ""  #微信公众号图片,
+//                "wxpay_collection_qrcode" ""  #服务商微信支付二维码,
+//                "alipay_collection_qrcode" ""  #服务商支付宝支付二维码,
+//                "login_token" "fd986f645eaac22ba512a69e4695c30d"  #login_token,
+//                "staff_user_id" 1  #登陆者id
+//        "user_name" "张三"  #登录者的名称,
+//                "create_time" "2017-02-21 11:13:45"  #服务商注册时间
 //   login_mobile  登录者手机号
 
+    /**
+     * 		"username": "admin",
+     "name": "",
+     "mobileLogin": true,
+     "JSESSIONID": ""
+     */
+
+    public String username;
+    public boolean mobileLogin;
+    public String JSESSIONID;
     public String provider_id;
     public String user_name;
     public String name;

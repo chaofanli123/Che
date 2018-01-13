@@ -49,7 +49,6 @@ public class WoDeSheBeiListActivity extends AppCompatActivity {
         mContext=this;
         init();
     }
-
     private void init() {
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);//设置布局管理器

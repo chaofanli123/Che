@@ -115,7 +115,7 @@ public class PolicyDetailActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         Gson gson = new Gson();
-                        quoteDetail = gson.fromJson(element.data,InsuranceQuoteDetail.class);
+                        quoteDetail = gson.fromJson(element.body,InsuranceQuoteDetail.class);
                         //                        quoteDetail = JSON.parseObject(element.data, InsuranceQuoteDetail.class);
 
                         if (quoteDetail ==null) {

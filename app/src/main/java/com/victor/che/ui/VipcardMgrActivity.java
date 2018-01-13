@@ -154,7 +154,7 @@ public class VipcardMgrActivity extends BaseActivity {
                         amount = element.options.getDoubleValue("amount");
                         tv_total_amount.setText(MathUtil.getFinanceValue(amount) + "元");
 
-                        List<Vipcard> temp = JSON.parseArray(element.data, Vipcard.class);
+                        List<Vipcard> temp = JSON.parseArray(element.body, Vipcard.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

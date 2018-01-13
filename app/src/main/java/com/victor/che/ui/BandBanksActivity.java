@@ -91,7 +91,7 @@ public class BandBanksActivity extends BaseActivity {
             @Override
             public void callbackSuccess(String url, Element element) {
                 mList.clear();//清空数据
-                bank = JSON.parseObject(element.data, Bank.class);
+                bank = JSON.parseObject(element.body, Bank.class);
                 defaultX = bank.getDefaultX();
                 List<Bank.CommonBean> common = bank.getCommon();
                 if (defaultX == null) {

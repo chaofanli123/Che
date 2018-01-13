@@ -153,10 +153,10 @@ public class SelectBaoxianCompanyActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        if (element.code == 0) {
-                            show();
-                        }
-                        if (element.code==4)
+//                        if (element.code == 0) {
+//                            show();
+//                        }
+//                        if (element.code==4)
                         sp.edit().clear().commit();
                     }
 
@@ -228,7 +228,7 @@ public class SelectBaoxianCompanyActivity extends BaseActivity {
                     public void callbackSuccess(String url, Element element) {
                         Gson gson = new Gson();
                         //  BaoxianCompany baoxianCompany = gson.fromJson(element.data, BaoxianCompany.class);
-                        List<BaoxianCompany> baoxianCompany = JSON.parseArray(element.data, BaoxianCompany.class);
+                        List<BaoxianCompany> baoxianCompany = JSON.parseArray(element.body, BaoxianCompany.class);
                         if (pullToRefresh) {////刷新
                             baoxianCompanyList.clear();//清空数据
                             if (baoxianCompany == null) {  //无数

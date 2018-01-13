@@ -116,7 +116,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        PayConfirmData payConfirmData = JSON.parseObject(element.data, PayConfirmData.class);
+                        PayConfirmData payConfirmData = JSON.parseObject(element.body, PayConfirmData.class);
                         int is_success = payConfirmData.is_success;//  #支付状态 0-回调失败 1-成功 2-未回调且客户端确认成功 3-客户端确认失败
                         if(is_success==1){
                             //成功

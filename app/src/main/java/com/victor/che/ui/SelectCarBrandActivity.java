@@ -73,12 +73,12 @@ public class SelectCarBrandActivity extends BaseActivity implements AdapterView.
         VictorHttpUtil.doGet(mContext, Define.URL_BRAND_SERIES_LIST, null, true, null, new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                if (StringUtil.isEmpty(element.data)) {
+                if (StringUtil.isEmpty(element.body)) {
                     MyApplication.showToast("返回数据格式不正确");
                     return;
                 }
                 // 渲染界面
-                render(element.data);
+                render(element.body);
 
             }
         });
@@ -187,11 +187,11 @@ public class SelectCarBrandActivity extends BaseActivity implements AdapterView.
             VictorHttpUtil.doGet(mContext, Define.URL_BRAND_SERIES_LIST, params, true, null, new BaseHttpCallbackListener<Element>() {
                 @Override
                 public void callbackSuccess(String url, Element element) {
-                    if (StringUtil.isEmpty(element.data)) {
+                    if (StringUtil.isEmpty(element.body)) {
                         MyApplication.showToast("返回数据格式不正确");
                         return;
                     }
-                    List<SubCarBrand> subCarBrandList = JSON.parseArray(element.data,
+                    List<SubCarBrand> subCarBrandList = JSON.parseArray(element.body,
                             SubCarBrand.class);
                     // 传参到fragment
                     EventBus.getDefault().post(carBrand);

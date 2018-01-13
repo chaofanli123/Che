@@ -166,7 +166,7 @@ public class CouponActivity extends BaseActivity {
                     Message message=new Message();
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = parseObject(element.data);
+                        JSONObject jsonobj = parseObject(element.body);
                         if (jsonobj != null) {
                             useful_count = jsonobj.getString("useful_count");
                             unuseful_count= jsonobj.getString("unuseful_count");

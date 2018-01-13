@@ -113,7 +113,7 @@ public class AddFanganActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         Gson gson = new Gson();
-                        baoxianStylefirst = gson.fromJson(element.data, BaoxianStyle.class);
+                        baoxianStylefirst = gson.fromJson(element.body, BaoxianStyle.class);
 
                         List<BaoxianStyle.交强险Bean> 交强险 = baoxianStylefirst.get交强险();
                         List<BaoxianStyle.商业险Bean> baoxianStyleslist = baoxianStylefirst.get商业险();

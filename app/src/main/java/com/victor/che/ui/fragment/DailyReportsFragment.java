@@ -76,7 +76,7 @@ public class DailyReportsFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
                         if (jsonobj == null) {
                             MyApplication.showToast("日报数据为空，请稍后重试");
                             return;

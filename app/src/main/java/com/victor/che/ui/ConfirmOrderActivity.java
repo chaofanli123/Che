@@ -184,7 +184,7 @@ public class ConfirmOrderActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = parseObject(element.data);
+                        JSONObject jsonobj = parseObject(element.body);
                             JSONObject user_info = jsonobj.getJSONObject("user_info");
 
                             if (user_info != null) {
@@ -484,7 +484,7 @@ public class ConfirmOrderActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        JSONObject jsonobj = parseObject(element.data);
+                        JSONObject jsonobj = parseObject(element.body);
                         if (jsonobj == null) {
                             MyApplication.showToast("订单返回数据异常");
                             return;

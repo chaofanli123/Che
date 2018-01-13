@@ -104,7 +104,7 @@ public class EndTimesFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<UsercardEnd> usercardEnd = JSON.parseArray(element.data, UsercardEnd.class);
+                        List<UsercardEnd> usercardEnd = JSON.parseArray(element.body, UsercardEnd.class);
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             messageListAdapter.setNewData(messageArrayList);
@@ -182,7 +182,7 @@ public class EndTimesFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public  void callbackSuccess(String url, Element element) {
-                        categoryList = JSON.parseArray(element.data, UserCustomMessage.class);
+                        categoryList = JSON.parseArray(element.body, UserCustomMessage.class);
                         if (CollectionUtil.isEmpty(categoryList)) {
                       //   MyApplication.showToast("数据区间列表为空，请点击下拉按钮自定义添加");
                             return;

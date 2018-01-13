@@ -125,7 +125,7 @@ public class UsercarHistoryValuesFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<QueryUserCarHistory> queryUserCarHistories = JSON.parseArray(element.data, QueryUserCarHistory.class);
+                        List<QueryUserCarHistory> queryUserCarHistories = JSON.parseArray(element.body, QueryUserCarHistory.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据

@@ -238,7 +238,7 @@ public class OrderListActivity extends BaseActivity {
                         orderWorker.user_name = "全部职员";
                         orderWorkerList.add(orderWorker);
 
-                        orderWorkerList.addAll(JSON.parseArray(element.data, Worker.class));
+                        orderWorkerList.addAll(JSON.parseArray(element.body, Worker.class));
                         if (CollectionUtil.isEmpty(orderWorkerList)) {
                             MyApplication.showToast("职员列表为空");
                             return;
@@ -355,7 +355,7 @@ public class OrderListActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Order> temp = JSON.parseArray(element.data, Order.class);
+                        List<Order> temp = JSON.parseArray(element.body, Order.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             mAdapter.setNewData(mList);

@@ -121,7 +121,7 @@ public class MyAccountActivity extends BaseActivity {
         VictorHttpUtil.doGet(mContext, Define.url_provider_bank_account_list_v1, params1, false, null, new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                bank = JSON.parseObject(element.data, Bank.class);
+                bank = JSON.parseObject(element.body, Bank.class);
             }
         });
     }
@@ -135,7 +135,7 @@ public class MyAccountActivity extends BaseActivity {
         VictorHttpUtil.doGet(mContext, Define.URL_PROVIDER_AMOUNT, params, true, "申请中...", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                JSONObject jsonobj = JSON.parseObject(element.data);
+                JSONObject jsonobj = JSON.parseObject(element.body);
                 if (jsonobj == null) {
                     MyApplication.showToast("返回数据为空，请稍后重试");
                     return;

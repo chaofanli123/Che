@@ -110,7 +110,7 @@ public class EndMoneyFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<UsercardEnd> usercardEnd = JSON.parseArray(element.data, UsercardEnd.class);
+                        List<UsercardEnd> usercardEnd = JSON.parseArray(element.body, UsercardEnd.class);
                         if (pullToRefresh) {////刷新
 
                             messageArrayList.clear();//清空数据
@@ -151,7 +151,7 @@ public class EndMoneyFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        categoryList = JSON.parseArray(element.data, UserCustomMessage.class);
+                        categoryList = JSON.parseArray(element.body, UserCustomMessage.class);
                         if (CollectionUtil.isEmpty(categoryList)) {
                           //  MyApplication.showToast("数据区间列表为空,点击下拉按钮自定义添加");
                             Toast.makeText(mContext,"数据区间列表为空,点击下拉按钮自定义添加",Toast.LENGTH_LONG).show();

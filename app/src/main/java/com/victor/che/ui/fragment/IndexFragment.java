@@ -252,14 +252,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
      */
     private void _reqData() {
         MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商编号
+       // params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商编号
         params.put("start", 0);//列表记录开始位置
         params.put("pageSize", 20);//一页显示行数
         VictorHttpUtil.doGet(mContext, Define.url_cart_list_pending_order, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Pending> temp = JSON.parseArray(element.data, Pending.class);
+                        List<Pending> temp = JSON.parseArray(element.body, Pending.class);
                         if (CollectionUtil.isEmpty(temp)) {
                             imgPutupOrder.setBackgroundResource(R.drawable.icon_putup_order_no);
                         } else {
@@ -278,7 +278,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
         VictorHttpUtil.doGet(mContext, Define.URL_APP_CONFIG, params, false, null, new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                bannerList = JSON.parseArray(element.data, Banner.class);
+                bannerList = JSON.parseArray(element.body, Banner.class);
                 initialize();
             }
         });
@@ -288,11 +288,11 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.area_product_mgr://产品管理
-                if (MyApplication.CURRENT_USER.is_initial_provider == 1) {//总店身份
-                    MyApplication.openActivity(mContext, ProductMgrHeadActivity.class, true);
-                } else if (MyApplication.CURRENT_USER.is_initial_provider == 0) {//分店身份
-                    MyApplication.openActivity(mContext, ProductMgrActivity.class, true);
-                }
+//                if (MyApplication.CURRENT_USER.is_initial_provider == 1) {//总店身份
+//                    MyApplication.openActivity(mContext, ProductMgrHeadActivity.class, true);
+//                } else if (MyApplication.CURRENT_USER.is_initial_provider == 0) {//分店身份
+//                    MyApplication.openActivity(mContext, ProductMgrActivity.class, true);
+//                }
                 break;
             case R.id.area_vipcard_mgr://会员卡管理
                 MyApplication.openActivity(mContext, VipcardStatisticActivity.class, true);
@@ -310,14 +310,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
                 MyApplication.openActivity(mContext, MyAccountActivity.class, true);
                 break;
             case R.id.area_shopping://商城
-                Bundle bundle = new Bundle();
-                bundle.putString("mURL", Define.MWEB_DOMAIN + "mall/#/" + MyApplication.CURRENT_USER.provider_id + "/" + MyApplication.CURRENT_USER.staff_user_id + "?_k=l01xoq");
-                MyApplication.openActivity(mContext, ShoppingWebActivity.class, bundle);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("mURL", Define.MWEB_DOMAIN + "mall/#/" + MyApplication.CURRENT_USER.provider_id + "/" + MyApplication.CURRENT_USER.staff_user_id + "?_k=l01xoq");
+//                MyApplication.openActivity(mContext, ShoppingWebActivity.class, bundle);
                 break;
             case R.id.area_report://数据分析
-                Bundle bundle1 = new Bundle();
-                bundle1.putString("mUrl", Define.MWEB_DOMAIN + "web/analyse/dataAnalysis.html" + "?provider_id=" + MyApplication.CURRENT_USER.provider_id);
-                MyApplication.openActivity(mContext, WebDataAnalysisActivity.class, bundle1);
+//                Bundle bundle1 = new Bundle();
+//                bundle1.putString("mUrl", Define.MWEB_DOMAIN + "web/analyse/dataAnalysis.html" + "?provider_id=" + MyApplication.CURRENT_USER.provider_id);
+//                MyApplication.openActivity(mContext, WebDataAnalysisActivity.class, bundle1);
                 break;
             case R.id.area_mendian://门店
                 MyApplication.openActivity(mContext, StoreActivity.class);
@@ -446,14 +446,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
         if (MyApplication.isLogined()) {
             _doRefreshData();
             _reqData();
-            tv_reg_days.setText(MyApplication.CURRENT_USER.getRegDays() + "");
+          //  tv_reg_days.setText(MyApplication.CURRENT_USER.getRegDays() + "");
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        tv_reg_days.setText(MyApplication.CURRENT_USER.getRegDays() + "");
+     //   tv_reg_days.setText(MyApplication.CURRENT_USER.getRegDays() + "");
     }
     /**
      * 去收款界面
@@ -476,14 +476,14 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
      */
     private void _doRefreshData() {
         MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//商家id
-        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);//登录者id
+//        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//商家id
+//        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);//登录者id
         VictorHttpUtil.doGet(mContext, Define.URL_STATISTIC_AMOUNT, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         //                        tv_refresh.setText("刷新");
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
 
                         if (jsonobj != null) {
                             tv_sales_amount.setText(MathUtil.getFinanceValue(jsonobj.getDoubleValue("amount")));//营业额

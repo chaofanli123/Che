@@ -211,7 +211,7 @@ public class CommitPolicyActivity extends BaseActivity {
                     public void callbackSuccess(String url, Element element) {
                         if(pay_method_id==1){
                             //支付宝支付
-                            PayPolicyAliData payPolicyAliData = JSON.parseObject(element.data, PayPolicyAliData.class);
+                            PayPolicyAliData payPolicyAliData = JSON.parseObject(element.body, PayPolicyAliData.class);
                             order_id = payPolicyAliData.insurance_order_id;
                             final String orderInfo = payPolicyAliData.payStr;
                             //  final  String orderInfo="app_id=2017032406383486&method=alipay.trade.app.pay&timestamp=2017-04-24+15%3A20%3A01&charset=utf-8&version=1.0&notify_url=https%3A%2F%2Fxapitest.cheweifang.cn%2Fapp%2Fnotify%2Fali_notify%2Fnotify_url.php&biz_content=%7B%22body%22%3A%22494%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22out_trade_no%22%3A%22201704241520011493018401660%22%2C%22total_amount%22%3A0.01%2C%22subject%22%3A%22201704241520011493018401660%22%7D&sign_type=RSA2&sign=G8CobNDtKNpSeB%2FzDsWvId4bShakSlPZlC%2FIk1yWM6vVuWMZ4wospQrILmoUaUSsoIjwewmUY8v1T%2F4CvtqAQNjC1haOwAwSyiLYU7MBTOmVVxSug0e5v9ZDpJKMg9hg4ampM35FWTSAcqSkoYeFdebdPyh3hexU1lcYMr0Q%2FwNLgozLmu8VSeD7ICW6bVMSQw4INzBFwEFDB6cujVf4cKQOJQpWfyejAVa14RonmnnVceAOlPWZDgxVB5aP02y%2FZQJX%2BEpogTcCtfZVpdqxxoppFr4rXRJ9q9dpRsO%2B72BWbyTPwWGlSoq8LsghGyDXSJQUVgEeodvQm1v5ljTbTg%3D%3D";
@@ -232,7 +232,7 @@ public class CommitPolicyActivity extends BaseActivity {
 
                         }else if(pay_method_id==2){
                             //微信支付
-                            PayPolicyWXData payPolicyWXData = JSON.parseObject(element.data, PayPolicyWXData.class);
+                            PayPolicyWXData payPolicyWXData = JSON.parseObject(element.body, PayPolicyWXData.class);
                             order_id = payPolicyWXData.insurance_order_id;
                             WXPayParams wxparams = payPolicyWXData.payStr;
                             WXPayUtil.startWXPay(mContext,wxparams,order_id+"");
@@ -290,7 +290,7 @@ public class CommitPolicyActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        PayConfirmData payConfirmData = JSON.parseObject(element.data, PayConfirmData.class);
+                        PayConfirmData payConfirmData = JSON.parseObject(element.body, PayConfirmData.class);
                         int is_success = payConfirmData.is_success;//  #支付状态 0-回调失败 1-成功 2-未回调且客户端确认成功 3-客户端确认失败
                         if(is_success==1){
                             //成功

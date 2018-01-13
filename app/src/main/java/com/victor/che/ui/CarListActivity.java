@@ -106,7 +106,7 @@ public class CarListActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Car> temp = JSON.parseArray(element.data, Car.class);
+                        List<Car> temp = JSON.parseArray(element.body, Car.class);
                         mList.clear();//清空数据
                         if (CollectionUtil.isEmpty(temp)) {
                             // 无数据

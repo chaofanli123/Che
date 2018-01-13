@@ -80,7 +80,7 @@ public class AddProductActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        categoryList = JSON.parseArray(element.data, Channel.class);
+                        categoryList = JSON.parseArray(element.body, Channel.class);
                         if (CollectionUtil.isEmpty(categoryList)) {
                             MyApplication.showToast("服务类型为空");
                             return;

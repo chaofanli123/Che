@@ -121,7 +121,7 @@ public class ProductListFragment extends BaseFragment {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Product> temp = JSON.parseArray(element.data, Product.class);
+                        List<Product> temp = JSON.parseArray(element.body, Product.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

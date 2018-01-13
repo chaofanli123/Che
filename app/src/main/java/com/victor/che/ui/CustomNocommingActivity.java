@@ -127,7 +127,7 @@ public class CustomNocommingActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<UserCustomMessage> userCustomMessages = JSON.parseArray(element.data, UserCustomMessage.class);
+                        List<UserCustomMessage> userCustomMessages = JSON.parseArray(element.body, UserCustomMessage.class);
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             if (CollectionUtil.isEmpty(userCustomMessages)) {  //无数

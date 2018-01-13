@@ -144,7 +144,7 @@ public class QueryHistoryFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<QueryBaoxianHistory> queryBaoxianHistories = JSON.parseArray(element.data, QueryBaoxianHistory.class);
+                        List<QueryBaoxianHistory> queryBaoxianHistories = JSON.parseArray(element.body, QueryBaoxianHistory.class);
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             if (CollectionUtil.isEmpty(queryBaoxianHistories)) {  //无数

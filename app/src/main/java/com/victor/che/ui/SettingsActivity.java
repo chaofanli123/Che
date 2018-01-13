@@ -88,11 +88,11 @@ public class SettingsActivity extends BaseActivity {
         VictorHttpUtil.doGet(mContext, Define.URL_APP_VERSION, null, true, "查询中……", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                if (StringUtil.isEmpty(element.data)) {
+                if (StringUtil.isEmpty(element.body)) {
                     MyApplication.showToast("已经是最新版本");
                     return;
                 }
-                final AppVersion version = JSON.parseObject(element.data, AppVersion.class);
+                final AppVersion version = JSON.parseObject(element.body, AppVersion.class);
                 if (version == null
                         || version.app_version == null
                         || version.app_version.compareTo(MyApplication.versionName) <= 0) {

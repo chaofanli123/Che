@@ -145,7 +145,7 @@ public class ReportDataFragment extends BaseFragment {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
 
 
                         JSONObject last = jsonobj.getJSONObject("last");

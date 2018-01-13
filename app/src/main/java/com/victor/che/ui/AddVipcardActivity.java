@@ -94,7 +94,7 @@ public class AddVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        categoryList = JSON.parseArray(element.data, VipcardCategory.class);
+                        categoryList = JSON.parseArray(element.body, VipcardCategory.class);
                         if (CollectionUtil.isEmpty(categoryList)) {
                             MyApplication.showToast("会员卡类型列表为空");
                             return;
@@ -118,7 +118,7 @@ public class AddVipcardActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        allCategoryList = (ArrayList<Channel>) JSON.parseArray(element.data, Channel.class);
+                        allCategoryList = (ArrayList<Channel>) JSON.parseArray(element.body, Channel.class);
 
                         if (CollectionUtil.isEmpty(allCategoryList)) {
                             MyApplication.showToast("服务类型为空");

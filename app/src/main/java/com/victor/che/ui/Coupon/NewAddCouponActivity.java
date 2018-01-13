@@ -382,7 +382,7 @@ public class NewAddCouponActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        allCategoryList = (ArrayList<Channel>) JSON.parseArray(element.data, Channel.class);
+                        allCategoryList = (ArrayList<Channel>) JSON.parseArray(element.body, Channel.class);
 
                         if (CollectionUtil.isEmpty(allCategoryList)) {
                             MyApplication.showToast("服务类型为空");

@@ -102,7 +102,7 @@ public class StoreActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Store> temp = JSON.parseArray(element.data, Store.class);
+                        List<Store> temp = JSON.parseArray(element.body, Store.class);
 
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据

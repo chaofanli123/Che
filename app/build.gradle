@@ -169,7 +169,7 @@ dependencies {
     }
     //compile 'com.pgyersdk:sdk:2.5.6'
     compile project(':signature-pad')
-    compile 'com.android.support:multidex:1.0.1'
+  compile 'com.android.support:multidex:1.0.1'
 }
 
 

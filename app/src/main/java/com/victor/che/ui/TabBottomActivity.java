@@ -82,62 +82,12 @@ public class TabBottomActivity extends BaseActivity {
                         setTabSelection(0);
                         break;
                     case R.id.tab_bottom_1:// 执法
-                        if (MyApplication.isLogined()) {
-                            setTabSelection(1);
-                            currentTabIndex = 1;
-                        } else {
-                            MyApplication.needLogin(mContext, TabBottomActivity.class, null);
-                            tab_bottom_1.setChecked(false);
-                            switch (currentTabIndex) {
-                                case 0:
-                                    tab_bottom_0.setChecked(true);
-                                    currentTabIndex = 0;
-                                    break;
-                                case 1:
-                                    tab_bottom_1.setChecked(true);
-                                    currentTabIndex = 1;
-                                    break;
-                                case 2:
-                                    tabBottom2.setChecked(true);
-                                    currentTabIndex = 1;
-                                    break;
-                                case 3:
-                                    tab_bottom_3.setChecked(true);
-                                    currentTabIndex = 3;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
+                        setTabSelection(1);
+                        currentTabIndex = 1;
                         break;
                     case R.id.tab_bottom_2:// 执法记录
-                        if (MyApplication.isLogined()) {
-                            setTabSelection(2);
-                            currentTabIndex = 2;
-                        } else {
-                            MyApplication.needLogin(mContext, TabBottomActivity.class, null);
-                            tab_bottom_1.setChecked(false);
-                            switch (currentTabIndex) {
-                                case 0:
-                                    tab_bottom_0.setChecked(true);
-                                    currentTabIndex = 0;
-                                    break;
-                                case 1:
-                                    tab_bottom_1.setChecked(true);
-                                    currentTabIndex = 1;
-                                    break;
-                                case 2:
-                                    tabBottom2.setChecked(true);
-                                    currentTabIndex = 1;
-                                    break;
-                                case 3:
-                                    tab_bottom_3.setChecked(true);
-                                    currentTabIndex = 3;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
+                        setTabSelection(2);
+                        currentTabIndex = 2;
                         break;
                     case R.id.tab_bottom_3:// 账户
                         setTabSelection(3);
@@ -158,10 +108,10 @@ public class TabBottomActivity extends BaseActivity {
         VictorHttpUtil.doGet(mContext, Define.URL_APP_VERSION, null, true, "查询中……", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                if (StringUtil.isEmpty(element.data)) {
+                if (StringUtil.isEmpty(element.body)) {
                     return;
                 }
-                final AppVersion version = JSON.parseObject(element.data, AppVersion.class);
+                final AppVersion version = JSON.parseObject(element.body, AppVersion.class);
                 if (version == null
                         || version.app_version == null
                         || version.app_version.compareTo(MyApplication.versionName) <= 0) {

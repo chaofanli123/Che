@@ -13,10 +13,6 @@ public class Define {
     public static final String MWEB_DOMAIN = "http://x.cheweifang.cn/";// 手机webview网页域名
   //  public static final String API_DOMAIN ="https://xapi.cheweifang.cn/index.php?";// API域名
     public static final String API_DOMAIN ="http://222.143.21.157:8090/aims/";//api地址
-//    public static final String MWEB_DOMAIN = String.format("http://x%s.cheweifang.cn/", MyApplication.DEBUG ? "test" : "");// 手机webview网页域名
-//
-//    public static final String API_DOMAIN = String.format("https://xapi%s.cheweifang.cn/index.php?", MyApplication.DEBUG ? "test" : "");// API域名
-
     /**
      * 登录
      */

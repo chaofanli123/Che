@@ -171,7 +171,7 @@ public class ReceiptQrcodeActivity extends BaseActivity {
                         public void callbackSuccess(String url, Element element) {
 
                             // #订单状态 1-未支付 3-待评价 4-已完成
-                            int order_status = JSON.parseObject(element.data).getIntValue("order_status");
+                            int order_status = JSON.parseObject(element.body).getIntValue("order_status");
                             switch (order_status) {
                                 case 1:
                                     MyApplication.showToast("订单未支付成功，请等待");

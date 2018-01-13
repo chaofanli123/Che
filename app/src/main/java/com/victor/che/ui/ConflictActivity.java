@@ -84,7 +84,7 @@ public class ConflictActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        mList = JSON.parseArray(element.data, Customer.class);
+                        mList = JSON.parseArray(element.body, Customer.class);
                         mAdapter.setNewData(mList);
                         mAdapter.notifyDataSetChanged();
                     }

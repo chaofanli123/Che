@@ -123,7 +123,7 @@ public class ChooseCustomerActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Customer> temp = JSON.parseArray(element.data, Customer.class);
+                        List<Customer> temp = JSON.parseArray(element.body, Customer.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

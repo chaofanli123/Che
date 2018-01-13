@@ -146,7 +146,7 @@ public class SearchCarFragment extends BaseFragment {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Car> temp = JSON.parseArray(element.data, Car.class);
+                        List<Car> temp = JSON.parseArray(element.body, Car.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

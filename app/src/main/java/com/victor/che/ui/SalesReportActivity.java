@@ -98,7 +98,7 @@ public class SalesReportActivity extends BaseActivity {
                         // 总营业额
                         tv_total.setText(MathUtil.getFinanceValue(element.options.getDoubleValue("amount")));
 
-                        mList = JSON.parseArray(element.data, DailyReport.class);
+                        mList = JSON.parseArray(element.body, DailyReport.class);
                         mAdapter.setNewData(mList);
                         mAdapter.notifyDataSetChanged();
 

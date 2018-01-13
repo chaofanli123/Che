@@ -39,7 +39,7 @@ public class AccountFragment extends BaseFragment {
         super.onResume();
         if (MyApplication.isLogined()) {
             // 当前用户名
-            tv_name.setText(MyApplication.CURRENT_USER.user_name);
+         //   tv_name.setText(MyApplication.CURRENT_USER.user_name);
             // 店铺名称
 //            tv_store_name.setText(MyApplication.CURRENT_USER.name);
         } else {

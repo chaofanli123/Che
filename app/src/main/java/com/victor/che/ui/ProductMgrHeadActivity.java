@@ -73,7 +73,7 @@ public class ProductMgrHeadActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        categoryList = JSON.parseArray(element.data, Category.class);
+                        categoryList = JSON.parseArray(element.body, Category.class);
                         if (CollectionUtil.isEmpty(categoryList)) {
                             MyApplication.showToast("服务类型为空");
                             return;

@@ -56,7 +56,7 @@ public class SelectServiceAreaActivity extends BaseActivity implements Indexable
         VictorHttpUtil.doGet(mContext, Define.url_usedcar_area_list_v1, null, true, "加载中...", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
-                MyApplication.RegionList = (ArrayList<Region>) JSON.parseArray(element.data, Region.class);// 保存到全局
+                MyApplication.RegionList = (ArrayList<Region>) JSON.parseArray(element.body, Region.class);// 保存到全局
                 MyApplication.saveRegionList();// 保存城市列表
                 // 渲染服务地区列表
                 renderRegionList();

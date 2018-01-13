@@ -308,7 +308,7 @@ public class ReceiptActivity extends BaseActivity {
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
-                            categoryList = JSON.parseArray(element.data, Channel.class);
+                            categoryList = JSON.parseArray(element.body, Channel.class);
                             if (CollectionUtil.isEmpty(categoryList)) {
                                 MyApplication.showToast("服务类别列表为空");
                                 return;
@@ -386,7 +386,7 @@ public class ReceiptActivity extends BaseActivity {
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
-                            categoryList = JSON.parseArray(element.data, Channel.class);
+                            categoryList = JSON.parseArray(element.body, Channel.class);
                             if (CollectionUtil.isEmpty(categoryList)) {
                                 MyApplication.showToast("服务类别列表为空");
                                 return;
@@ -541,7 +541,7 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        productList = JSON.parseArray(element.data, Product.class);
+                        productList = JSON.parseArray(element.body, Product.class);
                         if (CollectionUtil.isEmpty(productList)) {
                             MyApplication.showToast("服务列表为空");
                             tv_product.setText("还未有上架的服务");
@@ -569,7 +569,7 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        workerList = JSON.parseArray(element.data, User.class);
+                        workerList = JSON.parseArray(element.body, User.class);
                         if (CollectionUtil.isEmpty(workerList)) {
                             MyApplication.showToast("服务师傅列表为空");
                             return;
@@ -597,7 +597,7 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        workerList = JSON.parseArray(element.data, User.class);
+                        workerList = JSON.parseArray(element.body, User.class);
                         if (CollectionUtil.isEmpty(workerList)) {
                             MyApplication.showToast("服务师傅列表为空");
                             return;
@@ -627,7 +627,7 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        productList = JSON.parseArray(element.data, Product.class);
+                        productList = JSON.parseArray(element.body, Product.class);
                         if (CollectionUtil.isEmpty(productList)) {
                             MyApplication.showToast("服务列表为空");
                             tv_product.setText("还未有上架的服务");
@@ -891,7 +891,7 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        JSONObject jsonobj = parseObject(element.data);
+                        JSONObject jsonobj = parseObject(element.body);
                         JSONObject user_info = jsonobj.getJSONObject("user_info");
                         if (user_info != null) {
                             userIsExist = true;
@@ -1189,12 +1189,12 @@ public class ReceiptActivity extends BaseActivity {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-
-                        if (element.code == 0 && element.msg.equals("成功")) {
-                            MyApplication.showToast("挂单成功");
-                            MyApplication.openActivity(mContext, PendingOrderActivity.class);
-                            finish();
-                        }
+//
+//                        if (element.code == 0 && element.msg.equals("成功")) {
+//                            MyApplication.showToast("挂单成功");
+//                            MyApplication.openActivity(mContext, PendingOrderActivity.class);
+//                            finish();
+//                        }
                     }
                 });
     }
@@ -1220,11 +1220,11 @@ public class ReceiptActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        if (element.code == 0 && element.msg.equals("成功")) {
-                            MyApplication.showToast("挂单编辑成功");
-//                            MyApplication.openActivity(mContext,PendingOrderActivity.class);
-                            finish();
-                        }
+//                        if (element.code == 0 && element.msg.equals("成功")) {
+//                            MyApplication.showToast("挂单编辑成功");
+////                            MyApplication.openActivity(mContext,PendingOrderActivity.class);
+//                            finish();
+//                        }
                     }
                 });
     }
@@ -1535,7 +1535,7 @@ public class ReceiptActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
 
-                        JSONObject jsonobj = JSON.parseObject(element.data);
+                        JSONObject jsonobj = JSON.parseObject(element.body);
                         if (jsonobj == null) {
                             MyApplication.showToast("订单返回数据异常");
                             return;

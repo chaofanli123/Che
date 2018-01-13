@@ -54,12 +54,12 @@ public class SelectCarNumActivity extends BaseActivity implements IndexableAdapt
             VictorHttpUtil.doGet(mContext, Define.url_usedcar_brand_series_list_v1, null, true, null, new BaseHttpCallbackListener<Element>() {
                 @Override
                 public void callbackSuccess(String url, Element element) {
-                    if (StringUtil.isEmpty(element.data)) {
+                    if (StringUtil.isEmpty(element.body)) {
                         MyApplication.showToast("返回数据格式不正确");
                         return;
                     }
                     // 展示界面，不带热门品牌
-                    render_common(element.data);
+                    render_common(element.body);
 
                 }
             });
@@ -117,11 +117,11 @@ public class SelectCarNumActivity extends BaseActivity implements IndexableAdapt
             VictorHttpUtil.doGet(mContext, Define.url_usedcar_brand_series_list_v1, params, true, null, new BaseHttpCallbackListener<Element>() {
                 @Override
                 public void callbackSuccess(String url, Element element) {
-                    if (StringUtil.isEmpty(element.data)) {
+                    if (StringUtil.isEmpty(element.body)) {
                         MyApplication.showToast("返回数据格式不正确");
                         return;
                     }
-                    List<SubCarPinpai> subCarBrandList = JSON.parseArray(element.data,
+                    List<SubCarPinpai> subCarBrandList = JSON.parseArray(element.body,
                             SubCarPinpai.class);
                     // 传参到fragment
                    EventBus.getDefault().post(carBrand);

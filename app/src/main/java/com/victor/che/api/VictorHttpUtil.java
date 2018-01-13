@@ -66,7 +66,6 @@ public class VictorHttpUtil {
             return;
         }
         long timestamp = System.currentTimeMillis() / 1000;// 获取时间戳（单位：秒）
-        String signUrl = _genSignUrl(url, timestamp, params);// 变换url
 
         GetRequest request = OkGo.get(url)
                 .tag(context)
@@ -102,15 +101,12 @@ public class VictorHttpUtil {
             return;
         }
         long timestamp = System.currentTimeMillis() / 1000;// 获取时间戳（单位：秒）
-        String signUrl = _genSignUrl(url, timestamp, params);// 变换url
 
         PostRequest request = OkGo.post(url)
                 .tag(context)
                 ;//添加header .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp))
-
         // 添加请求参数
         _addReqParams(params, request);
-
         // 打印请求参数
         Logger.e(String.format("url: %s\nparams: %s", url, params));
 
@@ -132,7 +128,10 @@ public class VictorHttpUtil {
                 for (KeyValue item : list) {
                     if (item.value instanceof String) {
                         request.params(item.key, (String) item.value);
-                    } else if (item.value instanceof Integer) {
+                    }else if (item.value instanceof Boolean) {
+                        request.params(item.key, (Boolean) item.value);
+                    }
+                    else if (item.value instanceof Integer) {
                         request.params(item.key, (Integer) item.value);
                     } else if (item.value instanceof Double) {
                         request.params(item.key, (Double) item.value);
@@ -202,65 +201,6 @@ public class VictorHttpUtil {
     }
 
     /**
-     * GET请求生成签名后的url
-     *
-     * @param params
-     * @return
-     */
-    private static String _genSignUrl(String url, long timestamp, MyParams params) {
-        StringBuilder builder = new StringBuilder(url);
-        builder.append(url.contains("?") ? "&" : "?").append(SIGN_KEY).append("=").append(_genSign(timestamp, params));
-        return builder.toString();
-    }
-
-    /**
-     * 生成签名
-     *
-     * @param timestamp
-     * @param params
-     * @return
-     */
-    private static String _genSign(long timestamp, MyParams params) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(MyApplication.APP_KEY)
-                .append(MyApplication.APP_SECRET)
-                .append(timestamp);
-        if (params != null && !params.isEmpty()) {// 请求参数按key值排序
-            List<KeyValue> paramsList = params.getParamsList();
-            Collections.sort(paramsList, new Comparator<KeyValue>() {
-                @Override
-                public int compare(KeyValue lhs, KeyValue rhs) {
-                    return lhs.key.compareTo(rhs.key);
-                }
-            });
-            int size = paramsList.size();
-            for (int i = 0; i < size; i++) {
-                KeyValue pair = paramsList.get(i);
-                if (pair.value == null || pair.value.equals("") || pair.value instanceof File) {// 空和文件类型不参与计算
-                    continue;
-                }
-                builder.append(pair.key).append("=").append(pair.value);
-                if (i < size - 1) {
-                    builder.append("&");
-                }
-            }
-        }
-        String sign = MD5Util.md5(builder.toString());// 生成签名
-        return sign;
-    }
-
-    /**
-     * 生成请求头验证信息
-     *
-     * @param timestamp
-     * @return
-     */
-    private static String _genRequestHeaderAuth(long timestamp) {
-        String str = MyApplication.APP_KEY + ":" + timestamp;
-        return Base64Util.encode(str, ConstantValue.DEFAULT_CHARSET).trim();
-    }
-
-    /**
      * 回调
      *
      * @author Victor
@@ -282,7 +222,6 @@ public class VictorHttpUtil {
             this.showProgressDialog = showProgressDialog;
             this.loadingText = TextUtils.isEmpty(loadingText) ? "加载中……" : loadingText;
             this.listener = listener;
-
             if (listener != null && listener instanceof BaseHttpCallbackListener) {
                 // 设置context
                 BaseHttpCallbackListener baseHttpCallbackListener = (BaseHttpCallbackListener) listener;
@@ -299,24 +238,32 @@ public class VictorHttpUtil {
                 MyApplication.showToast("解析JSON数据为空，请检查！！！");
                 return;
             }
-
-            switch (element.code) {
-                case 0:// 0-成功
-                    if (listener != null) {
-                        listener.callbackSuccess(url, element);
-                    }
-                    break;
-                case 5:// 5-token验证失败 需要重新登录
-                    User user = new User();
-                    MyApplication.saveUser(user);
-                    MyApplication.openActivity(context, LoginActivity.class);
-                    break;
-                default:// 1-权限验证错误，跳转到登录界面, 2-数据库操作失败， 3-业务逻辑失败， 4-服务器错误
-                    if (listener != null) {
-                        listener.callbackError(url, element);
-                    }
-                    break;
+            if (element.isSuccess() == true) {
+                if (listener != null) {
+                    listener.callbackSuccess(url, element);
+                }
+            }else {
+                if (listener != null) {
+                    listener.callbackError(url, element);
+                }
             }
+//            switch (element.code) {
+//                case 0:// 0-成功
+//                    if (listener != null) {
+//                        listener.callbackSuccess(url, element);
+//                    }
+//                    break;
+//                case 5:// 5-token验证失败 需要重新登录
+//                    User user = new User();
+//                    MyApplication.saveUser(user);
+//                    MyApplication.openActivity(context, LoginActivity.class);
+//                    break;
+//                default:// 1-权限验证错误，跳转到登录界面, 2-数据库操作失败， 3-业务逻辑失败， 4-服务器错误
+//                    if (listener != null) {
+//                        listener.callbackError(url, element);
+//                    }
+//                    break;
+//            }
         }
 
         /**
@@ -344,7 +291,6 @@ public class VictorHttpUtil {
         public void parseError(Call call, Exception e) {
             Logger.e("verrr", url + "=" + e);// 打印错误
         }
-
         /**
          * 请求网络开始前，UI线程
          */

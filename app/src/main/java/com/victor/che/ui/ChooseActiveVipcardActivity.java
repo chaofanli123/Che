@@ -91,7 +91,7 @@ public class ChooseActiveVipcardActivity extends BaseActivity {
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Vipcard> temp = JSON.parseArray(element.data, Vipcard.class);
+                        List<Vipcard> temp = JSON.parseArray(element.body, Vipcard.class);
 
                         GlobalParams.gProvVipcardList = temp;//全局的服务商会员卡列表
 

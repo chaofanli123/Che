@@ -98,7 +98,7 @@ public class PastCouponFragment extends BaseFragment {
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+      //  params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
         params.put("pageSize", pageSize);
         params.put("start", curpage);
         params.put("status", 2);
@@ -106,7 +106,7 @@ public class PastCouponFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<ShopsCoupon> shopsCouponList = JSON.parseArray(element.data, ShopsCoupon.class);
+                        List<ShopsCoupon> shopsCouponList = JSON.parseArray(element.body, ShopsCoupon.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据

@@ -97,15 +97,15 @@ public class MessageFragment extends BaseFragment {
     private void _reqData(final boolean pullToRefresh, final int curpage, final int pageSize) {
         // 获取订单列表
         MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商编号
-        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);// 登陆者id(商户app必传,用户自己获取时不传)
+//        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商编号
+//        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);// 登陆者id(商户app必传,用户自己获取时不传)
         params.put("start", curpage);//列表记录开始位置
         params.put("pageSize", pageSize);//一页显示行数
         VictorHttpUtil.doGet(mContext, Define.URL_PROVIDER_NOTIFY_LIST, params, true, "加载中...",
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Message> temp = JSON.parseArray(element.data, Message.class);
+                        List<Message> temp = JSON.parseArray(element.body, Message.class);
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {

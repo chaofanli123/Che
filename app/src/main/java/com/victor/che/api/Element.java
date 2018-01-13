@@ -12,16 +12,13 @@ import java.io.Serializable;
  * @time 2016年3月22日 上午10:00:58
  */
 public class Element implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
-    public int code;// 0-成功， 1-权限验证错误 ， 2-数据库操作失败， 3-业务逻辑失败， 4-服务器错误,
+    private boolean success;// true 是代表 成功，false 失败
+    public  String errorCode;// -1
     public String msg;// 前端显示的提示信息
-    public String data;// 实际数据
+    public String body;// 实际数据
     public int count;// 总记录数
     public JSONObject options;
-
-
     /**
      * 聚合证件识别接口返回参数
      **/
@@ -29,13 +26,19 @@ public class Element implements Serializable {
     public String reason;//返回说明
     public String result;//	返回结果集
 
-
-    public int getCode() {
-        return code;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
     public String getMsg() {
@@ -47,11 +50,11 @@ public class Element implements Serializable {
     }
 
     public String getData() {
-        return data;
+        return body;
     }
 
     public void setData(String data) {
-        this.data = data;
+        this.body = data;
     }
 
     public int getCount() {
@@ -96,7 +99,17 @@ public class Element implements Serializable {
 
     @Override
     public String toString() {
-        return "Element [code=" + code + ", msg=" + msg + ", data=" + data + ", count=" + count + ", options=" + options + "]";
+        return "Element{" +
+                "success=" + success +
+                ", errorCode=" + errorCode +
+                ", msg='" + msg + '\'' +
+                ", body='" + body + '\'' +
+                ", count=" + count +
+                ", options=" + options +
+                ", error_code=" + error_code +
+                ", reason='" + reason + '\'' +
+                ", result='" + result + '\'' +
+                '}';
     }
 
     /**

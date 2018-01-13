@@ -102,7 +102,7 @@ public class ForbiddenCouponFragment extends BaseFragment {
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+      //  params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
         params.put("pageSize", pageSize);
         params.put("start", curpage);
         params.put("status", 0);
@@ -110,7 +110,7 @@ public class ForbiddenCouponFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<ShopsCoupon> shopsCouponList = JSON.parseArray(element.data, ShopsCoupon.class);
+                        List<ShopsCoupon> shopsCouponList = JSON.parseArray(element.body, ShopsCoupon.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
@@ -218,7 +218,7 @@ public class ForbiddenCouponFragment extends BaseFragment {
                     @Override
                     public void onClick(View v) {
                         MyParams params = new MyParams();
-                        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+                     //   params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
                         params.put("coupon_id", coupon_id);//优惠券id
                         params.put("status", 1);//要修改的状态值： 0-禁用 1-启用
                         VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,

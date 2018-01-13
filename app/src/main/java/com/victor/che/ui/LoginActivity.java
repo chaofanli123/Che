@@ -31,6 +31,7 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
+import com.victor.che.bean.NewUser;
 import com.victor.che.domain.User;
 import com.victor.che.util.AppUtil;
 import com.victor.che.util.DateUtil;
@@ -46,6 +47,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+
+import static com.victor.che.app.MyApplication.spUtil;
 
 /**
  * 登录界面
@@ -91,7 +94,6 @@ public class LoginActivity extends BaseActivity {
     public int getContentView() {
         return R.layout.activity_login;
     }
-
     @Override
     protected void initView() {
         super.initView();
@@ -111,7 +113,7 @@ public class LoginActivity extends BaseActivity {
                     }
                 }).check();
 
-        firstStartedApp = MyApplication.spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
+        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
         if (firstStartedApp) {// 第一次进入
             MyApplication.openActivity(mContext, GuideActivity.class);
             finish();
@@ -260,12 +262,12 @@ public class LoginActivity extends BaseActivity {
         }
         // 发送登录请求
         MyParams params = new MyParams();
-        params.put("mobileLogin", true);//用户名或手机号
-        params.put("username", username);//用户名或手机号
+        params.put("mobileLogin",true);//是否客户的端登录
+        params.put("username",username);//用户名或手机号
         if (mLoginByPwd) {// 密码登录
-            params.put("password", pwd);
+            params.put("password",pwd);
         } else {// 验证码登录MyApplication.showToast("登录成功");
-            params.put("smscode", captcha);
+            params.put("smscode",captcha);
     }
         VictorHttpUtil.doPost(mContext, Define.URL_LOGIN, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
@@ -273,21 +275,12 @@ public class LoginActivity extends BaseActivity {
             public void callbackSuccess(String url, Element element) {
                 // 登录成功
                 // 保存用户信息（手机号和默认车辆）
-                User user = JSON.parseObject(element.data, User.class);
-                user.tokenExpireTime = DateUtil.getDateByOffset(new Date(), Calendar.DAY_OF_YEAR,
-                        ConstantValue.TOKEN_EXPIRE_DAY);// 更新过期时间
+                User user = JSON.parseObject(element.body, User.class);
                 MyApplication.saveUser(user);
-                // 如果推送停止，则重新启动
-                if (JPushInterface.isPushStopped(getApplicationContext())) {
-                    JPushInterface.resumePush(getApplicationContext());
-                }
-                // 设置JPush别名(staff_user_id)
-                mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, user.staff_user_id));
-
+                spUtil.setObject("CURRENT_USER", user);
              MyApplication.openActivity(mContext, TabBottomActivity.class);
              //设置acToken
              MyApplication.getOpenSDK().setAccessToken("at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
-
                 // 关闭本页
                 finish();
             }
@@ -319,9 +312,9 @@ public class LoginActivity extends BaseActivity {
                 case 0:// 设置成功
                     Logger.e("设置jpush成功");
                     // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-                    boolean setJPushAlias = MyApplication.spUtil.getBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias);
+                    boolean setJPushAlias = spUtil.getBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias);
                     if (!setJPushAlias) {
-                        MyApplication.spUtil.setBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias, true);
+                        spUtil.setBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias, true);
                     }
                     break;
                 case 6002:// 设置超时，延迟 60 秒来调用 Handler 设置别名

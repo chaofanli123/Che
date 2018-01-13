@@ -68,9 +68,9 @@ public class VictorHttpUtil {
         long timestamp = System.currentTimeMillis() / 1000;// 获取时间戳（单位：秒）
         String signUrl = _genSignUrl(url, timestamp, params);// 变换url
 
-        GetRequest request = OkGo.get(signUrl)
+        GetRequest request = OkGo.get(url)
                 .tag(context)
-                .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp));//添加header
+               ;//添加header .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp))
 
         // 添加请求参数
         _addReqParams(params, request);
@@ -104,9 +104,9 @@ public class VictorHttpUtil {
         long timestamp = System.currentTimeMillis() / 1000;// 获取时间戳（单位：秒）
         String signUrl = _genSignUrl(url, timestamp, params);// 变换url
 
-        PostRequest request = OkGo.post(signUrl)
+        PostRequest request = OkGo.post(url)
                 .tag(context)
-                .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp));//添加header
+                ;//添加header .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp))
 
         // 添加请求参数
         _addReqParams(params, request);

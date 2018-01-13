@@ -171,11 +171,9 @@ public class LoginActivity extends BaseActivity {
         if (mLoginByPwd) {// 切换到密码登录
             area_pwd.setVisibility(View.VISIBLE);
             et_captcha.setVisibility(View.GONE);
-
             et_username.setHint("请输入用户名或手机号");
             et_username.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS); //输入类型
             et_username.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)}); //最大输入长度
-
             btn_get_captcha.setVisibility(View.GONE);
             divider.setVisibility(View.GONE);
             tv_switch_login_type.setText("验证码登录");
@@ -260,18 +258,15 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
         }
-
         // 发送登录请求
         MyParams params = new MyParams();
-        params.put("login_name", username);//用户名或手机号
+        params.put("mobileLogin", true);//用户名或手机号
+        params.put("username", username);//用户名或手机号
         if (mLoginByPwd) {// 密码登录
-            params.put("login_password", pwd);
+            params.put("password", pwd);
         } else {// 验证码登录MyApplication.showToast("登录成功");
             params.put("smscode", captcha);
-        }
-        params.put("os", ConstantValue.OS);//登录设备 0：未知，1：ios，2：Android
-        params.put("os_version", android.os.Build.VERSION.RELEASE);//app操作系统版本号
-        params.put("device_id", deviceId);//设备id
+    }
         VictorHttpUtil.doPost(mContext, Define.URL_LOGIN, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
             @Override
@@ -291,7 +286,7 @@ public class LoginActivity extends BaseActivity {
 
              MyApplication.openActivity(mContext, TabBottomActivity.class);
              //设置acToken
-//             MyApplication.getOpenSDK().setAccessToken("at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
+             MyApplication.getOpenSDK().setAccessToken("at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
 
                 // 关闭本页
                 finish();

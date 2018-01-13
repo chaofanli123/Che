@@ -342,7 +342,7 @@ public class MyApplication extends BaseApplication {
         return (User) spUtil.getObject("CURRENT_USER", User.class);
     }
 
-//    public static EZOpenSDK getOpenSDK() {
-//        return EZOpenSDK.getInstance();
-//    }
+    public static EZOpenSDK getOpenSDK() {
+        return EZOpenSDK.getInstance();
+    }
 }

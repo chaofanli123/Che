@@ -62,7 +62,6 @@
                     android:textColorHint="#cccccc"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="@dimen/middle_font_size"/>
-
                 <View
                     android:id="@+id/divider"
                     android:layout_width="1px"
@@ -166,7 +165,9 @@
                 android:layout_marginTop="40px"
                 android:clickable="true"
                 android:text="验证码登录"
-                android:textSize="@dimen/font_size_28px"/>
+                android:textSize="@dimen/font_size_28px"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@id/btn_operate"

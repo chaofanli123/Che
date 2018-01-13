@@ -1,5 +1,6 @@
 package com.victor.che.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Message;
+import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
@@ -82,7 +84,7 @@ public class MessageFragment extends BaseFragment {
             }
         });
         mPtrHelper.autoRefresh(true);
-//        startActivity(new Intent(getActivity(), WoDeSheBeiListActivity.class));
+        startActivity(new Intent(getActivity(), WoDeSheBeiListActivity.class));
     }
 
     /**

@@ -21,7 +21,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/ic_index_service"
             android:gravity="center"
-            android:text="服务"
+            android:text="养殖场档案"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"/>
 
@@ -33,7 +33,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/ic_index_vipcard"
             android:gravity="center"
-            android:text="会员卡"
+            android:text="档案详情"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"/>
 
@@ -45,7 +45,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/ic_index_customer"
             android:gravity="center"
-            android:text="用户"
+            android:text="监控记录"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"/>
 
@@ -71,7 +71,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/ic_index_order"
             android:gravity="center"
-            android:text="订单"
+            android:text="水质监测记录"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"/>
 
@@ -83,7 +83,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/ic_index_marketing"
             android:gravity="center"
-            android:text="营销"
+            android:text="用药记录"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"
             />
@@ -95,7 +95,7 @@
             android:drawablePadding="12dp"
             android:drawableTop="@drawable/icon_coupon"
             android:gravity="center"
-            android:text="优惠券"
+            android:text="补贴补助记录"
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"/>
 

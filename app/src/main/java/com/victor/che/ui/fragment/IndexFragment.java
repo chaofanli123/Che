@@ -1,6 +1,7 @@
 package com.victor.che.ui.fragment;
 
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -49,6 +50,7 @@ import com.victor.che.ui.ShoppingWebActivity;
 import com.victor.che.ui.StoreActivity;
 import com.victor.che.ui.VipcardStatisticActivity;
 import com.victor.che.ui.WebDataAnalysisActivity;
+import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.MathUtil;
@@ -298,7 +300,9 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
                 MyApplication.openActivity(mContext, VipcardStatisticActivity.class, true);
                 break;
             case R.id.area_customer://用户
-                MyApplication.openActivity(mContext, CustomerListActivity.class, true);
+//                MyApplication.openActivity(mContext, CustomerListActivity.class, true);
+//                MyApplication.openActivity(mContext, WoDeSheBeiListActivity.class, true);
+                startActivity(new Intent(mContext,WoDeSheBeiListActivity.class));
                 break;
             case R.id.area_order_list://订单界面
                 MyApplication.openActivity(mContext, OrderListActivity.class, true);

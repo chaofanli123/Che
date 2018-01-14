@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.orhanobut.logger.Logger;
 import com.victor.che.app.MyApplication;
+import com.videogo.exception.BaseException;
 
 /**
  * 回调的简单空实现
@@ -35,7 +36,7 @@ public class BaseHttpCallbackListener<T> implements HttpCallbackListener<T> {
     }
 
     @Override
-    public void callbackSuccess(String url, T element) {
+    public void callbackSuccess(String url, T element)  {
 
     }
 

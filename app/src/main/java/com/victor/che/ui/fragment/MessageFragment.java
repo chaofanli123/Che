@@ -84,7 +84,6 @@ public class MessageFragment extends BaseFragment {
             }
         });
         mPtrHelper.autoRefresh(true);
-        startActivity(new Intent(getActivity(), WoDeSheBeiListActivity.class));
     }
 
     /**

@@ -19,7 +19,10 @@ public class Define {
     public static final String URL_LOGIN = API_DOMAIN + "a/login";
 
 
-
+  /**
+   * 视频
+   */
+  public static final String URL_SHIPING = API_DOMAIN + "a/comopinion/videoDataInformation/list";
 
 
 

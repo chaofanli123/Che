@@ -113,8 +113,7 @@ public class LoginActivity extends BaseActivity {
                     }
                 }).check();
 
-//        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
-                firstStartedApp = false;
+        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
         if (firstStartedApp) {// 第一次进入
             MyApplication.openActivity(mContext, GuideActivity.class);
             finish();
@@ -280,8 +279,6 @@ public class LoginActivity extends BaseActivity {
                 MyApplication.saveUser(user);
                 spUtil.setObject("CURRENT_USER", user);
              MyApplication.openActivity(mContext, TabBottomActivity.class);
-             //设置acToken
-             MyApplication.getOpenSDK().setAccessToken("at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
                 // 关闭本页
                 finish();
             }

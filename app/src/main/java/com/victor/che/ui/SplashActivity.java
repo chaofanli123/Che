@@ -101,7 +101,8 @@ public class SplashActivity extends BaseActivity {
      * 获取存储权限后，展示启动图
      */
     private void displaySplashImage() {
-        firstStartedApp = MyApplication.spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
+//        firstStartedApp = MyApplication.spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
+        firstStartedApp=false;
         // 进入app
         enterApp();
     }
@@ -129,7 +130,8 @@ public class SplashActivity extends BaseActivity {
     @OnClick(R.id.btn_skip)
     void doSkip() {
         if (firstStartedApp) {// 第一次进入
-            MyApplication.openActivity(mContext, GuideActivity.class);
+//            MyApplication.openActivity(mContext, GuideActivity.class);
+            MyApplication.openActivity(mContext, LoginActivity.class);
         } else if (!MyApplication.isLogined()) {//未登录进入登录界面
             MyApplication.openActivity(mContext, LoginActivity.class);
         } else {// 第二次进入

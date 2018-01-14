@@ -113,7 +113,8 @@ public class LoginActivity extends BaseActivity {
                     }
                 }).check();
 
-        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
+//        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
+                firstStartedApp = false;
         if (firstStartedApp) {// 第一次进入
             MyApplication.openActivity(mContext, GuideActivity.class);
             finish();

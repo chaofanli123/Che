@@ -85,7 +85,6 @@ public class PastCouponFragment extends BaseFragment {
                 bundle.putString("type","couponlist");
                 bundle.putString("position",position+"");
                 bundle.putSerializable("shopsCoupon",shopsCoupon);
-                MyApplication.openActivity(mContext,NewAddCouponActivity.class,bundle);
             }
         });
         mPtrHelper.autoRefresh(true);
@@ -172,7 +171,6 @@ public class PastCouponFragment extends BaseFragment {
                 public void onClick(View view) {
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("shopsCoupon",shopsCoupon);
-                    MyApplication.openActivity(mContext,SendCouponListActivity.class,bundle);
                 }
             });
             TextView tv_forbidden = holder.getView(R.id.tv_forbidden);

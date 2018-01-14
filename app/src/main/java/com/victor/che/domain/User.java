@@ -38,9 +38,11 @@ public class User implements Serializable {
     public String username;
     public boolean mobileLogin;
     public String JSESSIONID;
-    public String provider_id;
-    public String user_name;
     public String name;
+
+
+    public String provider_id;
+
     public String address;
     public String thumb_image_url;
     public String service_tel;

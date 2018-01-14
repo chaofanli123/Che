@@ -5,7 +5,7 @@
     android:background="@color/common_bg"
     tools:context="com.victor.che.ui.fragment.UsercarHistoryValuesFragment">
 
-    <com.victor.che.widget.PtrlMeiTuanFrameLayout
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
         xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/pcfl_user_car"
         android:layout_width="match_parent"
@@ -21,6 +21,6 @@
             android:id="@+id/recycler_usr_car"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-    </com.victor.che.widget.PtrlMeiTuanFrameLayout>
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 </FrameLayout>

@@ -42,7 +42,6 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +49,6 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init();
     }
-
     private void init() {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override

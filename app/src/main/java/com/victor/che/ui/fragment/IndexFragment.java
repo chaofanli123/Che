@@ -32,18 +32,8 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Banner;
 import com.victor.che.domain.Pending;
-import com.victor.che.ui.AddCustomerActivity;
-import com.victor.che.ui.AddProductActivity;
-import com.victor.che.ui.Coupon.CouponListActivity;
-import com.victor.che.ui.CustomActiveVipcardActivity;
-import com.victor.che.ui.CustomerListActivity;
 import com.victor.che.ui.GuanggaoWebActivity;
-import com.victor.che.ui.MarketingActivity;
-import com.victor.che.ui.MyAccountActivity;
 import com.victor.che.ui.OrderListActivity;
-import com.victor.che.ui.PendingOrderActivity;
-import com.victor.che.ui.ProductMgrActivity;
-import com.victor.che.ui.ProductMgrHeadActivity;
 import com.victor.che.ui.ReceiptActivity;
 import com.victor.che.ui.SearchActivity;
 import com.victor.che.ui.ShoppingWebActivity;
@@ -297,7 +287,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
 //                }
                 break;
             case R.id.area_vipcard_mgr://会员卡管理
-                MyApplication.openActivity(mContext, VipcardStatisticActivity.class, true);
                 break;
             case R.id.area_customer://用户
 //                MyApplication.openActivity(mContext, CustomerListActivity.class, true);
@@ -308,10 +297,8 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
                 MyApplication.openActivity(mContext, OrderListActivity.class, true);
                 break;
             case R.id.area_marketing: //营销
-                MyApplication.openActivity(mContext, MarketingActivity.class);
                 break;
             case R.id.area_myzhanghu: //我的账户
-                MyApplication.openActivity(mContext, MyAccountActivity.class, true);
                 break;
             case R.id.area_shopping://商城
 //                Bundle bundle = new Bundle();
@@ -321,13 +308,10 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
             case R.id.area_report://数据分析
 //                Bundle bundle1 = new Bundle();
 //                bundle1.putString("mUrl", Define.MWEB_DOMAIN + "web/analyse/dataAnalysis.html" + "?provider_id=" + MyApplication.CURRENT_USER.provider_id);
-//                MyApplication.openActivity(mContext, WebDataAnalysisActivity.class, bundle1);
                 break;
             case R.id.area_mendian://门店
-                MyApplication.openActivity(mContext, StoreActivity.class);
                 break;
             case R.id.area_coupon_list://优惠券
-                MyApplication.openActivity(mContext, CouponListActivity.class);
                 break;
         }
     }
@@ -336,14 +320,12 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
      */
     @OnClick(R.id.topbar_search)
     void gotoSearch() {
-        MyApplication.openActivity(mContext, SearchActivity.class);
     }
     /**
      * 去搜索界面
      */
     @OnClick(R.id.topbar_search1)
     void gotoSearch1() {
-        MyApplication.openActivity(mContext, SearchActivity.class);
     }
 
     /**
@@ -359,21 +341,18 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
         ppw.findViewById(R.id.tv_add_product).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, AddProductActivity.class, true);
             }
         });
         // 新增客户
         ppw.findViewById(R.id.tv_add_customer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, AddCustomerActivity.class, true);
             }
         });
         // 开卡
         ppw.findViewById(R.id.tv_active_vipcard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, CustomActiveVipcardActivity.class, true);
             }
         });
 
@@ -396,21 +375,18 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
         ppw.findViewById(R.id.tv_add_product).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, AddProductActivity.class, true);
             }
         });
         // 新增客户
         ppw.findViewById(R.id.tv_add_customer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, AddCustomerActivity.class, true);
             }
         });
         // 开卡
         ppw.findViewById(R.id.tv_active_vipcard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyApplication.openActivity(mContext, CustomActiveVipcardActivity.class, true);
             }
         });
 
@@ -472,7 +448,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
      */
     @OnClick(R.id.img_putup_order)
     void gotoPending() {
-        MyApplication.openActivity(mContext, PendingOrderActivity.class);
     }
 
     /**

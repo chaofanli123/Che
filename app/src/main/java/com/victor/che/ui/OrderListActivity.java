@@ -152,7 +152,6 @@ public class OrderListActivity extends BaseActivity {
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("mOrder", mList.get(position));
-                MyApplication.openActivity(mContext, OrderDetailsActivity.class, bundle);
             }
         });
 
@@ -288,7 +287,6 @@ public class OrderListActivity extends BaseActivity {
      */
     @OnClick(R.id.btn_order_type)
     void showOrderTypeDialog() {
-        MyApplication.openActivity(mContext, ScreeningActivity.class);
     }
 
     /**

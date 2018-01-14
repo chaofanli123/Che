@@ -123,7 +123,6 @@ public class LoginActivity extends BaseActivity {
             finish();
             return;
         }
-
         mRedirectTargetClass = (Class<?>) getIntent().getSerializableExtra("mRedirectTargetClass");
         mBundle = getIntent().getBundleExtra("mBundle");
         et_pwd.setOnEditorActionListener(new TextView.OnEditorActionListener() {

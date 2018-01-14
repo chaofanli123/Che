@@ -109,7 +109,6 @@ public class ProductMgrHeadActivity extends BaseActivity {
      */
     @OnClick(R.id.topbar_right)
     void gotoAddProduct() {
-        MyApplication.openActivity(mContext, AddProductActivity.class);
     }
 
     @Override

@@ -53,7 +53,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@id/tv_operate"
+        android:id="@+id/tv_operate"
         android:layout_width="110px"
         android:layout_height="match_parent"
         android:background="#fafafa"

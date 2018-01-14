@@ -35,18 +35,15 @@ public class GuideActivity extends BaseActivity implements OnPageChangeListener 
     public int getContentView() {
         return R.layout.activity_guide;
     }
-
     @Override
     protected void initView() {
-        boolean firstStartedApp = MyApplication.spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP);
+      boolean firstStartedApp = MyApplication.spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP);
         if (!firstStartedApp) {// 第一次进入
-
             LayoutInflater inflater = LayoutInflater.from(mContext);
             views = new ArrayList<View>();
             views.add(inflater.inflate(R.layout.guide1, null));
             views.add(inflater.inflate(R.layout.guide2, null));
             views.add(inflater.inflate(R.layout.guide3, null));
-
             GuidePagePagerAdapter mAdapter = new GuidePagePagerAdapter(views);
             ViewPager mViewPager = (ViewPager) findViewById(R.id.mViewPager);
             mViewPager.setAdapter(mAdapter);
@@ -59,7 +56,6 @@ public class GuideActivity extends BaseActivity implements OnPageChangeListener 
                     doSkip();
                 }
             });
-
             initDots();
         } else {// 第二次进入
             MyApplication.openActivity(mContext, LoginActivity.class);

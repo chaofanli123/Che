@@ -28,7 +28,6 @@ import com.victor.che.domain.UsercardEnd;
 import com.victor.che.event.EndMoneyNumEvent;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.widget.MyBottomDialogFragment;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -172,35 +171,6 @@ public class EndMoneyFragment extends BaseFragment {
                         });
                     }
                 });
-    }
-    @OnClick(R.id.rl_endtime)
-    public void onViewClicked() {
-        MyBottomDialogFragment myBottomDialog=new MyBottomDialogFragment(categoryListAdapter,new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == selectedCategoryPos) {
-                    return;
-                }
-                selectedCategoryPos = position;
-                categoryListAdapter.notifyDataSetChanged();
-                if (categoryList.get(selectedCategoryPos).getMax_value()==0) { //最大值为空
-                    tvEndtime.setText(categoryList.get(selectedCategoryPos).getMin_value()+"-"+"最大值");
-                }else {
-                    tvEndtime.setText(categoryList.get(selectedCategoryPos).getMin_value()+"-"+categoryList.get(selectedCategoryPos).getMax_value()+""+categoryList.get(selectedCategoryPos).getUnit()+"");
-                }
-                user_track_id=categoryList.get(selectedCategoryPos).getUser_track_id();
-                // 获取listview列表联动
-
-                mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
-                    @Override
-                    public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
-                        _doGetProducts(pullToRefresh, curpage, pageSize);
-                    }
-                });
-              mPtrHelper.autoRefresh(true);
-            }
-        },2,mContext);
-        myBottomDialog.show(getFragmentManager(), getClass().getSimpleName());
     }
 
     /**

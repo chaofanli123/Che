@@ -88,7 +88,6 @@ public class StartUsingCouponFragment extends BaseFragment {
                 bundle.putString("type","couponlist");
                 bundle.putString("position",position+"");
                 bundle.putSerializable("shopsCoupon",shopsCoupon);
-                MyApplication.openActivity(mContext,NewAddCouponActivity.class,bundle);
             }
         });
         mPtrHelper.autoRefresh(true);
@@ -172,7 +171,6 @@ public class StartUsingCouponFragment extends BaseFragment {
                 public void onClick(View view) {
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("shopsCoupon",shopsCoupon);
-                    MyApplication.openActivity(mContext,SendCouponListActivity.class,bundle);
                 }
             });
             /**
@@ -194,7 +192,6 @@ public class StartUsingCouponFragment extends BaseFragment {
                         Bundle bundle=new Bundle();
                         bundle.putSerializable("shopsCoupon",shopsCoupon);
                         bundle.putString("couponId", String.valueOf(shopsCoupon.getCoupon_id()));
-                        MyApplication.openActivity(mContext,SelectUserActivity.class,bundle);
                     }else {
                         MyApplication.showToast("该优惠券不可以发券");
                     }

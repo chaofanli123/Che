@@ -17,7 +17,6 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.QueryBaoxianHistory;
-import com.victor.che.ui.QueryBaoxianActivity;
 import com.victor.che.ui.QueryjieguoActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
@@ -121,7 +120,6 @@ public class QueryHistoryFragment extends BaseFragment {
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("querybaoxianCar",queryBaoxianHistory);
-                        MyApplication.openActivity(getActivity(),QueryBaoxianActivity.class,bundle);
                         getActivity().finish();
                     }
                 }

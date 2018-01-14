@@ -57,12 +57,10 @@ public class MessageFragment extends BaseFragment {
     private MessageListAdapter mAdapter;
 
     private PtrHelper<Message> mPtrHelper;
-
     @Override
     public int getContentView() {
         return R.layout.common_pull_to_refresh_recyclerview;
     }
-
     @Override
     protected void initView() {
         super.initView();

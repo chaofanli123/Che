@@ -114,8 +114,6 @@ dependencies {
     compile project(':piclibrary')
     //对话框
     //compile 'com.android.support:support-v4:25.3.0'
-    //微信支付
-    compile files('libs/alipaySdk-20170309.jar')
     //jsbridge
     // compile 'com.github.lzyzsd:jsbridge:1.0.4'
     //字母列表

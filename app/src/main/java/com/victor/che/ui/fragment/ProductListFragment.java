@@ -21,7 +21,6 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Product;
 import com.victor.che.event.ProductEvent;
-import com.victor.che.ui.ProductDetailsActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
@@ -222,7 +221,6 @@ public class ProductListFragment extends BaseFragment {
                     public void onClick(View v) {
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("mProduct", mList.get(helper.getLayoutPosition()));
-                        MyApplication.openActivity(mContext, ProductDetailsActivity.class, bundle);
                     }
                 });
             }

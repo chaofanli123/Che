@@ -14,7 +14,6 @@ import com.victor.che.base.VictorBaseListAdapter;
 import com.victor.che.domain.CarChexi;
 import com.victor.che.domain.CarPingpai;
 import com.victor.che.domain.SubCarPinpai;
-import com.victor.che.ui.CarxingActivity;
 import com.victor.che.util.AbViewHolder;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.ImageLoaderUtil;
@@ -129,7 +128,6 @@ public class SelectCarPinpaiSeriesFragment extends BaseFragment {
                     bundle.putSerializable("carpingpai",carBrand); //汽车品牌
                     bundle.putString("carchexiId",entity.getCarSeries().get(position).getBrand_series_id());//汽车车系
                     bundle.putSerializable("chexi",entity.getCarSeries().get(position));
-                    MyApplication.openActivity(mContext, CarxingActivity.class,bundle);
                     getActivity().finish();
                 }
             });

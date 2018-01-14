@@ -157,23 +157,6 @@ public class MyApplication extends BaseApplication {
         super.attachBaseContext(base);
         MultiDex.install(this);
     }
-    /**
-     * 保存服务城市列表
-     */
-    public static void saveRegionList() {
-        if (CollectionUtil.isNotEmpty(RegionList)) {
-            spUtil.setObject("REGION_LIST", RegionList);
-        }
-    }
-
-    /**
-     * 保存当前服务城市
-     */
-    public static void saveCurrentRegion() {
-        if (CURRENT_REGION != null) {
-            spUtil.setObject("CURRENT_REGION", CURRENT_REGION);
-        }
-    }
 
     /**
      * 获取当前服务城市
@@ -200,8 +183,7 @@ public class MyApplication extends BaseApplication {
      * @return
      */
     public static boolean isLogined() {
-        if (MyApplication.CURRENT_USER == null || TextUtils.isEmpty(MyApplication.CURRENT_USER.provider_id)
-                || "null".equals(MyApplication.CURRENT_USER.provider_id) || TextUtils.isEmpty(MyApplication.CURRENT_USER.provider_id)) {
+        if (MyApplication.CURRENT_USER == null || MyApplication.CURRENT_USER.mobileLogin==false) {
             return false;
         }
         return true;

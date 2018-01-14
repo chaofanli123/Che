@@ -18,7 +18,6 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.QueryBaoxianHistory;
 import com.victor.che.domain.QuoteListDetail;
-import com.victor.che.ui.QuoteDetailActivity;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.List;
@@ -82,7 +81,6 @@ public class QueryQuoteListFragment extends BaseFragment {
 //                bundle.putString("discount",queryQuoteList.get(position).discount);
                 bundle.putSerializable("quoteListDetail",queryQuoteList.get(position));
                 bundle.putSerializable("queryBaoxianHistory",queryBaoxianHistory);
-                MyApplication.openActivity(getActivity(), QuoteDetailActivity.class,bundle);
             }
         });
     }

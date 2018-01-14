@@ -36,7 +36,7 @@ public class AccountInfoActivity extends BaseActivity {
         // 设置标题
         setTitle("个人信息");
         if (MyApplication.isLogined()) {
-            tv_name.setText(MyApplication.CURRENT_USER.user_name);
+            tv_name.setText(MyApplication.CURRENT_USER.username);
             if (!StringUtil.isEmpty(MyApplication.CURRENT_USER.login_mobile)) {
                 tvPhone.setText(MyApplication.CURRENT_USER.login_mobile);
             }

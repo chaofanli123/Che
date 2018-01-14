@@ -28,7 +28,6 @@ public class Define {
 
 
 
-
     /**
      * 获取总店服务商产品类别列表
      */

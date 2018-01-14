@@ -577,7 +577,7 @@ public class ReceiptActivity extends BaseActivity {
                         for (int i = 0; i < workerList.size(); i++) {
                             if (workerList.get(i).staff_user_id.equalsIgnoreCase(pending.sale_user_id + "")) {
                                 selectedWorkerPos = i;
-                                tv_worker.setText(workerList.get(i).user_name);
+                                tv_worker.setText(workerList.get(i).username);
                             }
                         }
 
@@ -607,7 +607,7 @@ public class ReceiptActivity extends BaseActivity {
                                 selectedWorkerPos = i;
                             }
                         }
-                        tv_worker.setText(MyApplication.CURRENT_USER.user_name);
+                        tv_worker.setText(MyApplication.CURRENT_USER.username);
                         workerListAdapter = new WorkerListAdapter(mContext, R.layout.item_bottom_dialog, workerList);
                     }
                 });
@@ -654,8 +654,6 @@ public class ReceiptActivity extends BaseActivity {
             return;
         }
         etSearchCarNumber.setText("");
-        Intent intent = new Intent(mContext, ChooseCustomerActivity.class);
-        startActivityForResult(intent, 100);
         //   MyApplication.openActivity(mContext, ChooseCustomerActivity.class);
     }
 
@@ -703,7 +701,6 @@ public class ReceiptActivity extends BaseActivity {
         }
         Bundle bundle = new Bundle();
         bundle.putString("mobile", mobile);
-        MyApplication.openActivity(mContext, ChooseCarActivity.class, bundle);
     }
 
     /**
@@ -831,7 +828,7 @@ public class ReceiptActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedWorkerPos = position;
                 workerListAdapter.notifyDataSetChanged();
-                tv_worker.setText(workerList.get(position).user_name);
+                tv_worker.setText(workerList.get(position).username);
             }
         }).show(getSupportFragmentManager(), getClass().getSimpleName());
     }
@@ -962,7 +959,6 @@ public class ReceiptActivity extends BaseActivity {
                                             Bundle bundle = new Bundle();
                                             bundle.putString("mobile", mobile);
                                             bundle.putString("car_plate_no", car_plate_no);
-                                            MyApplication.openActivity(mContext, AddCustomerActivity.class, bundle);
                                         }
                                     })
                                     .show(getSupportFragmentManager(), getClass().getSimpleName());
@@ -989,7 +985,6 @@ public class ReceiptActivity extends BaseActivity {
                                         public void onClick(View v) {
                                             Bundle bundle = new Bundle();
                                             bundle.putString("provider_user_id", user_id);
-                                            MyApplication.openActivity(mContext, ConflictActivity.class, bundle);
                                         }
                                     })
                                     .show(getSupportFragmentManager(), getClass().getSimpleName());
@@ -1028,7 +1023,6 @@ public class ReceiptActivity extends BaseActivity {
                 }
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("giftList", giftList);
-                MyApplication.openActivity(mContext, GiftListActivity.class, bundle);
 
             }
         });
@@ -1243,7 +1237,6 @@ public class ReceiptActivity extends BaseActivity {
                 } else {
                     Bundle bundle = new Bundle();
                     bundle.putString("provider_user_id", provider_user_id);
-                    MyApplication.openActivity(mContext, CustomerDetailsActivity.class, bundle);
                 }
                 break;
             case R.id.area_first_time://下次保养时间
@@ -1314,7 +1307,6 @@ public class ReceiptActivity extends BaseActivity {
                     bundle.putString("car_plate_no",car_plate_no);
                     bundle.putString("goods_id",product.goods_id);
                     bundle.putString("price",actual_pay+"");
-                    MyApplication.openActivity(mContext, CouponActivity.class,bundle);
                 }else {
                     MyApplication.showToast("请选择类别服务");
                 }
@@ -1371,11 +1363,10 @@ public class ReceiptActivity extends BaseActivity {
         @Override
         public void bindView(int position, View view, User entity) {
             TextView textView = (TextView) view;
-            textView.setText(entity.user_name);
+            textView.setText(entity.username);
             textView.setTextColor(getResources().getColor(selectedWorkerPos == position ? R.color.theme_color : R.color.black_text));
         }
     }
-
     /**
      * 拍照识别车牌号后
      *
@@ -1452,7 +1443,6 @@ public class ReceiptActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putBoolean("isCompleted", isCompleted);//信息是否完善
         bundle.putString("provider_user_id", provider_user_id);//用户id
-        MyApplication.openActivity(mContext, ReceiptResultActivity.class, bundle);
         // 关闭当前界面
         finish();
     }
@@ -1466,7 +1456,6 @@ public class ReceiptActivity extends BaseActivity {
         bundle.putDouble("mTotalEb", sum_price);//所需总eb
         bundle.putInt("mTotalNum", productList.get(selectedProductPos).card_num_price * buy_num);// 所需总次数
         bundle.putSerializable("mVipcardList", vipcardList);//会员卡列表
-        MyApplication.openActivity(mContext, ChooseReceiptVipcardActivity.class, bundle);
     }
     /**
      * 选择会员卡后
@@ -1550,7 +1539,6 @@ public class ReceiptActivity extends BaseActivity {
                         bundle.putString("actual_pay", MathUtil.getFinanceValue(sum_price));//支付金额
                         bundle.putString("url", url0);//收款二维码图片地址
                         bundle.putString("order_id", order_id);//订单id
-                        MyApplication.openActivity(mContext, ReceiptQrcodeActivity.class, bundle);
                         // 关闭当前界面
                         finish();
                     }

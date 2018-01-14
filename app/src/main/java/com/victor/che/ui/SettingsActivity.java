@@ -186,12 +186,6 @@ public class SettingsActivity extends BaseActivity {
     }
 
 
-     // 二维码扫描
-
-//    @OnClick(R.id.area_qrcode)
-//    void gotoQrcode() {
-//        MyApplication.openActivity(mContext, QrcodeActivity.class, true);
-//    }
     /**
      * 退出登录
      */

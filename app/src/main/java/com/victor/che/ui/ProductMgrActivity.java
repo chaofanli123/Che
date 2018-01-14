@@ -133,7 +133,6 @@ public class ProductMgrActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstanceValue.DATA_SELECTED, (Serializable) mSelectedDatas);
         bundle.putSerializable(ConstanceValue.DATA_UNSELECTED, (Serializable) mUnSelectedDatas);
-        MyApplication.openActivity(mContext, ChannelActivity.class, bundle);
     }
     private class ProductFragmentAdapter extends FragmentPagerAdapter {
         public ProductFragmentAdapter(FragmentManager fm) {

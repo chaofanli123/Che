@@ -26,7 +26,6 @@ import com.victor.che.domain.UsercardEnd;
 import com.victor.che.event.EndMoneyNumEvent;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.widget.MyBottomDialogFragment;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -131,45 +130,6 @@ public class EndTimesFragment extends BaseFragment {
                 });
     }
 
-    @OnClick(R.id.rl_endtime)
-    public void onViewClicked() {
-        MyBottomDialogFragment myBottomDialog=new MyBottomDialogFragment(categoryListAdapter,new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == selectedCategoryPos) {
-                    return;
-                }
-                selectedCategoryPos = position;
-                categoryListAdapter.notifyDataSetChanged();
-                if (categoryList.get(selectedCategoryPos).getMax_value()==0) { //最大值为空
-                    tvEndtime.setText(categoryList.get(selectedCategoryPos).getMin_value()+"-"+"最大值");
-                }else {
-                    tvEndtime.setText(categoryList.get(selectedCategoryPos).getMin_value()+"-"+categoryList.get(selectedCategoryPos).getMax_value()+""+categoryList.get(selectedCategoryPos).getUnit()+"");
-                }
-                // 获取listview列表联动
-                messageListAdapter = new EndListAdapter(mContext,R.layout.item_usercard_end, messageArrayList,1,getFragmentManager());
-                mPtrHelper = new PtrHelper<>(mPtrFrame, messageListAdapter, messageArrayList);
-                mPtrHelper.enableLoadMore(true, mRecyclerView);//允许加载更多
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器
-                mRecyclerView.setAdapter(messageListAdapter);
-
-                mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
-                        .sizeResId(R.dimen.common_divider_dp)
-                        .colorResId(R.color.divider)
-                        .build());//添加分隔线
-
-                mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
-                    @Override
-                    public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
-                        _doGetProducts(pullToRefresh, curpage, pageSize);
-                    }
-                });
-               mPtrHelper.autoRefresh(true);
-
-            }
-        },4,mContext);
-        myBottomDialog.show(getFragmentManager(), getClass().getSimpleName());
-    }
     /**
      * 获取余额不足区间
      */

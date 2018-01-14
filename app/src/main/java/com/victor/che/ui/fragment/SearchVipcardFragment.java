@@ -20,8 +20,6 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Vipcard;
 import com.victor.che.event.SearchEvent;
-import com.victor.che.ui.EditVipcardActivity;
-import com.victor.che.ui.RechargeVipcardActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
@@ -183,7 +181,6 @@ public class SearchVipcardFragment extends BaseFragment {
                     Bundle bundle = new Bundle();
                     bundle.putInt("mPosition", helper.getLayoutPosition());
                     bundle.putSerializable("mVipcard", item);
-                    MyApplication.openActivity(mContext, EditVipcardActivity.class, bundle);
                 }
             });
 
@@ -197,7 +194,6 @@ public class SearchVipcardFragment extends BaseFragment {
                         Bundle bundle = new Bundle();
                         bundle.putInt("mPosition", helper.getLayoutPosition());
                         bundle.putSerializable("mVipcard", item);
-                        MyApplication.openActivity(mContext, RechargeVipcardActivity.class, bundle);
                     }
                 });
             } else {

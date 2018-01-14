@@ -12,8 +12,6 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.ui.CustomerReportActivity;
-import com.victor.che.ui.SalesReportActivity;
 import com.victor.che.util.MathUtil;
 
 import butterknife.BindView;
@@ -122,7 +120,6 @@ public class DailyReportsFragment extends BaseFragment {
      */
     @OnClick({R.id.area_customer_report, R.id.tv_current_count})
     void gotoUserReport() {
-        MyApplication.openActivity(mContext, CustomerReportActivity.class);
     }
 
 
@@ -131,7 +128,6 @@ public class DailyReportsFragment extends BaseFragment {
      */
     @OnClick({R.id.area_sales_report, R.id.tv_current_amount})
     void gotoSalesReport() {
-        MyApplication.openActivity(mContext, SalesReportActivity.class);
     }
 
 }

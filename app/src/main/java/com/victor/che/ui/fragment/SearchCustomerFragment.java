@@ -22,7 +22,6 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Customer;
 import com.victor.che.event.SearchEvent;
-import com.victor.che.ui.CustomerDetailsActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.ImageLoaderUtil;
 import com.victor.che.util.PtrHelper;
@@ -106,7 +105,6 @@ public class SearchCustomerFragment extends BaseFragment {
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
                 bundle.putString("provider_user_id", mList.get(position).provider_user_id);
-                MyApplication.openActivity(mContext, CustomerDetailsActivity.class, bundle);
             }
         });
 

@@ -26,13 +26,10 @@ import com.victor.che.base.BaseFragment;
 import com.victor.che.base.VictorBaseListAdapter;
 import com.victor.che.event.Region;
 import com.victor.che.event.SelectCarPingpaiAndSeriesAndxilieEvent;
-import com.victor.che.ui.SelectCarNumActivity;
-import com.victor.che.ui.SelectServiceAreaActivity;
 import com.victor.che.util.DateUtil;
 import com.victor.che.util.StringUtil;
 import com.victor.che.widget.BottomDialogFragment;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
@@ -118,10 +115,8 @@ public class NewaddUserCarFragment extends BaseFragment {
             case R.id.area_carnum://车辆型号
                 Bundle build=new Bundle();
                 build.putString("type","NewaddUserCar");
-                MyApplication.openActivity(mContext, SelectCarNumActivity.class,build);
                 break;
             case R.id.area_city://所在城市
-                MyApplication.openActivity(mContext, SelectServiceAreaActivity.class);
                 break;
             case R.id.area_first_time://上牌时间
                 //显示时间对话框

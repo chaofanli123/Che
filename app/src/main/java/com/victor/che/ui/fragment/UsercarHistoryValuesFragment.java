@@ -18,7 +18,6 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.QueryUserCarHistory;
-import com.victor.che.ui.UserCarDetailActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.ToastUtils;
@@ -92,7 +91,6 @@ public class UsercarHistoryValuesFragment extends BaseFragment {
                 String car_plate_no = messageArrayList.get(position).car_plate_no;
                 bundle.putInt("usedcar_assess_record_id", usedcar_assess_record_id);
                 bundle.putString("car_plate_no", car_plate_no);
-                MyApplication.openActivity(mContext, UserCarDetailActivity.class, bundle);
 
             }
         });

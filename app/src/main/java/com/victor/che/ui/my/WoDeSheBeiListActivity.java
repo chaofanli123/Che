@@ -61,10 +61,7 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     protected Context mContext;
     private List<ShiPing.VideoListBean> mList=new ArrayList<>();
     private WoDeSheBeiListAdapter mAdapter;
-    private PtrHelperP<EZDeviceInfo> mPtrHelper;
-
     private PtrHelper<ShiPing.VideoListBean> mPtrHelper;
-
     public static final String APPKEY = "AppKey";
     public static final String AccessToekn = "AccessToekn";
     public static final String PLAY_URL = "play_url";

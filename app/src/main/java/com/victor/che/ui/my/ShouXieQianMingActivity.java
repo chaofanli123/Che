@@ -40,6 +40,8 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
     @BindView(R.id.save_button)
     Button mSaveButton;
 
+    private File svaeFile;
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     @Override
@@ -87,23 +89,17 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
                 }
                 if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
                     Toast.makeText(ShouXieQianMingActivity.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent();
+
+                    intent.putExtra("imgpath",svaeFile.getPath());
+                    setResult(666,intent);
+                    finish();
                 } else {
                     Toast.makeText(ShouXieQianMingActivity.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
-    @OnClick({R.id.clear_button, R.id.save_button})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.clear_button:
-                break;
-            case R.id.save_button:
-                break;
-        }
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -142,9 +138,9 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
     public boolean addJpgSignatureToGallery(Bitmap signature) {
         boolean result = false;
         try {
-            File photo = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
-            saveBitmapToJPG(signature, photo);
-            scanMediaFile(photo);
+            svaeFile = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.jpg", System.currentTimeMillis()));
+            saveBitmapToJPG(signature, svaeFile);
+            scanMediaFile(svaeFile);
             result = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -162,14 +158,14 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
     public boolean addSvgSignatureToGallery(String signatureSvg) {
         boolean result = false;
         try {
-            File svgFile = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.svg", System.currentTimeMillis()));
-            OutputStream stream = new FileOutputStream(svgFile);
+            File fijle = new File(getAlbumStorageDir("SignaturePad"), String.format("Signature_%d.svg", System.currentTimeMillis()));
+            OutputStream stream = new FileOutputStream(fijle);
             OutputStreamWriter writer = new OutputStreamWriter(stream);
             writer.write(signatureSvg);
             writer.close();
             stream.flush();
             stream.close();
-            scanMediaFile(svgFile);
+            scanMediaFile(fijle);
             result = true;
         } catch (IOException e) {
             e.printStackTrace();

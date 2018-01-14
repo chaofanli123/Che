@@ -98,6 +98,7 @@
                     android:src="@drawable/ic_arrow_right"/>
 
             </LinearLayout>
+
             <LinearLayout
                 android:background="@color/white"
                 android:padding="16dp"
@@ -121,6 +122,7 @@
                     android:verticalSpacing="5dp">
                 </com.victor.che.widget.NoScrollGridView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_add_yuyin"
                 style="@style/style_receipt_liner"
@@ -146,6 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_qianming"
                 android:background="@color/white"
                 android:padding="16dp"
                 android:layout_width="match_parent"
@@ -167,7 +170,20 @@
                     <!--android:scrollbars="none"-->
                     <!--android:verticalSpacing="5dp">-->
                 <!--</com.tianjistar.tjnla.utils.widget.NoScrollGridView>-->
+                <RelativeLayout
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:scaleType="fitXY"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/iv_qianming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

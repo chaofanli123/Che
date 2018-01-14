@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -24,12 +25,11 @@ import com.qikecn.uploadfilebybase64.UploadResultBean;
 import com.victor.che.R;
 import com.victor.che.adapter.GridAdapter;
 import com.victor.che.app.MyApplication;
-import com.victor.che.base.BaseActivity;
-import com.victor.che.ui.TakePhoto1Activity;
 import com.victor.che.util.BitmapUtil;
 import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.MaterialDialogUtils;
+import com.victor.che.util.PicassoUtils;
 import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.NoScrollGridView;
 
@@ -39,6 +39,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.bean.MediaBean;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
@@ -65,6 +66,8 @@ public class PublichaddActivity extends TakePhotoActivity {
     LinearLayout activityFollowUser;
     @BindView(R.id.noScrollgridview)
     NoScrollGridView noScrollgridview;
+    @BindView(R.id.iv_qianming)
+    ImageView ivQianming;
 
     private GridAdapter adapter;
     private ArrayList<String> imagePathList = new ArrayList<>();
@@ -86,7 +89,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                     //发布
                     String path = (String) msg.obj;
                     Log.e("imageimage1", "返回的图片路径获取发票" + msg.obj);
-                 //   userUploadBbs(path);
+                    //   userUploadBbs(path);
                     break;
             }
         }
@@ -95,6 +98,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private PopupWindow pop = null;
     private LinearLayout ll_popup;
     private View parentView;
+
     @Override
     public int getContentView() {
         return R.layout.activity_follow_user;
@@ -162,7 +166,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                 RxGalleryFinal.with(mContext)
                         .image()
                         .multiple()
-                        .maxSize(6- imagePathList.size())
+                        .maxSize(6 - imagePathList.size())
                         .imageLoader(ImageLoaderType.GLIDE)
                         .subscribe(new RxBusResultSubscriber<ImageMultipleResultEvent>() {
                             @Override
@@ -185,6 +189,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         });
 
     }
+
     Handler handler1 = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -215,16 +220,27 @@ public class PublichaddActivity extends TakePhotoActivity {
         imagePathList.add(file.getAbsolutePath());
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.ll_qianming)
+    public void onClick() {
+        startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 3:
-                if (data != null) {
-                    imagePathList.clear();
-                    imagePathList.addAll(data.getStringArrayListExtra("imageUrlList"));
-                    adapter.notifyDataSetChanged();
-                }
+        switch (resultCode) {
+            case 666:
+                String imgpath = data.getStringExtra("imgpath");
+                File file=new File(imgpath);
+                PicassoUtils.loadFileImage(mContext,file,ivQianming);
                 break;
         }
     }

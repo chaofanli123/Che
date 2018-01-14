@@ -39,21 +39,14 @@ public class User implements Serializable {
     public boolean mobileLogin;
     public String JSESSIONID;
     public String name;
+    public String head;
 
 
     public String provider_id;
 
-    public String address;
-    public String thumb_image_url;
-    public String service_tel;
-    public String wxmp_qrcode;//公众号二维码
-    public String wxpay_collection_qrcode;//服务商微信支付二维码,
-    public String alipay_collection_qrcode;//服务商支付宝支付二维码,
-    public String login_token;
     public String create_time;
 
     public String staff_user_id;
-    public Date tokenExpireTime = new Date();// token过期时间(不在json范围内)
     public String login_mobile;
     public int is_initial_provider;//1，总店，0分店
 

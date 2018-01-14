@@ -6,48 +6,168 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/common_bg"
-    tools:context="com.victor.che.ui.EndtimeUsercardrActivity">
+  >
     <include layout="@layout/top_bar_commom"/>
-
-    <RelativeLayout
-        android:id="@+id/rl_endtime"
+    <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:background="@drawable/sl_bg_message"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        >
-        <TextView
-            android:id="@+id/tv_endtime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_centerVertical="true"
-            android:textColor="@color/black_text"
-            android:textSize="14sp"
-            />
-        <ImageView
-            android:id="@+id/img_xialalist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_xiala"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            />
-    </RelativeLayout>
-
-    <com.victor.che.widget.PtrlMeiTuanFrameLayout
-        android:id="@id/mPtrFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <android.support.v7.widget.RecyclerView
-            android:id="@id/mRecyclerView"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            />
-    </com.victor.che.widget.PtrlMeiTuanFrameLayout>
+            android:orientation="vertical"
+            android:background="@color/theme_color"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_ording_list"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="执法清单"
+                    />
+                <TextView
+                    android:id="@+id/tv_qingdan_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="执法信息"
+                    />
+
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_search"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:cursorVisible="true"
+                    android:hint="请输入执法信息"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionSearch"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_size_28px"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_use_name"
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="姓名"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@color/white"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="添加照片"
+                    android:textColor="@color/dark_gray_text"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="@dimen/font_size_28px"/>
+                <com.victor.che.widget.NoScrollGridView
+                    android:id="@+id/noScrollgridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:horizontalSpacing="5dp"
+                    android:numColumns="4"
+                    android:scrollbars="none"
+                    android:verticalSpacing="5dp">
+                </com.victor.che.widget.NoScrollGridView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_add_yuyin"
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="添加语音"
+                    />
+                <TextView
+                    android:id="@+id/tv_add_yuyin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="@color/white"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="签名"
+                    android:textColor="@color/dark_gray_text"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="@dimen/font_size_28px"/>
+                <!--<com.tianjistar.tjnla.utils.widget.NoScrollGridView-->
+                    <!--android:id="@+id/noScrollgridview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:horizontalSpacing="5dp"-->
+                    <!--android:numColumns="4"-->
+                    <!--android:scrollbars="none"-->
+                    <!--android:verticalSpacing="5dp">-->
+                <!--</com.tianjistar.tjnla.utils.widget.NoScrollGridView>-->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -41,6 +41,15 @@ public class PicassoUtils {
     }
 
     //普通加载图片，错误路径加载默认图片R.drawable.pic_default
+    public static void loadHeadImage(Context context, String url, ImageView imageView) {
+        if (StringUtils.isBlank(url) || imageView == null) {
+            Glide.with(context).load(R.drawable.ic_current_user).into(imageView);
+            return;
+        }
+        Glide.with(context).load(url).error(R.drawable.ic_current_user).dontAnimate().into(imageView);
+    }
+
+    //普通加载图片，错误路径加载默认图片R.drawable.pic_default
     public static void loadFileImage(Context context, File file, ImageView imageView) {
         if (file == null || imageView == null) {
             Glide.with(context).load(R.drawable.def_banner).into(imageView);

@@ -22,6 +22,7 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Message;
+import com.victor.che.ui.my.PublichaddActivity;
 import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
@@ -153,7 +154,7 @@ public class MessageFragment extends BaseFragment {
     @OnClick(R.id.topbar_right)
     public void onaddClicked() {
         //跳转到执法界面
-
+MyApplication.openActivity(mContext, PublichaddActivity.class);
     }
 
     /**

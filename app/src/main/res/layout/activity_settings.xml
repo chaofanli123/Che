@@ -79,6 +79,7 @@
                 android:layout_marginTop="30px"
                 android:background="@drawable/sl_common_white_btn"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:paddingLeft="@dimen/common_padding"
                 android:paddingRight="@dimen/common_padding">
 
@@ -138,6 +139,7 @@
                 android:layout_marginTop="30px"
                 android:background="@drawable/sl_common_white_btn"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:paddingLeft="@dimen/common_padding"
                 android:paddingRight="@dimen/common_padding">
 
@@ -188,6 +190,7 @@
                 android:paddingRight="@dimen/common_padding"
                 android:text="关于我们"
                 android:textColor="@color/black_text"
+                android:visibility="gone"
                 android:textSize="@dimen/middle_font_size"/>
 
             <TextView

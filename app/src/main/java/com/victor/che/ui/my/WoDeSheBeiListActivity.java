@@ -22,6 +22,7 @@ import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
+import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.ShiPing;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.domain.User;
@@ -46,8 +47,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 
 import static com.victor.che.app.MyApplication.spUtil;
 
-public class WoDeSheBeiListActivity extends AppCompatActivity {
-
+public class WoDeSheBeiListActivity extends BaseActivity {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_topbar_title)
@@ -61,6 +61,8 @@ public class WoDeSheBeiListActivity extends AppCompatActivity {
     protected Context mContext;
     private List<ShiPing.VideoListBean> mList=new ArrayList<>();
     private WoDeSheBeiListAdapter mAdapter;
+    private PtrHelperP<EZDeviceInfo> mPtrHelper;
+
     private PtrHelper<ShiPing.VideoListBean> mPtrHelper;
 
     public static final String APPKEY = "AppKey";
@@ -68,13 +70,15 @@ public class WoDeSheBeiListActivity extends AppCompatActivity {
     public static final String PLAY_URL = "play_url";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wo_de_she_bei_list);
-        ButterKnife.bind(this);
-        mContext=this;
+    public int getContentView() {
+        return R.layout.activity_wo_de_she_bei_list;
+    }
+    @Override
+    protected void initView() {
+        super.initView();
         init();
     }
+
     private void init() {
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);//设置布局管理器
@@ -166,7 +170,7 @@ public class WoDeSheBeiListActivity extends AppCompatActivity {
                     }
                 });
             }catch (Exception e){
-                
+
             }
 
 //            ImageLoaderUtil.display(mContext, helper.imageView, entity.image, R.drawable.ic_car_pre, R.drawable.ic_car_pre);//品牌logo

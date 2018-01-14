@@ -46,7 +46,7 @@
                     android:textSize="@dimen/little_font_size"/>
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/rl_phone"
+                android:id="@+id/rl_head"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
                 android:layout_marginTop="30px"
@@ -60,19 +60,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="手机号"
+                    android:text="头像"
                     android:textColor="@color/black_text"
                     android:textSize="@dimen/middle_font_size"/>
 
-                <TextView
-                    android:id="@+id/tv_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/tv_head"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:gravity="center"
-                    android:textColor="@color/light_gray_text"
-                    android:textSize="@dimen/little_font_size"/>
+                    />
+
             </RelativeLayout>
 
             <TextView

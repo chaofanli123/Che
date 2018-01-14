@@ -28,5 +28,8 @@
     <string name="cube_ptr_refreshing">加载中...</string>
     <string name="cube_ptr_refresh_complete">更新完成.</string>
 
-
+    <string name="string_stop_play">"停止"</string>
+    <string name="string_pause_play">"暂停"</string>
+    <string name="string_start_play">"播放"</string>
+    <string name="string_not_found_recordfile">"未找到录像文件"</string>
 </resources>

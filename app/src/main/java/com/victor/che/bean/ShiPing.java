@@ -46,7 +46,7 @@ public class ShiPing {
         this.videoList = videoList;
     }
 
-    public static class VideoListBean {
+    public static class VideoListBean implements Serializable {
         /**
          * id : 2be37d0a7c984f768277874c9f766e65
          * isNewRecord : false

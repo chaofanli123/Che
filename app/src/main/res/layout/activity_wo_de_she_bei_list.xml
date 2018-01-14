@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/common_topbar"/>
-    <!--<com.victor.che.widget.PtrlMeiTuanFrameLayout-->
-        <!--android:id="@id/mPtrFrame"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!---->
-
-    <!--</com.victor.che.widget.PtrlMeiTuanFrameLayout>-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@id/mRecyclerView"
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@id/mPtrFrame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/mRecyclerView"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
 </LinearLayout>

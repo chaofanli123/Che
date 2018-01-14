@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="129dp"
+    android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
+    android:id="@+id/ll_shiping"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp">
+        android:layout_height="110dp">
 
         <ImageView
+            android:src="@drawable/def_banner"
             android:scaleType="fitXY"
             android:id="@+id/rl_video_bj"
             android:layout_width="match_parent"
@@ -29,10 +31,10 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:maxLines="2"
+            android:singleLine="true"
             android:ellipsize="end"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
             android:id="@+id/tv_video_jj"
             android:textColor="@color/black"
             android:text="中医里的女性虚弱"

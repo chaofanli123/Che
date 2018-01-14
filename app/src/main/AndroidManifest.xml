@@ -40,16 +40,16 @@
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
     <application
         android:name=".app.MyApplication"
@@ -127,6 +127,7 @@
 
         <!-- 搜索界面 -->
 
+
         <!-- 收款界面 -->
         <activity
             android:name=".ui.ReceiptActivity"
@@ -175,6 +176,7 @@
 
         <!-- 购买结果界面 -->
 
+
         <!-- 意见反馈界面 -->
         <activity
             android:name=".ui.FeedbackActivity"
@@ -184,6 +186,7 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <!-- 会员详情界面 -->
+
 
         <!-- 发布产品界面 -->
 
@@ -196,24 +199,33 @@
 
         <!-- 我的账户界面 -->
 
+
         <!-- 店面信息界面 -->
+
 
         <!-- 订单界面 -->
 
 
         <!-- 订单详情界面 -->
 
+
         <!-- 二维码界面 -->
+
 
         <!-- 编辑界面 -->
 
+
         <!-- 选择会员卡界面 -->
+
 
         <!-- 会员卡管理界面 -->
 
+
         <!-- 会员卡开卡界面 -->
 
+
         <!-- 新增会员卡界面 -->
+
 
         <!-- 订单列表界面 -->
         <activity
@@ -228,9 +240,12 @@
 
         <!-- 商品详情界面 -->
 
+
         <!-- 新增商品界面 -->
 
+
         <!-- 添加客户界面 -->
+
 
         <!-- 个人信息界面 -->
         <activity
@@ -250,17 +265,24 @@
 
         <!-- 选择汽车品牌界面 -->
 
+
         <!-- 会员卡列表界面 -->
+
 
         <!-- 车辆列表界面 -->
 
+
         <!-- 编辑会员卡界面 -->
+
 
         <!-- 会员卡充值界面 -->
 
+
         <!-- 服务商信息编辑界面 -->
 
+
         <!-- 图片裁剪界面 -->
+
 
         <!-- 欢迎界面 -->
         <activity
@@ -272,31 +294,45 @@
 
         <!-- 收款二维码界面 -->
 
+
         <!-- 用户报表界面 -->
+
 
         <!-- 营业额报表界面 -->
 
+
         <!-- 选择可用服务界面 -->
+
 
         <!-- 车辆详情界面 -->
 
+
         <!-- 收款结果界面 -->
+
 
         <!-- 搜索界面 -->
 
+
         <!-- 冲突界面 -->
+
 
         <!-- 冲突用户详情界面 -->
 
+
         <!-- 会员卡统计界面 -->
+
 
         <!-- 会员卡详情界面 -->
 
+
         <!-- 编辑会员卡具体信息界面 -->
+
 
         <!-- 选择用户界面 -->
 
+
         <!-- 自定义开卡界面 -->
+
 
         <!-- 开卡时选择会员卡界面 -->
         <activity
@@ -308,9 +344,12 @@
 
         <!-- 选择赠品界面 -->
 
+
         <!-- 赠品核销列表界面 -->
 
+
         <!-- 二手车估值详情界面 -->
+
 
         <!-- 效果图尺寸 -->
         <meta-data
@@ -321,10 +360,6 @@
             android:value="1280" />
 
         <activity android:name=".ui.QueryjieguoActivity" />
-        <activity android:name=".ui.QueryPolicyHistoryActivity" />
-        <activity android:name=".ui.PolicyDetailActivity" />
-        <activity android:name=".ui.PayPolicySuccessActivity" />
-        <!-- shareSDK配置开始 -->
         <!--
     <activity
         android:name="com.mob.tools.MobUIShell"
@@ -360,40 +395,13 @@
         -->
         <activity android:name=".ui.AboutusActivity" />
 
-        <!-- 微信支付SDK start -->
-        <activity
-            android:name=".wxapi.WXPayEntryActivity"
-            android:exported="true"
-            android:launchMode="singleTop" />
 
-        <receiver android:name=".pay.wxpay.wxpay.AppRegister">
-            <intent-filter>
-                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
-            </intent-filter>
-        </receiver>
-
-        <!-- 微信支付SDK end -->
-        <!-- 支付宝支付SDK start -->
-        <activity
-            android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
-        <activity
-            android:name="com.alipay.sdk.auth.AuthActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
-        <!-- 支付宝支付SDK end -->
-        <activity android:name=".ui.ShoppingWebActivity" />
         <activity android:name=".ui.EndtimeUsercardrActivity" />
         <activity android:name=".ui.GuanggaoWebActivity" />
         <activity android:name=".ui.TakePhoto1Activity" />
         <activity android:name=".ui.BigPicActivity" />
         <activity android:name=".ui.ClipImageActivity" />
-        <activity android:name=".ui.edit.EditStoresRunTimeActivity" />
         <activity android:name=".ui.ProductMgrHeadActivity" />
-        <activity android:name=".ui.Coupon.SelectUserActivity" />
         <activity android:name=".ui.my.ShouXieQianMingActivity" />
         <activity
             android:name="com.videogo.main.EzvizWebViewActivity"
@@ -409,9 +417,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.my.WoDeSheBeiListActivity"></activity>
-
-
+        <activity android:name=".ui.my.WoDeSheBeiListActivity" />
+        <activity android:name=".ui.my.Playctivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"></activity>
     </application>
 
 </manifest>

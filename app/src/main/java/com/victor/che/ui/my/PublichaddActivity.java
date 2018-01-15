@@ -2,8 +2,10 @@ package com.victor.che.ui.my;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,6 +27,8 @@ import com.qikecn.uploadfilebybase64.UploadResultBean;
 import com.victor.che.R;
 import com.victor.che.adapter.GridAdapter;
 import com.victor.che.app.MyApplication;
+import com.victor.che.ui.my.util.MediaPlayUtil;
+import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.BitmapUtil;
 import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
@@ -58,16 +62,28 @@ public class PublichaddActivity extends TakePhotoActivity {
     TextView tvUserName;
     @BindView(R.id.ll_use_name)
     LinearLayout llUseName;
-    @BindView(R.id.tv_add_yuyin)
-    TextView tvAddYuyin;
     @BindView(R.id.ll_add_yuyin)
-    LinearLayout llAddYuyin;
+    RelativeLayout llAddYuyin;
     @BindView(R.id.activity_follow_user)
     LinearLayout activityFollowUser;
     @BindView(R.id.noScrollgridview)
     NoScrollGridView noScrollgridview;
     @BindView(R.id.iv_qianming)
     ImageView ivQianming;
+    @BindView(R.id.tv_tianjiayvying)
+    TextView tvTianjiayvying;
+    @BindView(R.id.iv_luying)
+    ImageView ivLuying;
+    @BindView(R.id.chat_tv_voice_len)
+    TextView mTvTimeLengh;
+    @BindView(R.id.iv_voice_image)
+    ImageView mIvVoice;
+    @BindView(R.id.iv_voice_image_anim)
+    ImageView mIvVoiceAnim;
+    @BindView(R.id.voice_layout)
+    RelativeLayout mRlVoiceLayout;
+    @BindView(R.id.ll_qianming)
+    LinearLayout llQianming;
 
     private GridAdapter adapter;
     private ArrayList<String> imagePathList = new ArrayList<>();
@@ -98,6 +114,10 @@ public class PublichaddActivity extends TakePhotoActivity {
     private PopupWindow pop = null;
     private LinearLayout ll_popup;
     private View parentView;
+
+    private MediaPlayUtil mMediaPlayUtil;
+    private String mVoiceData;
+    private AnimationDrawable mImageAnim;
 
     @Override
     public int getContentView() {
@@ -130,6 +150,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }
             }
         });
+        mMediaPlayUtil = MediaPlayUtil.getInstance();
     }
 
     /**
@@ -228,19 +249,67 @@ public class PublichaddActivity extends TakePhotoActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.ll_qianming)
-    public void onClick() {
-        startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
             case 666:
                 String imgpath = data.getStringExtra("imgpath");
-                File file=new File(imgpath);
-                PicassoUtils.loadFileImage(mContext,file,ivQianming);
+                File file = new File(imgpath);
+                PicassoUtils.loadFileImage(mContext, file, ivQianming);
+                break;
+
+            case 66:
+                mVoiceData = data.getStringExtra("LYpath");
+                String time = data.getStringExtra("time");
+                if (mVoiceData!=null&&mVoiceData.length()>0){
+                    mRlVoiceLayout.setVisibility(View.VISIBLE);
+                    mTvTimeLengh.setText(time);
+                }
+                break;
+        }
+    }
+
+    /**
+     * 语音播放效果
+     *
+     */
+    public void startAnim() {
+        mImageAnim = (AnimationDrawable) mIvVoiceAnim.getBackground();
+        mIvVoiceAnim.setVisibility(View.VISIBLE);
+        mIvVoice.setVisibility(View.GONE);
+        mImageAnim.start();
+        mMediaPlayUtil.setPlayOnCompleteListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mIvVoice.setVisibility(View.VISIBLE);
+                mIvVoiceAnim.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
+    @OnClick({R.id.iv_luying, R.id.ll_qianming,R.id.voice_layout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_luying:
+                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                break;
+            case R.id.ll_qianming:
+                startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
+                break;
+
+            case R.id.voice_layout:
+                if (mMediaPlayUtil.isPlaying()) {
+                    mMediaPlayUtil.stop();
+                    mImageAnim.stop();
+                    mIvVoice.setVisibility(View.VISIBLE);
+                    mIvVoiceAnim.setVisibility(View.GONE);
+                } else {
+                    startAnim();
+                    mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
+                }
                 break;
         }
     }

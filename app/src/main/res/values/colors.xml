@@ -107,4 +107,6 @@
     <color name="c_1a1a1a">#1a1a1a</color>
    <!-- 提现状态颜色 蓝色-->
     <color name="bule">#498dff</color>
+
+    <color name="chat_sound">#eeeeee</color>
 </resources>

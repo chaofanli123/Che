@@ -123,29 +123,83 @@
                 </com.victor.che.widget.NoScrollGridView>
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:background="@color/white"
                 android:id="@+id/ll_add_yuyin"
-                style="@style/style_receipt_liner"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
                 >
                 <TextView
+                    android:id="@+id/tv_tianjiayvying"
+                    android:layout_centerVertical="true"
                     style="@style/style_receipt_text"
                     android:text="添加语音"
                     />
-                <TextView
-                    android:id="@+id/tv_add_yuyin"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:textColor="@color/black_text"
-                    android:textSize="@dimen/font_size_28px"/>
 
                 <ImageView
+                    android:id="@+id/iv_luying"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/common_padding2"
                     android:src="@drawable/ic_arrow_right"/>
-            </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_toRightOf="@id/tv_tianjiayvying"
+                    android:layout_toLeftOf="@id/iv_luying"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:id="@+id/voice_layout"
+                        android:visibility="gone"
+                        android:layout_width="125dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/selector_chat_send_msg_item_bg"
+                        >
+
+                        <TextView
+                            android:id="@+id/chat_tv_voice_len"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="16dp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="30dp"
+
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_voice_image"
+                            android:layout_width="15dp"
+                            android:layout_height="20dp"
+                            android:background="@drawable/chat_sound_item"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="6dp"
+                            android:visibility="visible"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_voice_image_anim"
+                            android:layout_width="15dp"
+                            android:layout_height="20dp"
+                            android:background="@anim/chat_voice_send_anim"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="6dp"
+                            android:visibility="gone"
+                            />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/ll_qianming"

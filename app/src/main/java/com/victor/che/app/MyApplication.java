@@ -2,7 +2,6 @@ package com.victor.che.app;
 
 import android.content.Context;
 import android.support.multidex.MultiDex;
-import android.text.TextUtils;
 
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -15,7 +14,6 @@ import com.victor.che.event.Region;
 import com.victor.che.util.AbActivityManager;
 import com.victor.che.util.AppUtil;
 import com.victor.che.util.BuglyUtil;
-import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.SharedPreferencesUtil;
 import com.videogo.openapi.EZOpenSDK;
 
@@ -24,7 +22,6 @@ import java.util.List;
 import cn.jpush.android.api.JPushInterface;
 /**
  * 全局应用类
- *
  * @author Victor
  * @email 468034043@qq.com
  * @time 2016年4月19日 下午5:01:46

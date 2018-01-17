@@ -14,7 +14,9 @@
     <com.victor.che.widget.FixRequestDisallowTouchEventPtrFrameLayout
         android:id="@id/mPtrFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
         <com.victor.che.widget.CustomScrollView
             android:id="@+id/scrollview"
             android:layout_width="match_parent"
@@ -23,8 +25,8 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
+                android:layout_height="wrap_content"
+                >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,19 +183,19 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <com.victor.che.widget.DisallowParentTouchViewPager
-                    android:id="@+id/guidePages"
-                    android:layout_width="fill_parent"
-                    android:layout_height="436px"/>
-                    <LinearLayout
-                        android:id="@+id/viewGroup"
-                        android:layout_width="fill_parent"
-                        android:layout_height="40px"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:paddingRight="10dp"
-                        android:orientation="horizontal" >
-                    </LinearLayout>
+                <!--<com.victor.che.widget.DisallowParentTouchViewPager-->
+                    <!--android:id="@+id/guidePages"-->
+                    <!--android:layout_width="fill_parent"-->
+                    <!--android:layout_height="436px"/>-->
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/viewGroup"-->
+                        <!--android:layout_width="fill_parent"-->
+                        <!--android:layout_height="40px"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:gravity="center_horizontal|center_vertical"-->
+                        <!--android:paddingRight="10dp"-->
+                        <!--android:orientation="horizontal" >-->
+                    <!--</LinearLayout>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -205,6 +207,7 @@
                     android:layout_height="80px"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:paddingLeft="@dimen/common_padding2">
 
                     <View
@@ -226,8 +229,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="332px"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     >
-
                     <cn.bingoogolapple.bgabanner.BGABanner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
@@ -301,7 +304,9 @@
                     android:background="@color/theme_color"
                     android:gravity="center_vertical"
                     android:layout_gravity="top"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    >
 
                     <TextView
                         android:id="@+id/topbar_search1"
@@ -341,5 +346,25 @@
         android:layout_marginBottom="16dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
+        android:visibility="gone"
       />
+<include
+    layout="@layout/top_bar_commom"
+    android:id="@+id/rl_topbar"
+    >
+</include>
+    <com.victor.che.widget.DisallowParentTouchViewPager
+        android:id="@+id/guidePages"
+        android:layout_below="@id/rl_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="436px"/>
+    <LinearLayout
+        android:id="@+id/viewGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="40px"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingRight="10dp"
+        android:orientation="horizontal" >
+    </LinearLayout>
 </RelativeLayout>

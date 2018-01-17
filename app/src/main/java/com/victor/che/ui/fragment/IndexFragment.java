@@ -117,7 +117,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener,
         scrollview.setOnScrollListener(this);
         // 设置标题
         ((TextView) findViewById(R.id.tv_topbar_title)).setText("辖区档案");
-        findViewById(R.id.iv_back).setVisibility(View.GONE);
+//        findViewById(R.id.iv_back).setVisibility(View.GONE);
         //当布局的状态或者控件的可见性发生改变回调的接口
         relativeLyaout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

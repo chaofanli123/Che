@@ -2,6 +2,7 @@ package com.victor.che.ui.my;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.squareup.picasso.Picasso;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
@@ -59,17 +64,24 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     @BindView(R.id.mPtrFrame)
     PtrClassicFrameLayout PtrHelper;
     protected Context mContext;
-    private List<ShiPing.VideoListBean> mList=new ArrayList<>();
+    private List<ShiPing.VideoListBean> mList = new ArrayList<>();
     private WoDeSheBeiListAdapter mAdapter;
     private PtrHelper<ShiPing.VideoListBean> mPtrHelper;
     public static final String APPKEY = "AppKey";
     public static final String AccessToekn = "AccessToekn";
     public static final String PLAY_URL = "play_url";
+    private String ac;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     public int getContentView() {
         return R.layout.activity_wo_de_she_bei_list;
     }
+
     @Override
     protected void initView() {
         super.initView();
@@ -104,20 +116,29 @@ public class WoDeSheBeiListActivity extends BaseActivity {
 //            }
 //        });
     }
+
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
         params.put("mobileLogin", true);
-        VictorHttpUtil.doGet(mContext, Define.URL_SHIPING+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
+        VictorHttpUtil.doPost(WoDeSheBeiListActivity.this, Define.URL_SHIPING + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         ShiPing shiPing = JSON.parseObject(element.body, ShiPing.class);
+                        MyApplication.getOpenSDK().setAccessToken(shiPing.getAccessToken());
+                        try {
+                            List<EZDeviceInfo> deviceList = MyApplication.getOpenSDK().getDeviceList(0, 20);
+                        }catch (Exception e){
+                            
+                        }
+
+                        ac = shiPing.getAccessToken();
                         List<ShiPing.VideoListBean> videoList = shiPing.getVideoList();
                         if (pullToRefresh) {////刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(videoList)) {
                                 // 无数据
-                                View common_no_data = View.inflate(mContext, R.layout.common_no_data, null);
+                                View common_no_data = View.inflate(WoDeSheBeiListActivity.this, R.layout.common_no_data, null);
                                 mPtrHelper.setEmptyView(common_no_data);
                             } else {
                                 // 有数据
@@ -139,6 +160,52 @@ public class WoDeSheBeiListActivity extends BaseActivity {
                 });
 
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("WoDeSheBeiList Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
+    }
+
     /**
      * 消息列表适配器
      */
@@ -150,23 +217,23 @@ public class WoDeSheBeiListActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder helper, ShiPing.VideoListBean item) {
-            helper.setText(R.id.tv_video_jj, item.getDeviceSerial());//时间
+            helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());//时间
             try {
-//                String s = MyApplication.getOpenSDK().captureCamera(item.getDeviceSerial(), Integer.valueOf(item.getChannelNo()));
-//                System.out.print(s);
-//                ImageView img = helper.getView(R.id.iv_video);
-//                PicassoUtils.loadImage(mContext,s, (ImageView) helper.getView(R.id.iv_video));
+                String s = MyApplication.getOpenSDK().captureCamera(item.getDeviceSerial(), Integer.valueOf(item.getChannelNo()));
+                System.out.print(s + "%%%%%%%%%%%%%%%%%%%%");
+                ImageView img = helper.getView(R.id.iv_video);
+                PicassoUtils.loadImage(mContext, s, (ImageView) helper.getView(R.id.iv_video));
                 helper.getView(R.id.ll_shiping).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                                        Intent intent=new Intent(mContext,Playctivity.class);
-                intent.putExtra(APPKEY,"566fb0a1d274443f8d32d74212c570e7");
-                intent.putExtra(AccessToekn,"at.c9izof7adwq7i89ubvn1udd974bn2nqr-7znpcab916-1hyd7e8-gi0qfpfkr");
-                intent.putExtra(PLAY_URL,"ezopen://open.ys7.com/835510343/1.live");
-                startActivity(intent);
+                        Intent intent = new Intent(mContext, Playctivity.class);
+                        intent.putExtra(APPKEY, "566fb0a1d274443f8d32d74212c570e7");
+                        intent.putExtra(AccessToekn, ac);
+                        intent.putExtra(PLAY_URL, "ezopen://open.ys7.com/835510343/2.hd.live");
+                        startActivity(intent);
                     }
                 });
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
 

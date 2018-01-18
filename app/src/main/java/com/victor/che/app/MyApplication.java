@@ -13,13 +13,10 @@ import com.victor.che.domain.User;
 import com.victor.che.event.Region;
 import com.victor.che.util.AbActivityManager;
 import com.victor.che.util.AppUtil;
-import com.victor.che.util.BuglyUtil;
 import com.victor.che.util.SharedPreferencesUtil;
 import com.videogo.openapi.EZOpenSDK;
 
 import java.util.List;
-
-import cn.jpush.android.api.JPushInterface;
 /**
  * 全局应用类
  * @author Victor
@@ -73,11 +70,11 @@ public class MyApplication extends BaseApplication {
         versionCode = String.valueOf(AppUtil.getVersionCode(this));
         //   PgyCrashManager.register(context);
         // 开启极光推送
-        JPushInterface.setDebugMode(DEBUG);// 设置开启日志,发布时请关闭日志
-        JPushInterface.init(this);
+//        JPushInterface.setDebugMode(DEBUG);// 设置开启日志,发布时请关闭日志
+//        JPushInterface.init(this);
 
         // 开启腾讯bugly
-        BuglyUtil.initCrashReport(getApplicationContext(), "63a1268c2e", DEBUG);
+     //   BuglyUtil.initCrashReport(getApplicationContext(), "63a1268c2e", DEBUG);
 
         //        QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {
         //            @Override

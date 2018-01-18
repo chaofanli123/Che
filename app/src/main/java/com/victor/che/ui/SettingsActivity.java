@@ -33,7 +33,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.jpush.android.api.JPushInterface;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -206,7 +205,7 @@ public class SettingsActivity extends BaseActivity {
                         // 关闭本页面
                         finish();
                         // 停止推送
-                        JPushInterface.stopPush(getApplicationContext());
+                      //  JPushInterface.stopPush(getApplicationContext());
                         startActivity(new Intent(SettingsActivity.this, LoginActivity.class));
 
                   EventBus.getDefault().post(TabBottomActivity.class);

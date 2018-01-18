@@ -2,7 +2,6 @@ package com.victor.che.ui;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -21,7 +20,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
-import com.orhanobut.logger.Logger;
 import com.victor.che.R;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
@@ -31,22 +29,15 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
-import com.victor.che.bean.NewUser;
 import com.victor.che.domain.User;
 import com.victor.che.util.AppUtil;
-import com.victor.che.util.DateUtil;
 import com.victor.che.util.StringUtil;
 import com.victor.che.widget.CaptchaTimer;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 
 import static com.victor.che.app.MyApplication.spUtil;
 
@@ -285,41 +276,41 @@ public class LoginActivity extends BaseActivity {
     }
 
     private static final int MSG_SET_ALIAS = 1001;
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(android.os.Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MSG_SET_ALIAS:
-                    // 调用 JPush 接口来设置别名。
-                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
-                    break;
-                default:
-            }
-        }
-    };
+//    private final Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(android.os.Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what) {
+//                case MSG_SET_ALIAS:
+//                    // 调用 JPush 接口来设置别名。
+//                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
+//                    break;
+//                default:
+//            }
+//        }
+//    };
 
-    /**
-     * 设置JPush别名的回调
-     */
-    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-        @Override
-        public void gotResult(int code, String alias, Set<String> tags) {
-            switch (code) {
-                case 0:// 设置成功
-                    Logger.e("设置jpush成功");
-                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-                    boolean setJPushAlias = spUtil.getBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias);
-                    if (!setJPushAlias) {
-                        spUtil.setBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias, true);
-                    }
-                    break;
-                case 6002:// 设置超时，延迟 60 秒来调用 Handler 设置别名
-                default:
-                    Logger.e("设置jpush失败，重试");
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-                    break;
-            }
-        }
-    };
+//    /**
+//     * 设置JPush别名的回调
+//     */
+//    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+//        @Override
+//        public void gotResult(int code, String alias, Set<String> tags) {
+//            switch (code) {
+//                case 0:// 设置成功
+//                    Logger.e("设置jpush成功");
+//                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+//                    boolean setJPushAlias = spUtil.getBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias);
+//                    if (!setJPushAlias) {
+//                        spUtil.setBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias, true);
+//                    }
+//                    break;
+//                case 6002:// 设置超时，延迟 60 秒来调用 Handler 设置别名
+//                default:
+//                    Logger.e("设置jpush失败，重试");
+//                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+//                    break;
+//            }
+//        }
+//    };
 }

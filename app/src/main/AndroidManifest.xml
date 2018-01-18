@@ -401,7 +401,6 @@
 
         <!-- 微信支付SDK end -->
 
-        <activity android:name=".ui.EndtimeUsercardrActivity" />
         <activity android:name=".ui.GuanggaoWebActivity" />
         <activity android:name=".ui.TakePhoto1Activity" />
         <activity android:name=".ui.BigPicActivity" />

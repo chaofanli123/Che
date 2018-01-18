@@ -1,9 +1,6 @@
 package com.victor.che.util;
 
-import android.content.Context;
 import android.text.TextUtils;
-
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,17 +21,17 @@ public class BuglyUtil {
      * @param appid
      * @param isDebug
      */
-    public static void initCrashReport(Context context, String appid, boolean isDebug) {
-        // 获取当前包名
-        String packageName = context.getPackageName();
-        // 获取当前进程名
-        String processName = getProcessName(android.os.Process.myPid());
-        // 设置是否为上报进程
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
-        strategy.setUploadProcess(processName == null || processName.equals(packageName));
-        // 初始化Bugly
-        CrashReport.initCrashReport(context, appid, isDebug, strategy);
-    }
+//    public static void initCrashReport(Context context, String appid, boolean isDebug) {
+//        // 获取当前包名
+//        String packageName = context.getPackageName();
+//        // 获取当前进程名
+//        String processName = getProcessName(android.os.Process.myPid());
+//        // 设置是否为上报进程
+//        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+//        strategy.setUploadProcess(processName == null || processName.equals(packageName));
+//        // 初始化Bugly
+//        CrashReport.initCrashReport(context, appid, isDebug, strategy);
+//    }
     /**
      * 获取进程号对应的进程名
      *

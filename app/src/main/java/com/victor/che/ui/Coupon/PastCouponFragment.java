@@ -163,21 +163,21 @@ public class PastCouponFragment extends BaseFragment {
             } else {
                 tv_coupon_time.setText("限" + shopsCoupon.getGrant_start_time() + "至" + shopsCoupon.getGrant_end_time() + "发放");
             }
-            /**
-             * 发券记录
-             */
-            holder.setOnClickListener(R.id.tv_send_coupon_history, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("shopsCoupon",shopsCoupon);
-                }
-            });
-            TextView tv_forbidden = holder.getView(R.id.tv_forbidden);
-            tv_forbidden.setVisibility(View.GONE);
-
-            TextView tv_send_coupon = holder.getView(R.id.tv_send_coupon);
-            tv_send_coupon.setVisibility(View.GONE);
+//            /**
+//             * 发券记录
+//             */
+//            holder.setOnClickListener(R.id.tv_send_coupon_history, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Bundle bundle=new Bundle();
+//                    bundle.putSerializable("shopsCoupon",shopsCoupon);
+//                }
+//            });
+//            TextView tv_forbidden = holder.getView(R.id.tv_forbidden);
+//            tv_forbidden.setVisibility(View.GONE);
+//
+//            TextView tv_send_coupon = holder.getView(R.id.tv_send_coupon);
+//            tv_send_coupon.setVisibility(View.GONE);
         }
 
     }

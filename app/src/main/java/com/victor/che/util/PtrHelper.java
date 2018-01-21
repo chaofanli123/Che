@@ -25,7 +25,7 @@ public class PtrHelper<T extends Serializable> {
 
     protected int curpage = START_INDEX;// 当前页码
 
-    private int pageSize = 20;// 每个页面的数据数量
+    private int pageSize = 10;// 每个页面的数据数量
 
     protected QuickAdapter<T> mAdapter;// 适配器
 

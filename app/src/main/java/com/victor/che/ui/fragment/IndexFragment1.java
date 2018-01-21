@@ -57,7 +57,6 @@ public class IndexFragment1 extends BaseFragment {
         adapter = new GoogleMusicAdapter(getFragmentManager());
         mViewPager.setAdapter(adapter);
         pagerTab.setViewPager(mViewPager);
-        provider_user_id =getActivity().getIntent().getStringExtra("provider_user_id");
         pagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -90,16 +89,18 @@ public class IndexFragment1 extends BaseFragment {
 
             switch (position) {
                 case 0:
-                    //启用
+                    //通知下达
                     fragment = new StartUsingCouponFragment();
                     break;
                 case 1:
                     //禁用
-                    fragment = new ForbiddenCouponFragment();
+                  //  fragment = new ForbiddenCouponFragment();
+                    fragment = new StartUsingCouponFragment();
                     break;
                 case 2:
                     //过期
-                    fragment = new PastCouponFragment();
+                  //  fragment = new PastCouponFragment();
+                    fragment = new StartUsingCouponFragment();
                     break;
 
                 default:
@@ -110,7 +111,6 @@ public class IndexFragment1 extends BaseFragment {
             args.putString("type", (position + 1) + "");
             // args.putSerializable("mCar",mCar);
 //        args.putSerializable("querybaoxianCar",querybaoxianCar);
-            args.putString("provider_user_id", provider_user_id);
             fragment.setArguments(args);
             fragments.add(position, fragment);
             return fragment;

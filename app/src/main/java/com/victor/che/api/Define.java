@@ -24,9 +24,15 @@ public class Define {
    */
   public static final String URL_SHIPING = API_DOMAIN + "a/comopinion/videoDataInformation/list";
 
+  /**
+   * app更新
+   */
+  public static final String URL_GENGXING= API_DOMAIN + "a/setting/appDownload/appUpdate";
 
-
-
+  /**
+   * 通知下达
+   */
+  public static final String URL_TONGZHIXIADALIST= API_DOMAIN + "a/oa/oaNotify/list";
 
     /**
      * 获取总店服务商产品类别列表

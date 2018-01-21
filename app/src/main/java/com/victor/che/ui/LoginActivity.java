@@ -61,17 +61,6 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.area_pwd)
     View area_pwd;
 
-    @BindView(R.id.et_captcha)
-    EditText et_captcha;
-
-    @BindView(R.id.btn_get_captcha)
-    TextView btn_get_captcha;
-
-    @BindView(R.id.tv_switch_login_type)
-    TextView tv_switch_login_type;
-
-    @BindView(R.id.divider)
-    View divider;
 
     @BindView(R.id.chk_show_pwd)
     CheckBox chk_show_pwd;
@@ -155,75 +144,13 @@ public class LoginActivity extends BaseActivity {
     }
 
     /**
-     * 切换登录类型(密码登录<==>验证码登录)
-     */
-    @OnClick(R.id.tv_switch_login_type)
-    public void switchLoginType() {
-        mLoginByPwd = !mLoginByPwd;
-        if (mLoginByPwd) {// 切换到密码登录
-            area_pwd.setVisibility(View.VISIBLE);
-            et_captcha.setVisibility(View.GONE);
-            et_username.setHint("请输入用户名或手机号");
-            et_username.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS); //输入类型
-            et_username.setFilters(new InputFilter[]{new InputFilter.LengthFilter(50)}); //最大输入长度
-            btn_get_captcha.setVisibility(View.GONE);
-            divider.setVisibility(View.GONE);
-            tv_switch_login_type.setText("验证码登录");
-        } else {// 切换到验证码登录
-            area_pwd.setVisibility(View.GONE);
-            et_captcha.setVisibility(View.VISIBLE);
-
-            et_username.setHint("请输入手机号");
-            et_username.setInputType(InputType.TYPE_CLASS_NUMBER); //输入类型
-            et_username.setFilters(new InputFilter[]{new InputFilter.LengthFilter(11)}); //最大输入长度
-
-            btn_get_captcha.setVisibility(View.VISIBLE);
-            divider.setVisibility(View.VISIBLE);
-            tv_switch_login_type.setText("密码登录");
-        }
-    }
-
-    /**
-     * 获取验证码
-     */
-    @OnClick(R.id.btn_get_captcha)
-    void doGetCaptcha() {
-        final String username = et_username.getText().toString().trim();
-        if (TextUtils.isEmpty(username)) {
-            MyApplication.showToast("手机号不能为空");
-            et_username.requestFocus();
-            return;
-        }
-        if (!StringUtil.isPhoneNumber(username)) {
-            MyApplication.showToast("手机号格式不正确");
-            et_username.requestFocus();
-            return;
-        }
-        // 获取短信验证码
-        MyParams params = new MyParams();
-        params.put("mobile", username);
-        VictorHttpUtil.doPost(mContext, Define.URL_GET_CAPTCHA, params, true, "获取中...",
-                new BaseHttpCallbackListener<Element>() {
-                    @Override
-                    public void callbackSuccess(String url, Element element) {
-                        super.callbackSuccess(url, element);
-                        // 成功
-                        new CaptchaTimer(60000L, 1000L, btn_get_captcha).start();
-                        MyApplication.showToast("验证码已发送到" + username + "的手机中");
-                        // 验证码框获得焦点
-                        et_captcha.requestFocus();
-                    }
-                });
-    }
-
-    /**
      * 登录
      */
     @OnClick(R.id.btn_operate)
     void doLogin() {
         String username = et_username.getText().toString().trim();
         if (TextUtils.isEmpty(username)) {
-            MyApplication.showToast("用户名或手机号不能为空");
+            MyApplication.showToast("账号不能为空");
             et_username.requestFocus();
             return;
         }
@@ -243,12 +170,6 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
 
-            captcha = et_captcha.getText().toString().trim();
-            if (TextUtils.isEmpty(captcha)) {
-                MyApplication.showToast("验证码不能为空");
-                et_captcha.requestFocus();
-                return;
-            }
         }
         // 发送登录请求
         MyParams params = new MyParams();
@@ -274,43 +195,4 @@ public class LoginActivity extends BaseActivity {
             }
         });
     }
-
-    private static final int MSG_SET_ALIAS = 1001;
-//    private final Handler mHandler = new Handler() {
-//        @Override
-//        public void handleMessage(android.os.Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what) {
-//                case MSG_SET_ALIAS:
-//                    // 调用 JPush 接口来设置别名。
-//                    JPushInterface.setAliasAndTags(getApplicationContext(), (String) msg.obj, null, mAliasCallback);
-//                    break;
-//                default:
-//            }
-//        }
-//    };
-
-//    /**
-//     * 设置JPush别名的回调
-//     */
-//    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
-//        @Override
-//        public void gotResult(int code, String alias, Set<String> tags) {
-//            switch (code) {
-//                case 0:// 设置成功
-//                    Logger.e("设置jpush成功");
-//                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
-//                    boolean setJPushAlias = spUtil.getBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias);
-//                    if (!setJPushAlias) {
-//                        spUtil.setBoolean(ConstantValue.SP_KEY_SET_JPUSH_ALIAS + alias, true);
-//                    }
-//                    break;
-//                case 6002:// 设置超时，延迟 60 秒来调用 Handler 设置别名
-//                default:
-//                    Logger.e("设置jpush失败，重试");
-//                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
-//                    break;
-//            }
-//        }
-//    };
 }

@@ -1,10 +1,8 @@
 package com.victor.che.ui.Coupon;
 
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -17,11 +15,11 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
+import com.victor.che.bean.Notify;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.MessageEvent;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.util.StringUtil;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -37,10 +35,9 @@ import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
- *启用优惠券列表
+ *通知下达列表
  */
 public class StartUsingCouponFragment extends BaseFragment {
-
     @BindView(R.id.recycler_usr_car)
     MyRecyclerView recycler;
     @BindView(R.id.pcfl_user_car)
@@ -49,8 +46,8 @@ public class StartUsingCouponFragment extends BaseFragment {
      * adapter
      */
     private CouponAdapter messageListAdapter;
-    private List<ShopsCoupon> messageArrayList = new ArrayList<ShopsCoupon>();
-    private PtrHelper<ShopsCoupon> mPtrHelper;
+    private List<Notify> messageArrayList = new ArrayList<>();
+    private PtrHelper<Notify> mPtrHelper;
     private int index;/*点击的愿望下标*/
 
     @Override
@@ -59,17 +56,15 @@ public class StartUsingCouponFragment extends BaseFragment {
     }
     @Override
     protected void initView() {
-        super.initView();
-        messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);  //
-        mPtrHelper = new PtrHelper<>(pcflUserCar, messageListAdapter, messageArrayList);
-        mPtrHelper.enableLoadMore(true, recycler);//允许加载更多
-        recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器
-        recycler.setAdapter(messageListAdapter);
+        messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);
+        recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
                 .colorResId(R.color.divider)
                 .build());//添加分隔线
-
+        recycler.setAdapter(messageListAdapter);
+        mPtrHelper = new PtrHelper<>(pcflUserCar, messageListAdapter, messageArrayList);
+        mPtrHelper.enableLoadMore(true, recycler);//允许加载更多
         mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
             @Override
             public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
@@ -83,14 +78,14 @@ public class StartUsingCouponFragment extends BaseFragment {
                 if (position == -1) {
                     return;
                 }
-                ShopsCoupon shopsCoupon = messageArrayList.get(position);
-                Bundle bundle=new Bundle();
-                bundle.putString("type","couponlist");
-                bundle.putString("position",position+"");
-                bundle.putSerializable("shopsCoupon",shopsCoupon);
+//                ShopsCoupon shopsCoupon = messageArrayList.get(position);
+//                Bundle bundle=new Bundle();
+//                bundle.putString("type","couponlist");
+//                bundle.putString("position",position+"");
+//                bundle.putSerializable("shopsCoupon",shopsCoupon);
             }
         });
-        mPtrHelper.autoRefresh(true);
+        mPtrHelper.autoRefresh(false);
     }
 
     /**
@@ -100,15 +95,17 @@ public class StartUsingCouponFragment extends BaseFragment {
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
-       // params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+       params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
+        params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
-        params.put("start", curpage);
-        params.put("status", 1);
-        VictorHttpUtil.doGet(mContext, Define.url_coupon_all_list_v1, params, false, null,
+//        params.put("title", "");
+//        params.put("type", "");
+//        params.put("status", "");
+        VictorHttpUtil.doPost(mContext, Define.URL_TONGZHIXIADALIST+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<ShopsCoupon> shopsCouponList = JSON.parseArray(element.body, ShopsCoupon.class);
+                        List<Notify> shopsCouponList = JSON.parseArray(element.body, Notify.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
@@ -121,7 +118,6 @@ public class StartUsingCouponFragment extends BaseFragment {
                                 messageArrayList.addAll(shopsCouponList);
                                 messageListAdapter.setNewData(messageArrayList);
                                 messageListAdapter.notifyDataSetChanged();
-
                                 if (CollectionUtil.getSize(shopsCouponList) < pageSize) {
                                     // 上拉加载无更多数据
                                     mPtrHelper.loadMoreEnd();
@@ -140,64 +136,30 @@ public class StartUsingCouponFragment extends BaseFragment {
     /**
      * 订单列表适配器
      */
-    private class CouponAdapter extends QuickAdapter<ShopsCoupon> {
+    private class CouponAdapter extends QuickAdapter<Notify> {
 
-        public CouponAdapter(int layoutResId, List<ShopsCoupon> data) {
+        public CouponAdapter(int layoutResId, List<Notify> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder holder, final ShopsCoupon shopsCoupon) {
-            holder.setText(R.id.tv_coupon_price, shopsCoupon.getMoney());
-            holder.setText(R.id.tv_coupon_message, shopsCoupon.getName());
-            TextView money_off = holder.getView(R.id.tv_money_off);
-            if ("0.00".equals(shopsCoupon.getFull_money())) { //不限制
-                money_off.setVisibility(View.GONE);
-            } else {
-                money_off.setVisibility(View.VISIBLE);
-                money_off.setText("满" + shopsCoupon.getFull_money() + "可用");
+        protected void convert(BaseViewHolder holder, final Notify shopsCoupon) {
+            holder.setText(R.id.tv_time, shopsCoupon.getCreateDate());
+            holder.setText(R.id.tv_title, "标题:"+shopsCoupon.getTitle());
+            if (shopsCoupon.getType().equals("1")){
+                holder.setText(R.id.tv_leixing,"类型:"+"会议通告" );
+            }else if (shopsCoupon.getType().equals("2")){
+                holder.setText(R.id.tv_leixing,"类型:"+"奖惩通告" );
+            }else if (shopsCoupon.getType().equals("3")){
+                holder.setText(R.id.tv_leixing,"类型:"+"活动通告" );
             }
-            TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//时间截止
-            if (StringUtil.isEmpty(shopsCoupon.getGrant_start_time())||StringUtil.isEmpty(shopsCoupon.getGrant_end_time())) { //不限制时间
-                tv_coupon_time.setText("不限期限");
-            } else {
-                tv_coupon_time.setText("限" + shopsCoupon.getGrant_start_time() + "至" + shopsCoupon.getGrant_end_time() + "发放");
+            if (shopsCoupon.getStatus().equals("1")){
+                holder.setText(R.id.tv_zhuangtai, "状态:"+"草稿");
+            }else {
+                holder.setText(R.id.tv_zhuangtai, "状态:"+"发布");
             }
-            /**
-             * 发券记录
-             */
-            holder.setOnClickListener(R.id.tv_send_coupon_history, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("shopsCoupon",shopsCoupon);
-                }
-            });
-            /**
-             * 禁用
-             */
-            holder.setOnClickListener(R.id.tv_forbidden, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showdialog(shopsCoupon,shopsCoupon.getCoupon_id());
-                }
-            });
-            /**
-             * 发券 去发券activty
-             */
-            holder.setOnClickListener(R.id.tv_send_coupon, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (shopsCoupon.getIs_grant() == 1) {
-                        Bundle bundle=new Bundle();
-                        bundle.putSerializable("shopsCoupon",shopsCoupon);
-                        bundle.putString("couponId", String.valueOf(shopsCoupon.getCoupon_id()));
-                    }else {
-                        MyApplication.showToast("该优惠券不可以发券");
-                    }
-
-                }
-            });
+            int total = Integer.valueOf(shopsCoupon.getReadNum()) + Integer.valueOf(shopsCoupon.getUnReadNum());
+            holder.setText(R.id.tv_caozuozhuangtai, "查阅状态:"+shopsCoupon.getUnReadNum()+"/"+total);
         }
     }
     /**
@@ -256,7 +218,7 @@ public class StartUsingCouponFragment extends BaseFragment {
                 }
                 if (index >= 0) {
                     if (event.object != null) {
-                        ShopsCoupon shopsCoupon= (ShopsCoupon) event.object;
+                        Notify shopsCoupon= (Notify) event.object;
                         messageArrayList.set(index, shopsCoupon);
                     } else {
                         messageArrayList.remove(index);

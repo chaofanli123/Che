@@ -17,15 +17,11 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.Notify;
 import com.victor.che.domain.ShopsCoupon;
-import com.victor.che.event.MessageEvent;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +42,8 @@ public class StartUsingCouponFragment extends BaseFragment {
      * adapter
      */
     private CouponAdapter messageListAdapter;
-    private List<Notify> messageArrayList = new ArrayList<>();
-    private PtrHelper<Notify> mPtrHelper;
+    private List<Notify.PageBean.ListBean> messageArrayList = new ArrayList<>();
+    private PtrHelper<Notify.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
 
     @Override
@@ -105,8 +101,11 @@ public class StartUsingCouponFragment extends BaseFragment {
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Notify> shopsCouponList = JSON.parseArray(element.body, Notify.class);
+                        Notify notify = JSON.parseObject(element.body, Notify.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
+                       List<Notify.PageBean.ListBean> shopsCouponList=new ArrayList<>();
+                        shopsCouponList=notify.getPage().getList();
+
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             if (CollectionUtil.isEmpty(shopsCouponList)) {
@@ -136,14 +135,15 @@ public class StartUsingCouponFragment extends BaseFragment {
     /**
      * 订单列表适配器
      */
-    private class CouponAdapter extends QuickAdapter<Notify> {
+    private class CouponAdapter extends QuickAdapter<Notify.PageBean.ListBean> {
 
-        public CouponAdapter(int layoutResId, List<Notify> data) {
+        public CouponAdapter(int layoutResId, List<Notify.PageBean.ListBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder holder, final Notify shopsCoupon) {
+        protected void convert(BaseViewHolder holder, final Notify.PageBean.ListBean shopsCoupon) {
+
             holder.setText(R.id.tv_time, shopsCoupon.getCreateDate());
             holder.setText(R.id.tv_title, "标题:"+shopsCoupon.getTitle());
             if (shopsCoupon.getType().equals("1")){
@@ -204,29 +204,29 @@ public class StartUsingCouponFragment extends BaseFragment {
                null)
                .show(getFragmentManager(), getClass().getSimpleName());
     }
-    @Subscribe
-    public void onMessageEvent(MessageEvent event) {
-        switch (event.code) {
-            case MessageEvent.ALL_WISH_RELOAD:///*刷新全部愿望列表*/
-            //    Map<String, String> paramMap = (Map<String, String>) event.object;
-                mPtrHelper.autoRefresh(true);
-                break;
-            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
-                if (event.position!=-1){
-                    index=event.position;
-                    //  messageListAdapter.notifyDataSetChanged();
-                }
-                if (index >= 0) {
-                    if (event.object != null) {
-                        Notify shopsCoupon= (Notify) event.object;
-                        messageArrayList.set(index, shopsCoupon);
-                    } else {
-                        messageArrayList.remove(index);
-                    }
-                    index = -1;
-                    messageListAdapter.notifyDataSetChanged();
-                }
-                break;
-        }
-    }
+//    @Subscribe
+//    public void onMessageEvent(MessageEvent event) {
+//        switch (event.code) {
+//            case MessageEvent.ALL_WISH_RELOAD:///*刷新全部愿望列表*/
+//            //    Map<String, String> paramMap = (Map<String, String>) event.object;
+//                mPtrHelper.autoRefresh(true);
+//                break;
+//            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
+//                if (event.position!=-1){
+//                    index=event.position;
+//                    //  messageListAdapter.notifyDataSetChanged();
+//                }
+//                if (index >= 0) {
+//                    if (event.object != null) {
+//                        Notify shopsCoupon= (Notify) event.object;
+//                        messageArrayList.set(index, shopsCoupon);
+//                    } else {
+//                        messageArrayList.remove(index);
+//                    }
+//                    index = -1;
+//                    messageListAdapter.notifyDataSetChanged();
+//                }
+//                break;
+//        }
+//    }
 }

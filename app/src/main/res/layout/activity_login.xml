@@ -3,8 +3,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/icon_bg"
+    android:background="#004fa2"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/icon_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +67,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/common_padding2"
                 android:paddingRight="@dimen/common_padding2"
-                android:textColor="@color/black_text"
+                android:textColor="@color/white"
                 android:textColorHint="#cccccc"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/middle_font_size"/>
@@ -93,7 +102,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="@dimen/common_padding2"
                 android:paddingRight="@dimen/common_padding2"
-                android:textColor="@color/black_text"
+                android:textColor="@color/white"
                 android:textColorHint="#cccccc"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/middle_font_size"/>
@@ -123,7 +132,7 @@
             android:maxLength="6"
             android:paddingLeft="@dimen/common_padding2"
             android:paddingRight="@dimen/common_padding2"
-            android:textColor="@color/black_text"
+            android:textColor="@color/white"
             android:textColorHint="#cccccc"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/middle_font_size"
@@ -151,5 +160,5 @@
             android:textSize="@dimen/large_font_size"
             android:textStyle="bold"/>
     </LinearLayout>
-
+    </LinearLayout>
 </LinearLayout>

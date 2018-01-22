@@ -28,22 +28,23 @@ public class Notify implements Serializable {
      * isNewRecord : false
      */
 
-    private String type;
-    private String title;
-    private String content;
-    private String files;
-    private String status;
-    private String readNum;
-    private String unReadNum;
-    private boolean isSelf;
-    private CreateByBean createBy;
-    private String createDate;
-    private UpdateByBean updateBy;
-    private String updateDate;
-    private String delFlag;
-    private String id;
-    private boolean isNewRecord;
-    private List<?> oaNotifyRecordList;
+            private String id;
+            private boolean isNewRecord;
+            private Object remarks;
+            private String createDate;
+            private String updateDate;
+            private String type;
+            private String title;
+            private String content;
+            private String files;
+            private String status;
+            private String readNum;
+            private String unReadNum;
+            private Object readFlag;
+            private String oaNotifyRecordIds;
+            private String oaNotifyRecordNames;
+            private boolean self;
+            private List<?> oaNotifyRecordList;
 
     public String getType() {
         return type;

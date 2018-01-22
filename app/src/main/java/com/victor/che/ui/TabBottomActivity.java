@@ -138,7 +138,6 @@ public class TabBottomActivity extends BaseActivity {
             }
         });
     }
-
     private void _doUpdate(final AppVersion version) {
         // 存储权限检查
         new TedPermission(MyApplication.CONTEXT)

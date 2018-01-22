@@ -48,6 +48,4 @@
         android:text="跳过( 3 )"
         android:textColor="@color/white"
         android:textSize="14sp"/>
-
-
 </FrameLayout>

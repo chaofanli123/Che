@@ -1,6 +1,7 @@
 package com.victor.che.ui.Coupon;
 
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -17,6 +18,7 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.Policy;
 import com.victor.che.domain.ShopsCoupon;
+import com.victor.che.ui.my.ZhengCheFaGuiActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
@@ -80,6 +82,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
+                startActivity(new Intent(mContext, ZhengCheFaGuiActivity.class).putExtra("id",messageArrayList.get(position).getId()));
             }
         });
         mPtrHelper.autoRefresh(false);

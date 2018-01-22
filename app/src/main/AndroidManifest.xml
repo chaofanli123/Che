@@ -443,7 +443,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ui.my.TongZhiXiaDaActivity"></activity>
+        <activity android:name=".ui.my.TongZhiXiaDaActivity" />
+        <activity android:name=".ui.my.ZhengCheFaGuiActivity"></activity>
     </application>
 
 </manifest>

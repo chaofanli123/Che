@@ -17,14 +17,39 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginLeft="12dp"
-        android:layout_gravity="center_vertical"
-        android:text="类型:"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:text="标题:"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_biaoti"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_gravity="center_vertical"
+            android:text="类型"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/common_bg"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center_vertical"
+            android:text="类型:"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content" />
         <TextView
             android:layout_marginRight="12dp"
             android:id="@+id/tv_leixing"
@@ -48,11 +73,11 @@
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="标题:"
+            android:text="公式时间:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_biaoti"
+            android:id="@+id/tv_time"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
@@ -60,11 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/common_bg"/>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -86,32 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="时间:"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -125,11 +125,11 @@
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="接  受  人:"
+            android:text="备注信息:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_jiesouren"
+            android:id="@+id/tv_beizhuxingxi"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
@@ -137,65 +137,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="阅读状态:"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_yueduzhuangtai"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="阅读时间:"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_yuedushijian"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/common_bg"/>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"/>
 </LinearLayout>

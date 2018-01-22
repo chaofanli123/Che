@@ -47,9 +47,19 @@ public class Define {
 
 
   /**
+   * 查看通知
+   */
+  public static final String URL_CHAKANTONGZHI= API_DOMAIN + "a/oa/oaNotify/formView";
+
+  /**
    * 政策法规
    */
   public static final String URL_ZHENGCHEFAGUI= API_DOMAIN + "a/gov/govPolicy/list";
+
+  /**
+   * 查看政策法规
+   */
+  public static final String URL_CHAKANZHENGCHEFAGUI= API_DOMAIN + "a/gov/govPolicy/form";
 
   /**
    * 禁用鱼药

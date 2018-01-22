@@ -82,7 +82,7 @@ public class StartUsingCouponFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, TongZhiXiaDaActivity.class));
+                startActivity(new Intent(mContext, TongZhiXiaDaActivity.class).putExtra("id",messageArrayList.get(position).getId()));
             }
         });
         mPtrHelper.autoRefresh(false);

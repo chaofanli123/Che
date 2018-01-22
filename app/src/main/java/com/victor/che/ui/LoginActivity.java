@@ -94,11 +94,7 @@ public class LoginActivity extends BaseActivity {
                 }).check();
 
         firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
-        if (firstStartedApp) {// 第一次进入
-            MyApplication.openActivity(mContext, GuideActivity.class);
-            finish();
-            return;
-        } else if (MyApplication.isLogined()) {//已登录进入首页
+         if (MyApplication.isLogined()) {//已登录进入首页
             MyApplication.openActivity(mContext, TabBottomActivity.class);
             finish();
             return;
@@ -169,7 +165,6 @@ public class LoginActivity extends BaseActivity {
                 et_username.requestFocus();
                 return;
             }
-
         }
         // 发送登录请求
         MyParams params = new MyParams();

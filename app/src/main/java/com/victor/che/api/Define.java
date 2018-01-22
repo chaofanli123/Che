@@ -34,6 +34,17 @@ public class Define {
    */
   public static final String URL_TONGZHIXIADALIST= API_DOMAIN + "a/oa/oaNotify/list";
 
+  /**
+   * 政策法规
+   */
+  public static final String URL_ZHENGCHEFAGUI= API_DOMAIN + "a/gov/govPolicy/list";
+
+  /**
+   * 禁用鱼药
+   */
+  public static final String URL_JINGYONGYVYAO= API_DOMAIN + "a/gov/fishDrug/list";
+
+
     /**
      * 获取总店服务商产品类别列表
      */

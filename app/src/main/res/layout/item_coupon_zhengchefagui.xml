@@ -36,7 +36,6 @@
                 android:text="标题: "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
     </RelativeLayout>
     <LinearLayout
@@ -53,16 +52,11 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_zhuangtai"
+            android:id="@+id/tv_beizhuxingxi"
             android:layout_marginLeft="10dp"
-            android:text="状态:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_caozuozhuangtai"
-            android:layout_marginLeft="10dp"
-            android:text="操作状态: "
+            android:text="备注信息: "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 </LinearLayout>

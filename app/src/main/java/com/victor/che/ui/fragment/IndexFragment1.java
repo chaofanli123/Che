@@ -11,9 +11,9 @@ import android.widget.TextView;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.victor.che.R;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.ui.Coupon.ForbiddenCouponFragment;
-import com.victor.che.ui.Coupon.PastCouponFragment;
+import com.victor.che.ui.Coupon.JingYongYvYaoFragment;
 import com.victor.che.ui.Coupon.StartUsingCouponFragment;
+import com.victor.che.ui.Coupon.ZhenCeFaGuiFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,12 +95,12 @@ public class IndexFragment1 extends BaseFragment {
                 case 1:
                     //禁用
                   //  fragment = new ForbiddenCouponFragment();
-                    fragment = new StartUsingCouponFragment();
+                    fragment = new ZhenCeFaGuiFragment();
                     break;
                 case 2:
                     //过期
                   //  fragment = new PastCouponFragment();
-                    fragment = new StartUsingCouponFragment();
+                    fragment = new JingYongYvYaoFragment();
                     break;
 
                 default:

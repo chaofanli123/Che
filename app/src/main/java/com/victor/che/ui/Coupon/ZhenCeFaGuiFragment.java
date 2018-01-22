@@ -1,7 +1,6 @@
 package com.victor.che.ui.Coupon;
 
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -16,9 +15,8 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.bean.Notify;
+import com.victor.che.bean.Policy;
 import com.victor.che.domain.ShopsCoupon;
-import com.victor.che.ui.my.TongZhiXiaDaActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
@@ -35,7 +33,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 /**
  *通知下达列表
  */
-public class StartUsingCouponFragment extends BaseFragment {
+public class ZhenCeFaGuiFragment extends BaseFragment {
     @BindView(R.id.recycler_usr_car)
     MyRecyclerView recycler;
     @BindView(R.id.pcfl_user_car)
@@ -44,8 +42,8 @@ public class StartUsingCouponFragment extends BaseFragment {
      * adapter
      */
     private CouponAdapter messageListAdapter;
-    private List<Notify.PageBean.ListBean> messageArrayList;
-    private PtrHelper<Notify.PageBean.ListBean> mPtrHelper;
+    private List<Policy.PageBean.ListBean> messageArrayList;
+    private PtrHelper<Policy.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
 
     @Override
@@ -55,7 +53,7 @@ public class StartUsingCouponFragment extends BaseFragment {
     @Override
     protected void initView() {
         messageArrayList = new ArrayList<>();
-        messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);
+        messageListAdapter = new CouponAdapter(R.layout.item_coupon_zhengchefagui, messageArrayList);
         recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
@@ -82,7 +80,6 @@ public class StartUsingCouponFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, TongZhiXiaDaActivity.class));
             }
         });
         mPtrHelper.autoRefresh(false);
@@ -101,13 +98,14 @@ public class StartUsingCouponFragment extends BaseFragment {
 //        params.put("title", "");
 //        params.put("type", "");
 //        params.put("status", "");
-        VictorHttpUtil.doPost(mContext, Define.URL_TONGZHIXIADALIST+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
+        VictorHttpUtil.doPost(mContext, Define.URL_ZHENGCHEFAGUI+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        Notify notify = JSON.parseObject(element.body, Notify.class);
-                       List<Notify.PageBean.ListBean> shopsCouponList;
-                        shopsCouponList=notify.getPage().getList();
+                        Policy Policy = JSON.parseObject(element.body, Policy.class);
+                        //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
+                       List<Policy.PageBean.ListBean> shopsCouponList=new ArrayList<>();
+                        shopsCouponList=Policy.getPage().getList();
 
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
@@ -138,31 +136,27 @@ public class StartUsingCouponFragment extends BaseFragment {
     /**
      * 订单列表适配器
      */
-    private class CouponAdapter extends QuickAdapter<Notify.PageBean.ListBean> {
+    private class CouponAdapter extends QuickAdapter<Policy.PageBean.ListBean> {
 
-        public CouponAdapter(int layoutResId, List<Notify.PageBean.ListBean> data) {
+        public CouponAdapter(int layoutResId, List<Policy.PageBean.ListBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder holder, final Notify.PageBean.ListBean shopsCoupon) {
+        protected void convert(BaseViewHolder holder, final Policy.PageBean.ListBean shopsCoupon) {
 
             holder.setText(R.id.tv_time, shopsCoupon.getCreateDate());
             holder.setText(R.id.tv_title, "标题: "+shopsCoupon.getTitle());
             if (shopsCoupon.getType().equals("1")){
-                holder.setText(R.id.tv_leixing,"类型: "+"会议通告" );
+                holder.setText(R.id.tv_leixing,"类型: "+"部门文件" );
             }else if (shopsCoupon.getType().equals("2")){
-                holder.setText(R.id.tv_leixing,"类型: "+"奖惩通告" );
+                holder.setText(R.id.tv_leixing,"类型: "+"法规规章" );
             }else if (shopsCoupon.getType().equals("3")){
-                holder.setText(R.id.tv_leixing,"类型: "+"活动通告" );
+                holder.setText(R.id.tv_leixing,"类型: "+"规范性文件" );
+            }else if (shopsCoupon.getType().equals("4")){
+                holder.setText(R.id.tv_leixing,"类型: "+"政策解读" );
             }
-            if (shopsCoupon.getStatus().equals("1")){
-                holder.setText(R.id.tv_zhuangtai, "状态: "+"草稿");
-            }else {
-                holder.setText(R.id.tv_zhuangtai, "状态: "+"发布");
-            }
-            int total = Integer.valueOf(shopsCoupon.getReadNum()) + Integer.valueOf(shopsCoupon.getUnReadNum());
-            holder.setText(R.id.tv_caozuozhuangtai, "查阅状态: "+shopsCoupon.getReadNum()+"/"+total);
+            holder.setText(R.id.tv_beizhuxingxi, "备注信息: "+shopsCoupon.getRemarks());
         }
     }
     /**
@@ -217,17 +211,17 @@ public class StartUsingCouponFragment extends BaseFragment {
 //            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
 //                if (event.position!=-1){
 //                    index=event.position;
-//                    //  messageListAdapter.notifyDataSetChanged();
+//                    //  messageListAdapter.PolicyDataSetChanged();
 //                }
 //                if (index >= 0) {
 //                    if (event.object != null) {
-//                        Notify shopsCoupon= (Notify) event.object;
+//                        Policy shopsCoupon= (Policy) event.object;
 //                        messageArrayList.set(index, shopsCoupon);
 //                    } else {
 //                        messageArrayList.remove(index);
 //                    }
 //                    index = -1;
-//                    messageListAdapter.notifyDataSetChanged();
+//                    messageListAdapter.PolicyDataSetChanged();
 //                }
 //                break;
 //        }

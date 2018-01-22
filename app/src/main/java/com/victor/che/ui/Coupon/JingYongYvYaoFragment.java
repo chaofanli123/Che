@@ -1,7 +1,6 @@
 package com.victor.che.ui.Coupon;
 
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -16,9 +15,8 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
-import com.victor.che.bean.Notify;
+import com.victor.che.bean.fishDrug;
 import com.victor.che.domain.ShopsCoupon;
-import com.victor.che.ui.my.TongZhiXiaDaActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
@@ -35,7 +33,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 /**
  *通知下达列表
  */
-public class StartUsingCouponFragment extends BaseFragment {
+public class JingYongYvYaoFragment extends BaseFragment {
     @BindView(R.id.recycler_usr_car)
     MyRecyclerView recycler;
     @BindView(R.id.pcfl_user_car)
@@ -44,8 +42,8 @@ public class StartUsingCouponFragment extends BaseFragment {
      * adapter
      */
     private CouponAdapter messageListAdapter;
-    private List<Notify.PageBean.ListBean> messageArrayList;
-    private PtrHelper<Notify.PageBean.ListBean> mPtrHelper;
+    private List<fishDrug.PageBean.ListBean> messageArrayList;
+    private PtrHelper<fishDrug.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
 
     @Override
@@ -55,7 +53,7 @@ public class StartUsingCouponFragment extends BaseFragment {
     @Override
     protected void initView() {
         messageArrayList = new ArrayList<>();
-        messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);
+        messageListAdapter = new CouponAdapter(R.layout.item_coupon_jingyongyvyao, messageArrayList);
         recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
@@ -82,7 +80,6 @@ public class StartUsingCouponFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, TongZhiXiaDaActivity.class));
             }
         });
         mPtrHelper.autoRefresh(false);
@@ -101,13 +98,14 @@ public class StartUsingCouponFragment extends BaseFragment {
 //        params.put("title", "");
 //        params.put("type", "");
 //        params.put("status", "");
-        VictorHttpUtil.doPost(mContext, Define.URL_TONGZHIXIADALIST+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
+        VictorHttpUtil.doPost(mContext, Define.URL_JINGYONGYVYAO+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        Notify notify = JSON.parseObject(element.body, Notify.class);
-                       List<Notify.PageBean.ListBean> shopsCouponList;
-                        shopsCouponList=notify.getPage().getList();
+                        fishDrug fishDrug = JSON.parseObject(element.body, fishDrug.class);
+                        //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
+                       List<fishDrug.PageBean.ListBean> shopsCouponList=new ArrayList<>();
+                        shopsCouponList=fishDrug.getPage().getList();
 
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
@@ -138,31 +136,19 @@ public class StartUsingCouponFragment extends BaseFragment {
     /**
      * 订单列表适配器
      */
-    private class CouponAdapter extends QuickAdapter<Notify.PageBean.ListBean> {
+    private class CouponAdapter extends QuickAdapter<fishDrug.PageBean.ListBean> {
 
-        public CouponAdapter(int layoutResId, List<Notify.PageBean.ListBean> data) {
+        public CouponAdapter(int layoutResId, List<fishDrug.PageBean.ListBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder holder, final Notify.PageBean.ListBean shopsCoupon) {
+        protected void convert(BaseViewHolder holder, final fishDrug.PageBean.ListBean shopsCoupon) {
 
-            holder.setText(R.id.tv_time, shopsCoupon.getCreateDate());
-            holder.setText(R.id.tv_title, "标题: "+shopsCoupon.getTitle());
-            if (shopsCoupon.getType().equals("1")){
-                holder.setText(R.id.tv_leixing,"类型: "+"会议通告" );
-            }else if (shopsCoupon.getType().equals("2")){
-                holder.setText(R.id.tv_leixing,"类型: "+"奖惩通告" );
-            }else if (shopsCoupon.getType().equals("3")){
-                holder.setText(R.id.tv_leixing,"类型: "+"活动通告" );
-            }
-            if (shopsCoupon.getStatus().equals("1")){
-                holder.setText(R.id.tv_zhuangtai, "状态: "+"草稿");
-            }else {
-                holder.setText(R.id.tv_zhuangtai, "状态: "+"发布");
-            }
-            int total = Integer.valueOf(shopsCoupon.getReadNum()) + Integer.valueOf(shopsCoupon.getUnReadNum());
-            holder.setText(R.id.tv_caozuozhuangtai, "查阅状态: "+shopsCoupon.getReadNum()+"/"+total);
+            holder.setText(R.id.tv_yaowumingcheng, "药物名称: "+shopsCoupon.getMedicineName());
+            holder.setText(R.id.tv_yingyuming, "英文名: "+shopsCoupon.getEnglishName());
+            holder.setText(R.id.tv_bieming, "别名: "+shopsCoupon.getAnotherName());
+            holder.setText(R.id.tv_yinyongyiju, "引用依据: "+shopsCoupon.getReferenceBasis());
         }
     }
     /**
@@ -217,17 +203,17 @@ public class StartUsingCouponFragment extends BaseFragment {
 //            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
 //                if (event.position!=-1){
 //                    index=event.position;
-//                    //  messageListAdapter.notifyDataSetChanged();
+//                    //  messageListAdapter.fishDrugDataSetChanged();
 //                }
 //                if (index >= 0) {
 //                    if (event.object != null) {
-//                        Notify shopsCoupon= (Notify) event.object;
+//                        fishDrug shopsCoupon= (fishDrug) event.object;
 //                        messageArrayList.set(index, shopsCoupon);
 //                    } else {
 //                        messageArrayList.remove(index);
 //                    }
 //                    index = -1;
-//                    messageListAdapter.notifyDataSetChanged();
+//                    messageListAdapter.fishDrugDataSetChanged();
 //                }
 //                break;
 //        }

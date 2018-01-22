@@ -108,8 +108,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
         super.onResume();
      //   tv_reg_days.setText(MyApplication.CURRENT_USER.getRegDays() + "");
     }
-
-
     /**
      * 指引页面Adapter
      */
@@ -194,7 +192,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
                             .setBackgroundResource(R.drawable.ic_normal_point);
                 }
             }
-
         }
 
     }

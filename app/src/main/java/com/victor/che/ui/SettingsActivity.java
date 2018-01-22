@@ -84,7 +84,8 @@ public class SettingsActivity extends BaseActivity {
      */
     @OnClick(R.id.area_check_update)
     void checkUpdate() {
-        VictorHttpUtil.doGet(mContext, Define.URL_APP_VERSION, null, true, "查询中……", new BaseHttpCallbackListener<Element>() {
+        VictorHttpUtil.doPost(mContext, Define.URL_APP_VERSION+";JSESSIONID="+MyApplication.getUser().JSESSIONID, null, true, "查询中……",
+                new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
                 if (StringUtil.isEmpty(element.body)) {
@@ -93,15 +94,15 @@ public class SettingsActivity extends BaseActivity {
                 }
                 final AppVersion version = JSON.parseObject(element.body, AppVersion.class);
                 if (version == null
-                        || version.app_version == null
-                        || version.app_version.compareTo(MyApplication.versionName) <= 0) {
+                        || version.ver+"" == null
+                        || version.ver+"".compareTo(MyApplication.versionName) <= 0) {
                     MyApplication.showToast("已经是最新版本");
                     return;
                 }
                 // 有新版本
                 AlertDialogFragment alertDialogFragment = AlertDialogFragment.newInstance(
                         "发现新版本",
-                        version.upgrade_info,
+                        version.remarks,
                         "以后再说",
                         "确定",
                         null,
@@ -132,7 +133,7 @@ public class SettingsActivity extends BaseActivity {
                             MyApplication.showToast("没有sdcard，请安装上再试");
                             return;
                         }
-                        VictorHttpUtil.downloadApk(mContext, version.app_url);
+                        VictorHttpUtil.downloadApk(mContext, version.downPath);
                     }
 
                     @Override

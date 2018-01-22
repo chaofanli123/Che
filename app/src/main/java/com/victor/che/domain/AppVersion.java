@@ -14,9 +14,10 @@ public class AppVersion implements Serializable {
     //     "app_version": "1"  #app版本,
     //            "app_url": "http://image.cheweifang.cn//update/android.apk"  #app下载url,
     //            "upgrade_info": "更新"  #app更新信息
-    public String app_version;
-    public String app_url;
-    public String upgrade_info;
-
+    public String id;
+    public String remarks;//备注信息
+    public int ver;//版本号
+    public String showVer; //版本名称
+    public String downPath; //下载地址
 
 }

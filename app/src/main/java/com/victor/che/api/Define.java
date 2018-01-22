@@ -34,6 +34,18 @@ public class Define {
    */
   public static final String URL_TONGZHIXIADALIST= API_DOMAIN + "a/oa/oaNotify/list";
 
+
+  /**
+   * 提示app更新---app最新版本信息
+   */
+  public static final String URL_APP_VERSION = API_DOMAIN + "a/setting/appDownload/appUpdate";
+
+
+
+
+
+
+
   /**
    * 政策法规
    */
@@ -75,10 +87,7 @@ public class Define {
      */
     public static final String URL_CHECK_TOKEN = API_DOMAIN + "c=auth&a=check_token&v=1";
 
-    /**
-     * 提示app更新---app最新版本信息
-     */
-    public static final String URL_APP_VERSION = API_DOMAIN + "c=app_client_version&a=info&v=1";
+
 
     /**
      * 登录获取验证码

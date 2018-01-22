@@ -23,7 +23,7 @@
             0% — 00-->
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#45c018</color>
+    <color name="colorPrimaryDark">#00317e</color>
     <color name="colorAccent">#00000000</color>
     <!-- 白色 -->
     <color name="white">#FFFFFF</color>
@@ -34,9 +34,9 @@
     <!--%40透明-->
     <color name="transparent_40">#66000000</color>
     <!-- 主题颜色 -->
-    <color name="theme_color">#45c018</color>
-    <!-- 主题颜色按下状态 -->
-    <color name="theme_color_pressed">#8045c018</color>
+    <color name="theme_color">#00317e</color>
+    <!-- 主题颜色按下状态  45c018-->
+    <color name="theme_color_pressed">#8000317e</color>
     <!-- 分割线颜色 -->
     <color name="divider">#ebebeb</color>
     <!-- 分割线颜色 -->

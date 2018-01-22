@@ -50,10 +50,7 @@ import java.util.regex.Pattern;
  * @time 2016年4月29日 上午12:08:16
  */
 public class AppUtil {
-
     public static List<String[]> mProcessList = null;
-
-
     /**
      * 判断app是否在后台运行
      *
@@ -63,7 +60,6 @@ public class AppUtil {
     public static boolean isAppOnForeground(Context context) {
         // Returns a list of application processes that are running on the
         // device
-
         ActivityManager activityManager = (ActivityManager) context.getApplicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = context.getApplicationContext().getPackageName();

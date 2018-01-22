@@ -18,6 +18,7 @@ import com.victor.che.R;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
 import com.victor.che.api.Element;
+import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
@@ -27,6 +28,7 @@ import com.victor.che.ui.fragment.IndexFragment;
 import com.victor.che.ui.fragment.IndexFragment1;
 import com.victor.che.ui.fragment.MessageFragment;
 import com.victor.che.util.AbFileUtil;
+import com.victor.che.util.AppUtil;
 import com.victor.che.util.StringUtil;
 import com.victor.che.widget.AlertDialogFragment;
 
@@ -99,13 +101,14 @@ public class TabBottomActivity extends BaseActivity {
 
         // 默认选中首页
         setTabSelection(0);
-
         // 检查更新
         checkUpdate();
     }
 
     private void checkUpdate() {
-        VictorHttpUtil.doGet(mContext, Define.URL_APP_VERSION, null, true, "查询中……", new BaseHttpCallbackListener<Element>() {
+        MyParams params = new MyParams();
+        params.put("ver", AppUtil.getVersionCode(mContext));//当前版本的版本号
+        VictorHttpUtil.doPost(mContext, Define.URL_APP_VERSION+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "查询中……", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
                 if (StringUtil.isEmpty(element.body)) {
@@ -113,14 +116,14 @@ public class TabBottomActivity extends BaseActivity {
                 }
                 final AppVersion version = JSON.parseObject(element.body, AppVersion.class);
                 if (version == null
-                        || version.app_version == null
-                        || version.app_version.compareTo(MyApplication.versionName) <= 0) {
+                        || version.ver+"" == null
+                        || version.ver+"".compareTo(MyApplication.versionName) <= 0) {
                     return;
                 }
                 // 有新版本
                 AlertDialogFragment alertDialogFragment = AlertDialogFragment.newInstance(
                         "发现新版本",
-                        version.upgrade_info,
+                        version.remarks,
                         "以后再说",
                         "确定",
                         null,
@@ -151,7 +154,7 @@ public class TabBottomActivity extends BaseActivity {
                             MyApplication.showToast("没有sdcard，请安装上再试");
                             return;
                         }
-                        VictorHttpUtil.downloadApk(mContext, version.app_url);
+                        VictorHttpUtil.downloadApk(mContext, version.downPath);
                     }
 
                     @Override

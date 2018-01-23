@@ -96,7 +96,7 @@ public class StartUsingCouponFragment extends BaseFragment {
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
-        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
         params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
         if (!StringUtil.isEmpty(keywords)) {

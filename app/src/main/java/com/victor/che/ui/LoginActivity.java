@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -34,6 +35,7 @@ import com.victor.che.util.StringUtil;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.victor.che.app.MyApplication.spUtil;
@@ -46,6 +48,8 @@ import static com.victor.che.app.MyApplication.spUtil;
  */
 public class LoginActivity extends BaseActivity {
 
+    @BindView(R.id.tv_check)
+    ImageView tvCheck;
     private Class<?> mRedirectTargetClass;// 重定向的界面
     private Bundle mBundle;// 重定向要传的参数
 
@@ -67,13 +71,14 @@ public class LoginActivity extends BaseActivity {
     private boolean mLoginByPwd = true;// 默认是密码登录
     private String deviceId;
 
-    private boolean isrember;//是否记住密码
+    private boolean isrember = true;//是否记住密码
 
 
     @Override
     public int getContentView() {
         return R.layout.activity_login;
     }
+
     @Override
     protected void initView() {
         super.initView();
@@ -87,6 +92,7 @@ public class LoginActivity extends BaseActivity {
                     public void onPermissionGranted() {
                         deviceId = AppUtil.getDeviceId(mContext);
                     }
+
                     @Override
                     public void onPermissionDenied(ArrayList<String> deniedPermissions) {
 
@@ -94,7 +100,7 @@ public class LoginActivity extends BaseActivity {
                 }).check();
 
         firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
-         if (MyApplication.isLogined()) {//已登录进入首页
+        if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) {//已登录进入首页
             MyApplication.openActivity(mContext, TabBottomActivity.class);
             finish();
             return;
@@ -111,17 +117,11 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-        //        et_username.addTextChangedListener(new SimpleTextWatcher() {
-        //            @Override
-        //            public void afterTextChanged(Editable s) {
-        //                String text = s.toString().trim();
-        //                if (StringUtil.isPhoneNumber(text)) {//输入的是手机号
-        //                    tv_switch_login_type.setVisibility(View.VISIBLE);
-        //                } else {//用户名
-        //                    tv_switch_login_type.setVisibility(View.INVISIBLE);
-        //                }
-        //            }
-        //        });
+        if (isrember) {
+            tvCheck.setImageResource(R.drawable.ic_common_checked);
+        } else {
+            tvCheck.setImageResource(R.drawable.ic_common_unchecked);
+        }
 
         chk_show_pwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -168,28 +168,54 @@ public class LoginActivity extends BaseActivity {
         }
         // 发送登录请求
         MyParams params = new MyParams();
-        params.put("mobileLogin",true);//是否客户的端登录
-        params.put("username",username);//用户名或手机号
-        params.put("rememberMe","on");//是否记住密码
+        params.put("mobileLogin", true);//是否客户的端登录
+        params.put("username", username);//用户名或手机号
+        if (isrember) {
+            params.put("rememberMe", "on");//是否记住密码
+        }
         if (mLoginByPwd) {// 密码登录
-            params.put("password",pwd);
+            params.put("password", pwd);
         } else {// 验证码登录MyApplication.showToast("登录成功");
-            params.put("smscode",captcha);
-    }
+            params.put("smscode", captcha);
+        }
         VictorHttpUtil.doPost(mContext, Define.URL_LOGIN, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
-            @Override
-            public void callbackSuccess(String url, Element element) {
-                // 登录成功
-                // 保存用户信息（手机号和默认车辆）
-                User user = JSON.parseObject(element.body, User.class);
-                MyApplication.saveUser(user);
-                spUtil.setObject("CURRENT_USER", user);
-                spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP,true);//是否第一次登录
-             MyApplication.openActivity(mContext, TabBottomActivity.class);
-                // 关闭本页
-                finish();
-            }
-        });
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        // 登录成功
+                        // 保存用户信息（手机号和默认车辆）
+                        User user = JSON.parseObject(element.body, User.class);
+                        MyApplication.saveUser(user);
+                        if (isrember) {
+                            spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);//是否第一次登录
+                        }
+                        spUtil.setObject("CURRENT_USER", user);
+                        MyApplication.openActivity(mContext, TabBottomActivity.class);
+                        // 关闭本页
+                        finish();
+                    }
+                });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    /**
+     * 是否记住密码
+     */
+    @OnClick(R.id.lin_rember)
+    public void onViewClicked() {
+        if (isrember) {
+            tvCheck.setImageResource(R.drawable.ic_common_unchecked);
+            isrember=false;
+        } else {
+            isrember=true;
+            tvCheck.setImageResource(R.drawable.ic_common_checked);
+        }
+
     }
 }

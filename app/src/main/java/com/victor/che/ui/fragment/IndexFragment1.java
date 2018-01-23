@@ -145,16 +145,12 @@ public class IndexFragment1 extends BaseFragment {
                 btnOrderstate.setText(ORDER_STATES[position]);
                 btnOrderstate.requestLayout();// 防止文字和图片覆盖
                 //类型 1会议通告 2奖惩通告 3活动通告
-                status=selectedOrderStatePos+"";
+                if (selectedOrderStatePos == 0) {
+                    status="";
+                }else {
+                    status=selectedOrderStatePos+"";
+                }
                 _doSearch();
-//                mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
-//                    @Override
-//                    public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
-//                        _reqData(pullToRefresh, curpage, pageSize);
-//                    }
-//                });
-//                // 刷新列表
-//                mPtrHelper.autoRefresh(true);
             }
         }).show(getFragmentManager(), getClass().getSimpleName());
     }
@@ -171,16 +167,13 @@ public class IndexFragment1 extends BaseFragment {
                 btn_order_type.setText(ORDER_TYPE[position]);
                 btn_order_type.requestLayout();// 防止文字和图片覆盖
                 //类型 1会议通告 2奖惩通告 3活动通告
-                type=selectedOrderTypePos+"";
+                if (selectedOrderTypePos == 0) {
+                    type="";
+                }else {
+                    type=selectedOrderTypePos+"";
+                }
+
                 _doSearch();
-//                mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
-//                    @Override
-//                    public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
-//                        _reqData(pullToRefresh, curpage, pageSize);
-//                    }
-//                });
-//                // 刷新列表
-//                mPtrHelper.autoRefresh(true);
             }
         }).show(getFragmentManager(), getClass().getSimpleName());
     }

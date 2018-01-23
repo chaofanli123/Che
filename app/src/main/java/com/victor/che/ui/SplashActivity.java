@@ -1,18 +1,15 @@
 package com.victor.che.ui;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
+import com.squareup.picasso.Picasso;
 import com.victor.che.R;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.base.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,7 +26,7 @@ import static com.victor.che.app.MyApplication.spUtil;
 public class SplashActivity extends BaseActivity {
     Handler handler = new Handler();
     @BindView(R.id.lin_splsh)
-    LinearLayout linSplsh;
+    ImageView linSplsh;
     private int seconds = 3;
     private boolean firstStartedApp;// 是否是第一次启动app
     @Override
@@ -40,36 +37,34 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        linSplsh.setBackgroundResource(R.drawable.ic_welcom);
+        Picasso.with(mContext).load(R.drawable.ic_welcom).into(linSplsh);
         setViewData();
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // 存储权限检查
-        new TedPermission(mActivity)
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
-                .setDeniedMessage("您必须有存储权限正常使用app，请到\"设置->应用->权限\"中配置权限")
-                .setDeniedCloseButtonText("取消")
-                .setGotoSettingButtonText("设置")
-                .setPermissionListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        // 已获得授权--显示启动图
-                        displaySplashImage();
-                    }
-                    @Override
-                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                        // 设置本地默认启动图
-                                          linSplsh.setBackgroundResource(R.drawable.ic_welcom);
-                        // 倒计时进入主页
-                        setViewData();
-                    }
-
-                }).check();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // 存储权限检查
+//        new TedPermission(mActivity)
+//                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
+//                .setDeniedMessage("您必须有存储权限正常使用app，请到\"设置->应用->权限\"中配置权限")
+//                .setDeniedCloseButtonText("取消")
+//                .setGotoSettingButtonText("设置")
+//                .setPermissionListener(new PermissionListener() {
+//                    @Override
+//                    public void onPermissionGranted() {
+//                        // 已获得授权--显示启动图
+//                        displaySplashImage();
+//                    }
+//                    @Override
+//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//                        // 设置本地默认启动图
+//                                          linSplsh.setBackgroundResource(R.drawable.ic_welcom);
+//                        // 倒计时进入主页
+//                        setViewData();
+//                    }
+//
+//                }).check();
+//    }
     /**
      * 获取存储权限后，展示启动图
      */

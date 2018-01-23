@@ -24,10 +24,6 @@ public class Define {
    */
   public static final String URL_SHIPING = API_DOMAIN + "a/comopinion/videoDataInformation/list";
 
-  /**
-   * app更新
-   */
-  public static final String URL_GENGXING= API_DOMAIN + "a/setting/appDownload/appUpdate";
 
   /**
    * 通知下达
@@ -39,9 +35,6 @@ public class Define {
    * 提示app更新---app最新版本信息
    */
   public static final String URL_APP_VERSION = API_DOMAIN + "a/setting/appDownload/appUpdate";
-
-
-
 
 
 
@@ -69,6 +62,15 @@ public class Define {
    * 查看禁用鱼药
    */
   public static final String URL_CHAKANJINGYONGYVYAO= API_DOMAIN + "a/gov/fishDrug/form";
+
+  /**
+   查询执法列表
+   */
+  public static final String URL_govAquLaw_list= API_DOMAIN + "a/gov/govAquLaw/list";
+
+
+
+
 
     /**
      * 获取总店服务商产品类别列表

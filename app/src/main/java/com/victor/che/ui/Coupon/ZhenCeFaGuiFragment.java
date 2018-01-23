@@ -17,13 +17,11 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.Policy;
-import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.ZhengCheFaGuiActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
-import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -201,37 +199,6 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
             messageListAdapter=null;
         if(mPtrHelper!=null)
             mPtrHelper=null;
-    }
-
-    /**
-     *禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
-     */
-   private void  showdialog(final ShopsCoupon shopsCoupon, final int coupon_id){
-       AlertDialogFragment.newInstance(
-               "提示",
-               "禁用之后不可以再发放该优惠券，是否确定？",
-               "是",
-               "否",
-               new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       MyParams params = new MyParams();
-                   //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
-                       params.put("coupon_id", coupon_id);//优惠券id
-                       params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
-                       VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
-                               new BaseHttpCallbackListener<Element>() {
-                                   @Override
-                                   public void callbackSuccess(String url, Element element) {
-                                       messageArrayList.remove(shopsCoupon);
-                                         messageListAdapter.notifyDataSetChanged();
-                                       MyApplication.showToast("禁用成功");
-                                   }
-                               });
-                   }
-               },
-               null)
-               .show(getFragmentManager(), getClass().getSimpleName());
     }
 //    @Subscribe
 //    public void onMessageEvent(MessageEvent event) {

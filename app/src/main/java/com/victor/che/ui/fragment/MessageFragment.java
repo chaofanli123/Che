@@ -1,6 +1,5 @@
 package com.victor.che.ui.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
+import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
 import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
@@ -22,10 +22,11 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Message;
+import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.ui.my.PublichaddActivity;
-import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
+import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 
 import java.util.ArrayList;
@@ -47,17 +48,16 @@ public class MessageFragment extends BaseFragment {
 
     @BindView(R.id.mPtrFrame)
     PtrFrameLayout mPtrFrame;
-
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.topbar_right)
     ImageView topbarRight;
     Unbinder unbinder;
 
-    private List<Message> mList = new ArrayList<>();
-    private MessageListAdapter mAdapter;
+    private List<Message.PageBean.ListBean> mList = new ArrayList<>();
+    private CouponAdapter mAdapter;
 
-    private PtrHelper<Message> mPtrHelper;
+    private PtrHelper<Message.PageBean.ListBean> mPtrHelper;
     @Override
     public int getContentView() {
         return R.layout.common_pull_to_refresh_recyclerview;
@@ -70,9 +70,8 @@ public class MessageFragment extends BaseFragment {
         findViewById(R.id.iv_back).setVisibility(View.GONE);
         topbarRight.setImageResource(R.drawable.sl_topbar_more);
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器
-        mAdapter = new MessageListAdapter(R.layout.item_message, mList);
+        mAdapter = new CouponAdapter(R.layout.item_message, mList);  //
         mRecyclerView.setAdapter(mAdapter);
-
         mPtrHelper = new PtrHelper<>(mPtrFrame, mAdapter, mList);
         mPtrHelper.enableLoadMore(true, mRecyclerView);//允许加载更多
 
@@ -84,9 +83,8 @@ public class MessageFragment extends BaseFragment {
         });
         mPtrHelper.autoRefresh(true);
     }
-
     /**
-     * 请求数据
+     * 请求执法数据
      *
      * @param pullToRefresh
      * @param curpage
@@ -95,24 +93,23 @@ public class MessageFragment extends BaseFragment {
     private void _reqData(final boolean pullToRefresh, final int curpage, final int pageSize) {
         // 获取订单列表
         MyParams params = new MyParams();
-//        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商编号
-//        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);// 登陆者id(商户app必传,用户自己获取时不传)
-        params.put("start", curpage);//列表记录开始位置
-        params.put("pageSize", pageSize);//一页显示行数
-        VictorHttpUtil.doGet(mContext, Define.URL_PROVIDER_NOTIFY_LIST, params, true, "加载中...",
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
+        params.put("pageNo",curpage/pageSize+1);
+        params.put("pageSize", pageSize);
+
+//        params.put("begin", pageSize);
+//        params.put("end", pageSize);
+        VictorHttpUtil.doGet(mContext, Define.URL_govAquLaw_list+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                        List<Message> temp = JSON.parseArray(element.body, Message.class);
+                        Message message = JSON.parseObject(element.body, Message.class);
+                        List<Message.PageBean.ListBean> temp = message.getPage().getList();
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
                             if (CollectionUtil.isEmpty(temp)) {
                                 // 无数据
                                 View common_no_data = View.inflate(mContext, R.layout.common_no_data, null);
-                                ImageView iv_no_data = (ImageView) common_no_data.findViewById(R.id.iv_no_data);
-                                iv_no_data.setImageResource(R.drawable.ic_empty_message);
-                                TextView tv_tip = (TextView) common_no_data.findViewById(R.id.tv_tip);
-                                tv_tip.setText("暂未收到消息！");
                                 mPtrHelper.setEmptyView(common_no_data);
                             } else {
                                 // 有数据
@@ -154,24 +151,106 @@ public class MessageFragment extends BaseFragment {
     @OnClick(R.id.topbar_right)
     public void onaddClicked() {
         //跳转到执法界面
-MyApplication.openActivity(mContext, PublichaddActivity.class);
+        MyApplication.openActivity(mContext, PublichaddActivity.class);
     }
 
     /**
-     * 消息列表适配器
+     * 订单列表适配器
      */
-    private class MessageListAdapter extends QuickAdapter<Message> {
+    private class CouponAdapter extends QuickAdapter<Message.PageBean.ListBean> {
 
-        public MessageListAdapter(int layoutResId, List<Message> data) {
+        public CouponAdapter(int layoutResId, List<Message.PageBean.ListBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, Message item) {
-            helper.setText(R.id.tv_time, item.create_time)//时间
-                    //                    .setImageResource(R.id.iv_order_type, item.getOrderCategoryIcon())//订单类型图标
-                    .setText(R.id.tv_title, item.title)//标题
-                    .setText(R.id.tv_content, item.content);//内容
+        protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
+            holder.setText(R.id.tv_title_name, "单位名称："+shopsCoupon.getLawName());
+            holder.setText(R.id.tv_lawQual_message,"质量管理制度:"+shopsCoupon.getLawQual());
+            holder.setText(R.id.tv_lawSta,"接受监管情况:"+shopsCoupon.getLawSta());
+            holder.setText(R.id.tv_coupon_message,"养殖证或苗种生产许可证:"+shopsCoupon.getLawAqu());
+            holder.setText(R.id.tv_lawSta_message,"处理情况:"+shopsCoupon.getLawTrea());
+            TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
+            tv_coupon_time.setText(shopsCoupon.getLawTime());
+            /**
+             * 删除
+             */
+            holder.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  //  showdialog(shopsCoupon,shopsCoupon.getCoupon_id());
+                }
+            });
+            /**
+             * 修改
+             */
+            holder.setOnClickListener(R.id.tv_change, new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putString("type","couponlist");
+            //    bundle.putString("position",position+"");
+                bundle.putSerializable("shopsCoupon",shopsCoupon);
+
+                }
+            });
         }
     }
+
+    /**
+     *禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
+     */
+    private void  showdialog(final ShopsCoupon shopsCoupon, final int coupon_id){
+        AlertDialogFragment.newInstance(
+                "提示",
+                "是否要删除该执法记录？",
+                "是",
+                "否",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyParams params = new MyParams();
+                        //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+                        params.put("coupon_id", coupon_id);//优惠券id
+                        params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
+                        VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
+                                new BaseHttpCallbackListener<Element>() {
+                                    @Override
+                                    public void callbackSuccess(String url, Element element) {
+                                        mList.remove(shopsCoupon);
+                                        mAdapter.notifyDataSetChanged();
+                                        MyApplication.showToast("删除成功");
+                                    }
+                                });
+                    }
+                },
+                null)
+                .show(getFragmentManager(), getClass().getSimpleName());
+    }
+
+//   @Subscribe
+//    public void onMessageEvent(MessageEvent event) {
+//        switch (event.code) {
+//            case MessageEvent.ALL_WISH_RELOAD:///*刷新全部愿望列表*/
+//            //    Map<String, String> paramMap = (Map<String, String>) event.object;
+//                mPtrHelper.autoRefresh(true);
+//                break;
+//            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
+//                if (event.position!=-1){
+//                    index=event.position;
+//                    //  messageListAdapter.notifyDataSetChanged();
+//                }
+//                if (index >= 0) {
+//                    if (event.object != null) {
+//                        Notify shopsCoupon= (Notify) event.object;
+//                        messageArrayList.set(index, shopsCoupon);
+//                    } else {
+//                        messageArrayList.remove(index);
+//                    }
+//                    index = -1;
+//                    messageListAdapter.notifyDataSetChanged();
+//                }
+//                break;
+//        }
+//    }
 }

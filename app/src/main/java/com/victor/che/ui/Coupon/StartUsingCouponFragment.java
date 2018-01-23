@@ -194,29 +194,4 @@ public class StartUsingCouponFragment extends BaseFragment {
             mPtrHelper=null;
     }
 
-//    @Subscribe
-//    public void onMessageEvent(MessageEvent event) {
-//        switch (event.code) {
-//            case MessageEvent.ALL_WISH_RELOAD:///*刷新全部愿望列表*/
-//            //    Map<String, String> paramMap = (Map<String, String>) event.object;
-//                mPtrHelper.autoRefresh(true);
-//                break;
-//            case MessageEvent.ALL_WISH_REFRESH:///*刷新局部愿望*/
-//                if (event.position!=-1){
-//                    index=event.position;
-//                    //  messageListAdapter.notifyDataSetChanged();
-//                }
-//                if (index >= 0) {
-//                    if (event.object != null) {
-//                        Notify shopsCoupon= (Notify) event.object;
-//                        messageArrayList.set(index, shopsCoupon);
-//                    } else {
-//                        messageArrayList.remove(index);
-//                    }
-//                    index = -1;
-//                    messageListAdapter.notifyDataSetChanged();
-//                }
-//                break;
-//        }
-//    }
 }

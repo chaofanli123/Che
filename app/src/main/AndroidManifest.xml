@@ -82,14 +82,27 @@
              android:resource="@xml/provider_paths"/>
      </provider>
         -->
-        <!-- 引导页界面 -->
+        <!-- 启动页 -->
+        <!--<activity-->
+            <!--android:name=".ui.SplashActivity"-->
+            <!--android:configChanges="orientation|keyboardHidden"-->
+            <!--android:launchMode="singleTask"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/LuchTheme"-->
+            <!--android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />-->
         <activity
             android:name=".ui.SplashActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:launchMode="singleTask"
+            android:theme="@style/LuchTheme"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <!-- 底部导航菜单 -->
         <activity
             android:name=".ui.TabBottomActivity"
@@ -104,18 +117,18 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
 
-                <data android:scheme="wxff87f02dac93ce58" />
-            </intent-filter>
+                <!--<data android:scheme="wxff87f02dac93ce58" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <!-- 设置界面 -->

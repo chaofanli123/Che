@@ -16,6 +16,7 @@ import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
 import com.victor.che.api.Element;
 import com.victor.che.api.VictorHttpUtil;
+import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.AppVersion;
@@ -33,6 +34,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.victor.che.app.MyApplication.spUtil;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -203,6 +206,7 @@ public class SettingsActivity extends BaseActivity {
                         // 清空用户信息
                         User user = new User();
                         MyApplication.saveUser(user);
+                        spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP,false);
                         // 关闭本页面
                         finish();
                         // 停止推送

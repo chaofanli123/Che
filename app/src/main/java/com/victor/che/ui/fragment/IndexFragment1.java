@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,8 +68,7 @@ public class IndexFragment1 extends BaseFragment {
     private int selectedOrderStatePos = 0; //状态
     //类型 1会议通告 2奖惩通告 3活动通告
     private String[] ORDER_TYPE = {"全部", "会议通告", "奖惩通告", "活动通告"};
-    //1草稿2发布
-
+    //状态 1草稿2发布
     private String[] ORDER_STATES = {"全部", "草稿", "发布"};
 
     private static final String[] CONTENT = new String[]{"通知下达", "政策法规", "禁用鱼药"};
@@ -121,16 +118,16 @@ public class IndexFragment1 extends BaseFragment {
                 _doSearch();
             }
         });
-        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    keywords = et_search.getText().toString().trim();
-                    _doSearch();
-                }
-                return false;
-            }
-        });
+//        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                    keywords = et_search.getText().toString().trim();
+//                    _doSearch();
+//                }
+//                return false;
+//            }
+//        });
     }
     /**
      * 显示状态
@@ -172,7 +169,6 @@ public class IndexFragment1 extends BaseFragment {
                 }else {
                     type=selectedOrderTypePos+"";
                 }
-
                 _doSearch();
             }
         }).show(getFragmentManager(), getClass().getSimpleName());

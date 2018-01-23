@@ -18,12 +18,17 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.Policy;
 import com.victor.che.domain.ShopsCoupon;
+import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.ZhengCheFaGuiActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
+import com.victor.che.util.StringUtil;
 import com.victor.che.widget.AlertDialogFragment;
+import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +52,10 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     private List<Policy.PageBean.ListBean> messageArrayList;
     private PtrHelper<Policy.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
+    public static String keywords = "";
+    public static int currentPos = 0;//当前位置
+    private String type = "";// 搜索类型
+    private String status = "";// 搜索状态
 
     @Override
     public int getContentView() {
@@ -56,7 +65,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     protected void initView() {
         messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_coupon_zhengchefagui, messageArrayList);
-        recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
+        recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
                 .colorResId(R.color.divider)
@@ -87,7 +96,18 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
         });
         mPtrHelper.autoRefresh(false);
     }
-
+    @Subscribe
+    public void onSearch(SearchEvent event) {
+        if (event == null) {
+            return;
+        }
+        this.keywords = event.keywords;
+        this.type=event.type;
+        this.status=event.status;
+        if (currentPos == event.currentPos) {//只处理当前页事件
+        mPtrHelper.autoRefresh(true);
+    }
+    }
     /**
      * 获取商家优惠券
      *
@@ -98,9 +118,18 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
         params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
-//        params.put("title", "");
-//        params.put("type", "");
-//        params.put("status", "");
+        if (!StringUtil.isEmpty(keywords)) {
+            params.put("title", keywords);
+
+        }
+        if (!StringUtil.isEmpty(type)) {
+            params.put("type", type);
+        }
+        if (!StringUtil.isEmpty(status)) {
+            params.put("status", status);
+        }
+        // params.put("type",keywords);
+//        params.put("status", keywords);
         VictorHttpUtil.doPost(mContext, Define.URL_ZHENGCHEFAGUI+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override

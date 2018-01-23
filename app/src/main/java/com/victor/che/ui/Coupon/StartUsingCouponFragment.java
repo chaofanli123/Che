@@ -17,13 +17,16 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.Notify;
-import com.victor.che.domain.ShopsCoupon;
+import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.TongZhiXiaDaActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.widget.AlertDialogFragment;
+import com.victor.che.util.StringUtil;
+import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +50,10 @@ public class StartUsingCouponFragment extends BaseFragment {
     private List<Notify.PageBean.ListBean> messageArrayList;
     private PtrHelper<Notify.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
+    public static String keywords = "";
+    public static int currentPos = 0;//当前位置
+    private String type = "";// 搜索类型
+    private String status = "";// 搜索状态
 
     @Override
     public int getContentView() {
@@ -56,7 +63,7 @@ public class StartUsingCouponFragment extends BaseFragment {
     protected void initView() {
         messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);
-        recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
+        recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
                 .colorResId(R.color.divider)
@@ -77,17 +84,11 @@ public class StartUsingCouponFragment extends BaseFragment {
                 if (position == -1) {
                     return;
                 }
-//                ShopsCoupon shopsCoupon = messageArrayList.get(position);
-//                Bundle bundle=new Bundle();
-//                bundle.putString("type","couponlist");
-//                bundle.putString("position",position+"");
-//                bundle.putSerializable("shopsCoupon",shopsCoupon);
                 startActivity(new Intent(mContext, TongZhiXiaDaActivity.class).putExtra("id",messageArrayList.get(position).getId()));
             }
         });
-        mPtrHelper.autoRefresh(false);
+            mPtrHelper.autoRefresh(false);
     }
-
     /**
      * 获取商家优惠券
      *
@@ -95,20 +96,25 @@ public class StartUsingCouponFragment extends BaseFragment {
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();
-       params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
+        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
         params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
-//        params.put("title", "");
-//        params.put("type", "");
-//        params.put("status", "");
+        if (!StringUtil.isEmpty(keywords)) {
+            params.put("title", keywords);
+        }
+        if (!StringUtil.isEmpty(type)) {
+            params.put("type", type);
+        }
+        if (!StringUtil.isEmpty(status)) {
+            params.put("status", status);
+        }
         VictorHttpUtil.doPost(mContext, Define.URL_TONGZHIXIADALIST+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         Notify notify = JSON.parseObject(element.body, Notify.class);
-                       List<Notify.PageBean.ListBean> shopsCouponList;
+                        List<Notify.PageBean.ListBean> shopsCouponList;
                         shopsCouponList=notify.getPage().getList();
-
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
                             if (CollectionUtil.isEmpty(shopsCouponList)) {
@@ -134,7 +140,18 @@ public class StartUsingCouponFragment extends BaseFragment {
                 });
 
     }
-
+    @Subscribe
+    public void onSearch(SearchEvent event) {
+        if (event == null) {
+            return;
+        }
+        this.keywords = event.keywords;
+        this.type=event.type;
+        this.status=event.status;
+        if (currentPos == event.currentPos) {//只处理当前页事件
+            mPtrHelper.autoRefresh(true);
+        }
+    }
     /**
      * 订单列表适配器
      */
@@ -177,36 +194,6 @@ public class StartUsingCouponFragment extends BaseFragment {
             mPtrHelper=null;
     }
 
-    /**
-     *禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
-     */
-   private void  showdialog(final ShopsCoupon shopsCoupon, final int coupon_id){
-       AlertDialogFragment.newInstance(
-               "提示",
-               "禁用之后不可以再发放该优惠券，是否确定？",
-               "是",
-               "否",
-               new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       MyParams params = new MyParams();
-                   //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
-                       params.put("coupon_id", coupon_id);//优惠券id
-                       params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
-                       VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
-                               new BaseHttpCallbackListener<Element>() {
-                                   @Override
-                                   public void callbackSuccess(String url, Element element) {
-                                       messageArrayList.remove(shopsCoupon);
-                                         messageListAdapter.notifyDataSetChanged();
-                                       MyApplication.showToast("禁用成功");
-                                   }
-                               });
-                   }
-               },
-               null)
-               .show(getFragmentManager(), getClass().getSimpleName());
-    }
 //    @Subscribe
 //    public void onMessageEvent(MessageEvent event) {
 //        switch (event.code) {

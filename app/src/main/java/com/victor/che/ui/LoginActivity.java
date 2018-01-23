@@ -3,8 +3,6 @@ package com.victor.che.ui;
 import android.Manifest;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
-import android.text.InputType;
 import android.text.Selection;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -32,7 +30,6 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.User;
 import com.victor.che.util.AppUtil;
 import com.victor.che.util.StringUtil;
-import com.victor.che.widget.CaptchaTimer;
 
 import java.util.ArrayList;
 
@@ -69,6 +66,9 @@ public class LoginActivity extends BaseActivity {
 
     private boolean mLoginByPwd = true;// 默认是密码登录
     private String deviceId;
+
+    private boolean isrember;//是否记住密码
+
 
     @Override
     public int getContentView() {
@@ -170,6 +170,7 @@ public class LoginActivity extends BaseActivity {
         MyParams params = new MyParams();
         params.put("mobileLogin",true);//是否客户的端登录
         params.put("username",username);//用户名或手机号
+        params.put("rememberMe","on");//是否记住密码
         if (mLoginByPwd) {// 密码登录
             params.put("password",pwd);
         } else {// 验证码登录MyApplication.showToast("登录成功");
@@ -184,6 +185,7 @@ public class LoginActivity extends BaseActivity {
                 User user = JSON.parseObject(element.body, User.class);
                 MyApplication.saveUser(user);
                 spUtil.setObject("CURRENT_USER", user);
+                spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP,true);//是否第一次登录
              MyApplication.openActivity(mContext, TabBottomActivity.class);
                 // 关闭本页
                 finish();

@@ -17,11 +17,16 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.fishDrug;
 import com.victor.che.domain.ShopsCoupon;
+import com.victor.che.event.SearchEvent;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
+import com.victor.che.util.StringUtil;
 import com.victor.che.widget.AlertDialogFragment;
+import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +50,10 @@ public class JingYongYvYaoFragment extends BaseFragment {
     private List<fishDrug.PageBean.ListBean> messageArrayList;
     private PtrHelper<fishDrug.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
+    public static String keywords = "";
+    private String type = "";// 搜索类型
+    private String status = "";// 搜索状态
+    public static int currentPos = 0;//当前位置
 
     @Override
     public int getContentView() {
@@ -54,7 +63,7 @@ public class JingYongYvYaoFragment extends BaseFragment {
     protected void initView() {
         messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_coupon_jingyongyvyao, messageArrayList);
-        recycler.setLayoutManager(new LinearLayoutManager(mContext));//设置布局管理器//
+        recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
                 .sizeResId(R.dimen.common_divider_dp)
                 .colorResId(R.color.divider)
@@ -95,9 +104,15 @@ public class JingYongYvYaoFragment extends BaseFragment {
        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
         params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
-//        params.put("title", "");
-//        params.put("type", "");
-//        params.put("status", "");
+        if (!StringUtil.isEmpty(keywords)) {
+            params.put("title", keywords);
+        }
+        if (!StringUtil.isEmpty(type)) {
+            params.put("type", type);
+        }
+        if (!StringUtil.isEmpty(status)) {
+            params.put("status", status);
+        }
         VictorHttpUtil.doPost(mContext, Define.URL_JINGYONGYVYAO+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
@@ -149,6 +164,19 @@ public class JingYongYvYaoFragment extends BaseFragment {
             holder.setText(R.id.tv_yingyuming, "英文名: "+shopsCoupon.getEnglishName());
             holder.setText(R.id.tv_bieming, "别名: "+shopsCoupon.getAnotherName());
             holder.setText(R.id.tv_yinyongyiju, "引用依据: "+shopsCoupon.getReferenceBasis());
+        }
+    }
+
+    @Subscribe
+    public void onSearch(SearchEvent event) {
+        if (event == null) {
+            return;
+        }
+        this.keywords = event.keywords;
+        this.type=event.type;
+        this.status=event.status;
+        if (currentPos == event.currentPos) {//只处理当前页事件
+            mPtrHelper.autoRefresh(true);
         }
     }
     /**

@@ -98,7 +98,6 @@ public class TabBottomActivity extends BaseActivity {
                 }
             }
         });
-
         // 默认选中首页
         setTabSelection(0);
         // 检查更新

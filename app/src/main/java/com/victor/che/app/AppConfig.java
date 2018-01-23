@@ -12,7 +12,7 @@ import java.io.File;
 @SuppressLint("NewApi")
 public class AppConfig {
 
-    public final static String CONF_AUTO_LOGIN = "auto_login";//是否加载图片
+    public final static String CONF_AUTO_LOGIN = "auto_login";//是否自动登录
     public static boolean debug = false;
     public final static String APP_FIRST_LAUNCHER = "first_launcher_v3";//是否第一次运行
     public final static File ROOT_FILE = new File(Environment.getExternalStorageDirectory(), "/Che");/*文件存储根目录*/

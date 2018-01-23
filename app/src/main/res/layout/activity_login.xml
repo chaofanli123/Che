@@ -144,6 +144,12 @@
             android:layout_marginLeft="@dimen/common_padding2"
             android:layout_marginRight="@dimen/common_padding2"
             android:background="@drawable/xt"/>
+        <ImageView
+            android:id="@+id/img_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_check_normal"
+            />
         <TextView
             android:id="@id/btn_operate"
             android:layout_width="match_parent"

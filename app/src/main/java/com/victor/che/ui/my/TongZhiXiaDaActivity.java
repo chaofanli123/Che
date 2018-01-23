@@ -65,7 +65,6 @@ public class TongZhiXiaDaActivity extends BaseActivity {
      */
     private void loadData() {
         MyParams params = new MyParams();
-        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
         params.put("id",getIntent().getStringExtra("id"));
 //        params.put("title", "");
 //        params.put("type", "");

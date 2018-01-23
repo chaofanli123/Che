@@ -65,7 +65,10 @@ public class Define {
    * 禁用鱼药
    */
   public static final String URL_JINGYONGYVYAO= API_DOMAIN + "a/gov/fishDrug/list";
-
+  /**
+   * 查看禁用鱼药
+   */
+  public static final String URL_CHAKANJINGYONGYVYAO= API_DOMAIN + "a/gov/fishDrug/form";
 
     /**
      * 获取总店服务商产品类别列表

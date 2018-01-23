@@ -76,7 +76,6 @@ public class WoDeSheBeiListActivity extends BaseActivity {
             @Override
             public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
                 loadData(pullToRefresh, curpage, pageSize);
-                mList.clear();//清空数据
             }
         });
         mPtrHelper.autoRefresh(true);
@@ -135,12 +134,22 @@ public class WoDeSheBeiListActivity extends BaseActivity {
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, ShiPing.VideoListBean item) {
+        protected void convert(final BaseViewHolder helper, final ShiPing.VideoListBean item) {
             helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());//时间
             try {
-                String s = MyApplication.getOpenSDK().captureCamera(item.getDeviceSerial(), Integer.valueOf(item.getChannelNo()));
-                ImageView img = helper.getView(R.id.iv_video);
-                PicassoUtils.loadImage(mContext, s, (ImageView) helper.getView(R.id.iv_video));
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String s = MyApplication.getOpenSDK().captureCamera(item.getDeviceSerial(), Integer.valueOf(item.getChannelNo()));
+                            ImageView img = helper.getView(R.id.iv_video);
+                            PicassoUtils.loadImage(mContext, s, (ImageView) helper.getView(R.id.iv_video));
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+
                 helper.getView(R.id.ll_shiping).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -2,6 +2,9 @@ package com.victor.che.ui.my;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +39,7 @@ public class ZhengCheFaGuiActivity extends BaseActivity {
     @BindView(R.id.tv_time)
     TextView tvTime;
     @BindView(R.id.tv_content)
-    TextView tvContent;
+    WebView tvContent;
     @BindView(R.id.tv_beizhuxingxi)
     TextView tvBeizhuxingxi;
 
@@ -63,7 +66,6 @@ public class ZhengCheFaGuiActivity extends BaseActivity {
      */
     private void loadData() {
         MyParams params = new MyParams();
-        params.put("JSESSIONID", MyApplication.CURRENT_USER.JSESSIONID);//
         params.put("id", getIntent().getStringExtra("id"));
 //        params.put("title", "");
 //        params.put("type", "");
@@ -84,13 +86,47 @@ public class ZhengCheFaGuiActivity extends BaseActivity {
                             tvLeixing.setText("政策解读");
                         }
                         tvBiaoti.setText(shopsCoupon.getTitle());
-                        tvContent.setText(Html.fromHtml(shopsCoupon.getContent()));
+                        System.out.println(String.valueOf(Html.fromHtml(shopsCoupon.getContent()))+"**************");
+                        WebSettings webSettings = tvContent.getSettings();
+                        webSettings.setTextZoom(120);
+                        //控制webView不要出现横向滚动条
+                        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+                        //此方法不支持4.4以后
+                        webSettings.setUseWideViewPort(true);
+                        webSettings.setJavaScriptEnabled(true);
+                        tvContent.setWebViewClient(new MyWebViewClient());
+
+                        tvContent.loadData(String.valueOf(Html.fromHtml(shopsCoupon.getContent())), "text/html; charset=UTF-8", null);
                         tvTime.setText(shopsCoupon.getCreateDate());
                     }
                 });
 
     }
+    //设置webview代理加载图片
+    private class MyWebViewClient extends WebViewClient {
 
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            imgReset();
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
+    private void imgReset() {
+        tvContent.loadUrl("javascript:(function(){" +
+                "var objs = document.getElementsByTagName('img'); " +
+                "for(var i=0;i<objs.length;i++)  " +
+                "{"
+                + "var img = objs[i];   " +
+                " img.style.maxWidth = '100%';img.style.height='auto';" +
+                "}" +
+                "})()");
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

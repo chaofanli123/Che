@@ -7,14 +7,14 @@
     android:background="@color/white"
     android:orientation="vertical">
     <include layout="@layout/common_topbar"/>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
@@ -24,94 +24,16 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginLeft="12dp"
-        android:layout_gravity="center_vertical"
-        android:text="类型:"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content" />
-        <TextView
-            android:layout_marginRight="12dp"
-            android:id="@+id/tv_leixing"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <TextView
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="标题:"
+            android:text="药物名称:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_biaoti"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="内容:"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="类型"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginLeft="12dp"
-            android:layout_gravity="center_vertical"
-            android:text="时间:"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_yaowumingcheng"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
@@ -132,13 +54,13 @@
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="接  受  人:"
+            android:text="英文名:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_jiesouren"
-            android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
+            android:id="@+id/tv_yinwenming"
+            android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
             android:text="类型"
             android:layout_width="wrap_content"
@@ -158,11 +80,11 @@
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="阅读状态:"
+            android:text="别名:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_yueduzhuangtai"
+            android:id="@+id/tv_bieming"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
@@ -170,11 +92,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/common_bg"/>
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -184,11 +106,11 @@
             android:paddingBottom="15dp"
             android:layout_marginLeft="12dp"
             android:layout_gravity="center_vertical"
-            android:text="阅读时间:"
+            android:text="引用依据:"
             android:layout_width="60dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_yuedushijian"
+            android:id="@+id/tv_yinyongyiju"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
@@ -196,15 +118,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/common_bg"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/common_bg"/>
     </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </LinearLayout>

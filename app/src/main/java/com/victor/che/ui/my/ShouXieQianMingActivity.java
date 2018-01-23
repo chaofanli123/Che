@@ -29,7 +29,6 @@ import java.io.OutputStreamWriter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ShouXieQianMingActivity extends AppCompatActivity {
 
@@ -55,7 +54,6 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-                Toast.makeText(ShouXieQianMingActivity.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -83,19 +81,15 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
                 if (addJpgSignatureToGallery(signatureBitmap)) {
-                    Toast.makeText(ShouXieQianMingActivity.this, "Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ShouXieQianMingActivity.this, "Unable to store the signature", Toast.LENGTH_SHORT).show();
                 }
                 if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Toast.makeText(ShouXieQianMingActivity.this, "SVG Signature saved into the Gallery", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent();
 
                     intent.putExtra("imgpath",svaeFile.getPath());
                     setResult(666,intent);
                     finish();
                 } else {
-                    Toast.makeText(ShouXieQianMingActivity.this, "Unable to store the SVG signature", Toast.LENGTH_SHORT).show();
                 }
             }
         });

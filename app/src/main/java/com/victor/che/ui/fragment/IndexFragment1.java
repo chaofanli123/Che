@@ -8,11 +8,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -34,7 +37,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * 首页
@@ -53,6 +58,9 @@ public class IndexFragment1 extends BaseFragment {
     Button btn_order_type;
     @BindView(R.id.btn_order_state)
     IconButton btnOrderstate;
+    @BindView(R.id.lin_search)
+    LinearLayout linSearch;
+    Unbinder unbinder;
 
     private List<Fragment> fragments = new ArrayList<>();
     private FragmentPagerAdapter adapter;
@@ -80,6 +88,7 @@ public class IndexFragment1 extends BaseFragment {
     public int getContentView() {
         return R.layout.fragment_shouye;
     }
+
     @Override
     protected void initView() {
         super.initView();
@@ -108,11 +117,14 @@ public class IndexFragment1 extends BaseFragment {
                         break;
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
 
             }
         });
+        linSearch.setFocusable(true);
+  linSearch.setFocusableInTouchMode(true);
         et_search.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -131,6 +143,7 @@ public class IndexFragment1 extends BaseFragment {
             }
         });
     }
+
     /**
      * 显示状态
      */
@@ -145,14 +158,15 @@ public class IndexFragment1 extends BaseFragment {
                 btnOrderstate.requestLayout();// 防止文字和图片覆盖
                 //类型 1会议通告 2奖惩通告 3活动通告
                 if (selectedOrderStatePos == 0) {
-                    status="";
-                }else {
-                    status=selectedOrderStatePos+"";
+                    status = "";
+                } else {
+                    status = selectedOrderStatePos + "";
                 }
                 _doSearch();
             }
         }).show(getFragmentManager(), getClass().getSimpleName());
     }
+
     /**
      * 显示类型
      */
@@ -167,20 +181,36 @@ public class IndexFragment1 extends BaseFragment {
                 btn_order_type.requestLayout();// 防止文字和图片覆盖
                 //类型 1会议通告 2奖惩通告 3活动通告
                 if (selectedOrderTypePos == 0) {
-                    type="";
-                }else {
-                    type=selectedOrderTypePos+"";
+                    type = "";
+                } else {
+                    type = selectedOrderTypePos + "";
                 }
                 _doSearch();
             }
         }).show(getFragmentManager(), getClass().getSimpleName());
     }
+
     /**
      * 开始搜索
      */
     private void _doSearch() {
-        EventBus.getDefault().post(new SearchEvent(keywords,type,status, currentPos));
+        EventBus.getDefault().post(new SearchEvent(keywords, type, status, currentPos));
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
     class GoogleMusicAdapter extends FragmentPagerAdapter {
         public GoogleMusicAdapter(FragmentManager fm) {
             super(fm);
@@ -237,6 +267,7 @@ public class IndexFragment1 extends BaseFragment {
         public OrderTypeListAdapter(Context context, int layoutResId, String[] array) {
             super(context, layoutResId, array);
         }
+
         @Override
         public void bindView(int position, View view, String entity) {
             TextView textView = (TextView) view;

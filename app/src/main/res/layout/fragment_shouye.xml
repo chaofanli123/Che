@@ -12,6 +12,7 @@
         android:orientation="vertical"
         >
         <LinearLayout
+            android:id="@+id/lin_search"
             android:layout_width="match_parent"
             android:layout_height="@dimen/common_topbar_height"
             android:background="@color/theme_color"

@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,6 +91,7 @@ public class IndexFragment1 extends BaseFragment {
         adapter = new GoogleMusicAdapter(getFragmentManager());
         mViewPager.setAdapter(adapter);
         pagerTab.setViewPager(mViewPager);
+
         pagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -110,7 +113,6 @@ public class IndexFragment1 extends BaseFragment {
 
             }
         });
-        // 不停的请求搜索接口
         et_search.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -118,16 +120,16 @@ public class IndexFragment1 extends BaseFragment {
                 _doSearch();
             }
         });
-//        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    keywords = et_search.getText().toString().trim();
-//                    _doSearch();
-//                }
-//                return false;
-//            }
-//        });
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    keywords = et_search.getText().toString().trim();
+                    _doSearch();
+                }
+                return false;
+            }
+        });
     }
     /**
      * 显示状态

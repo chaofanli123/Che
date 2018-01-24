@@ -2,6 +2,7 @@ package com.victor.che.ui.my;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,9 +23,7 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.ShiPing;
 import com.victor.che.util.CollectionUtil;
-import com.victor.che.util.PicassoUtils;
 import com.victor.che.util.PtrHelper;
-import com.videogo.openapi.bean.EZDeviceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +59,7 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setTitle("监控记录");
         init();
     }
@@ -90,11 +90,6 @@ public class WoDeSheBeiListActivity extends BaseActivity {
                     public void callbackSuccess(String url, Element element) {
                         ShiPing shiPing = JSON.parseObject(element.body, ShiPing.class);
                         MyApplication.getOpenSDK().setAccessToken(shiPing.getAccessToken());
-                        try {
-                            List<EZDeviceInfo> deviceList = MyApplication.getOpenSDK().getDeviceList(0, 20);
-                        }catch (Exception e){
-                            
-                        }
                         ac = shiPing.getAccessToken();
                         List<ShiPing.VideoListBean> videoList = shiPing.getVideoList();
                         if (pullToRefresh) {////刷新
@@ -136,35 +131,16 @@ public class WoDeSheBeiListActivity extends BaseActivity {
         @Override
         protected void convert(final BaseViewHolder helper, final ShiPing.VideoListBean item) {
             helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());//时间
-            try {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            String s = MyApplication.getOpenSDK().captureCamera(item.getDeviceSerial(), Integer.valueOf(item.getChannelNo()));
-                            ImageView img = helper.getView(R.id.iv_video);
-                            PicassoUtils.loadImage(mContext, s, (ImageView) helper.getView(R.id.iv_video));
-                        } catch (Exception e) {
-
-                        }
-                    }
-                });
-
                 helper.getView(R.id.ll_shiping).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(mContext, Playctivity.class);
                         intent.putExtra(APPKEY, "566fb0a1d274443f8d32d74212c570e7");
                         intent.putExtra(AccessToekn, ac);
-                        intent.putExtra(PLAY_URL, "ezopen://open.ys7.com/835510343/2.hd.live");
+                        intent.putExtra(PLAY_URL, item.getEzopen());
                         startActivity(intent);
                     }
                 });
-            } catch (Exception e) {
-
-            }
-
-//            ImageLoaderUtil.display(mContext, helper.imageView, entity.image, R.drawable.ic_car_pre, R.drawable.ic_car_pre);//品牌logo
         }
     }
 }

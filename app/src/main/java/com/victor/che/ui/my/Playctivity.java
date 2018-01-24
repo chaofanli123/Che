@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.OrientationEventListener;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -23,7 +24,6 @@ import com.ezvizuikit.open.EZUIError;
 import com.ezvizuikit.open.EZUIKit;
 import com.ezvizuikit.open.EZUIPlayer;
 import com.victor.che.R;
-import com.victor.che.base.BaseActivity;
 
 import java.util.Calendar;
 
@@ -31,28 +31,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Playctivity extends AppCompatActivity implements View.OnClickListener, WindowSizeChangeNotifier.OnWindowSizeChangedListener, EZUIPlayer.EZUIPlayerCallBack  {
+public class Playctivity extends AppCompatActivity implements View.OnClickListener, WindowSizeChangeNotifier.OnWindowSizeChangedListener, EZUIPlayer.EZUIPlayerCallBack {
 
     @BindView(R.id.player_ui)
     EZUIPlayer playerUi;
     @BindView(R.id.player_layout)
     RelativeLayout playerLayout;
     @BindView(R.id.btn_play)
-    Button btnPlay;
+    ImageView btnPlay;
     @BindView(R.id.activity_play)
-    RelativeLayout activityPlay;
+    LinearLayout activityPlay;
+    @BindView(R.id.screen_status_img)
+    ImageView screenStatusImg;
+    @BindView(R.id.screen_status_btn)
+    RelativeLayout screenStatusBtn;
 
+    private boolean kj = true;
 
     /**
-     *  开发者申请的Appkey
+     * 开发者申请的Appkey
      */
     private String appkey;
     /**
-     *  授权accesstoken
+     * 授权accesstoken
      */
     private String accesstoken;
     /**
-     *  播放url：ezopen协议
+     * 播放url：ezopen协议
      */
     private String playUrl;
     /**
@@ -81,8 +86,8 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         playUrl = intent.getStringExtra(PLAY_URL);
         if (TextUtils.isEmpty(appkey)
                 || TextUtils.isEmpty(accesstoken)
-                || TextUtils.isEmpty(playUrl)){
-            Toast.makeText(this,"appkey,accesstoken or playUrl is null",Toast.LENGTH_LONG).show();
+                || TextUtils.isEmpty(playUrl)) {
+            Toast.makeText(this, "appkey,accesstoken or playUrl is null", Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -90,15 +95,27 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         new WindowSizeChangeNotifier(this, this);
         //设置加载需要显示的view
         playerUi.setLoadingView(initProgressBar());
-
-        btnPlay.setText(R.string.string_stop_play);
+        playerUi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (kj) {
+                    screenStatusBtn.setVisibility(View.GONE);
+                    kj=false;
+                } else {
+                    screenStatusBtn.setVisibility(View.VISIBLE);
+                    kj=true;
+                }
+            }
+        });
         btnPlay.setOnClickListener(this);
         preparePlay();
         setSurfaceSize();
+
     }
 
     /**
      * 创建加载view
+     *
      * @return
      */
     private ProgressBar initProgressBar() {
@@ -114,7 +131,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
     /**
      * 准备播放资源参数
      */
-    private void preparePlay(){
+    private void preparePlay() {
         //设置debug模式，输出log信息
         EZUIKit.setDebug(true);
         //appkey初始化
@@ -125,6 +142,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         playerUi.setCallBack(this);
         playerUi.setUrl(playUrl);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -132,7 +150,6 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         //界面stop时，如果在播放，那isResumePlay标志位置为true，resume时恢复播放
         if (isResumePlay) {
             isResumePlay = false;
-            btnPlay.setText(R.string.string_stop_play);
             playerUi.startPlay();
         }
     }
@@ -165,18 +182,17 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onPlaySuccess() {
         // TODO: 2017/2/7 播放成功处理
-        btnPlay.setText(R.string.string_pause_play);
     }
 
     @Override
     public void onPlayFail(EZUIError error) {
         // TODO: 2017/2/21 播放失败处理
-        if (error.getErrorString().equals(EZUIError.UE_ERROR_INNER_VERIFYCODE_ERROR)){
+        if (error.getErrorString().equals(EZUIError.UE_ERROR_INNER_VERIFYCODE_ERROR)) {
 
-        }else if(error.getErrorString().equalsIgnoreCase(EZUIError.UE_ERROR_NOT_FOUND_RECORD_FILES)){
+        } else if (error.getErrorString().equalsIgnoreCase(EZUIError.UE_ERROR_NOT_FOUND_RECORD_FILES)) {
             // TODO: 2017/5/12
             //未发现录像文件
-            Toast.makeText(this,getString(R.string.string_not_found_recordfile),Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.string_not_found_recordfile), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -203,15 +219,15 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (view == btnPlay){
+        if (view == btnPlay) {
             // TODO: 2017/2/14
             if (playerUi.getStatus() == EZUIPlayer.STATUS_PLAY) {
                 //播放状态，点击停止播放
-                btnPlay.setText(R.string.string_start_play);
+                btnPlay.setImageResource(R.mipmap.icon_video_play);
                 playerUi.stopPlay();
             } else if (playerUi.getStatus() == EZUIPlayer.STATUS_STOP) {
                 //停止状态，点击播放
-                btnPlay.setText(R.string.string_stop_play);
+                btnPlay.setImageResource(R.mipmap.icon_video_pause);
                 playerUi.startPlay();
             }
         }
@@ -227,7 +243,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         setSurfaceSize();
     }
 
-    private void setSurfaceSize(){
+    private void setSurfaceSize() {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         boolean isWideScrren = mOrientationDetector.isWideScrren();
@@ -237,7 +253,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
             playerUi.setSurfaceSize(dm.widthPixels, 0);
         } else {
             //横屏屏调整播放区域大小，宽、高均全屏，播放区域根据视频分辨率自适应
-            playerUi.setSurfaceSize(dm.widthPixels,dm.heightPixels);
+            playerUi.setSurfaceSize(dm.widthPixels, dm.heightPixels);
         }
     }
 
@@ -245,6 +261,24 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
     public void onWindowSizeChanged(int w, int h, int oldW, int oldH) {
         if (playerUi != null) {
             setSurfaceSize();
+        }
+    }
+
+    @OnClick(R.id.screen_status_img)
+    public void onClick() {
+        int i = getResources().getConfiguration().orientation;
+        if (i == Configuration.ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            screenStatusImg.setImageResource(R.mipmap.iconfont_exit);
+            ViewGroup.LayoutParams paramss = playerLayout.getLayoutParams();
+            paramss.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            playerLayout.setLayoutParams(paramss);
+        } else if (i == Configuration.ORIENTATION_LANDSCAPE) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            screenStatusImg.setImageResource(R.mipmap.iconfont_enter_32);
+            ViewGroup.LayoutParams params = playerLayout.getLayoutParams();
+            params.height = 600;
+            playerLayout.setLayoutParams(params);
         }
     }
 
@@ -264,6 +298,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
             display.getSize(pt);
             return pt.x > pt.y;
         }
+
         @Override
         public void onOrientationChanged(int orientation) {
             int value = getCurentOrientationEx(orientation);

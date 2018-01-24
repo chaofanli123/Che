@@ -38,7 +38,6 @@ public class Define {
 
 
 
-
   /**
    * 查看通知
    */
@@ -67,6 +66,12 @@ public class Define {
    查询执法列表
    */
   public static final String URL_govAquLaw_list= API_DOMAIN + "a/gov/govAquLaw/list";
+  /**
+   添加执法
+   */
+  public static final String URL_govAquLaw_save= API_DOMAIN + "gov/govAquLaw/save";
+
+
 
 
 

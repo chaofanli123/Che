@@ -45,7 +45,6 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * Time 2016/12/27 0027 9:45
  */
 public class MessageFragment extends BaseFragment {
-
     @BindView(R.id.mPtrFrame)
     PtrFrameLayout mPtrFrame;
     @BindView(R.id.mRecyclerView)
@@ -53,7 +52,6 @@ public class MessageFragment extends BaseFragment {
     @BindView(R.id.topbar_right)
     ImageView topbarRight;
     Unbinder unbinder;
-
     private List<Message.PageBean.ListBean> mList = new ArrayList<>();
     private CouponAdapter mAdapter;
 
@@ -85,7 +83,6 @@ public class MessageFragment extends BaseFragment {
     }
     /**
      * 请求执法数据
-     *
      * @param pullToRefresh
      * @param curpage
      * @param pageSize

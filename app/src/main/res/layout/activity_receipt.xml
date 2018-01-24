@@ -159,12 +159,10 @@
                 android:id="@+id/ll_use_name"
                 style="@style/style_receipt_liner"
                 >
-
                 <TextView
                     style="@style/style_receipt_text"
                     android:text="姓名"
                     />
-
                 <TextView
                     android:id="@+id/tv_user_name"
                     android:layout_width="0dp"
@@ -212,7 +210,6 @@
                     style="@style/style_receipt_text"
                     android:text="类别"
                     />
-
                 <TextView
                     android:id="@+id/tv_category"
                     android:layout_width="0dp"

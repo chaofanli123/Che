@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/common_bg"
   >
-    <include layout="@layout/top_bar_commom"/>
+    <include layout="@layout/top_bar_commom_text"/>
     <ScrollView
         android:scrollbars="none"
         android:layout_width="match_parent"
@@ -18,77 +18,83 @@
             android:orientation="vertical"
             android:background="@color/theme_color"
             >
-
             <LinearLayout
-                android:id="@+id/ll_ording_list"
-                style="@style/style_receipt_liner"
-                >
-
-                <TextView
-                    style="@style/style_receipt_text"
-                    android:text="执法清单"
-                    />
-                <TextView
-                    android:id="@+id/tv_qingdan_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:textColor="@color/black_text"
-                    android:textSize="@dimen/font_size_28px"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/common_padding2"
-                    android:src="@drawable/ic_arrow_right"/>
-
-            </LinearLayout>
-            <LinearLayout
+                android:id="@+id/ll_use_name"
                 style="@style/style_receipt_liner"
                 >
                 <TextView
                     style="@style/style_receipt_text"
-                    android:text="执法信息"
+                    android:text="单位名称"
                     />
-
                 <com.victor.che.widget.ClearEditText
-                    android:id="@+id/et_search"
+                    android:id="@+id/et_unitname"
                     style="@style/common_edittext"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/white"
                     android:cursorVisible="true"
-                    android:hint="请输入执法信息"
-                    android:gravity="center_vertical"
+                    android:hint="请输入单位名称"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="16dp"
                     android:imeOptions="actionSearch"
-                    android:inputType="phone"
                     android:maxLength="11"
                     android:singleLine="true"
                     android:textColor="@color/black_text"
                     android:textColorHint="@color/gray_text"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="@dimen/font_size_28px"/>
-
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_use_name"
+
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="检查时间"
+                    />
+                <TextView
+                    android:id="@+id/tv_firsttime"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择检查时间"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/area_category"
                 style="@style/style_receipt_liner"
                 >
 
                 <TextView
                     style="@style/style_receipt_text"
-                    android:text="姓名"
+                    android:text="养殖水域属性"
                     />
 
                 <TextView
-                    android:id="@+id/tv_user_name"
+                    android:id="@+id/tv_lawWaters"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:hint="请选择水域属性"
                     android:maxLines="1"
+                    android:gravity="center_vertical|right"
                     android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
                     android:textSize="@dimen/font_size_28px"/>
 
                 <ImageView
@@ -96,9 +102,407 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/common_padding2"
                     android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
 
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="养殖证或苗种生产许可证"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lawAqu"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择养殖证或苗种生产许可证"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="用药记录"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lawMed"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择用药记录"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="生产纪录"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawPro"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择生产纪录"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="销售纪录"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lawSal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择销售纪录"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="苗种来源"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawDeli"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择苗种来源"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="用药和饲料情况"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lawMedi"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择用药和饲料情况"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="质量管理制度"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lawQual"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择质量管理制度"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="是否参加过渔业部门组织的法律法规培训"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawTech"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择是否参加培训"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_lawDate"
+                style="@style/style_receipt_liner"
+                android:visibility="gone"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="培训时间"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawDate"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择培训时间"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/text_color_hint"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
             </LinearLayout>
 
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="接受监管情况"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawSta"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择接受监管情况"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="对以往检查发现问题的整改情况"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawOld"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择对以往检查发现问题的整改情况"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="处理情况"
+                    />
+                <TextView
+                    android:id="@+id/tv_lawTrea"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="请选择处理情况"
+                    android:maxLines="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textSize="@dimen/font_size_28px"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lin_lawTrea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+            <LinearLayout
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="责令整改项目"
+                    />
+                <com.victor.che.widget.ClearEditText
+                    android:id="@+id/et_lawProb"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:cursorVisible="true"
+                    android:hint="请输入责令整改项目"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center_vertical|right"
+                    android:imeOptions="actionSearch"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/black_text"
+                    android:textColorHint="@color/gray_text"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="@dimen/font_size_28px"/>
+            </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/label_height"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_40px"
+                    android:text="整改建议"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+                <RelativeLayout
+                    android:id="@+id/rl_input_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <EditText
+                        android:id="@+id/et_remarks"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sl_feedback_edittext"
+                        android:gravity="left|top"
+                        android:hint="请输入你的整改建议"
+                        android:maxLength="200"
+                        android:maxLines="10"
+                        android:minHeight="200dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/black_text"
+                        android:textColorHint="@color/light_gray_text"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/label_height"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/padding_40px"
+                    android:text="其他处罚或处置"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+                <RelativeLayout
+                    android:id="@+id/rl_lawOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <EditText
+                        android:id="@+id/et_lawOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sl_feedback_edittext"
+                        android:gravity="left|top"
+                        android:hint="请输入其他处罚或处置"
+                        android:maxLength="200"
+                        android:maxLines="10"
+                        android:minHeight="200dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:paddingTop="10dp"
+                        android:textColor="@color/black_text"
+                        android:textColorHint="@color/light_gray_text"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
                 android:background="@color/white"
                 android:padding="16dp"
@@ -122,7 +526,6 @@
                     android:verticalSpacing="5dp">
                 </com.victor.che.widget.NoScrollGridView>
             </LinearLayout>
-
             <RelativeLayout
                 android:background="@color/white"
                 android:id="@+id/ll_add_yuyin"
@@ -195,12 +598,9 @@
                             android:layout_marginRight="6dp"
                             android:visibility="gone"
                             />
-
                     </RelativeLayout>
                 </RelativeLayout>
-
             </RelativeLayout>
-
             <LinearLayout
                 android:id="@+id/ll_qianming"
                 android:background="@color/white"
@@ -215,15 +615,6 @@
                     android:textColor="@color/dark_gray_text"
                     android:layout_marginBottom="10dp"
                     android:textSize="@dimen/font_size_28px"/>
-                <!--<com.tianjistar.tjnla.utils.widget.NoScrollGridView-->
-                    <!--android:id="@+id/noScrollgridview"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:horizontalSpacing="5dp"-->
-                    <!--android:numColumns="4"-->
-                    <!--android:scrollbars="none"-->
-                    <!--android:verticalSpacing="5dp">-->
-                <!--</com.tianjistar.tjnla.utils.widget.NoScrollGridView>-->
                 <RelativeLayout
                     android:layout_marginBottom="20dp"
                     android:layout_width="match_parent"
@@ -237,7 +628,6 @@
                         android:layout_height="wrap_content" />
                 </RelativeLayout>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

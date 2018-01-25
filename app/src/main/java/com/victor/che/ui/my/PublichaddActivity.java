@@ -2,20 +2,16 @@ package com.victor.che.ui.my;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +45,6 @@ import com.victor.che.util.MaterialDialogUtils;
 import com.victor.che.util.PicassoUtils;
 import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.ClearEditText;
-import com.victor.che.widget.NoScrollGridView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -77,8 +72,8 @@ public class PublichaddActivity extends TakePhotoActivity {
     RelativeLayout llAddYuyin;
     @BindView(R.id.activity_follow_user)
     LinearLayout activityFollowUser;
-    @BindView(R.id.noScrollgridview)
-    NoScrollGridView noScrollgridview;
+//    @BindView(R.id.noScrollgridview)
+//    NoScrollGridView noScrollgridview;
     @BindView(R.id.iv_qianming)
     ImageView ivQianming;
     @BindView(R.id.tv_tianjiayvying)
@@ -169,7 +164,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private View parentView;
 
     private MediaPlayUtil mMediaPlayUtil;
-    private String mVoiceData;
+    private String mVoiceData; //语音string
     private AnimationDrawable mImageAnim;
     private LawWatersListAdapter lawWatersListAdapter;
     private String[] lawWaters = {"全民所有", "集体所有"};
@@ -220,6 +215,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private String[] lawTrea = {"合格,没有发现违规行为", "不合格项或者需要整改的地方"};
     private int selectedlawTreaPos = 0;
     private String lawprob, remarks,lawOther;
+    private File qianmingFile,recordFile;
 
     @Override
     public int getContentView() {
@@ -236,23 +232,23 @@ public class PublichaddActivity extends TakePhotoActivity {
         /**
          * 上传图片初始化
          */
-        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        adapter = new GridAdapter(this, imagePathList);
-        noScrollgridview.setAdapter(adapter);
-        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                if (arg2 == imagePathList.size() && imagePathList.size() < 6) {
-                    ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.activity_translate_in));
-                    pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
-                } else {
-                    Intent intent = new Intent(mContext, GalleryFileActivity.class);
-                    intent.putExtra("isDelete", true);
-                    intent.putExtra("point", arg2);
-                    intent.putStringArrayListExtra("imageUrlList", imagePathList);
-                    startActivityForResult(intent, 3);
-                }
-            }
-        });
+//        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+//        adapter = new GridAdapter(this, imagePathList);
+//        noScrollgridview.setAdapter(adapter);
+//        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+//                if (arg2 == imagePathList.size() && imagePathList.size() < 6) {
+//                    ll_popup.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.activity_translate_in));
+//                    pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+//                } else {
+//                    Intent intent = new Intent(mContext, GalleryFileActivity.class);
+//                    intent.putExtra("isDelete", true);
+//                    intent.putExtra("point", arg2);
+//                    intent.putStringArrayListExtra("imageUrlList", imagePathList);
+//                    startActivityForResult(intent, 3);
+//                }
+//            }
+//        });
         mMediaPlayUtil = MediaPlayUtil.getInstance();
         /**
          * 初始化适配器
@@ -366,18 +362,21 @@ public class PublichaddActivity extends TakePhotoActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (resultCode) {
-            case 666:
+            case 666:  //签名文件
                 String imgpath = data.getStringExtra("imgpath");
-                File file = new File(imgpath);
-                PicassoUtils.loadFileImage(mContext, file, ivQianming);
+                qianmingFile = new File(imgpath);
+                PicassoUtils.loadFileImage(mContext, qianmingFile, ivQianming);
                 break;
-
             case 66:
                 mVoiceData = data.getStringExtra("LYpath");
                 String time = data.getStringExtra("time");
+                String mSoundData = data.getStringExtra("mSoundData");
                 if (mVoiceData != null && mVoiceData.length() > 0) {
                     mRlVoiceLayout.setVisibility(View.VISIBLE);
                     mTvTimeLengh.setText(time);
+                }
+                if (!StringUtil.isEmpty(mSoundData) ) {
+                    recordFile=new File(mSoundData);
                 }
                 break;
         }
@@ -678,6 +677,10 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }
             }
         }
+        if (qianmingFile==null) {
+            MyApplication.showToast("签名文件不能为空");
+            return;
+        }
         MyParams params = new MyParams();
         params.put("lawName", Unitname);//单位名称
         params.put("lawTime", lawTime);//检查时间
@@ -702,15 +705,17 @@ public class PublichaddActivity extends TakePhotoActivity {
             params.put("remarks", selectedlawOldPos);//整改建议
             params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
         }
+        params.put("pson",qianmingFile);//// 签名文件 File
+        params.put("user",recordFile);//// 录音文件 File 可空
+
         VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-
+                      MyApplication.showToast(element.msg);
                     }
                 });
     }
-
     /**
      * 显示时间对话框
      */
@@ -774,7 +779,6 @@ public class PublichaddActivity extends TakePhotoActivity {
             TextView textView = (TextView) view;
             textView.setText(entity);
             textView.setTextColor(getResources().getColor(pos == position ? R.color.theme_color : R.color.black_text));
-            // ViewUtil.setDrawableRight(mContext, textView, selectedlawWatersPos == position ? R.drawable.ic_checked : R.drawable.ic_unchecked);
         }
     }
 }

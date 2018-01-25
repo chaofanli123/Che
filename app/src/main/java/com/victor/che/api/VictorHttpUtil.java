@@ -17,17 +17,11 @@ import com.orhanobut.logger.Logger;
 import com.victor.che.R;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
-import com.victor.che.domain.User;
-import com.victor.che.ui.LoginActivity;
 import com.victor.che.util.AbDialogUtil;
 import com.victor.che.util.AppUtil;
-import com.victor.che.util.Base64Util;
-import com.victor.che.util.MD5Util;
 import com.victor.che.util.MyLogger;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import okhttp3.Call;

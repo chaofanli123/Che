@@ -110,9 +110,7 @@ public class Playctivity extends AppCompatActivity implements View.OnClickListen
         btnPlay.setOnClickListener(this);
         preparePlay();
         setSurfaceSize();
-
     }
-
     /**
      * 创建加载view
      *

@@ -503,29 +503,29 @@
                         android:textSize="14sp"/>
                 </RelativeLayout>
             </LinearLayout>
-            <LinearLayout
-                android:background="@color/white"
-                android:padding="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="添加照片"
-                    android:textColor="@color/dark_gray_text"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="@dimen/font_size_28px"/>
-                <com.victor.che.widget.NoScrollGridView
-                    android:id="@+id/noScrollgridview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:horizontalSpacing="5dp"
-                    android:numColumns="4"
-                    android:scrollbars="none"
-                    android:verticalSpacing="5dp">
-                </com.victor.che.widget.NoScrollGridView>
-            </LinearLayout>
+            <!--<LinearLayout-->
+                <!--android:background="@color/white"-->
+                <!--android:padding="16dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="添加照片"-->
+                    <!--android:textColor="@color/dark_gray_text"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:textSize="@dimen/font_size_28px"/>-->
+                <!--<com.victor.che.widget.NoScrollGridView-->
+                    <!--android:id="@+id/noScrollgridview"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:horizontalSpacing="5dp"-->
+                    <!--android:numColumns="4"-->
+                    <!--android:scrollbars="none"-->
+                    <!--android:verticalSpacing="5dp">-->
+                <!--</com.victor.che.widget.NoScrollGridView>-->
+            <!--</LinearLayout>-->
             <RelativeLayout
                 android:background="@color/white"
                 android:id="@+id/ll_add_yuyin"
@@ -574,9 +574,7 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="30dp"
-
                             />
-
                         <ImageView
                             android:id="@+id/iv_voice_image"
                             android:layout_width="15dp"

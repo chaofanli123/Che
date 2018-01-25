@@ -17,7 +17,7 @@
 
         <ImageView
             android:id="@+id/iv_finish"
-            android:layout_width="@dimen/common_topbar_height"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
             android:scaleType="center"
             android:src="@drawable/sl_topbar_back"/>
@@ -28,16 +28,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="@color/white"
-            android:textSize="@dimen/topbar_font_size"/>
+            android:textSize="18sp"/>
 
-        <ImageView
+        <TextView
             android:id="@+id/iv_reload"
-            android:layout_width="@dimen/common_topbar_height"
+            android:layout_width="48dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:scaleType="center"
-            android:src="@drawable/sl_reload"
-            android:visibility="gone"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="完成"
+            android:textSize="18sp"
+            android:textColor="@color/white"
             />
     </RelativeLayout>
     <RelativeLayout

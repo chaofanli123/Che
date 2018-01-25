@@ -30,9 +30,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+/**
+ * 录音
+ */
 public class YuYingActivity extends AppCompatActivity {
 
     // 语音相关
@@ -50,7 +53,8 @@ public class YuYingActivity extends AppCompatActivity {
     private int mTime;
     private String mVoiceData;
     private AnimationDrawable mImageAnim;
-    private Handler mHandler = new Handler(){
+    private File folder;//录音存放路径
+    private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -61,18 +65,21 @@ public class YuYingActivity extends AppCompatActivity {
      * Called when the activity is first created.
      */
 
-    private TextView mTvTime,mTvNotice,mTvTimeLengh,tv_topbar_title;
-    private ImageView mIvRecord,mIvVoice,mIvVoiceAnim,mFinish;
+    private TextView mTvTime, mTvNotice, mTvTimeLengh, tv_topbar_title;
+    private ImageView mIvRecord, mIvVoice, mIvVoiceAnim, mFinish;
     private LinearLayout mSoundLengthLayout;
     private RelativeLayout mRlVoiceLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yu_ying);
+        ButterKnife.bind(this);
         initSoundData();
         initView();
     }
-    public void initView(){
+
+    public void initView() {
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -87,10 +94,6 @@ public class YuYingActivity extends AppCompatActivity {
         mFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
-                intent.putExtra("LYpath",mVoiceData);
-                intent.putExtra("time",mTvTimeLengh.getText().toString().trim());
-                setResult(66,intent);
                 finish();
             }
         });
@@ -115,10 +118,8 @@ public class YuYingActivity extends AppCompatActivity {
 
     /**
      * 语音播放效果
-     *
      */
     public void startAnim() {
-
         mImageAnim = (AnimationDrawable) mIvVoiceAnim.getBackground();
         mIvVoiceAnim.setVisibility(View.VISIBLE);
         mIvVoice.setVisibility(View.GONE);
@@ -137,11 +138,24 @@ public class YuYingActivity extends AppCompatActivity {
      */
     public void initSoundData() {
         dataPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AsRecrod/Sounds/";
-        File folder = new File(dataPath);
+     folder = new File(mSoundData);
         if (!folder.exists()) {
             folder.mkdirs();
         }
         mMediaPlayUtil = MediaPlayUtil.getInstance();
+    }
+
+    /**
+     * 完成录音
+     */
+    @OnClick(R.id.iv_reload)
+    public void onViewClicked() {
+        Intent intent = new Intent();
+        intent.putExtra("LYpath", mVoiceData);
+        intent.putExtra("time", mTvTimeLengh.getText().toString().trim());
+        intent.putExtra("mSoundData",mSoundData);
+        setResult(66, intent);
+        finish();
     }
 
     /**
@@ -182,7 +196,7 @@ public class YuYingActivity extends AppCompatActivity {
                         // TODO 开启定时器
                         mHandler.postDelayed(runnable, 1000);
                     } catch (Exception e) {
-                        Log.i("recoder", "prepare() failed-Exception-"+e.toString());
+                        Log.i("recoder", "prepare() failed-Exception-" + e.toString());
                     }
                     initScaleAnim();
                     // TODO 录音过程重复动画
@@ -239,22 +253,22 @@ public class YuYingActivity extends AppCompatActivity {
 
                         if (isCanceled) {
                             deleteSoundFileUnSend();
-                            mTvTime.setText("0" +'"' );
+                            mTvTime.setText("0" + '"');
                             mTvNotice.setText("录音取消");
                             mRlVoiceLayout.setVisibility(View.GONE);
                         } else {
                             mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record));
                             mRlVoiceLayout.setVisibility(View.VISIBLE);
-                            mTvTimeLengh.setText(mTime + "" +'"' );
+                            mTvTimeLengh.setText(mTime + "" + '"');
                         }
-                    }else{
+                    } else {
                         mTvTime.setText("0");
                         mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record));
                         mTvNotice.setText("重新录音");
                     }
                     break;
                 case MotionEvent.ACTION_CANCEL: // 首次开权限时会走这里，录音取消
-                    Log.i("record_test","权限影响录音录音");
+                    Log.i("record_test", "权限影响录音录音");
                     mHandler.removeCallbacks(runnable);
                     mSoundLengthLayout.setVisibility(View.GONE);
 
@@ -308,7 +322,7 @@ public class YuYingActivity extends AppCompatActivity {
             mTvNotice.setText("录音成功");
             // 不加  "" 空串 会出  Resources$NotFoundException 错误
             mTvTime.setText(mTime + "" + '"');
-            Log.i("record_test","录音成功");
+            Log.i("record_test", "录音成功");
 
         }
         //mRecorder.setOnErrorListener(null);
@@ -322,7 +336,7 @@ public class YuYingActivity extends AppCompatActivity {
             mIvRecord.setVisibility(View.VISIBLE);
             mTvTime.setText("");
             Toast.makeText(YuYingActivity.this, "录音发生错误,请重新录音", Toast.LENGTH_LONG).show();
-            Log.i("record_test","录音发生错误");
+            Log.i("record_test", "录音发生错误");
         }
         mHandler.removeCallbacks(runnable);
         if (mRecorder != null) {

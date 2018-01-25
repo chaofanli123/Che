@@ -129,7 +129,7 @@ public class Message implements Serializable {
              * begin : null
              * end : null
              */
-
+            public boolean checked = false;// 本地变量，是否被选中
             private String id;
             private boolean isNewRecord;
             private String remarks;

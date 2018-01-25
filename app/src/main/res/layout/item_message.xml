@@ -7,7 +7,7 @@
     android:orientation="vertical"
     >
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:background="@color/white"
         android:paddingTop="10dp"
         android:layout_height="90dp">
@@ -89,9 +89,10 @@
                 />
         </LinearLayout>
         <ImageView
+            android:id="@+id/img_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="16dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_arrow_right"/>
@@ -101,7 +102,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/common_bg"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -121,6 +121,7 @@
             android:paddingRight="@dimen/common_padding2"
             android:text="删除"
             android:textColor="@color/textcolor_theme_color_pressed"
+            android:visibility="gone"
             android:textSize="26px"/>
         <TextView
             android:id="@+id/tv_change"
@@ -133,7 +134,7 @@
             android:paddingLeft="@dimen/common_padding2"
             android:paddingRight="@dimen/common_padding2"
             android:text="修改"
-            android:textColor="@color/dark_gray_text"
+            android:textColor="@color/textcolor_theme_color_pressed"
             android:textSize="26px"/>
 
     </LinearLayout>

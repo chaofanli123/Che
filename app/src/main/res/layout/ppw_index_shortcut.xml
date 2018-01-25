@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:layout_height="250px"
               android:background="@drawable/bg_index_shortcut"
               android:orientation="vertical"
-              android:paddingBottom="10dp"
               android:paddingTop="10dp">
 
     <TextView
@@ -12,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="96px"
         android:background="@drawable/sl_common_white_btn"
-        android:drawableLeft="@drawable/shortcut_add_product"
+        android:drawableLeft="@drawable/shortcut_active_vipcard"
         android:drawablePadding="24px"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:paddingLeft="@dimen/common_padding2"
         android:paddingRight="@dimen/common_padding2"
-        android:text="新增服务"
+        android:text="新增执法"
         android:textColor="@color/black_text"
         android:textSize="@dimen/font_size_28px"/>
 
@@ -28,23 +27,24 @@
         android:layout_height="96px"
         android:layout_marginTop="10dip"
         android:background="@drawable/sl_common_white_btn"
-        android:drawableLeft="@drawable/shortcut_add_customer"
+        android:drawableLeft="@drawable/ic_delete"
         android:drawablePadding="24px"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:paddingLeft="@dimen/common_padding2"
         android:paddingRight="@dimen/common_padding2"
-        android:text="新增用户"
+        android:text="删除执法"
         android:textColor="@color/black_text"
         android:textSize="@dimen/font_size_28px"/>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_active_vipcard"
         android:layout_width="match_parent"
         android:layout_height="96px"
         android:layout_marginTop="10dip"
         android:background="@drawable/sl_common_white_btn"
-        android:drawableLeft="@drawable/shortcut_active_vipcard"
+        android:drawableLeft="@drawable/shortcut_add_product"
         android:drawablePadding="24px"
         android:gravity="center_vertical"
         android:maxLines="1"

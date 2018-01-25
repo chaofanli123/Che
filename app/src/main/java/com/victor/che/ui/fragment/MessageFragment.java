@@ -1,16 +1,25 @@
 package com.victor.che.ui.fragment;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.jzxiang.pickerview.TimePickerDialog;
+import com.jzxiang.pickerview.data.Type;
+import com.jzxiang.pickerview.listener.OnDateSetListener;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
 import com.victor.che.api.BaseHttpCallbackListener;
@@ -22,14 +31,18 @@ import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Message;
-import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.ui.my.PublichaddActivity;
+import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.CollectionUtil;
+import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,26 +62,43 @@ public class MessageFragment extends BaseFragment {
     PtrFrameLayout mPtrFrame;
     @BindView(R.id.mRecyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.topbar_right)
-    ImageView topbarRight;
     Unbinder unbinder;
+    @BindView(R.id.ed_tiem_start)
+    TextView edTiemStart;
+    @BindView(R.id.et_time_end)
+    TextView etTimeEnd;
+    @BindView(R.id.topbar_right1)
+    ImageView topbarRight1;
+    @BindView(R.id.btn_notarize)
+    Button btnNotarize;
+    @BindView(R.id.lin_notarize)
+    LinearLayout linNotarize;
     private List<Message.PageBean.ListBean> mList = new ArrayList<>();
     private CouponAdapter mAdapter;
 
     private PtrHelper<Message.PageBean.ListBean> mPtrHelper;
+    private boolean ischeckd = false;
+    private String ids = ""; // 列表id
+    private int select;
+    private List<String> list_id = new ArrayList<>();
+    private List<Message.PageBean.ListBean> list;
+    private List<String> selectID = new ArrayList<>();
+    private String begin = "";//开始时间
+    private String end = "";//结束时间
+
     @Override
     public int getContentView() {
         return R.layout.common_pull_to_refresh_recyclerview;
     }
+
     @Override
     protected void initView() {
         super.initView();
+        linNotarize.setVisibility(View.GONE);
+
         // 设置标题
-        ((TextView) findViewById(R.id.tv_topbar_title)).setText("执法");
-        findViewById(R.id.iv_back).setVisibility(View.GONE);
-        topbarRight.setImageResource(R.drawable.sl_topbar_more);
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器
-        mAdapter = new CouponAdapter(R.layout.item_message, mList);  //
+        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
         mRecyclerView.setAdapter(mAdapter);
         mPtrHelper = new PtrHelper<>(mPtrFrame, mAdapter, mList);
         mPtrHelper.enableLoadMore(true, mRecyclerView);//允许加载更多
@@ -79,24 +109,45 @@ public class MessageFragment extends BaseFragment {
                 _reqData(pullToRefresh, curpage, pageSize);
             }
         });
-        mPtrHelper.autoRefresh(true);
+        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+            @Override
+            public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
+                select = position;
+                Message.PageBean.ListBean listBean = mList.get(position);
+                listBean.checked = !listBean.checked;
+                if (listBean.checked) {
+                    list_id.add(listBean.getId() + "");
+
+                } else {
+                    list_id.remove(listBean.getId() + "");
+                }
+                list = new ArrayList<>();
+                list.add(listBean);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+        mPtrHelper.autoRefresh(false);
     }
+
     /**
      * 请求执法数据
+     *
      * @param pullToRefresh
      * @param curpage
      * @param pageSize
      */
     private void _reqData(final boolean pullToRefresh, final int curpage, final int pageSize) {
-        // 获取订单列表
         MyParams params = new MyParams();
         params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
-        params.put("pageNo",curpage/pageSize+1);
+        params.put("pageNo", curpage / pageSize + 1);
         params.put("pageSize", pageSize);
-
-//        params.put("begin", pageSize);
-//        params.put("end", pageSize);
-        VictorHttpUtil.doGet(mContext, Define.URL_govAquLaw_list+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+        if (!StringUtil.isEmpty(begin)) {
+            params.put("begin", begin);
+        }
+        if (!StringUtil.isEmpty(end)) {
+            params.put("end", end);
+        }
+        VictorHttpUtil.doGet(mContext, Define.URL_govAquLaw_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
@@ -142,87 +193,154 @@ public class MessageFragment extends BaseFragment {
         unbinder.unbind();
     }
 
+    @OnClick({R.id.ed_tiem_start, R.id.et_time_end, R.id.img_search, R.id.topbar_right1})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ed_tiem_start: //开始时间
+                showDatePickerDialog(edTiemStart);
+                break;
+            case R.id.et_time_end://结束时间
+                showDatePickerDialog(etTimeEnd);
+                break;
+            case R.id.img_search://搜索
+                begin = edTiemStart.getText().toString().trim();
+                end = etTimeEnd.getText().toString().trim();
+                mPtrHelper.autoRefresh(true);
+                break;
+            case R.id.topbar_right1:// 编辑
+                View ppw = View.inflate(mContext, R.layout.ppw_index_shortcut, null);
+                final PopupWindow popupWindow = new PopupWindow(ppw, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow.setFocusable(true);// 不产生焦点
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setBackgroundDrawable(new BitmapDrawable());
+                popupWindow.showAsDropDown(topbarRight1, 0, 0);
+                // 新增执法
+                ppw.findViewById(R.id.tv_add_product).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //跳转到执法界面
+                        Bundle bundle = new Bundle();
+                        bundle.putString("type", "add");
+                        MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
+                        popupWindow.dismiss();
+                    }
+                });
+                // 删除
+                ppw.findViewById(R.id.tv_add_customer).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ischeckd = true;
+                        linNotarize.setVisibility(View.VISIBLE);
+                        mAdapter.notifyDataSetChanged();  //
+                        popupWindow.dismiss();
+                    }
+                });
+                break;
+        }
+    }
+
+    @OnClick(R.id.btn_notarize)
+    public void onViewClicked() {
+        AlertDialogFragment.newInstance(
+                "提示",
+                "是否要删除",
+                "是",
+                "否",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        upcommit();
+                    }
+                },
+                null)
+                .show(getFragmentManager(), getClass().getSimpleName());
+
+    }
+
     /**
-     * 执法
+     * 提交车险询价
      */
-    @OnClick(R.id.topbar_right)
-    public void onaddClicked() {
-        //跳转到执法界面
-        MyApplication.openActivity(mContext, PublichaddActivity.class);
+    private void upcommit() {
+        // 发送登录请求
+        if (CollectionUtil.isEmpty(list_id)) {
+            MyApplication.showToast("请选择要删除的执法信息");
+            return;
+        }
+        selectID.addAll(list_id);
+        for (String s : selectID) {
+            ids += s + ",";
+        }
+        ids = ids.substring(0, ids.length() - 1);
+
+        MyParams params = new MyParams();
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+        params.put("ids", ids);//多个id以，隔开
+        VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_deleteAll + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "删除中...",
+                new BaseHttpCallbackListener<Element>() {
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        MyApplication.showToast(element.msg);
+                        linNotarize.setVisibility(View.GONE);
+                        ischeckd = false;
+                        mAdapter.notifyDataSetChanged();
+                        mPtrHelper.autoRefresh(true);
+                    }
+                });
     }
 
     /**
      * 订单列表适配器
      */
     private class CouponAdapter extends QuickAdapter<Message.PageBean.ListBean> {
+        private boolean isdelete;
 
-        public CouponAdapter(int layoutResId, List<Message.PageBean.ListBean> data) {
+        public CouponAdapter(int layoutResId, List<Message.PageBean.ListBean> data, boolean isdelete) {
             super(layoutResId, data);
+            this.isdelete = isdelete;
         }
 
         @Override
         protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
-            holder.setText(R.id.tv_title_name, "单位名称："+shopsCoupon.getLawName());
-            holder.setText(R.id.tv_lawQual_message,"质量管理制度:"+shopsCoupon.getLawQual());
-            holder.setText(R.id.tv_lawSta,"接受监管情况:"+shopsCoupon.getLawSta());
-            holder.setText(R.id.tv_coupon_message,"养殖证或苗种生产许可证:"+shopsCoupon.getLawAqu());
-            holder.setText(R.id.tv_lawSta_message,"处理情况:"+shopsCoupon.getLawTrea());
+            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.getLawName());
+            holder.setText(R.id.tv_lawQual_message, "质量管理制度:" + shopsCoupon.getLawQual());
+            holder.setText(R.id.tv_lawSta, "接受监管情况:" + shopsCoupon.getLawSta());
+            holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:" + shopsCoupon.getLawAqu());
+            holder.setText(R.id.tv_lawSta_message, "处理情况:" + shopsCoupon.getLawTrea());
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
             tv_coupon_time.setText(shopsCoupon.getLawTime());
             /**
              * 删除
              */
-            holder.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                  //  showdialog(shopsCoupon,shopsCoupon.getCoupon_id());
+//            holder.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                  //  showdialog(shopsCoupon,shopsCoupon.getCoupon_id());
+//                }
+//            });
+            final ImageView select = holder.getView(R.id.img_select);
+            if (isdelete) {//删除
+                if (shopsCoupon.checked) {//选择状态
+                    select.setImageResource(R.drawable.ic_select_compan_click);
+                } else {
+                    select.setImageResource(R.drawable.ic_select_company_normal);
                 }
-            });
+            } else {
+                select.setImageResource(R.drawable.ic_arrow_right);
+            }
+
             /**
              * 修改
              */
             holder.setOnClickListener(R.id.tv_change, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("type","couponlist");
-            //    bundle.putString("position",position+"");
-                bundle.putSerializable("shopsCoupon",shopsCoupon);
-
+                    Bundle bundle = new Bundle();
+                    bundle.putString("type", "list");
+                    bundle.putSerializable("shopsCoupon", shopsCoupon);
+                    MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
                 }
             });
         }
-    }
-
-    /**
-     *禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
-     */
-    private void  showdialog(final ShopsCoupon shopsCoupon, final int coupon_id){
-        AlertDialogFragment.newInstance(
-                "提示",
-                "是否要删除该执法记录？",
-                "是",
-                "否",
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MyParams params = new MyParams();
-                        //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
-                        params.put("coupon_id", coupon_id);//优惠券id
-                        params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
-                        VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
-                                new BaseHttpCallbackListener<Element>() {
-                                    @Override
-                                    public void callbackSuccess(String url, Element element) {
-                                        mList.remove(shopsCoupon);
-                                        mAdapter.notifyDataSetChanged();
-                                        MyApplication.showToast("删除成功");
-                                    }
-                                });
-                    }
-                },
-                null)
-                .show(getFragmentManager(), getClass().getSimpleName());
     }
 
 //   @Subscribe
@@ -250,4 +368,43 @@ public class MessageFragment extends BaseFragment {
 //                break;
 //        }
 //    }
+
+    /**
+     * 显示时间对话框
+     */
+    private void showDatePickerDialog(final TextView tv) {
+        // 回显时间，展示选择框
+        Calendar calendar = new GregorianCalendar();
+        String text = tv.getText().toString().trim();
+        if (!com.victor.che.util.StringUtil.isEmpty(text)) {
+            Date date = DateUtil.getDateByFormat(text, DateUtil.YMD);
+            calendar.setTime(date == null ? new Date() : date);
+        }
+        long _100year = 100L * 365 * 1000 * 60 * 60 * 24L;//100年
+        TimePickerDialog mDialogYearMonthDay = new TimePickerDialog.Builder()
+                .setCallBack(new OnDateSetListener() {
+                    @Override
+                    public void onDateSet(TimePickerDialog timePickerView, long millseconds) {
+                        tv.setText(DateUtil.getStringByFormat(millseconds, DateUtil.YMD));
+                    }
+                })
+                .setCancelStringId("取消")
+                .setSureStringId("确定")
+                .setTitleStringId("选择日期")
+                .setYearText("年")
+                .setMonthText("月")
+                .setDayText("日")
+                .setCyclic(false)
+                .setMinMillseconds(System.currentTimeMillis() - _100year)//设置最小时间
+                //.setMaxMillseconds(System.currentTimeMillis() + _100year)//设置最大时间+100年
+                .setMaxMillseconds(System.currentTimeMillis())//设置最大时间+100年
+                .setCurrentMillseconds(calendar.getTimeInMillis())//设置当前时间
+                .setThemeColor(getResources().getColor(R.color.timepicker_dialog_bg))
+                .setType(Type.YEAR_MONTH_DAY)
+                .setWheelItemTextNormalColor(getResources().getColor(R.color.timetimepicker_default_text_color))
+                .setWheelItemTextSelectorColor(getResources().getColor(R.color.timepicker_toolbar_bg))
+                .setWheelItemTextSize(16)
+                .build();
+        mDialogYearMonthDay.show(getFragmentManager(), getClass().getSimpleName());
+    }
 }

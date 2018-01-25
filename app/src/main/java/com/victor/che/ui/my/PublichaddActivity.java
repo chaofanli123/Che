@@ -217,15 +217,23 @@ public class PublichaddActivity extends TakePhotoActivity {
     private String lawprob, remarks,lawOther;
     private File qianmingFile,recordFile;
 
+    private com.victor.che.domain.Message.PageBean.ListBean shopsCoupon;//从列表界面传过来的对象
+    private String type;
+
+
     @Override
     public int getContentView() {
         return R.layout.activity_follow_user;
     }
-
     @Override
     protected void initView() {
         super.initView();
         setTitle("添加执法");
+        type=getIntent().getStringExtra("type");
+        if ("list".equals(type)){ //修改执法
+            shopsCoupon= (com.victor.che.domain.Message.PageBean.ListBean) getIntent().getSerializableExtra("shopsCoupon");
+            showdata(shopsCoupon);
+        }
         topbarRight.setText("提交");
         parentView = getLayoutInflater().inflate(R.layout.activity_follow_user, null);
         showpic();
@@ -268,7 +276,132 @@ public class PublichaddActivity extends TakePhotoActivity {
         lawStaListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawSta, selectedlawStaPos);
         lawOldListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawOld, selectedlawOldPos);
         lawTreaListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawTrea, selectedlawTreaPos);
+    }
 
+    /**
+     * 渲染界面
+     * @param shopsCoupon
+     */
+    private void showdata(com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
+        etUnitname.setText(shopsCoupon.getLawName());
+        tvFirsttime.setText(shopsCoupon.getLawTime());
+        if (shopsCoupon.getLawWaters()==1) {
+            tvLawWaters.setText("全民所有");
+        }else if (shopsCoupon.getLawWaters()==2) {
+            tvLawWaters.setText("集体所有 ");
+        }
+        selectedlawWatersPos=shopsCoupon.getLawWaters();
+        selectedLawAquPos=shopsCoupon.getLawAqu();
+        if (shopsCoupon.getLawAqu() == 0) {
+            tvLawAqu.setText("有");
+        }else if (shopsCoupon.getLawAqu() == 1) {
+            tvLawAqu.setText("应该持有但没有");
+        }else {
+            tvLawAqu.setText("不需办理");
+        }
+        //用药记录
+        selectedlawMed=shopsCoupon.getLawMed();
+        if (shopsCoupon.getLawMed() == 0) {
+            tvLawMed.setText("真实完整");
+        }else if (shopsCoupon.getLawMed() == 1) {
+            tvLawMed.setText("不真实");
+        }else if (shopsCoupon.getLawMed() == 2) {
+            tvLawMed.setText("不完整");
+        }else {
+            tvLawMed.setText("不能提供");
+        }
+        //生产记录
+        selectedlawPro=shopsCoupon.getLawPro();
+        if (shopsCoupon.getLawPro() == 0) {
+            tvLawPro.setText("真实完整");
+        }else if (shopsCoupon.getLawPro() == 1) {
+            tvLawPro.setText("不真实");
+        }else if (shopsCoupon.getLawPro() == 2) {
+            tvLawPro.setText("不完整");
+        }else {
+            tvLawPro.setText("不能提供");
+        }
+        //销售记录
+        selectedlawSal=shopsCoupon.getLawSal();
+        if (shopsCoupon.getLawSal() == 0) {
+            tvLawSal.setText("真实完整");
+        }else if (shopsCoupon.getLawSal() == 1) {
+            tvLawSal.setText("不真实");
+        }else if (shopsCoupon.getLawSal() == 2) {
+            tvLawSal.setText("不完整");
+        }else {
+            tvLawSal.setText("不能提供");
+        }
+        //苗种来源
+        selectedlawDeliPos=shopsCoupon.getLawDeli();
+        if (shopsCoupon.getLawDeli() == 0) {
+            tvLawDeli.setText("苗种来源于合法的生产企业，且来源记录清晰 ，存有供货方苗种生产许可证");
+        }else if (shopsCoupon.getLawDeli() == 1) {
+            tvLawDeli.setText("无法证明来源及其合法性");
+        }
+        //tv_lawMedi 用药和饲料情况
+        selectedlawMediPos=shopsCoupon.getLawMedi();
+        if (shopsCoupon.getLawMedi() == 0) {
+            tvLawMedi.setText("现场未发现禁用药物和非法添加物");
+        }else if (shopsCoupon.getLawMedi() == 1) {
+            tvLawMedi.setText("现场发现禁用药物或者非法添加物");
+        }else {
+            tvLawMedi.setText("药残检测超标");
+        }
+        //tv_lawQual 质量管理制度
+        selectedlawQualPos=shopsCoupon.getLawQual();
+        if (shopsCoupon.getLawQual() == 0) {
+            tvLawQual.setText("有");
+        }else if (shopsCoupon.getLawQual() == 1) {
+            tvLawQual.setText("无");
+        }
+        //tv_lawTech 是否参加过渔业部门组织的法律法规培训
+        selectedlawTechPos=shopsCoupon.getLawTech();
+        if (shopsCoupon.getLawTech() == 0) {
+            tvLawTech.setText("是");
+            linLawDate.setVisibility(View.VISIBLE);
+            tvLawDate.setText(shopsCoupon.getLawDate()+"");
+        }else if (shopsCoupon.getLawTech() == 1) {
+            tvLawTech.setText("否");
+            linLawDate.setVisibility(View.GONE);
+        }
+        //接受监管情况tv_lawSta
+        selectedlawStaPos=shopsCoupon.getLawSta();
+        if (shopsCoupon.getLawSta() == 0) {
+            tvLawSta.setText("接受监管并有监管记录");
+        }else if (shopsCoupon.getLawSta() == 1) {
+            tvLawSta.setText("曾接受监管但无记录");
+        }
+        //tv_lawOld 对以往检查发现问题的整改情况
+        selectedlawOldPos=shopsCoupon.getLawOld();
+        if (shopsCoupon.getLawOld() == 0) {
+            tvLawOld.setText("整改彻底");
+        }else if (shopsCoupon.getLawOld() == 1) {
+            tvLawOld.setText("整改不彻底");
+        }else {
+            tvLawOld.setText("未整改");
+        }
+        //tv_lawTrea 处理情况
+        selectedlawTreaPos=shopsCoupon.getLawTrea();
+        if (shopsCoupon.getLawTrea() == 0) {
+            tvLawTrea.setText("合格，没有发现违规行为");
+            linLawTrea.setVisibility(View.GONE);
+        }else if (shopsCoupon.getLawTrea() == 1) {
+            tvLawTrea.setText("不合格项或者需要整改的地方");
+            linLawTrea.setVisibility(View.VISIBLE);
+            etLawProb.setText(shopsCoupon.getLawProb());//et_lawProb
+            etRemarks.setText(shopsCoupon.getRemarks());//
+            etLawOther.setText(shopsCoupon.getLawOther());//
+        }
+        //签名文件
+        PicassoUtils.loadImage(mContext, shopsCoupon.getPsonName(), ivQianming);
+        //luyin
+        if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
+            recordFile=new File(shopsCoupon.getUserName());
+            mRlVoiceLayout.setVisibility(View.VISIBLE);
+        }else {
+            mRlVoiceLayout.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -398,14 +531,14 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
         });
     }
-    @OnClick({R.id.tv_lawAqu, R.id.iv_luying, R.id.ll_qianming, R.id.voice_layout, R.id.tv_firsttime,
+    @OnClick({R.id.tv_lawAqu, R.id.iv_luying, R.id.ll_qianming, R.id.rel_luyin, R.id.tv_firsttime,
             R.id.tv_lawWaters, R.id.topbar_right, R.id.tv_lawMed, R.id.tv_lawPro, R.id.tv_lawSal,
             R.id.tv_lawDeli, R.id.tv_lawMedi, R.id.tv_lawQual, R.id.tv_lawTech, R.id.tv_lawDate,
             R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.topbar_right://提交
-                saveup();
+                    saveup();
                 break;
             case R.id.iv_luying:
                 startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
@@ -413,7 +546,7 @@ public class PublichaddActivity extends TakePhotoActivity {
             case R.id.ll_qianming:
                 startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
                 break;
-            case R.id.voice_layout:
+            case R.id.rel_luyin:
                 if (mMediaPlayUtil.isPlaying()) {
                     mMediaPlayUtil.stop();
                     mImageAnim.stop();
@@ -566,69 +699,13 @@ public class PublichaddActivity extends TakePhotoActivity {
     }
 
     /**
-     * 提交
+     * 修改
      */
-    private void saveup() {
+    private void change() {
         String Unitname = etUnitname.getText().toString().trim();
-        if (TextUtils.isEmpty(Unitname)) {
-            MyApplication.showToast("单位名称不能为空");
-            etUnitname.requestFocus();
-            return;
-        }
         String lawTime = tvFirsttime.getText().toString().trim();
-        if (TextUtils.isEmpty(lawTime)) {
-            MyApplication.showToast("单检查时间不能为空");
-            tvFirsttime.requestFocus();
-            return;
-        }
-        String lawaqu = tvLawAqu.getText().toString().trim();
-        if (TextUtils.isEmpty(lawaqu)) {
-            MyApplication.showToast("养殖证或苗种生产许可证不能为空");
-            tvLawAqu.requestFocus();
-            return;
-        }
-        String lawmed = tvLawMed.getText().toString().trim();
-        if (TextUtils.isEmpty(lawmed)) {
-            MyApplication.showToast("用药纪录不能为空");
-            tvLawMed.requestFocus();
-            return;
-        }
-        String lawpro = tvLawPro.getText().toString().trim();
-        if (TextUtils.isEmpty(lawpro)) {
-            MyApplication.showToast("生产纪录不能为空");
-            tvLawPro.requestFocus();
-            return;
-        }
-        String lawsal = tvLawSal.getText().toString().trim();
-        if (TextUtils.isEmpty(lawsal)) {
-            MyApplication.showToast("销售纪录不能为空");
-            tvLawSal.requestFocus();
-            return;
-        }
-        String lawdeli = tvLawDeli.getText().toString().trim();
-        if (TextUtils.isEmpty(lawdeli)) {
-            MyApplication.showToast("苗种来源不能为空");
-            tvLawDeli.requestFocus();
-            return;
-        }
-        String lawmedi = tvLawMedi.getText().toString().trim();
-        if (TextUtils.isEmpty(lawmedi)) {
-            MyApplication.showToast("用药和饲料情况不能为空");
-            tvLawMedi.requestFocus();
-            return;
-        }
-        String lawqual = tvLawQual.getText().toString().trim();
-        if (TextUtils.isEmpty(lawqual)) {
-            MyApplication.showToast("质量管理制度不能为空");
-            tvLawQual.requestFocus();
-            return;
-        }
         String lawtech = tvLawTech.getText().toString().trim();
-        if (TextUtils.isEmpty(lawtech)) {
-            MyApplication.showToast("是否参加过渔业部门组织的法律法规培训不能为空");
-            tvLawTech.requestFocus();
-            return;
-        } else {
+        if (!TextUtils.isEmpty(lawtech)) {
             if ("是".equals(lawtech)) {
                 lawDate = tvLawDate.getText().toString().trim();
                 if (TextUtils.isEmpty(lawDate)) {
@@ -637,51 +714,230 @@ public class PublichaddActivity extends TakePhotoActivity {
                     return;
                 }
             }
-        }
-        String lawsta = tvLawSta.getText().toString().trim();
-        if (TextUtils.isEmpty(lawsta)) {
-            MyApplication.showToast("质量管理制度不能为空");
-            tvLawSta.requestFocus();
-            return;
-        }
-        String lawold = tvLawOld.getText().toString().trim();
-        if (TextUtils.isEmpty(lawold)) {
-            MyApplication.showToast("接受监管情况不能为空");
-            tvLawOld.requestFocus();
-            return;
-        }
-        String lawtrea = tvLawTrea.getText().toString().trim();
-        if (TextUtils.isEmpty(lawtrea)) {
-            MyApplication.showToast("对以往检查发现问题的整改情况不能为空");
-            tvLawTrea.requestFocus();
-            return;
-        } else {
+            String lawtrea = tvLawTrea.getText().toString().trim();
+            if (!TextUtils.isEmpty(lawtrea)) {
+                if ("不合格项或者需要整改的地方".equals(lawtrea)) {
+                    lawprob = etLawProb.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("责令整改项目不能为空");
+                        etLawProb.requestFocus();
+                        return;
+                    }
+                    remarks = etRemarks.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("整改建议不能为空");
+                        etRemarks.requestFocus();
+                        return;
+                    }
+                    lawOther = etLawOther.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("其他处罚或处置不能为空");
+                        etLawOther.requestFocus();
+                        return;
+                    }
+                }
+            }
+            MyParams params = new MyParams();
+            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+            params.put("id", shopsCoupon.getId());
+            params.put("lawName", Unitname);//单位名称
+            params.put("lawTime", lawTime);//检查时间
+            params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,
+            params.put("lawAqu", selectedLawAquPos);////0 有1 应该持有但没有 2 不需办理
+            params.put("lawMed", selectedlawMed);//// 用药纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
+            params.put("lawPro", selectedlawPro);//// 生产纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
+            params.put("lawSal", selectedlawSal);//// 销售纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
+
+            params.put("lawDeli", selectedlawDeliPos);//// 苗种来源 0 苗种来源于合法的生产企业，且来源记录清晰,存有供货方苗种生产许可证1无法证明来源及其合法性
+            params.put("lawMedi", selectedlawMediPos);//// 用药和饲料情况 0 现场未发现禁用药物和非法添加物1现场发现禁用药物或者非法添加物2药残检测超标
+            params.put("lawQual", selectedlawQualPos);//// 质量管理制度 0 有 1 无
+            params.put("lawTech", selectedlawTechPos);//// 是否参加过渔业部门组织的法律法规培训 0 是1 否
+            if ("是".equals(lawtech)) {
+                params.put("lawDate", lawDate);//// 培训时间 如果为 是 应输入培训时间
+            }
+            params.put("lawSta", selectedlawStaPos);//// 接受监管情况 0 接受监管并有监管记录1 曾接受监管但无记录
+            params.put("lawOld", selectedlawOldPos);//// 对以往检查发现问题的整改情况 0 整改彻底1 整改不彻底2 未整改
+            params.put("lawTrea", selectedlawTreaPos);//// 处理情况 0 合格，没有发现违规行为1 不合格项或者需要整改的地方
             if ("不合格项或者需要整改的地方".equals(lawtrea)) {
-                lawprob = etLawProb.getText().toString().trim();
-                if (TextUtils.isEmpty(lawDate)) {
-                    MyApplication.showToast("责令整改项目不能为空");
-                    etLawProb.requestFocus();
-                    return;
-                }
-                remarks = etRemarks.getText().toString().trim();
-                if (TextUtils.isEmpty(lawDate)) {
-                    MyApplication.showToast("整改建议不能为空");
-                    etRemarks.requestFocus();
-                    return;
-                }
-                lawOther = etLawOther.getText().toString().trim();
-                if (TextUtils.isEmpty(lawDate)) {
-                    MyApplication.showToast("其他处罚或处置不能为空");
-                    etLawOther.requestFocus();
-                    return;
+                params.put("lawProb", selectedlawStaPos);//责令整改项目
+                params.put("remarks", selectedlawOldPos);//整改建议
+                params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
+            }
+            params.put("pson", qianmingFile);//// 签名文件 File
+            params.put("user", recordFile);//// 录音文件 File 可空
+
+            VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
+                    new BaseHttpCallbackListener<Element>() {
+                        @Override
+                        public void callbackSuccess(String url, Element element) {
+                            MyApplication.showToast(element.msg);
+                        }
+                    });
+        }
+    }
+
+    /**
+     * 提交
+     */
+    private void saveup() {
+        String Unitname = etUnitname.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(Unitname)) {
+                MyApplication.showToast("单位名称不能为空");
+                etUnitname.requestFocus();
+                return;
+            }
+        }
+        String lawTime = tvFirsttime.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawTime)) {
+                MyApplication.showToast("单检查时间不能为空");
+                tvFirsttime.requestFocus();
+                return;
+            }
+        }
+
+        String lawaqu = tvLawAqu.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawaqu)) {
+                MyApplication.showToast("养殖证或苗种生产许可证不能为空");
+                tvLawAqu.requestFocus();
+                return;
+            }
+        }
+
+        String lawmed = tvLawMed.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawmed)) {
+                MyApplication.showToast("用药纪录不能为空");
+                tvLawMed.requestFocus();
+                return;
+            }
+        }
+
+        String lawpro = tvLawPro.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawpro)) {
+                MyApplication.showToast("生产纪录不能为空");
+                tvLawPro.requestFocus();
+                return;
+            }
+        }
+
+        String lawsal = tvLawSal.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawsal)) {
+                MyApplication.showToast("销售纪录不能为空");
+                tvLawSal.requestFocus();
+                return;
+            }
+        }
+
+        String lawdeli = tvLawDeli.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawdeli)) {
+                MyApplication.showToast("苗种来源不能为空");
+                tvLawDeli.requestFocus();
+                return;
+            }
+        }
+
+        String lawmedi = tvLawMedi.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawmedi)) {
+                MyApplication.showToast("用药和饲料情况不能为空");
+                tvLawMedi.requestFocus();
+                return;
+            }
+        }
+
+        String lawqual = tvLawQual.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawqual)) {
+                MyApplication.showToast("质量管理制度不能为空");
+                tvLawQual.requestFocus();
+                return;
+            }
+        }
+
+        String lawtech = tvLawTech.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawtech)) {
+                MyApplication.showToast("是否参加过渔业部门组织的法律法规培训不能为空");
+                tvLawTech.requestFocus();
+                return;
+            } else {
+                if ("是".equals(lawtech)) {
+                    lawDate = tvLawDate.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("培训时间不能为空");
+                        tvLawDate.requestFocus();
+                        return;
+                    }
                 }
             }
         }
-        if (qianmingFile==null) {
-            MyApplication.showToast("签名文件不能为空");
-            return;
+
+        String lawsta = tvLawSta.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawsta)) {
+                MyApplication.showToast("质量管理制度不能为空");
+                tvLawSta.requestFocus();
+                return;
+            }
         }
+
+
+        String lawold = tvLawOld.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawold)) {
+                MyApplication.showToast("接受监管情况不能为空");
+                tvLawOld.requestFocus();
+                return;
+            }
+        }
+
+        String lawtrea = tvLawTrea.getText().toString().trim();
+        if ("add".equals(type)){ //add执法
+            if (TextUtils.isEmpty(lawtrea)) {
+                MyApplication.showToast("对以往检查发现问题的整改情况不能为空");
+                tvLawTrea.requestFocus();
+                return;
+            } else {
+                if ("不合格项或者需要整改的地方".equals(lawtrea)) {
+                    lawprob = etLawProb.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("责令整改项目不能为空");
+                        etLawProb.requestFocus();
+                        return;
+                    }
+                    remarks = etRemarks.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("整改建议不能为空");
+                        etRemarks.requestFocus();
+                        return;
+                    }
+                    lawOther = etLawOther.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawDate)) {
+                        MyApplication.showToast("其他处罚或处置不能为空");
+                        etLawOther.requestFocus();
+                        return;
+                    }
+                }
+            }
+        }
+        if ("add".equals(type)){ //add执法
+            if (qianmingFile==null) {
+                MyApplication.showToast("签名文件不能为空");
+                return;
+            }
+        }
+
         MyParams params = new MyParams();
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+        if ("list".equals(type)){ //修改执法
+            params.put("id",shopsCoupon.getId());
+        }
         params.put("lawName", Unitname);//单位名称
         params.put("lawTime", lawTime);//检查时间
         params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,

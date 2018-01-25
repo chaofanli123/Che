@@ -126,8 +126,6 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
         if (!StringUtil.isEmpty(status)) {
             params.put("status", status);
         }
-        // params.put("type",keywords);
-//        params.put("status", keywords);
         VictorHttpUtil.doPost(mContext, Define.URL_ZHENGCHEFAGUI+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override

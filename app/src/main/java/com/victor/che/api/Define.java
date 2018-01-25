@@ -67,12 +67,13 @@ public class Define {
    */
   public static final String URL_govAquLaw_list= API_DOMAIN + "a/gov/govAquLaw/list";
   /**
-   添加执法
+   添加执法 修改执法
    */
   public static final String URL_govAquLaw_save= API_DOMAIN + "gov/govAquLaw/save";
-
-
-
+  /**
+   删除执法
+   */
+  public static final String URL_govAquLaw_deleteAll= API_DOMAIN + "gov/govAquLaw/deleteAll";
 
 
 

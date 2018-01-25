@@ -41,6 +41,8 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
 
     private File svaeFile;
 
+    private Boolean save=false;
+
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     @Override
@@ -58,14 +60,12 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
 
             @Override
             public void onSigned() {
-                mSaveButton.setEnabled(true);
-                mClearButton.setEnabled(true);
+                save=true;
             }
 
             @Override
             public void onClear() {
-                mSaveButton.setEnabled(false);
-                mClearButton.setEnabled(false);
+                save=false;
             }
         });
 
@@ -73,24 +73,31 @@ public class ShouXieQianMingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mSignaturePad.clear();
+
             }
         });
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
-                if (addJpgSignatureToGallery(signatureBitmap)) {
-                } else {
-                }
-                if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
-                    Intent intent=new Intent();
+                if (save){
+                    Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
+                    if (addJpgSignatureToGallery(signatureBitmap)) {
+                    } else {
+                    }
+                    if (addSvgSignatureToGallery(mSignaturePad.getSignatureSvg())) {
+                        Intent intent=new Intent();
 
-                    intent.putExtra("imgpath",svaeFile.getPath());
-                    setResult(666,intent);
-                    finish();
-                } else {
+                        intent.putExtra("imgpath",svaeFile.getPath());
+                        setResult(666,intent);
+                        finish();
+                    } else {
+                    }
+                }else {
+                    System.out.println("******************************");
+                    Toast.makeText(ShouXieQianMingActivity.this,"请在空白处填写签名",Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }

@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * 账户界面
+ * 个人中心界面
  * Author Victor
  * Email 468034043@qq.com
  * Time 2016/12/27 0027 9:45
@@ -47,8 +47,8 @@ public class AccountFragment extends BaseFragment {
         super.onResume();
         if (MyApplication.isLogined()) {
             // 当前用户名
-            tv_name.setText(MyApplication.CURRENT_USER.username);
-            PicassoUtils.loadHeadImage(mContext, MyApplication.CURRENT_USER.head, ivFgMineHead);
+            tv_name.setText(MyApplication.getUser().username);
+            PicassoUtils.loadHeadImage(mContext, MyApplication.getUser().head, ivFgMineHead);
             // 店铺名称
 //            tv_store_name.setText(MyApplication.CURRENT_USER.name);
         } else {

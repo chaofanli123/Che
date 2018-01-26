@@ -177,7 +177,7 @@ public class MyApplication extends BaseApplication {
      * @return
      */
     public static boolean isLogined() {
-        if (MyApplication.CURRENT_USER == null || MyApplication.CURRENT_USER.mobileLogin==false) {
+        if (MyApplication.getUser() == null || MyApplication.getUser().mobileLogin==false) {
             return false;
         }
         return true;

@@ -258,7 +258,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     /**
-     * 提交车险询价
+     * 确定删除
      */
     private void upcommit() {
         // 发送登录请求
@@ -301,13 +301,37 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
-            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.getLawName());
-            holder.setText(R.id.tv_lawQual_message, "质量管理制度:" + shopsCoupon.getLawQual());
-            holder.setText(R.id.tv_lawSta, "接受监管情况:" + shopsCoupon.getLawSta());
-            holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:" + shopsCoupon.getLawAqu());
-            holder.setText(R.id.tv_lawSta_message, "处理情况:" + shopsCoupon.getLawTrea());
+            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.farm);
+
+            if (shopsCoupon.getLawQual() == 0) {
+                holder.setText(R.id.tv_lawQual_message, "质量管理制度:有");
+            }else {
+                holder.setText(R.id.tv_lawQual_message, "质量管理制度:无");
+            }
+
+            if (shopsCoupon.getLawSta() == 0) {
+                holder.setText(R.id.tv_lawSta, "接受监管情况:接受监管并有监管记录");
+            }else {
+                holder.setText(R.id.tv_lawSta, "接受监管情况:曾接受监管但无记录");
+            }
+
+            if (shopsCoupon.getLawAqu() == 0) {
+                holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:有");
+            }else if (shopsCoupon.getLawAqu() == 1) {
+                holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:应该持有但没有");
+            }
+            else {
+                holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:不需办理");
+            }
+
+            if (shopsCoupon.getLawTrea() == 0) {
+                holder.setText(R.id.tv_lawSta_message, "处理情况:合格，没有发现违规行为");
+            }else {
+                holder.setText(R.id.tv_lawSta_message, "处理情况:不合格项或者需要整改的地方");
+            }
+
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
-            tv_coupon_time.setText(shopsCoupon.getLawTime());
+            tv_coupon_time.setText("检查时间"+shopsCoupon.getLawTime());
             /**
              * 删除
              */

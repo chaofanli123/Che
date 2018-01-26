@@ -2,7 +2,6 @@ package com.victor.che.ui;
 
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -25,14 +24,12 @@ import com.victor.che.util.BitmapUtil;
 import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.PicassoUtils;
-import com.victor.che.util.StringUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -70,8 +67,8 @@ public class AccountInfoActivity extends TakePhotoActivity {
         parentView = getLayoutInflater().inflate(R.layout.activity_account_info, null);
         setTitle("个人信息");
         if (MyApplication.isLogined()) {
-            tv_name.setText(MyApplication.CURRENT_USER.username);
-                PicassoUtils.loadHeadImage(mContext, MyApplication.CURRENT_USER.head, tv_head);
+            tv_name.setText(MyApplication.getUser().username);
+                PicassoUtils.loadHeadImage(mContext, MyApplication.getUser().head, tv_head);
         }
         showPicPick();
     }

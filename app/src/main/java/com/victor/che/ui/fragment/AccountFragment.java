@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-
 /**
  * 个人中心界面
  * Author Victor
@@ -49,8 +48,6 @@ public class AccountFragment extends BaseFragment {
             // 当前用户名
             tv_name.setText(MyApplication.getUser().username);
             PicassoUtils.loadHeadImage(mContext, MyApplication.getUser().head, ivFgMineHead);
-            // 店铺名称
-//            tv_store_name.setText(MyApplication.CURRENT_USER.name);
         } else {
             tv_name.setText("请登录");
         }

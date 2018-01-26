@@ -108,6 +108,7 @@ public class Message implements Serializable {
              * createDate : 2018-01-21 08:55:39
              * updateDate : 2018-01-21 09:21:14
              * lawName : 商丘和昌  //单位名称
+             * farm：单位名称；
              * lawWaters : 1
              * lawAqu : 0
              * lawMed : 1
@@ -148,6 +149,7 @@ public class Message implements Serializable {
             private int lawSta;
             private int lawOld;
             private int lawTrea;
+            public String farm;
             private String lawProb;
             private String lawOther;
             private String psonName;

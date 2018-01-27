@@ -38,6 +38,7 @@ import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -98,6 +99,10 @@ public class MessageFragment extends BaseFragment {
 
         // 设置标题
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器
+        mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
+                .size(20)
+                .colorResId(R.color.divider)
+                .build());//添加分隔线
         mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
         mRecyclerView.setAdapter(mAdapter);
         mPtrHelper = new PtrHelper<>(mPtrFrame, mAdapter, mList);
@@ -231,7 +236,9 @@ public class MessageFragment extends BaseFragment {
                     public void onClick(View v) {
                         ischeckd = true;
                         linNotarize.setVisibility(View.VISIBLE);
-                        mAdapter.notifyDataSetChanged();  //
+                        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
+                    mRecyclerView.setAdapter(mAdapter);
+                     mAdapter.notifyDataSetChanged();  //
                         popupWindow.dismiss();
                     }
                 });
@@ -282,8 +289,9 @@ public class MessageFragment extends BaseFragment {
                         MyApplication.showToast(element.msg);
                         linNotarize.setVisibility(View.GONE);
                         ischeckd = false;
-                        mAdapter.notifyDataSetChanged();
-                        mPtrHelper.autoRefresh(true);
+//                        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
+//                      mRecyclerView.setAdapter(mAdapter);
+                     mPtrHelper.autoRefresh(true);
                     }
                 });
     }
@@ -344,9 +352,9 @@ public class MessageFragment extends BaseFragment {
             }
 
             /**
-             * 修改
+             * 修改 进入详情
              */
-            holder.setOnClickListener(R.id.tv_change, new View.OnClickListener() {
+            holder.setOnClickListener(R.id.rl_item, new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();

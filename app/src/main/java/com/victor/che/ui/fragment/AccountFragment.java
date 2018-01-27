@@ -19,6 +19,11 @@ import android.widget.TextView;
 import com.jph.takephoto.model.TResult;
 import com.qikecn.uploadfilebybase64.UploadResultBean;
 import com.victor.che.R;
+import com.victor.che.api.BaseHttpCallbackListener;
+import com.victor.che.api.Define;
+import com.victor.che.api.Element;
+import com.victor.che.api.MyParams;
+import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.event.StringEvent;
 import com.victor.che.ui.AccountInfoActivity;
@@ -84,6 +89,7 @@ public class AccountFragment extends TakePhoneFragment {
                             headPic = headPic.substring(0, headPic.length() - 1);
                         }
                     }
+                    MyApplication.showToast("修改成功");
                     break;
             }
         }
@@ -183,7 +189,7 @@ public class AccountFragment extends TakePhoneFragment {
     Runnable runnableHeaderImage = new Runnable() {
         @Override
         public void run() {
-            Message msg = new Message();
+            final Message msg = new Message();
             if (!ListUtils.isEmpty(personHeaderImageList)) {
                 ArrayList<File> localFiles = new ArrayList<File>();
                 for (String path : personHeaderImageList) {
@@ -195,22 +201,22 @@ public class AccountFragment extends TakePhoneFragment {
                 /**
                  * 给后台传图片，后台返回string 接口
                  */
-//                MyParams params=new MyParams();
-//                params.put("photo",file);
-//                params.put("type",5);
-//                VictorHttpUtil.doPost(mContext, Define.URL_PostPic, params, true, "加载中...",
-//                        new BaseHttpCallbackListener<Element>() {
-//                    @Override
-//                    public void callbackSuccess(String url, Element element) {
-//                        super.callbackSuccess(url, element);
-//                        PublishImg publishImg=  JSON.parseObject(element.data, PublishImg.class);
-//                        headPic = publishImg.getUrl();
-//                        SharedPreferencesHelper.getInstance().putString(AppSpContact.URL, headPic);
-//                    }
-//                });
+                MyParams params=new MyParams();
+                params.put("file",file);
+                params.put("mobileLogin",MyApplication.getUser().mobileLogin);
+                params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
+                VictorHttpUtil.doPost(mContext, Define.URL_imageUpload+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                        new BaseHttpCallbackListener<Element>() {
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        super.callbackSuccess(url, element);
+                            MyApplication.showToast(element.msg);
+                        msg.what = 1;
+                        handler.sendMessage(msg);
+                    }
+                });
             }
-            msg.what = 1;
-            handler.sendMessage(msg);
+
         }
     };
 

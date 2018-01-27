@@ -3,17 +3,13 @@ package com.victor.che.ui;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
 import com.victor.che.R;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.base.BaseActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import butterknife.BindView;
 
 import static com.victor.che.app.MyApplication.spUtil;
 
@@ -25,8 +21,8 @@ import static com.victor.che.app.MyApplication.spUtil;
  */
 public class SplashActivity extends BaseActivity {
     Handler handler = new Handler();
-    @BindView(R.id.lin_splsh)
-    ImageView linSplsh;
+//    @BindView(R.id.lin_splsh)
+//    ImageView linSplsh;
     private int seconds = 3;
     private boolean firstStartedApp;// 是否是第一次启动app
     @Override
@@ -37,7 +33,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        Picasso.with(mContext).load(R.drawable.ic_welcom).into(linSplsh);
+       // Picasso.with(mContext).load(R.drawable.ic_welcom).into(linSplsh);
         setViewData();
     }
 //    @Override

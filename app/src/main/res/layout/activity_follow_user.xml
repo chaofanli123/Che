@@ -26,24 +26,27 @@
                     style="@style/style_receipt_text"
                     android:text="单位名称"
                     />
-                <com.victor.che.widget.ClearEditText
+                <TextView
                     android:id="@+id/et_unitname"
                     style="@style/common_edittext"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/white"
-                    android:cursorVisible="true"
                     android:hint="请输入单位名称"
-                    android:gravity="center_vertical|right"
-                    android:layout_marginRight="16dp"
-                    android:imeOptions="actionSearch"
+                    android:inputType="number"
                     android:maxLength="11"
+                    android:gravity="center_vertical|right"
                     android:singleLine="true"
                     android:textColor="@color/black_text"
-                    android:textColorHint="@color/gray_text"
+                    android:textColorHint="@color/text_color_hint"
                     android:textCursorDrawable="@drawable/color_cursor"
-                    android:textSize="@dimen/font_size_28px"/>
+                    android:textSize="14sp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/common_padding2"
+                    android:src="@drawable/ic_arrow_right"/>
             </LinearLayout>
             <LinearLayout
 

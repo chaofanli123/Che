@@ -72,7 +72,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     RelativeLayout llAddYuyin;
     @BindView(R.id.activity_follow_user)
     LinearLayout activityFollowUser;
-//    @BindView(R.id.noScrollgridview)
+    //    @BindView(R.id.noScrollgridview)
 //    NoScrollGridView noScrollgridview;
     @BindView(R.id.iv_qianming)
     ImageView ivQianming;
@@ -91,7 +91,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     @BindView(R.id.ll_qianming)
     LinearLayout llQianming;
     @BindView(R.id.et_unitname)
-    ClearEditText etUnitname; //单位名称
+    TextView etUnitname; //单位名称
     @BindView(R.id.tv_firsttime)
     TextView tvFirsttime;
     @BindView(R.id.tv_lawWaters)
@@ -166,6 +166,11 @@ public class PublichaddActivity extends TakePhotoActivity {
     private MediaPlayUtil mMediaPlayUtil;
     private String mVoiceData; //语音string
     private AnimationDrawable mImageAnim;
+
+    private LawWatersListAdapter framListAdapter; //单位名称
+ //
+    private int selectedframPos = 0;
+
     private LawWatersListAdapter lawWatersListAdapter;
     private String[] lawWaters = {"全民所有", "集体所有"};
     private int selectedlawWatersPos = 0;
@@ -214,8 +219,8 @@ public class PublichaddActivity extends TakePhotoActivity {
     private LawWatersListAdapter lawTreaListAdapter;
     private String[] lawTrea = {"合格,没有发现违规行为", "不合格项或者需要整改的地方"};
     private int selectedlawTreaPos = 0;
-    private String lawprob, remarks,lawOther;
-    private File qianmingFile,recordFile;
+    private String lawprob, remarks, lawOther;
+    private File qianmingFile, recordFile;
 
     private com.victor.che.domain.Message.PageBean.ListBean shopsCoupon;//从列表界面传过来的对象
     private String type;
@@ -225,15 +230,18 @@ public class PublichaddActivity extends TakePhotoActivity {
     public int getContentView() {
         return R.layout.activity_follow_user;
     }
+
     @Override
     protected void initView() {
         super.initView();
-        setTitle("添加执法");
-        type=getIntent().getStringExtra("type");
-        if ("list".equals(type)){ //修改执法
-            shopsCoupon= (com.victor.che.domain.Message.PageBean.ListBean) getIntent().getSerializableExtra("shopsCoupon");
+
+        type = getIntent().getStringExtra("type");
+        if ("list".equals(type)) { //修改执法
+            setTitle("修改执法信息");
+            shopsCoupon = (com.victor.che.domain.Message.PageBean.ListBean) getIntent().getSerializableExtra("shopsCoupon");
             showdata(shopsCoupon);
         }
+        setTitle("添加执法信息");
         topbarRight.setText("提交");
         parentView = getLayoutInflater().inflate(R.layout.activity_follow_user, null);
         showpic();
@@ -259,8 +267,10 @@ public class PublichaddActivity extends TakePhotoActivity {
 //        });
         mMediaPlayUtil = MediaPlayUtil.getInstance();
         /**
-         * 初始化适配器
+         * 初始化适配器s
          */
+        framListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, null, selectedframPos);
+        _getorderWorker();
         lawWatersListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawWaters, selectedlawWatersPos);
         LawAquListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawAqu, selectedLawAquPos);
 
@@ -280,113 +290,114 @@ public class PublichaddActivity extends TakePhotoActivity {
 
     /**
      * 渲染界面
+     *
      * @param shopsCoupon
      */
     private void showdata(com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
-        etUnitname.setText(shopsCoupon.getLawName());
+        etUnitname.setText(shopsCoupon.farm);
         tvFirsttime.setText(shopsCoupon.getLawTime());
-        if (shopsCoupon.getLawWaters()==1) {
+        if (shopsCoupon.getLawWaters() == 1) {
             tvLawWaters.setText("全民所有");
-        }else if (shopsCoupon.getLawWaters()==2) {
+        } else if (shopsCoupon.getLawWaters() == 2) {
             tvLawWaters.setText("集体所有 ");
         }
-        selectedlawWatersPos=shopsCoupon.getLawWaters();
-        selectedLawAquPos=shopsCoupon.getLawAqu();
+        selectedlawWatersPos = shopsCoupon.getLawWaters();
+        selectedLawAquPos = shopsCoupon.getLawAqu();
         if (shopsCoupon.getLawAqu() == 0) {
             tvLawAqu.setText("有");
-        }else if (shopsCoupon.getLawAqu() == 1) {
+        } else if (shopsCoupon.getLawAqu() == 1) {
             tvLawAqu.setText("应该持有但没有");
-        }else {
+        } else {
             tvLawAqu.setText("不需办理");
         }
         //用药记录
-        selectedlawMed=shopsCoupon.getLawMed();
+        selectedlawMed = shopsCoupon.getLawMed();
         if (shopsCoupon.getLawMed() == 0) {
             tvLawMed.setText("真实完整");
-        }else if (shopsCoupon.getLawMed() == 1) {
+        } else if (shopsCoupon.getLawMed() == 1) {
             tvLawMed.setText("不真实");
-        }else if (shopsCoupon.getLawMed() == 2) {
+        } else if (shopsCoupon.getLawMed() == 2) {
             tvLawMed.setText("不完整");
-        }else {
+        } else {
             tvLawMed.setText("不能提供");
         }
         //生产记录
-        selectedlawPro=shopsCoupon.getLawPro();
+        selectedlawPro = shopsCoupon.getLawPro();
         if (shopsCoupon.getLawPro() == 0) {
             tvLawPro.setText("真实完整");
-        }else if (shopsCoupon.getLawPro() == 1) {
+        } else if (shopsCoupon.getLawPro() == 1) {
             tvLawPro.setText("不真实");
-        }else if (shopsCoupon.getLawPro() == 2) {
+        } else if (shopsCoupon.getLawPro() == 2) {
             tvLawPro.setText("不完整");
-        }else {
+        } else {
             tvLawPro.setText("不能提供");
         }
         //销售记录
-        selectedlawSal=shopsCoupon.getLawSal();
+        selectedlawSal = shopsCoupon.getLawSal();
         if (shopsCoupon.getLawSal() == 0) {
             tvLawSal.setText("真实完整");
-        }else if (shopsCoupon.getLawSal() == 1) {
+        } else if (shopsCoupon.getLawSal() == 1) {
             tvLawSal.setText("不真实");
-        }else if (shopsCoupon.getLawSal() == 2) {
+        } else if (shopsCoupon.getLawSal() == 2) {
             tvLawSal.setText("不完整");
-        }else {
+        } else {
             tvLawSal.setText("不能提供");
         }
         //苗种来源
-        selectedlawDeliPos=shopsCoupon.getLawDeli();
+        selectedlawDeliPos = shopsCoupon.getLawDeli();
         if (shopsCoupon.getLawDeli() == 0) {
             tvLawDeli.setText("苗种来源于合法的生产企业，且来源记录清晰 ，存有供货方苗种生产许可证");
-        }else if (shopsCoupon.getLawDeli() == 1) {
+        } else if (shopsCoupon.getLawDeli() == 1) {
             tvLawDeli.setText("无法证明来源及其合法性");
         }
         //tv_lawMedi 用药和饲料情况
-        selectedlawMediPos=shopsCoupon.getLawMedi();
+        selectedlawMediPos = shopsCoupon.getLawMedi();
         if (shopsCoupon.getLawMedi() == 0) {
             tvLawMedi.setText("现场未发现禁用药物和非法添加物");
-        }else if (shopsCoupon.getLawMedi() == 1) {
+        } else if (shopsCoupon.getLawMedi() == 1) {
             tvLawMedi.setText("现场发现禁用药物或者非法添加物");
-        }else {
+        } else {
             tvLawMedi.setText("药残检测超标");
         }
         //tv_lawQual 质量管理制度
-        selectedlawQualPos=shopsCoupon.getLawQual();
+        selectedlawQualPos = shopsCoupon.getLawQual();
         if (shopsCoupon.getLawQual() == 0) {
             tvLawQual.setText("有");
-        }else if (shopsCoupon.getLawQual() == 1) {
+        } else if (shopsCoupon.getLawQual() == 1) {
             tvLawQual.setText("无");
         }
         //tv_lawTech 是否参加过渔业部门组织的法律法规培训
-        selectedlawTechPos=shopsCoupon.getLawTech();
+        selectedlawTechPos = shopsCoupon.getLawTech();
         if (shopsCoupon.getLawTech() == 0) {
             tvLawTech.setText("是");
             linLawDate.setVisibility(View.VISIBLE);
-            tvLawDate.setText(shopsCoupon.getLawDate()+"");
-        }else if (shopsCoupon.getLawTech() == 1) {
+            tvLawDate.setText(shopsCoupon.getLawDate() + "");
+        } else if (shopsCoupon.getLawTech() == 1) {
             tvLawTech.setText("否");
             linLawDate.setVisibility(View.GONE);
         }
         //接受监管情况tv_lawSta
-        selectedlawStaPos=shopsCoupon.getLawSta();
+        selectedlawStaPos = shopsCoupon.getLawSta();
         if (shopsCoupon.getLawSta() == 0) {
             tvLawSta.setText("接受监管并有监管记录");
-        }else if (shopsCoupon.getLawSta() == 1) {
+        } else if (shopsCoupon.getLawSta() == 1) {
             tvLawSta.setText("曾接受监管但无记录");
         }
         //tv_lawOld 对以往检查发现问题的整改情况
-        selectedlawOldPos=shopsCoupon.getLawOld();
+        selectedlawOldPos = shopsCoupon.getLawOld();
         if (shopsCoupon.getLawOld() == 0) {
             tvLawOld.setText("整改彻底");
-        }else if (shopsCoupon.getLawOld() == 1) {
+        } else if (shopsCoupon.getLawOld() == 1) {
             tvLawOld.setText("整改不彻底");
-        }else {
+        } else {
             tvLawOld.setText("未整改");
         }
         //tv_lawTrea 处理情况
-        selectedlawTreaPos=shopsCoupon.getLawTrea();
+        selectedlawTreaPos = shopsCoupon.getLawTrea();
         if (shopsCoupon.getLawTrea() == 0) {
             tvLawTrea.setText("合格，没有发现违规行为");
             linLawTrea.setVisibility(View.GONE);
-        }else if (shopsCoupon.getLawTrea() == 1) {
+        } else if (shopsCoupon.getLawTrea() == 1) {
             tvLawTrea.setText("不合格项或者需要整改的地方");
             linLawTrea.setVisibility(View.VISIBLE);
             etLawProb.setText(shopsCoupon.getLawProb());//et_lawProb
@@ -397,9 +408,9 @@ public class PublichaddActivity extends TakePhotoActivity {
         PicassoUtils.loadImage(mContext, shopsCoupon.getPsonName(), ivQianming);
         //luyin
         if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
-            recordFile=new File(shopsCoupon.getUserName());
+            recordFile = new File(shopsCoupon.getUserName());
             mRlVoiceLayout.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mRlVoiceLayout.setVisibility(View.GONE);
         }
     }
@@ -491,6 +502,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         imagePathList.add(file.getAbsolutePath());
         adapter.notifyDataSetChanged();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -508,8 +520,8 @@ public class PublichaddActivity extends TakePhotoActivity {
                     mRlVoiceLayout.setVisibility(View.VISIBLE);
                     mTvTimeLengh.setText(time);
                 }
-                if (!StringUtil.isEmpty(mSoundData) ) {
-                    recordFile=new File(mSoundData);
+                if (!StringUtil.isEmpty(mSoundData)) {
+                    recordFile = new File(mSoundData);
                 }
                 break;
         }
@@ -531,14 +543,33 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
         });
     }
+
     @OnClick({R.id.tv_lawAqu, R.id.iv_luying, R.id.ll_qianming, R.id.rel_luyin, R.id.tv_firsttime,
             R.id.tv_lawWaters, R.id.topbar_right, R.id.tv_lawMed, R.id.tv_lawPro, R.id.tv_lawSal,
             R.id.tv_lawDeli, R.id.tv_lawMedi, R.id.tv_lawQual, R.id.tv_lawTech, R.id.tv_lawDate,
-            R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea})
+            R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea,R.id.et_unitname})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.topbar_right://提交
-                    saveup();
+                saveup();
+                break;
+            case R.id.et_unitname: //单位名称
+//                ListDialogFragment.newInstance(orderdworkerListAdapter, new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        selectedOrderTypePos = position;
+//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
+//                        sale_user_id = orderWorkerList.get(selectedOrderTypePos).staff_user_id;
+//                        // 刷新列表
+//                        mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
+//                            @Override
+//                            public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
+//                                _reqData(pullToRefresh, curpage, pageSize);
+//                            }
+//                        });
+//                        mPtrHelper.autoRefresh(true);
+//                    }
+//                }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
             case R.id.iv_luying:
                 startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
@@ -781,7 +812,7 @@ public class PublichaddActivity extends TakePhotoActivity {
      */
     private void saveup() {
         String Unitname = etUnitname.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(Unitname)) {
                 MyApplication.showToast("单位名称不能为空");
                 etUnitname.requestFocus();
@@ -789,7 +820,7 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
         }
         String lawTime = tvFirsttime.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawTime)) {
                 MyApplication.showToast("单检查时间不能为空");
                 tvFirsttime.requestFocus();
@@ -798,7 +829,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawaqu = tvLawAqu.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawaqu)) {
                 MyApplication.showToast("养殖证或苗种生产许可证不能为空");
                 tvLawAqu.requestFocus();
@@ -807,7 +838,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawmed = tvLawMed.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawmed)) {
                 MyApplication.showToast("用药纪录不能为空");
                 tvLawMed.requestFocus();
@@ -816,7 +847,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawpro = tvLawPro.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawpro)) {
                 MyApplication.showToast("生产纪录不能为空");
                 tvLawPro.requestFocus();
@@ -825,7 +856,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawsal = tvLawSal.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawsal)) {
                 MyApplication.showToast("销售纪录不能为空");
                 tvLawSal.requestFocus();
@@ -834,7 +865,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawdeli = tvLawDeli.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawdeli)) {
                 MyApplication.showToast("苗种来源不能为空");
                 tvLawDeli.requestFocus();
@@ -843,7 +874,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawmedi = tvLawMedi.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawmedi)) {
                 MyApplication.showToast("用药和饲料情况不能为空");
                 tvLawMedi.requestFocus();
@@ -852,7 +883,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawqual = tvLawQual.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawqual)) {
                 MyApplication.showToast("质量管理制度不能为空");
                 tvLawQual.requestFocus();
@@ -861,7 +892,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawtech = tvLawTech.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawtech)) {
                 MyApplication.showToast("是否参加过渔业部门组织的法律法规培训不能为空");
                 tvLawTech.requestFocus();
@@ -879,7 +910,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawsta = tvLawSta.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawsta)) {
                 MyApplication.showToast("质量管理制度不能为空");
                 tvLawSta.requestFocus();
@@ -889,7 +920,7 @@ public class PublichaddActivity extends TakePhotoActivity {
 
 
         String lawold = tvLawOld.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawold)) {
                 MyApplication.showToast("接受监管情况不能为空");
                 tvLawOld.requestFocus();
@@ -898,7 +929,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
 
         String lawtrea = tvLawTrea.getText().toString().trim();
-        if ("add".equals(type)){ //add执法
+        if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawtrea)) {
                 MyApplication.showToast("对以往检查发现问题的整改情况不能为空");
                 tvLawTrea.requestFocus();
@@ -926,8 +957,8 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }
             }
         }
-        if ("add".equals(type)){ //add执法
-            if (qianmingFile==null) {
+        if ("add".equals(type)) { //add执法
+            if (qianmingFile == null) {
                 MyApplication.showToast("签名文件不能为空");
                 return;
             }
@@ -935,8 +966,8 @@ public class PublichaddActivity extends TakePhotoActivity {
 
         MyParams params = new MyParams();
         params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
-        if ("list".equals(type)){ //修改执法
-            params.put("id",shopsCoupon.getId());
+        if ("list".equals(type)) { //修改执法
+            params.put("id", shopsCoupon.getId());
         }
         params.put("lawName", Unitname);//单位名称
         params.put("lawTime", lawTime);//检查时间
@@ -961,17 +992,18 @@ public class PublichaddActivity extends TakePhotoActivity {
             params.put("remarks", selectedlawOldPos);//整改建议
             params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
         }
-        params.put("pson",qianmingFile);//// 签名文件 File
-        params.put("user",recordFile);//// 录音文件 File 可空
+        params.put("pson", qianmingFile);//// 签名文件 File
+        params.put("user", recordFile);//// 录音文件 File 可空
 
         VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
-                      MyApplication.showToast(element.msg);
+                        MyApplication.showToast(element.msg);
                     }
                 });
     }
+
     /**
      * 显示时间对话框
      */
@@ -1019,6 +1051,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     }
 
 
+
     /**
      * 水产属性适配器
      */
@@ -1036,5 +1069,39 @@ public class PublichaddActivity extends TakePhotoActivity {
             textView.setText(entity);
             textView.setTextColor(getResources().getColor(pos == position ? R.color.theme_color : R.color.black_text));
         }
+    }
+
+
+    /**
+     * 获取单位名称列表
+     */
+    private void _getorderWorker() {
+        // 获取订单列表
+        MyParams params = new MyParams();
+        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+        VictorHttpUtil.doGet(mContext, Define.URL_STAFF_USER_LIST, params, false, null,
+                new BaseHttpCallbackListener<Element>() {
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        /***职工类型增加“全部职员”***/
+//                        orderWorkerList = new ArrayList<>();
+//                        Worker orderWorker = new Worker();
+//                        orderWorker.staff_user_id = "0";
+//                        orderWorker.user_name = "全部职员";
+//                        orderWorkerList.add(orderWorker);
+//
+//                        orderWorkerList.addAll(JSON.parseArray(element.data, Worker.class));
+//                        if (CollectionUtil.isEmpty(orderWorkerList)) {
+//                            MyApplication.showToast("职员列表为空");
+//                            return;
+//                        }
+//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
+//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
+//                        btnOrderWorker.requestLayout();// 防止文字和图片覆盖
+//                        sale_user_id = orderWorkerList.get(selectedOrderTypePos).staff_user_id;
+//                        orderdworkerListAdapter = new OrderListActivity.OrderWorkerListAdapter(mContext, R.layout.item_list_dialog, orderWorkerList);
+
+                    }
+                });
     }
 }

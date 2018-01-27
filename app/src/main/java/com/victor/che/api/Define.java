@@ -85,6 +85,10 @@ public class Define {
    * 修改密码
    */
   public static final String URL_CHANGE_PWD = API_DOMAIN + "a/sys/user/modifyPwd";
+  /**
+   * 修改密码
+   */
+  public static final String URL_imageUpload = API_DOMAIN + "a/sys/user/imageUpload";
 
 
 

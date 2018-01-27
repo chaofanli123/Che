@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity {
     private boolean mLoginByPwd = true;// 默认是密码登录
     private String deviceId;
 
-    private boolean isrember = true;//是否记住密码
+    private boolean isrember=false;//是否记住密码
 
 
     @Override
@@ -101,9 +101,12 @@ public class LoginActivity extends BaseActivity {
 
         firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
         if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) {//已登录进入首页
-            MyApplication.openActivity(mContext, TabBottomActivity.class);
-            finish();
-            return;
+            isrember=MyApplication.getUser().isrember;
+            if (isrember) {
+               et_username.setText(MyApplication.getUser().username);
+            } else {
+                et_username.setText("");
+            }
         }
         mRedirectTargetClass = (Class<?>) getIntent().getSerializableExtra("mRedirectTargetClass");
         mBundle = getIntent().getBundleExtra("mBundle");
@@ -119,6 +122,7 @@ public class LoginActivity extends BaseActivity {
 
         if (isrember) {
             tvCheck.setImageResource(R.drawable.ic_common_checked);
+
         } else {
             tvCheck.setImageResource(R.drawable.ic_common_unchecked);
         }
@@ -185,10 +189,9 @@ public class LoginActivity extends BaseActivity {
                         // 登录成功
                         // 保存用户信息（手机号和默认车辆）
                         User user = JSON.parseObject(element.body, User.class);
+                        user.isrember=isrember;
                         MyApplication.saveUser(user);
-                        if (isrember) {
                             spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);//是否第一次登录
-                        }
                         spUtil.setObject("CURRENT_USER", user);
                         MyApplication.openActivity(mContext, TabBottomActivity.class);
                         // 关闭本页

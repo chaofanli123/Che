@@ -34,7 +34,7 @@ public class User implements Serializable {
      "mobileLogin": true,
      "JSESSIONID": ""
      */
-
+public boolean isrember;
     public String username;
     public boolean mobileLogin;
     public String JSESSIONID;

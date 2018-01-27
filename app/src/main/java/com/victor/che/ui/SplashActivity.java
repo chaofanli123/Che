@@ -103,14 +103,16 @@ public class SplashActivity extends BaseActivity {
      * */
     protected void setViewData() {
         final Intent intent;
-        if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) { //已经登录过了
-            //进入首页
-            intent = new Intent(this, TabBottomActivity.class);
+//        if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) { //已经登录过了
+//            //进入首页
+//            intent = new Intent(this, TabBottomActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        }else {
+//            intent=new Intent(this, LoginActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        }
+        intent=new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }else {
-            intent=new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
         Timer timer=new Timer();
         TimerTask task=new TimerTask()
         {

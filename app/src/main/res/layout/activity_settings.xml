@@ -189,8 +189,6 @@
                 android:textColor="@color/black_text"
                 android:visibility="gone"
                 android:textSize="@dimen/middle_font_size"/>
-
-
             <TextView
                 android:id="@+id/tv_about_us"
                 android:layout_width="match_parent"

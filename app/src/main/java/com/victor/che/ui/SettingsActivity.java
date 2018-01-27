@@ -168,6 +168,14 @@ public class SettingsActivity extends BaseActivity {
     }
 
     /**
+     * 修改密码
+     */
+    @OnClick(R.id.area_change_pwd)
+    void gotoChangePwd() {
+        MyApplication.openActivity(mContext, ChangePwdActivity.class);
+    }
+
+    /**
      * 去功能介绍
      */
     @OnClick(R.id.area_function)

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/common_topbar"/>
+    <include layout="@layout/top_bar_commom_text"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,6 +17,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/rl_name"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
                 android:layout_marginTop="30px"
@@ -40,16 +41,51 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:gravity="center"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center_vertical|left"
                     android:text="店小二"
                     android:textColor="@color/light_gray_text"
                     android:textSize="@dimen/little_font_size"/>
             </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"/>
             <RelativeLayout
-                android:id="@+id/rl_head"
+                android:id="@+id/rl_email"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
-                android:layout_marginTop="30px"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="邮箱"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+                <TextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center_vertical|left"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"/>
+            <RelativeLayout
+                android:id="@+id/rl_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
                 android:background="@drawable/sl_common_white_btn"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -60,35 +96,87 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="头像"
+                    android:text="电话"
                     android:textColor="@color/black_text"
                     android:textSize="@dimen/middle_font_size"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/tv_head"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    />
-
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center_vertical|left"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
             </RelativeLayout>
-
-            <TextView
-                android:id="@+id/area_change_pwd"
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"/>
+            <RelativeLayout
+                android:id="@+id/rl_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height"
-                android:layout_marginTop="20px"
                 android:background="@drawable/sl_common_white_btn"
-                android:drawableRight="@drawable/ic_arrow_right"
-                android:gravity="center_vertical|left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="@dimen/common_padding"
-                android:paddingRight="@dimen/common_padding"
-                android:text="修改密码"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/middle_font_size"/>
+                android:paddingRight="@dimen/common_padding">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="手机"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
 
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:inputType="phone"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center_vertical|left"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/divider"/>
+            <RelativeLayout
+                android:id="@+id/rl_remarks"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:background="@drawable/sl_common_white_btn"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="备注"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/middle_font_size"/>
+
+                <TextView
+                    android:id="@+id/tv_remarks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:inputType="phone"
+                    android:layout_centerVertical="true"
+                    android:drawableRight="@drawable/ic_arrow_right"
+                    android:gravity="center_vertical|left"
+                    android:textColor="@color/light_gray_text"
+                    android:textSize="@dimen/little_font_size"/>
+            </RelativeLayout>
             <!--<TextView
                 android:id="@id/btn_operate"
                 android:layout_width="match_parent"

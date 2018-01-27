@@ -68,7 +68,6 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.area_product_mgr://产品管理
 //                if (MyApplication.CURRENT_USER.is_initial_provider == 1) {//总店身份
-//                    MyApplication.openActivity(mContext, ProductMgrHeadActivity.class, true);
 //                } else if (MyApplication.CURRENT_USER.is_initial_provider == 0) {//分店身份
 //                    MyApplication.openActivity(mContext, ProductMgrActivity.class, true);
 //                }

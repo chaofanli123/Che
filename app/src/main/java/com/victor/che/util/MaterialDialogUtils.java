@@ -62,7 +62,6 @@ public class MaterialDialogUtils {
                 .content(content)
                 .inputType(InputType.TYPE_CLASS_TEXT)
                 .input(hint, "", positiveClick)
-
                 .positiveText("确定")
                 .negativeText("取消")
                 .onNegative(new SingleButtonCallback() {

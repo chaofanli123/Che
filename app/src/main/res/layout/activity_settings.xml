@@ -37,7 +37,19 @@
             <include
                 layout="@layout/common_divider"
                 android:visibility="gone"/>
-
+            <TextView
+                android:id="@+id/area_change_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height"
+                android:layout_marginTop="20px"
+                android:background="@drawable/sl_common_white_btn"
+                android:drawableRight="@drawable/ic_arrow_right"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingRight="@dimen/common_padding"
+                android:text="修改密码"
+                android:textColor="@color/black_text"
+                android:textSize="@dimen/middle_font_size"/>
             <RelativeLayout
                 android:id="@+id/area_clear_cache"
                 android:layout_width="match_parent"
@@ -175,6 +187,7 @@
                 android:paddingRight="@dimen/common_padding"
                 android:text="意见反馈"
                 android:textColor="@color/black_text"
+                android:visibility="gone"
                 android:textSize="@dimen/middle_font_size"/>
 
 

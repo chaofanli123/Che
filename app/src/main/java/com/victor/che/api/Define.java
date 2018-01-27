@@ -17,8 +17,6 @@ public class Define {
      * 登录
      */
     public static final String URL_LOGIN = API_DOMAIN + "a/login";
-
-
   /**
    * 视频
    */
@@ -69,19 +67,34 @@ public class Define {
   /**
    添加执法 修改执法
    */
-  public static final String URL_govAquLaw_save= API_DOMAIN + "gov/govAquLaw/save";
+  public static final String URL_govAquLaw_save= API_DOMAIN + "a/gov/govAquLaw/save";
   /**
    删除执法
    */
-  public static final String URL_govAquLaw_deleteAll= API_DOMAIN + "gov/govAquLaw/deleteAll";
-
-
-
-
+  public static final String URL_govAquLaw_deleteAll= API_DOMAIN + "a/gov/govAquLaw/deleteAll";
     /**
-     * 获取总店服务商产品类别列表
+     * 修改个人资料接口
      */
-    public static final String URL_GOODS_CATEGORY_LIST = API_DOMAIN + "c=goods_category&a=list&v=1";
+    public static final String URL_infoEdit = API_DOMAIN + "a/sys/user/infoEdit";
+    /**
+     * 查看个人资料
+     */
+    public static final String URL_info = API_DOMAIN + "a/sys/user/info";
+
+  /**
+   * 修改密码
+   */
+  public static final String URL_CHANGE_PWD = API_DOMAIN + "a/sys/user/modifyPwd";
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 获取服务商商品列表
@@ -130,10 +143,7 @@ public class Define {
      */
     public static final String URL_PROVIDER_USER_DETAILS = API_DOMAIN + "c=provider_user&a=detail&v=1";
 
-    /**
-     * 修改密码
-     */
-    public static final String URL_CHANGE_PWD = API_DOMAIN + "c=provider&a=reset_password&v=1";
+
 
     /**
      * 获取服务商卡列表

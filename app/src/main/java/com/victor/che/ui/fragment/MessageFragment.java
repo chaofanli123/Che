@@ -147,7 +147,7 @@ public class MessageFragment extends BaseFragment {
         if (!StringUtil.isEmpty(end)) {
             params.put("end", end);
         }
-        VictorHttpUtil.doGet(mContext, Define.URL_govAquLaw_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+        VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
@@ -332,17 +332,8 @@ public class MessageFragment extends BaseFragment {
 
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
             tv_coupon_time.setText("检查时间"+shopsCoupon.getLawTime());
-            /**
-             * 删除
-             */
-//            holder.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                  //  showdialog(shopsCoupon,shopsCoupon.getCoupon_id());
-//                }
-//            });
             final ImageView select = holder.getView(R.id.img_select);
-            if (isdelete) {//删除
+            if (isdelete) {
                 if (shopsCoupon.checked) {//选择状态
                     select.setImageResource(R.drawable.ic_select_compan_click);
                 } else {

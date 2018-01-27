@@ -1,77 +1,148 @@
 package com.victor.che.ui.fragment;
 
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jph.takephoto.model.TResult;
+import com.qikecn.uploadfilebybase64.UploadResultBean;
 import com.victor.che.R;
 import com.victor.che.app.MyApplication;
-import com.victor.che.base.BaseFragment;
+import com.victor.che.event.StringEvent;
 import com.victor.che.ui.AccountInfoActivity;
 import com.victor.che.ui.SettingsActivity;
 import com.victor.che.ui.WebViewActivity;
+import com.victor.che.ui.my.util.StringUtil;
+import com.victor.che.util.BitmapUtil;
+import com.victor.che.util.Executors;
+import com.victor.che.util.ListUtils;
 import com.victor.che.util.PicassoUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * 个人中心界面
  * Author Victor
  * Email 468034043@qq.com
  * Time 2016/12/27 0027 9:45
  */
-public class AccountFragment extends BaseFragment {
+public class AccountFragment extends TakePhoneFragment {
 
     @BindView(R.id.tv_name)
     TextView tv_name;
     @BindView(R.id.iv_fg_mine_head)
     CircleImageView ivFgMineHead;
 
+    private View parentView;
+    /**
+     * popuwindow
+     */
+    private LinearLayout ll_popup;
+    private PopupWindow pop = null;
+    private File file;
+    private ArrayList<String> personHeaderImageList = new ArrayList<>();//头像图片集合
+    private String headPic = ""; //头像图片 需要上传的头像
+    private List<UploadResultBean> uploadHeadImage;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case -1:
+                    MyApplication.showToast("上传图片过大或网络异常，上传失败");
+                    break;
+                case 1: // 修改头像
+                    headPic = "";
+                    if (uploadHeadImage != null) {
+                        for (UploadResultBean bean : uploadHeadImage) {
+                            if (!TextUtils.isEmpty(bean.getRemoteFileName())) {
+                                headPic += bean.getRemoteFileName() + ",";
+                            }
+                        }
+                        if (headPic.endsWith(",")) {
+                            headPic = headPic.substring(0, headPic.length() - 1);
+                        }
+                    }
+                    break;
+            }
+        }
+    };
+
     @Override
     public int getContentView() {
         return R.layout.fragment_account;
     }
-
     @Override
     protected void initView() {
         super.initView();
+        // 设置标题
+        parentView = View.inflate(getActivity(), R.layout.fragment_account, null);
+        initview();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    private void initview() {
         if (MyApplication.isLogined()) {
             // 当前用户名
-            tv_name.setText(MyApplication.getUser().username);
-            PicassoUtils.loadHeadImage(mContext, MyApplication.getUser().head, ivFgMineHead);
+            if (StringUtil.isEmpty(MyApplication.getUser().name)) {
+                tv_name.setText(MyApplication.getUser().username);
+            }else {
+                tv_name.setText(MyApplication.getUser().name);
+            }
+            PicassoUtils.loadHeadImage(getActivity(), MyApplication.getUser().head, ivFgMineHead);
         } else {
             tv_name.setText("请登录");
         }
+        showPicPick();
     }
+    //    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if (MyApplication.isLogined()) {
+//            // 当前用户名
+//            tv_name.setText(MyApplication.getUser().username);
+//            PicassoUtils.loadHeadImage(getActivity(), MyApplication.getUser().head, ivFgMineHead);
+//        } else {
+//            tv_name.setText("请登录");
+//        }
+//        showPicPick();
+//    }
 
     /**
-     * 登录用户界面
+     * 去修改个人资料界面
      */
     @OnClick(R.id.area_account_info)
     void gotoAccountInfo() {
-        MyApplication.openActivity(mContext, AccountInfoActivity.class, true);
+            MyApplication.openActivity(getActivity(), AccountInfoActivity.class);
+
     }
-
-
-
-
     /**
      * 去设置界面
      */
     @OnClick(R.id.area_settings)
     void gotoSettings() {
-        MyApplication.openActivity(mContext, SettingsActivity.class);
+        MyApplication.openActivity(getActivity(), SettingsActivity.class);
     }
-
     /**
      * 去设置界面
      */
@@ -79,15 +150,125 @@ public class AccountFragment extends BaseFragment {
     void gotoHelp() {
         Bundle bundle = new Bundle();
         bundle.putString("mUrl", "");
-        MyApplication.openActivity(mContext, WebViewActivity.class);
+        MyApplication.openActivity(getActivity(), WebViewActivity.class);
     }
+    /**
+     * 修改头像
+     */
+    @OnClick(R.id.iv_fg_mine_head)
+    public void onchangeheadClicked() {
+        ll_popup.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.activity_translate_in));
+        pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+    }
+    /**
+     * 获取到照片
+     *
+     * @param result
+     */
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
+    public void takeSuccess(TResult result) {
+        super.takeSuccess(result);
+        file = new File(getFiles().getPath());
+        BitmapUtil.compressAndSaveImage(file, result.getImage().getPath(), 2);
+        personHeaderImageList.clear();
+        personHeaderImageList.add(file.getAbsolutePath());
+        ivFgMineHead.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
+        Executors.cacheThreadExecutor(runnableHeaderImage);
+    }
+
+    /**
+     * 给后台传头像，后台返回头像字符串
+     */
+    Runnable runnableHeaderImage = new Runnable() {
+        @Override
+        public void run() {
+            Message msg = new Message();
+            if (!ListUtils.isEmpty(personHeaderImageList)) {
+                ArrayList<File> localFiles = new ArrayList<File>();
+                for (String path : personHeaderImageList) {
+                    File file = new File(path);
+                    if (file.exists()) {
+                        localFiles.add(file);
+                    }
+                }
+                /**
+                 * 给后台传图片，后台返回string 接口
+                 */
+//                MyParams params=new MyParams();
+//                params.put("photo",file);
+//                params.put("type",5);
+//                VictorHttpUtil.doPost(mContext, Define.URL_PostPic, params, true, "加载中...",
+//                        new BaseHttpCallbackListener<Element>() {
+//                    @Override
+//                    public void callbackSuccess(String url, Element element) {
+//                        super.callbackSuccess(url, element);
+//                        PublishImg publishImg=  JSON.parseObject(element.data, PublishImg.class);
+//                        headPic = publishImg.getUrl();
+//                        SharedPreferencesHelper.getInstance().putString(AppSpContact.URL, headPic);
+//                    }
+//                });
+            }
+            msg.what = 1;
+            handler.sendMessage(msg);
+        }
+    };
+
+    /**
+     * 照片选择器
+     */
+    private void showPicPick() {
+        View view = View.inflate(getActivity(), R.layout.item_popupwindows, null);
+        ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+        pop = new PopupWindow(getActivity());
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        Button bt1 = (Button) view.findViewById(R.id.item_popupwindows_camera);
+        Button bt2 = (Button) view.findViewById(R.id.item_popupwindows_Photo);
+        Button bt3 = (Button) view.findViewById(R.id.item_popupwindows_cancel);
+        parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        /**
+         * 拍照
+         */
+        bt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getTakePhoto().onPickFromCapture(getFiles());
+                getActivity().overridePendingTransition(R.anim.activity_translate_in, R.anim.activity_translate_out);
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        /**
+         * 从本地相册选择
+         */
+        bt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                getTakePhoto().onPickFromGalleryWithCrop(getFiles(), getCropOptions());
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        /**
+         * 取消
+         */
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
     }
     /**
      * 去关于我们界面
@@ -99,4 +280,11 @@ public class AccountFragment extends BaseFragment {
 //        MyApplication.openActivity(mContext, AboutusActivity.class);
 //
 //    }
+@Subscribe
+    public void rechangername(StringEvent event){
+        if (event == null) {
+            return;
+        }
+        initView();
+    }
 }

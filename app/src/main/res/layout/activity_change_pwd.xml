@@ -31,7 +31,7 @@
                     android:layout_height="100px"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    android:hint="请输入6-16位旧密码(必填)"
+                    android:hint="请输入旧密码(必填)"
                     android:inputType="textPassword"
                     android:maxLength="16"
                     android:paddingLeft="15dp"
@@ -55,7 +55,7 @@
                     android:layout_height="100px"
                     android:background="@color/white"
                     android:gravity="center_vertical"
-                    android:hint="请输入6-16位新密码(必填)"
+                    android:hint="请输入新密码(必填)"
                     android:inputType="textPassword"
                     android:maxLength="16"
                     android:paddingLeft="15dp"
@@ -64,7 +64,6 @@
                     android:textColorHint="#cccccc"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="16sp"/>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"

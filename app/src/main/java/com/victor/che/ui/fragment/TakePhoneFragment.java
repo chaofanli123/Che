@@ -14,11 +14,12 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+import com.victor.che.base.BaseFragment;
 
 import java.io.File;
 
 
-public class TakePhoneFragment extends BaseFragment1 implements TakePhoto.TakeResultListener, InvokeListener {
+public class TakePhoneFragment extends BaseFragment implements TakePhoto.TakeResultListener, InvokeListener {
 
     private static final String TAG = com.jph.takephoto.app.TakePhotoActivity.class.getName();
     private TakePhoto takePhoto;
@@ -27,6 +28,11 @@ public class TakePhoneFragment extends BaseFragment1 implements TakePhoto.TakeRe
     public void onCreate(Bundle savedInstanceState) {
         getTakePhoto().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public int getContentView() {
+        return 0;
     }
 
     @Override

@@ -10,11 +10,17 @@ import com.victor.che.api.Define;
 import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
+import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
+import com.victor.che.domain.User;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.victor.che.app.MyApplication.spUtil;
 
 /**
  * 修改密码界面
@@ -47,8 +53,6 @@ public class ChangePwdActivity extends BaseActivity {
         // 设置标题
         setTitle("修改密码");
     }
-
-
     /**
      * 确认修改
      */
@@ -74,20 +78,20 @@ public class ChangePwdActivity extends BaseActivity {
             return;
         }
 
-        if (oldpwd.length() < 6) {
-            MyApplication.showToast("旧密码长度不能低于6位");
+        if (oldpwd.length() > 64) {
+            MyApplication.showToast("旧密码长度最大64位");
             et_old_pwd.requestFocus();
             return;
         }
 
-        if (newpwd.length() < 6) {
-            MyApplication.showToast("新密码长度不能低于6位");
+        if (newpwd.length() > 64) {
+            MyApplication.showToast("新密码长度最大64位");
             et_new_pwd.requestFocus();
             return;
         }
 
-        if (confirmpwd.length() < 6) {
-            MyApplication.showToast("确认密码长度不能低于6位");
+        if (confirmpwd.length() > 64) {
+            MyApplication.showToast("确认密码长度最大64位");
             et_confirm_pwd.requestFocus();
             return;
         }
@@ -100,15 +104,25 @@ public class ChangePwdActivity extends BaseActivity {
 
         // 发送修改密码请求
         MyParams params = new MyParams();
-        params.put("staff_user_id", MyApplication.CURRENT_USER.staff_user_id);
-        params.put("old_password", oldpwd);
-        params.put("new_password", newpwd);
-        VictorHttpUtil.doPost(mContext, Define.URL_CHANGE_PWD, params, true, "提交中...", new BaseHttpCallbackListener<Element>() {
+        params.put("mobileLogin", MyApplication.getUser().mobileLogin);
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+        params.put("oldPassword", oldpwd);
+        params.put("newPassword", newpwd);
+        VictorHttpUtil.doPost(mContext, Define.URL_CHANGE_PWD+ ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "提交中...", new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {
                 // 修改成功
                 MyApplication.showToast("密码修改成功");
+                // 清空用户信息
+                User user = new User();
+                MyApplication.saveUser(user);
+                spUtil.setBoolean(ConstantValue.SP.FIRST_STARTED_APP,false);
+                // 关闭本页面
                 finish();
+                // 停止推送
+                //  JPushInterface.stopPush(getApplicationContext());
+                MyApplication.openActivity(mContext,LoginActivity.class);
+                EventBus.getDefault().post(TabBottomActivity.class);
             }
         });
     }

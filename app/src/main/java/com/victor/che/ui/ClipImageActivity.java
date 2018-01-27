@@ -138,8 +138,6 @@ public class ClipImageActivity extends BaseActivity implements View.OnClickListe
                 break;
         }
     }
-
-
     /**
      * 生成Uri并且通过setResult返回给打开的activity
      */
@@ -208,7 +206,6 @@ public class ClipImageActivity extends BaseActivity implements View.OnClickListe
 //                                else {// 直接点击扫一扫，跳转到收款界面
 //                                    Bundle bundle = new Bundle();
 //                                    bundle.putString("mData", pln);
-//                                    MyApplication.openActivity(mContext, ReceiptActivity.class, bundle);
 //                                }
                             } else {
                                 //                            MyApplication.showToast(element.reason);

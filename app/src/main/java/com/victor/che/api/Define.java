@@ -92,7 +92,10 @@ public class Define {
 
 
 
-
+  /**
+   查询养殖场信息列表
+   */
+  public static final String URL_YangZhiChangXingXi= API_DOMAIN + "a/gov/aquFarm/govList";
 
 
 

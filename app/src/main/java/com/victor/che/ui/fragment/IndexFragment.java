@@ -12,6 +12,7 @@ import com.victor.che.R;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Banner;
 import com.victor.che.ui.my.WoDeSheBeiListActivity;
+import com.victor.che.ui.my.YangZhiChangDangAnActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
 //                } else if (MyApplication.CURRENT_USER.is_initial_provider == 0) {//分店身份
 //                    MyApplication.openActivity(mContext, ProductMgrActivity.class, true);
 //                }
+                startActivity(new Intent(mContext,YangZhiChangDangAnActivity.class));
                 break;
             case R.id.area_vipcard_mgr://会员卡管理
                 break;

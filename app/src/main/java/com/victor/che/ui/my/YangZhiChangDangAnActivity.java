@@ -105,7 +105,7 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
                 if (position == -1) {
                     return;
                 }
-//                startActivity(new Intent(mContext, ZhengCheFaGuiActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getId()));
             }
         });
         mPtrHelper.autoRefresh(true);

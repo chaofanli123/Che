@@ -83,24 +83,23 @@
      </provider>
         -->
         <!-- 启动页 -->
-        <!--<activity-->
-            <!--android:name=".ui.SplashActivity"-->
-            <!--android:configChanges="orientation|keyboardHidden"-->
-            <!--android:launchMode="singleTask"-->
-            <!--android:screenOrientation="portrait"-->
-            <!--android:theme="@style/LuchTheme"-->
-            <!--android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />-->
+        <!-- <activity -->
+        <!-- android:name=".ui.SplashActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden" -->
+        <!-- android:launchMode="singleTask" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/LuchTheme" -->
+        <!-- android:windowSoftInputMode="stateAlwaysHidden|adjustResize" /> -->
         <activity
             android:name=".ui.SplashActivity"
-            android:theme="@style/LuchTheme"
-            android:screenOrientation="portrait"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@style/LuchTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!-- 底部导航菜单 -->
@@ -117,18 +116,22 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
 
-                <!--<data android:scheme="wxff87f02dac93ce58" />-->
-            <!--</intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+
+
+            <!-- <data android:scheme="wxff87f02dac93ce58" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <!-- 设置界面 -->
@@ -146,6 +149,7 @@
 
 
         <!-- 收款界面 -->
+
 
         <!-- 产品管理界面 -->
 
@@ -270,8 +274,9 @@
         <activity android:name=".ui.TakePhoto1Activity" />
         <activity android:name=".ui.BigPicActivity" />
         <activity android:name=".ui.ClipImageActivity" />
-        <activity android:name=".ui.my.ShouXieQianMingActivity"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".ui.my.ShouXieQianMingActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name="com.videogo.main.EzvizWebViewActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -291,11 +296,12 @@
             android:name=".ui.my.Playctivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|uiMode"
             android:exported="false" />
-        <activity android:name=".ui.my.WoDeSheBeiListActivity"
-            tools:ignore="DuplicateActivity"
-            />
-        <activity android:name=".ui.my.PublichaddActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.my.WoDeSheBeiListActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity
+            android:name=".ui.my.PublichaddActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.my.GalleryFileActivity" />
         <activity
             android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
@@ -314,7 +320,8 @@
         <activity android:name=".ui.my.TongZhiXiaDaActivity" />
         <activity android:name=".ui.my.ZhengCheFaGuiActivity" />
         <activity android:name=".ui.my.JingYongYvYaoActivity" />
-        <activity android:name=".ui.my.YangZhiChangDangAnActivity"></activity>
+        <activity android:name=".ui.my.YangZhiChangDangAnActivity" />
+        <activity android:name=".ui.my.YangZhiChangDangAnXiangQingActivity"></activity>
     </application>
 
 </manifest>

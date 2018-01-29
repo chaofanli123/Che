@@ -1,31 +1,31 @@
 package com.victor.che.api;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.text.TextUtils;
+        import android.app.Dialog;
+        import android.app.ProgressDialog;
+        import android.content.Context;
+        import android.text.TextUtils;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONException;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.AbsCallback;
-import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.request.BaseRequest;
-import com.lzy.okgo.request.GetRequest;
-import com.lzy.okgo.request.PostRequest;
-import com.orhanobut.logger.Logger;
-import com.victor.che.R;
-import com.victor.che.app.ConstantValue;
-import com.victor.che.app.MyApplication;
-import com.victor.che.util.AbDialogUtil;
-import com.victor.che.util.AppUtil;
-import com.victor.che.util.MyLogger;
+        import com.alibaba.fastjson.JSON;
+        import com.alibaba.fastjson.JSONException;
+        import com.lzy.okgo.OkGo;
+        import com.lzy.okgo.callback.AbsCallback;
+        import com.lzy.okgo.callback.FileCallback;
+        import com.lzy.okgo.request.BaseRequest;
+        import com.lzy.okgo.request.GetRequest;
+        import com.lzy.okgo.request.PostRequest;
+        import com.orhanobut.logger.Logger;
+        import com.victor.che.R;
+        import com.victor.che.app.ConstantValue;
+        import com.victor.che.app.MyApplication;
+        import com.victor.che.util.AbDialogUtil;
+        import com.victor.che.util.AppUtil;
+        import com.victor.che.util.MyLogger;
 
-import java.io.File;
-import java.util.List;
+        import java.io.File;
+        import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
+        import okhttp3.Call;
+        import okhttp3.Response;
 
 /**
  * 封装的网络请求工具类（使用OkHttp3）
@@ -63,7 +63,7 @@ public class VictorHttpUtil {
 
         GetRequest request = OkGo.get(url)
                 .tag(context)
-               ;//添加header .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp))
+                ;//添加header .headers(AUTHORIZATION_KEY, _genRequestHeaderAuth(timestamp))
 
         // 添加请求参数
         _addReqParams(params, request);
@@ -318,7 +318,6 @@ public class VictorHttpUtil {
             MyLogger.json(str);//打印返回数据
             return JSON.parseObject(str, Element.class);
         }
-
     }
 
 }

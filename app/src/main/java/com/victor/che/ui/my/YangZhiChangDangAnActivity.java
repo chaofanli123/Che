@@ -154,11 +154,7 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
 
                     }
                 });
-
     }
-
-
-
     @OnClick({R.id.ed_tiem_start, R.id.et_time_end, R.id.img_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {

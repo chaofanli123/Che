@@ -96,7 +96,6 @@ public class MessageFragment extends BaseFragment {
     protected void initView() {
         super.initView();
         linNotarize.setVisibility(View.GONE);
-
         // 设置标题
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
@@ -132,6 +131,12 @@ public class MessageFragment extends BaseFragment {
             }
         });
         mPtrHelper.autoRefresh(false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPtrHelper.autoRefresh(true);
     }
 
     /**
@@ -237,8 +242,8 @@ public class MessageFragment extends BaseFragment {
                         ischeckd = true;
                         linNotarize.setVisibility(View.VISIBLE);
                         mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
-                    mRecyclerView.setAdapter(mAdapter);
-                     mAdapter.notifyDataSetChanged();  //
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();  //
                         popupWindow.dismiss();
                     }
                 });
@@ -289,11 +294,25 @@ public class MessageFragment extends BaseFragment {
                         MyApplication.showToast(element.msg);
                         linNotarize.setVisibility(View.GONE);
                         ischeckd = false;
-//                        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
-//                      mRecyclerView.setAdapter(mAdapter);
-                     mPtrHelper.autoRefresh(true);
+                        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+                     // mPtrHelper.autoRefresh(true);
                     }
                 });
+    }
+
+    /**
+     * 取消删除
+     */
+    @OnClick(R.id.btn_cancel)
+    public void onCancelClicked() {
+        linNotarize.setVisibility(View.GONE);
+        ischeckd = false;
+        mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
+        mRecyclerView.setAdapter(mAdapter);
+        //initView();
+   //  mPtrHelper.autoRefresh(true);
     }
 
     /**
@@ -309,37 +328,36 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
-            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.farm);
+            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.getLawName());
 
             if (shopsCoupon.getLawQual() == 0) {
                 holder.setText(R.id.tv_lawQual_message, "质量管理制度:有");
-            }else {
+            } else {
                 holder.setText(R.id.tv_lawQual_message, "质量管理制度:无");
             }
 
             if (shopsCoupon.getLawSta() == 0) {
                 holder.setText(R.id.tv_lawSta, "接受监管情况:接受监管并有监管记录");
-            }else {
+            } else {
                 holder.setText(R.id.tv_lawSta, "接受监管情况:曾接受监管但无记录");
             }
 
             if (shopsCoupon.getLawAqu() == 0) {
                 holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:有");
-            }else if (shopsCoupon.getLawAqu() == 1) {
+            } else if (shopsCoupon.getLawAqu() == 1) {
                 holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:应该持有但没有");
-            }
-            else {
+            } else {
                 holder.setText(R.id.tv_coupon_message, "养殖证或苗种生产许可证:不需办理");
             }
 
             if (shopsCoupon.getLawTrea() == 0) {
                 holder.setText(R.id.tv_lawSta_message, "处理情况:合格，没有发现违规行为");
-            }else {
+            } else {
                 holder.setText(R.id.tv_lawSta_message, "处理情况:不合格项或者需要整改的地方");
             }
 
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
-            tv_coupon_time.setText("检查时间"+shopsCoupon.getLawTime());
+            tv_coupon_time.setText("检查时间" + shopsCoupon.getLawTime());
             final ImageView select = holder.getView(R.id.img_select);
             if (isdelete) {
                 if (shopsCoupon.checked) {//选择状态
@@ -350,19 +368,20 @@ public class MessageFragment extends BaseFragment {
             } else {
                 select.setImageResource(R.drawable.ic_arrow_right);
             }
-
+            LinearLayout item = holder.getView(R.id.rl_item);
             /**
              * 修改 进入详情
              */
-            holder.setOnClickListener(R.id.rl_item, new View.OnClickListener() {
+            item.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putString("type", "list");
                     bundle.putSerializable("shopsCoupon", shopsCoupon);
                     MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
                 }
             });
+
         }
     }
 

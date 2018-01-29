@@ -9,7 +9,6 @@ package com.victor.che.api;
  * @time 2016年10月29日 下午9:11:53
  */
 public class Define {
-
     public static final String MWEB_DOMAIN = "http://x.cheweifang.cn/";// 手机webview网页域名
   //  public static final String API_DOMAIN ="https://xapi.cheweifang.cn/index.php?";// API域名
     public static final String API_DOMAIN ="http://222.143.21.157:8090/aims/";//api地址
@@ -86,20 +85,20 @@ public class Define {
    */
   public static final String URL_CHANGE_PWD = API_DOMAIN + "a/sys/user/modifyPwd";
   /**
-   * 修改密码
+   * 修改头像
    */
-  public static final String URL_imageUpload = API_DOMAIN + "a/sys/user/imageUpload";
-
-
-
-
-
-
+  public static final String URL_imageUpload = API_DOMAIN + "a/sys/user/imageEdit";
+  /**
+   * 上传文件
+   */
+  public static final String URL_fileUpLoad = API_DOMAIN + "a/gov/govAquLaw/fileUpLoad";
 
   /**
    查询养殖场信息列表
    */
   public static final String URL_YangZhiChangXingXi= API_DOMAIN + "a/gov/aquFarm/govList";
+
+
 
 
 

@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.jph.takephoto.model.TResult;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
@@ -35,16 +36,23 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.VictorBaseArrayAdapter;
+import com.victor.che.base.VictorBaseListAdapter;
+import com.victor.che.bean.Files;
+import com.victor.che.bean.YangZhiChangDanAn;
+import com.victor.che.domain.Worker;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.BitmapUtil;
+import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.DateUtil;
 import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.MaterialDialogUtils;
 import com.victor.che.util.PicassoUtils;
+import com.victor.che.util.ViewUtil;
 import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.ClearEditText;
+import com.victor.che.widget.ListDialogFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -137,7 +145,8 @@ public class PublichaddActivity extends TakePhotoActivity {
     private ArrayList<String> imagePathList = new ArrayList<>();
     private List<UploadResultBean> upload = new ArrayList<>();
     private List<MediaBean> mediaBeanList;
-    private String pic = "";
+    private String pic = ""; //签名路径
+    private String luyin="";//录音文件
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -150,10 +159,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                     adapter.notifyDataSetChanged();
                     break;
                 case 2: // 得到图片
-                    //发布
-                    String path = (String) msg.obj;
-                    Log.e("imageimage1", "返回的图片路径获取发票" + msg.obj);
-                    //   userUploadBbs(path);
+                   MyApplication.showToast(pic);
                     break;
             }
         }
@@ -167,8 +173,8 @@ public class PublichaddActivity extends TakePhotoActivity {
     private String mVoiceData; //语音string
     private AnimationDrawable mImageAnim;
 
-    private LawWatersListAdapter framListAdapter; //单位名称
- //
+    private FarmListAdapter framListAdapter; //单位名称
+    private List<YangZhiChangDanAn.PageBean.ListBean> framlist;
     private int selectedframPos = 0;
 
     private LawWatersListAdapter lawWatersListAdapter;
@@ -266,10 +272,6 @@ public class PublichaddActivity extends TakePhotoActivity {
 //            }
 //        });
         mMediaPlayUtil = MediaPlayUtil.getInstance();
-        /**
-         * 初始化适配器s
-         */
-        framListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, null, selectedframPos);
         _getorderWorker();
         lawWatersListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawWaters, selectedlawWatersPos);
         LawAquListAdapter = new LawWatersListAdapter(mContext, R.layout.item_bottom_dialog, lawAqu, selectedLawAquPos);
@@ -405,7 +407,9 @@ public class PublichaddActivity extends TakePhotoActivity {
             etLawOther.setText(shopsCoupon.getLawOther());//
         }
         //签名文件
-        PicassoUtils.loadImage(mContext, shopsCoupon.getPsonName(), ivQianming);
+        String photo=Define.API_DOMAIN +shopsCoupon.getPsonName().substring(6,shopsCoupon.getPsonName().length());
+        String s = photo.replaceAll("\\\\", "//");
+        PicassoUtils.loadImage(mContext,s , ivQianming);
         //luyin
         if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
             recordFile = new File(shopsCoupon.getUserName());
@@ -511,6 +515,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                 String imgpath = data.getStringExtra("imgpath");
                 qianmingFile = new File(imgpath);
                 PicassoUtils.loadFileImage(mContext, qianmingFile, ivQianming);
+                Executors.cacheThreadExecutor(runnableHeaderImage);
                 break;
             case 66:
                 mVoiceData = data.getStringExtra("LYpath");
@@ -523,10 +528,66 @@ public class PublichaddActivity extends TakePhotoActivity {
                 if (!StringUtil.isEmpty(mSoundData)) {
                     recordFile = new File(mSoundData);
                 }
+                Executors.cacheThreadExecutor(runnableluyin);
                 break;
         }
     }
+    /**
+     * 给后台传头像，后台返回头像字符串
+     */
+    Runnable runnableluyin = new Runnable() {
+        @Override
+        public void run() {
+            final Message msg = new Message();
+            /**
+             * 给后台传图片，后台返回string 接口
+             */
+            MyParams params=new MyParams();
+            params.put("file1",recordFile);
+            params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
+            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                    new BaseHttpCallbackListener<Element>() {
+                        @Override
+                        public void callbackSuccess(String url, Element element) {
+                            super.callbackSuccess(url, element);
+                            Files files = JSON.parseObject(element.body, Files.class);
+                            luyin = files.getFiles().get(0).getFilePath();
+                            //  MyApplication.showToast(element.msg);
+                            msg.what = 1;
+                            handler.sendMessage(msg);
+                        }
+                    });
 
+        }
+    };
+    /**
+     * 给后台传头像，后台返回头像字符串
+     */
+    Runnable runnableHeaderImage = new Runnable() {
+        @Override
+        public void run() {
+            final Message msg = new Message();
+                /**
+                 * 给后台传图片，后台返回string 接口
+                 */
+                MyParams params=new MyParams();
+                params.put("file1",qianmingFile);
+                params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
+                VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                        new BaseHttpCallbackListener<Element>() {
+                            @Override
+                            public void callbackSuccess(String url, Element element) {
+                                super.callbackSuccess(url, element);
+                                Files files = JSON.parseObject(element.body, Files.class);
+                                pic = files.getFiles().get(0).getFilePath();
+                                //  MyApplication.showToast(element.msg);
+                                msg.what = 2;
+                                handler.sendMessage(msg);
+                            }
+                        });
+
+        }
+    };
     /**
      * 语音播放效果
      */
@@ -551,25 +612,18 @@ public class PublichaddActivity extends TakePhotoActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.topbar_right://提交
-                saveup();
+                saveup();//提交信息
                 break;
             case R.id.et_unitname: //单位名称
-//                ListDialogFragment.newInstance(orderdworkerListAdapter, new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        selectedOrderTypePos = position;
-//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
-//                        sale_user_id = orderWorkerList.get(selectedOrderTypePos).staff_user_id;
-//                        // 刷新列表
-//                        mPtrHelper.setOnRequestDataListener(new PtrHelper.OnRequestDataListener() {
-//                            @Override
-//                            public void onRequestData(boolean pullToRefresh, int curpage, int pageSize) {
-//                                _reqData(pullToRefresh, curpage, pageSize);
-//                            }
-//                        });
-//                        mPtrHelper.autoRefresh(true);
-//                    }
-//                }).show(getSupportFragmentManager(), getClass().getSimpleName());
+                ListDialogFragment.newInstance(framListAdapter, new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        selectedframPos = position;
+                        framListAdapter.notifyDataSetChanged();
+                        etUnitname.setText(framlist.get(selectedframPos).getFarmName());
+                      //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
+                    }
+                }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
             case R.id.iv_luying:
                 startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
@@ -796,7 +850,6 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
             params.put("pson", qianmingFile);//// 签名文件 File
             params.put("user", recordFile);//// 录音文件 File 可空
-
             VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
                     new BaseHttpCallbackListener<Element>() {
                         @Override
@@ -811,9 +864,9 @@ public class PublichaddActivity extends TakePhotoActivity {
      * 提交
      */
     private void saveup() {
-        String Unitname = etUnitname.getText().toString().trim();
+        String unitname = etUnitname.getText().toString().trim();
         if ("add".equals(type)) { //add执法
-            if (TextUtils.isEmpty(Unitname)) {
+            if (TextUtils.isEmpty(unitname)) {
                 MyApplication.showToast("单位名称不能为空");
                 etUnitname.requestFocus();
                 return;
@@ -963,13 +1016,12 @@ public class PublichaddActivity extends TakePhotoActivity {
                 return;
             }
         }
-
         MyParams params = new MyParams();
         params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
         if ("list".equals(type)) { //修改执法
             params.put("id", shopsCoupon.getId());
         }
-        params.put("lawName", Unitname);//单位名称
+        params.put("lawName", unitname);//单位名称
         params.put("lawTime", lawTime);//检查时间
         params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,
         params.put("lawAqu", selectedLawAquPos);////0 有1 应该持有但没有 2 不需办理
@@ -992,14 +1044,15 @@ public class PublichaddActivity extends TakePhotoActivity {
             params.put("remarks", selectedlawOldPos);//整改建议
             params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
         }
-        params.put("pson", qianmingFile);//// 签名文件 File
-        params.put("user", recordFile);//// 录音文件 File 可空
+        params.put("psonName", pic);//// 签名文件 File
+        params.put("userName", luyin);//// 录音文件 File 可空
 
         VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         MyApplication.showToast(element.msg);
+                        finish();
                     }
                 });
     }
@@ -1051,6 +1104,22 @@ public class PublichaddActivity extends TakePhotoActivity {
     }
 
 
+    /**
+     * 所有职工适配器
+     */
+    private class FarmListAdapter extends VictorBaseListAdapter<YangZhiChangDanAn.PageBean.ListBean> {
+
+        public FarmListAdapter(Context context, int layoutResId, List<YangZhiChangDanAn.PageBean.ListBean> mList) {
+            super(context, layoutResId, mList);
+        }
+
+        @Override
+        public void bindView(int position, View view, YangZhiChangDanAn.PageBean.ListBean entity) {
+            TextView textView = (TextView) view;
+            textView.setText(entity.getFarmName());
+            textView.setTextColor(getResources().getColor(selectedframPos == position ? R.color.theme_color : R.color.black_text));
+        }
+    }
 
     /**
      * 水产属性适配器
@@ -1076,32 +1145,30 @@ public class PublichaddActivity extends TakePhotoActivity {
      * 获取单位名称列表
      */
     private void _getorderWorker() {
-        // 获取订单列表
-        MyParams params = new MyParams();
-        params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
-        VictorHttpUtil.doGet(mContext, Define.URL_STAFF_USER_LIST, params, false, null,
-                new BaseHttpCallbackListener<Element>() {
-                    @Override
-                    public void callbackSuccess(String url, Element element) {
-                        /***职工类型增加“全部职员”***/
-//                        orderWorkerList = new ArrayList<>();
-//                        Worker orderWorker = new Worker();
-//                        orderWorker.staff_user_id = "0";
-//                        orderWorker.user_name = "全部职员";
-//                        orderWorkerList.add(orderWorker);
-//
-//                        orderWorkerList.addAll(JSON.parseArray(element.data, Worker.class));
-//                        if (CollectionUtil.isEmpty(orderWorkerList)) {
-//                            MyApplication.showToast("职员列表为空");
-//                            return;
-//                        }
-//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
-//                        btnOrderWorker.setText(orderWorkerList.get(selectedOrderTypePos).user_name);
-//                        btnOrderWorker.requestLayout();// 防止文字和图片覆盖
-//                        sale_user_id = orderWorkerList.get(selectedOrderTypePos).staff_user_id;
-//                        orderdworkerListAdapter = new OrderListActivity.OrderWorkerListAdapter(mContext, R.layout.item_list_dialog, orderWorkerList);
+        // 获取单位名称列表
+            MyParams params = new MyParams();
+            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
+            VictorHttpUtil.doPost(mContext, Define.URL_YangZhiChangXingXi + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
+                    new BaseHttpCallbackListener<Element>() {
+                        @Override
+                        public void callbackSuccess(String url, Element element) {
+                            YangZhiChangDanAn Policy = JSON.parseObject(element.body, YangZhiChangDanAn.class);
+                            List<YangZhiChangDanAn.PageBean.ListBean> shopsCouponList = new ArrayList<>();
+                            framlist = Policy.getPage().getList();
+                         //   framlist.addAll(shopsCouponList);
+                        if (CollectionUtil.isEmpty(framlist)) {
+                            MyApplication.showToast("单位名称列表为空");
+                            return;
+                        }
+                            etUnitname.setText(framlist.get(selectedframPos).getFarmName());
+                            etUnitname.requestLayout();// 防止文字和图片覆盖
+                       // sale_user_id = framlist.get(selectedframPos).getId();
+                            /**
+                             * 初始化适配器s
+                             */
+                            framListAdapter = new FarmListAdapter(mContext, R.layout.item_bottom_dialog, framlist);
 
-                    }
-                });
+                        }
+                    });
     }
 }

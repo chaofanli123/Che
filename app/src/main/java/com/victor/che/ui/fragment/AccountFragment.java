@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.jph.takephoto.model.TResult;
 import com.qikecn.uploadfilebybase64.UploadResultBean;
 import com.victor.che.R;
@@ -25,6 +26,8 @@ import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
+import com.victor.che.bean.Files;
+import com.victor.che.bean.UserInfo;
 import com.victor.che.event.StringEvent;
 import com.victor.che.ui.AccountInfoActivity;
 import com.victor.che.ui.SettingsActivity;
@@ -78,27 +81,41 @@ public class AccountFragment extends TakePhoneFragment {
                     MyApplication.showToast("上传图片过大或网络异常，上传失败");
                     break;
                 case 1: // 修改头像
-                    headPic = "";
-                    if (uploadHeadImage != null) {
-                        for (UploadResultBean bean : uploadHeadImage) {
-                            if (!TextUtils.isEmpty(bean.getRemoteFileName())) {
-                                headPic += bean.getRemoteFileName() + ",";
-                            }
-                        }
-                        if (headPic.endsWith(",")) {
-                            headPic = headPic.substring(0, headPic.length() - 1);
-                        }
-                    }
-                    MyApplication.showToast("修改成功");
+//                    if (uploadHeadImage != null) {
+//                        for (UploadResultBean bean : uploadHeadImage) {
+//                            if (!TextUtils.isEmpty(bean.getRemoteFileName())) {
+//                                headPic += bean.getRemoteFileName() + ",";
+//                            }
+//                        }
+//                        if (headPic.endsWith(",")) {
+//                            headPic = headPic.substring(0, headPic.length() - 1);
+//                        }
+//                    }
+                    //修改头像接口
+                    MyParams params=new MyParams();
+                    params.put("photo",headPic);
+                    params.put("name",MyApplication.getUser().username);
+                 //   params.put("mobileLogin",MyApplication.getUser().mobileLogin);
+                    params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
+                    VictorHttpUtil.doPost(mContext, Define.URL_imageUpload+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                            new BaseHttpCallbackListener<Element>() {
+                                @Override
+                                public void callbackSuccess(String url, Element element) {
+                                    super.callbackSuccess(url, element);
+                                    MyApplication.showToast(element.msg);
+                                }
+                            });
                     break;
             }
         }
     };
-
     @Override
     public int getContentView() {
         return R.layout.fragment_account;
     }
+
+
+
     @Override
     protected void initView() {
         super.initView();
@@ -106,7 +123,6 @@ public class AccountFragment extends TakePhoneFragment {
         parentView = View.inflate(getActivity(), R.layout.fragment_account, null);
         initview();
     }
-
     private void initview() {
         if (MyApplication.isLogined()) {
             // 当前用户名
@@ -115,24 +131,33 @@ public class AccountFragment extends TakePhoneFragment {
             }else {
                 tv_name.setText(MyApplication.getUser().name);
             }
-            PicassoUtils.loadHeadImage(getActivity(), MyApplication.getUser().head, ivFgMineHead);
         } else {
             tv_name.setText("请登录");
         }
+        getusermessage();
         showPicPick();
     }
-    //    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (MyApplication.isLogined()) {
-//            // 当前用户名
-//            tv_name.setText(MyApplication.getUser().username);
-//            PicassoUtils.loadHeadImage(getActivity(), MyApplication.getUser().head, ivFgMineHead);
-//        } else {
-//            tv_name.setText("请登录");
-//        }
-//        showPicPick();
-//    }
+
+    /**
+     * 获取用户信息
+     */
+    private void getusermessage() {
+        MyParams parms=new MyParams();
+        VictorHttpUtil.doPost(mContext, Define.URL_info+ ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, parms, false, null,
+                new BaseHttpCallbackListener<Element>() {
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        UserInfo userInfo = JSON.parseObject(element.body, UserInfo.class);
+                        UserInfo.UserInformationBean userInformation = userInfo.getUserInformation();
+                        if (userInformation != null) {
+                            tv_name.setText(userInformation.getName());
+                            String photo=Define.API_DOMAIN +userInformation.getPhoto().substring(6,userInformation.getPhoto().length());
+                            String s = photo.replaceAll("\\\\", "//");
+                            PicassoUtils.loadHeadImage(getActivity(),s,ivFgMineHead);
+                        }
+                    }
+                });
+    }
 
     /**
      * 去修改个人资料界面
@@ -140,7 +165,6 @@ public class AccountFragment extends TakePhoneFragment {
     @OnClick(R.id.area_account_info)
     void gotoAccountInfo() {
             MyApplication.openActivity(getActivity(), AccountInfoActivity.class);
-
     }
     /**
      * 去设置界面
@@ -202,21 +226,22 @@ public class AccountFragment extends TakePhoneFragment {
                  * 给后台传图片，后台返回string 接口
                  */
                 MyParams params=new MyParams();
-                params.put("file",file);
-                params.put("mobileLogin",MyApplication.getUser().mobileLogin);
+                params.put("file1",file);
                 params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
-                VictorHttpUtil.doPost(mContext, Define.URL_imageUpload+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                         new BaseHttpCallbackListener<Element>() {
-                    @Override
-                    public void callbackSuccess(String url, Element element) {
-                        super.callbackSuccess(url, element);
-                            MyApplication.showToast(element.msg);
-                        msg.what = 1;
-                        handler.sendMessage(msg);
-                    }
-                });
-            }
+                            @Override
+                        public void callbackSuccess(String url, Element element) {
+                                super.callbackSuccess(url, element);
+                                Files files = JSON.parseObject(element.body, Files.class);
+                               headPic = files.getFiles().get(0).getFilePath();
+                              //  MyApplication.showToast(element.msg);
+                                msg.what = 1;
+                                handler.sendMessage(msg);
+                            }
+                        });
 
+            }
         }
     };
 

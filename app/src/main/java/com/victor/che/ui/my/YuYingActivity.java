@@ -172,7 +172,6 @@ public class YuYingActivity extends AppCompatActivity {
                     mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record_pressed));
                     mTvNotice.setText("向上滑动取消发送");
                     mSoundData = dataPath + getRandomFileName() + ".amr";
-
                     // TODO 防止开权限后崩溃
                     if (mRecorder != null) {
                         mRecorder.reset();
@@ -180,9 +179,11 @@ public class YuYingActivity extends AppCompatActivity {
                         mRecorder = new MediaRecorder();
                     }
                     mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+                   mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+                   // mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
                     mRecorder.setOutputFile(mSoundData);
-                    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                   mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    // mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
                     try {
                         mRecorder.prepare();
                     } catch (IOException e) {

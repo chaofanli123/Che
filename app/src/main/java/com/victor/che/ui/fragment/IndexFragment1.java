@@ -104,6 +104,7 @@ public class IndexFragment1 extends BaseFragment {
         pagerTab.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
@@ -124,7 +125,7 @@ public class IndexFragment1 extends BaseFragment {
             }
         });
         linSearch.setFocusable(true);
-  linSearch.setFocusableInTouchMode(true);
+        linSearch.setFocusableInTouchMode(true);
         et_search.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {

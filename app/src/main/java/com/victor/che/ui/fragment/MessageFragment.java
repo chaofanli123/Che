@@ -113,23 +113,22 @@ public class MessageFragment extends BaseFragment {
                 _reqData(pullToRefresh, curpage, pageSize);
             }
         });
-        mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-            @Override
-            public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
-                select = position;
-                Message.PageBean.ListBean listBean = mList.get(position);
-                listBean.checked = !listBean.checked;
-                if (listBean.checked) {
-                    list_id.add(listBean.getId() + "");
-
-                } else {
-                    list_id.remove(listBean.getId() + "");
+            mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
+                @Override
+                public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
+                    select = position;
+                    Message.PageBean.ListBean listBean = mList.get(position);
+                    listBean.checked = !listBean.checked;
+                    if (listBean.checked) {
+                        list_id.add(listBean.getId() + "");
+                    } else {
+                        list_id.remove(listBean.getId() + "");
+                    }
+                    list = new ArrayList<>();
+                    list.add(listBean);
+                    mAdapter.notifyDataSetChanged();
                 }
-                list = new ArrayList<>();
-                list.add(listBean);
-                mAdapter.notifyDataSetChanged();
-            }
-        });
+            });
         mPtrHelper.autoRefresh(false);
     }
 

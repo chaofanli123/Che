@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -39,7 +38,6 @@ import com.victor.che.base.VictorBaseArrayAdapter;
 import com.victor.che.base.VictorBaseListAdapter;
 import com.victor.che.bean.Files;
 import com.victor.che.bean.YangZhiChangDanAn;
-import com.victor.che.domain.Worker;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.BitmapUtil;
@@ -49,7 +47,6 @@ import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.MaterialDialogUtils;
 import com.victor.che.util.PicassoUtils;
-import com.victor.che.util.ViewUtil;
 import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.ListDialogFragment;
@@ -147,30 +144,13 @@ public class PublichaddActivity extends TakePhotoActivity {
     private List<MediaBean> mediaBeanList;
     private String pic = ""; //签名路径
     private String luyin="";//录音文件
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case -1:
-                    MyApplication.showToast("上传图片过大或网络异常，上传失败");
-                    break;
-                case 1:
-                    adapter.notifyDataSetChanged();
-                    break;
-                case 2: // 得到图片
-                   MyApplication.showToast(pic);
-                    break;
-            }
-        }
-    };
 
     private PopupWindow pop = null;
     private LinearLayout ll_popup;
     private View parentView;
 
     private MediaPlayUtil mMediaPlayUtil;
-    private String mVoiceData; //语音string
+   private String mVoiceData; //语音string
     private AnimationDrawable mImageAnim;
 
     private FarmListAdapter framListAdapter; //单位名称
@@ -231,7 +211,23 @@ public class PublichaddActivity extends TakePhotoActivity {
     private com.victor.che.domain.Message.PageBean.ListBean shopsCoupon;//从列表界面传过来的对象
     private String type;
 
-
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case -1:
+                    MyApplication.showToast("上传图片过大或网络异常，上传失败");
+                    break;
+                case 1:
+                    adapter.notifyDataSetChanged();
+                    break;
+                case 2: // 得到图片
+                    MyApplication.showToast(pic);
+                    break;
+            }
+        }
+    };
     @Override
     public int getContentView() {
         return R.layout.activity_follow_user;
@@ -298,6 +294,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private void showdata(com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
         etUnitname.setText(shopsCoupon.farm);
         tvFirsttime.setText(shopsCoupon.getLawTime());
+
         if (shopsCoupon.getLawWaters() == 1) {
             tvLawWaters.setText("全民所有");
         } else if (shopsCoupon.getLawWaters() == 2) {
@@ -407,13 +404,20 @@ public class PublichaddActivity extends TakePhotoActivity {
             etLawOther.setText(shopsCoupon.getLawOther());//
         }
         //签名文件
-        String photo=Define.API_DOMAIN +shopsCoupon.getPsonName().substring(6,shopsCoupon.getPsonName().length());
-        String s = photo.replaceAll("\\\\", "//");
-        PicassoUtils.loadImage(mContext,s , ivQianming);
+        if (!StringUtil.isEmpty(shopsCoupon.getPsonName())) {
+            pic=shopsCoupon.getPsonName();
+            String photo=Define.API_DOMAIN +shopsCoupon.getPsonName().substring(6,shopsCoupon.getPsonName().length());
+            String s = photo.replaceAll("\\\\", "//");
+            PicassoUtils.loadImage(mContext,s,ivQianming);
+        }
         //luyin
         if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
+            luyin=shopsCoupon.getUserName();
             recordFile = new File(shopsCoupon.getUserName());
             mRlVoiceLayout.setVisibility(View.VISIBLE);
+            //语音
+            String username=Define.API_DOMAIN+shopsCoupon.getUserName().substring(6,shopsCoupon.getUserName().length());
+         mVoiceData = username.replaceAll("\\\\", "//");
         } else {
             mRlVoiceLayout.setVisibility(View.GONE);
         }
@@ -518,14 +522,14 @@ public class PublichaddActivity extends TakePhotoActivity {
                 Executors.cacheThreadExecutor(runnableHeaderImage);
                 break;
             case 66:
-                mVoiceData = data.getStringExtra("LYpath");
+              mVoiceData = data.getStringExtra("LYpath");
                 String time = data.getStringExtra("time");
-                String mSoundData = data.getStringExtra("mSoundData");
-                if (mVoiceData != null && mVoiceData.length() > 0) {
+              String  mSoundData = data.getStringExtra("mSoundData");
+                if (mSoundData != null && mSoundData.length() > 0) {
                     mRlVoiceLayout.setVisibility(View.VISIBLE);
                     mTvTimeLengh.setText(time);
                 }
-                if (!StringUtil.isEmpty(mSoundData)) {
+                if (!StringUtil.isEmpty(mVoiceData)) {
                     recordFile = new File(mSoundData);
                 }
                 Executors.cacheThreadExecutor(runnableluyin);
@@ -553,8 +557,8 @@ public class PublichaddActivity extends TakePhotoActivity {
                             Files files = JSON.parseObject(element.body, Files.class);
                             luyin = files.getFiles().get(0).getFilePath();
                             //  MyApplication.showToast(element.msg);
-                            msg.what = 1;
-                            handler.sendMessage(msg);
+//                            msg.what = 1;
+//                            handler.sendMessage(msg);
                         }
                     });
 
@@ -605,7 +609,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         });
     }
 
-    @OnClick({R.id.tv_lawAqu, R.id.iv_luying, R.id.ll_qianming, R.id.rel_luyin, R.id.tv_firsttime,
+    @OnClick({R.id.tv_lawAqu, R.id.ll_add_yuyin, R.id.ll_qianming, R.id.rel_luyin, R.id.tv_firsttime,
             R.id.tv_lawWaters, R.id.topbar_right, R.id.tv_lawMed, R.id.tv_lawPro, R.id.tv_lawSal,
             R.id.tv_lawDeli, R.id.tv_lawMedi, R.id.tv_lawQual, R.id.tv_lawTech, R.id.tv_lawDate,
             R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea,R.id.et_unitname})
@@ -625,21 +629,26 @@ public class PublichaddActivity extends TakePhotoActivity {
                     }
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
-            case R.id.iv_luying:
+            case R.id.ll_add_yuyin:
                 startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
                 break;
             case R.id.ll_qianming:
                 startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
                 break;
             case R.id.rel_luyin:
-                if (mMediaPlayUtil.isPlaying()) {
-                    mMediaPlayUtil.stop();
-                    mImageAnim.stop();
-                    mIvVoice.setVisibility(View.VISIBLE);
-                    mIvVoiceAnim.setVisibility(View.GONE);
-                } else {
-                    startAnim();
-                    mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
+                if (!StringUtil.isEmpty(mVoiceData)) {
+                    if (mMediaPlayUtil.isPlaying()) {
+                        mMediaPlayUtil.stop();
+                        mImageAnim.stop();
+                        mIvVoice.setVisibility(View.VISIBLE);
+                        mIvVoiceAnim.setVisibility(View.GONE);
+                    } else {
+                        startAnim();
+                    //  mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
+                     mMediaPlayUtil.play(mVoiceData);
+                    }
+                }else {
+                    startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
                 }
                 break;
             case R.id.tv_firsttime: //
@@ -783,82 +792,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
     }
 
-    /**
-     * 修改
-     */
-    private void change() {
-        String Unitname = etUnitname.getText().toString().trim();
-        String lawTime = tvFirsttime.getText().toString().trim();
-        String lawtech = tvLawTech.getText().toString().trim();
-        if (!TextUtils.isEmpty(lawtech)) {
-            if ("是".equals(lawtech)) {
-                lawDate = tvLawDate.getText().toString().trim();
-                if (TextUtils.isEmpty(lawDate)) {
-                    MyApplication.showToast("培训时间不能为空");
-                    tvLawDate.requestFocus();
-                    return;
-                }
-            }
-            String lawtrea = tvLawTrea.getText().toString().trim();
-            if (!TextUtils.isEmpty(lawtrea)) {
-                if ("不合格项或者需要整改的地方".equals(lawtrea)) {
-                    lawprob = etLawProb.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
-                        MyApplication.showToast("责令整改项目不能为空");
-                        etLawProb.requestFocus();
-                        return;
-                    }
-                    remarks = etRemarks.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
-                        MyApplication.showToast("整改建议不能为空");
-                        etRemarks.requestFocus();
-                        return;
-                    }
-                    lawOther = etLawOther.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
-                        MyApplication.showToast("其他处罚或处置不能为空");
-                        etLawOther.requestFocus();
-                        return;
-                    }
-                }
-            }
-            MyParams params = new MyParams();
-            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
-            params.put("id", shopsCoupon.getId());
-            params.put("lawName", Unitname);//单位名称
-            params.put("lawTime", lawTime);//检查时间
-            params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,
-            params.put("lawAqu", selectedLawAquPos);////0 有1 应该持有但没有 2 不需办理
-            params.put("lawMed", selectedlawMed);//// 用药纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
-            params.put("lawPro", selectedlawPro);//// 生产纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
-            params.put("lawSal", selectedlawSal);//// 销售纪录 0 真实完整 1 不真实 2 不完整 3 不能提供
 
-            params.put("lawDeli", selectedlawDeliPos);//// 苗种来源 0 苗种来源于合法的生产企业，且来源记录清晰,存有供货方苗种生产许可证1无法证明来源及其合法性
-            params.put("lawMedi", selectedlawMediPos);//// 用药和饲料情况 0 现场未发现禁用药物和非法添加物1现场发现禁用药物或者非法添加物2药残检测超标
-            params.put("lawQual", selectedlawQualPos);//// 质量管理制度 0 有 1 无
-            params.put("lawTech", selectedlawTechPos);//// 是否参加过渔业部门组织的法律法规培训 0 是1 否
-            if ("是".equals(lawtech)) {
-                params.put("lawDate", lawDate);//// 培训时间 如果为 是 应输入培训时间
-            }
-            params.put("lawSta", selectedlawStaPos);//// 接受监管情况 0 接受监管并有监管记录1 曾接受监管但无记录
-            params.put("lawOld", selectedlawOldPos);//// 对以往检查发现问题的整改情况 0 整改彻底1 整改不彻底2 未整改
-            params.put("lawTrea", selectedlawTreaPos);//// 处理情况 0 合格，没有发现违规行为1 不合格项或者需要整改的地方
-            if ("不合格项或者需要整改的地方".equals(lawtrea)) {
-                params.put("lawProb", selectedlawStaPos);//责令整改项目
-                params.put("remarks", selectedlawOldPos);//整改建议
-                params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
-            }
-            params.put("pson", qianmingFile);//// 签名文件 File
-            params.put("user", recordFile);//// 录音文件 File 可空
-            VictorHttpUtil.doPost(mContext, Define.URL_govAquLaw_save + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "登录中...",
-                    new BaseHttpCallbackListener<Element>() {
-                        @Override
-                        public void callbackSuccess(String url, Element element) {
-                            MyApplication.showToast(element.msg);
-                        }
-                    });
-        }
-    }
 
     /**
      * 提交
@@ -1139,7 +1073,6 @@ public class PublichaddActivity extends TakePhotoActivity {
             textView.setTextColor(getResources().getColor(pos == position ? R.color.theme_color : R.color.black_text));
         }
     }
-
 
     /**
      * 获取单位名称列表

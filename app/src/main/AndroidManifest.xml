@@ -321,7 +321,9 @@
         <activity android:name=".ui.my.ZhengCheFaGuiActivity" />
         <activity android:name=".ui.my.JingYongYvYaoActivity" />
         <activity android:name=".ui.my.YangZhiChangDangAnActivity" />
-        <activity android:name=".ui.my.YangZhiChangDangAnXiangQingActivity"></activity>
+        <activity android:name=".ui.my.YangZhiChangDangAnXiangQingActivity" />
+        <activity android:name=".ui.my.ShuiZhiJianCheJiLuActivity" />
+        <activity android:name=".ui.my.ShuiZhiJianCheTuBiaoActivity"></activity>
     </application>
 
 </manifest>

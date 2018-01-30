@@ -98,9 +98,15 @@ public class Define {
    */
   public static final String URL_YangZhiChangXingXi= API_DOMAIN + "a/gov/aquFarm/govList";
 
+  /**
+   养殖环境信息接口
+   */
+  public static final String URL_ShuiZhiXingXi= API_DOMAIN + "a/comopinion/iotSensorData/firmTreeData";
 
-
-
+  /**
+   采集数据
+   */
+  public static final String URL_CaiJiXingXi= API_DOMAIN + "a/comopinion/iotSensorData/getDate";
 
     /**
      * 获取服务商商品列表

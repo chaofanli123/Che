@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.victor.che.R;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Banner;
+import com.victor.che.ui.my.ShuiZhiJianCheJiLuActivity;
 import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.ui.my.YangZhiChangDangAnActivity;
 
@@ -68,34 +69,23 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.area_product_mgr://产品管理
-//                if (MyApplication.CURRENT_USER.is_initial_provider == 1) {//总店身份
-//                } else if (MyApplication.CURRENT_USER.is_initial_provider == 0) {//分店身份
-//                    MyApplication.openActivity(mContext, ProductMgrActivity.class, true);
-//                }
                 startActivity(new Intent(mContext,YangZhiChangDangAnActivity.class));
                 break;
             case R.id.area_vipcard_mgr://会员卡管理
                 break;
             case R.id.area_customer://用户
-//                MyApplication.openActivity(mContext, CustomerListActivity.class, true);
-//                MyApplication.openActivity(mContext, WoDeSheBeiListActivity.class, true);
                 startActivity(new Intent(mContext,WoDeSheBeiListActivity.class));
                 break;
             case R.id.area_order_list://订单界面
-              //  MyApplication.openActivity(mContext, OrderListActivity.class, true);
+                startActivity(new Intent(mContext,ShuiZhiJianCheJiLuActivity.class));
                 break;
             case R.id.area_marketing: //营销
                 break;
             case R.id.area_myzhanghu: //我的账户
                 break;
             case R.id.area_shopping://商城
-//                Bundle bundle = new Bundle();
-//                bundle.putString("mURL", Define.MWEB_DOMAIN + "mall/#/" + MyApplication.CURRENT_USER.provider_id + "/" + MyApplication.CURRENT_USER.staff_user_id + "?_k=l01xoq");
-//                MyApplication.openActivity(mContext, ShoppingWebActivity.class, bundle);
                 break;
             case R.id.area_report://数据分析
-//                Bundle bundle1 = new Bundle();
-//                bundle1.putString("mUrl", Define.MWEB_DOMAIN + "web/analyse/dataAnalysis.html" + "?provider_id=" + MyApplication.CURRENT_USER.provider_id);
                 break;
             case R.id.area_mendian://门店
                 break;

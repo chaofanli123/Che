@@ -70,13 +70,34 @@
         android:padding="10dp"
         zhy:max_select="1"
         />
-
-    <com.victor.che.ui.my.util.SuitLines
-        xmlns:line="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/xinglv"
-        android:layout_margin="10dp"
+    <TextView
+        android:textColor="@color/theme_color"
+        android:padding="10dp"
+        android:id="@+id/tv_danwei"
+        android:text="单位:mg/l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/bg_common"
-        line:lineType="curve" />
+        android:layout_height="match_parent">
+        <com.victor.che.ui.my.util.SuitLines
+            xmlns:line="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/xinglv"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_common"
+            line:lineType="curve" />
+
+        <TextView
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/tv_shuju"
+            android:text="暂无数据"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
 </LinearLayout>

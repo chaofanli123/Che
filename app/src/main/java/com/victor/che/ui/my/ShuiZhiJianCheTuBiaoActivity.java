@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.jzxiang.pickerview.TimePickerDialog;
@@ -50,6 +49,11 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
     TagFlowLayout mFlowLayout;
     @BindView(R.id.xinglv)
     SuitLines xinglv;
+    @BindView(R.id.tv_shuju)
+    TextView tvShuju;
+    @BindView(R.id.tv_danwei)
+    TextView tvDanwei;
+
     private String[] mVals = new String[]
             {"溶解氧", "温度", "PH", "浊度", "氨氮"};
 
@@ -57,7 +61,7 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
     private String end = "";//结束时间
 
     private float textSize = 10;
-    private String channel=5+"";
+    private String channel = 5 + "";
 
     @Override
     public int getContentView() {
@@ -70,10 +74,12 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
 
         init();
     }
+
     private void sz(SuitLines sl) {
         sl.setXySize(textSize);
         sl.setDefaultOneLineColor(Color.WHITE);
     }
+
     private void init() {
         final LayoutInflater mInflater = LayoutInflater.from(mContext);
         TagAdapter<String> stringTagAdapter = new TagAdapter<String>(mVals) {
@@ -91,17 +97,21 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
         mFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
-                Toast.makeText(mContext, mVals[position], Toast.LENGTH_SHORT).show();
-                if (mVals[position].equals("溶解氧")){
-                    channel=5+"";
-                }else if (mVals[position].equals("温度")){
-                    channel=6+"";
-                }else if (mVals[position].equals("PH")){
-                    channel=8+"";
-                }else if (mVals[position].equals("浊度")){
-                    channel=9+"";
-                }else if (mVals[position].equals("氨氮")){
-                    channel=11+"";
+                if (mVals[position].equals("溶解氧")) {
+                    tvDanwei.setText("单位:mg/l");
+                    channel = 5 + "";
+                } else if (mVals[position].equals("温度")) {
+                    tvDanwei.setText("单位:°C");
+                    channel = 6 + "";
+                } else if (mVals[position].equals("PH")) {
+                    tvDanwei.setText("单位:ph");
+                    channel = 8 + "";
+                } else if (mVals[position].equals("浊度")) {
+                    tvDanwei.setText("单位:NTU");
+                    channel = 9 + "";
+                } else if (mVals[position].equals("氨氮")) {
+                    tvDanwei.setText("单位:mg/l");
+                    channel = 11 + "";
                 }
                 loadData();
                 return true;
@@ -132,10 +142,19 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
                     public void callbackSuccess(String url, Element element) {
                         ShuiZhiJianCheTuBiao notify = JSON.parseObject(element.body, ShuiZhiJianCheTuBiao.class);
                         List<Unit> xinglvlines = new ArrayList<>();
-                        for (ShuiZhiJianCheTuBiao.IotListBean data :notify.getIotList()){
-                            xinglvlines.add(new Unit(Float.valueOf(String.valueOf(data.getVal())), data.getTime()));
+                        if (notify.getIotList().size() > 0) {
+                            xinglv.setVisibility(View.VISIBLE);
+                            for (ShuiZhiJianCheTuBiao.IotListBean data : notify.getIotList()) {
+                                xinglvlines.add(new Unit(Float.valueOf(String.valueOf(data.getVal())), data.getTime()));
+                            }
+                            xinglv.feedWithAnim(xinglvlines);
+                            tvShuju.setVisibility(View.GONE);
+
+                        } else {
+                            tvShuju.setVisibility(View.VISIBLE);
+                            xinglv.setVisibility(View.GONE);
                         }
-                        xinglv.feedWithAnim(xinglvlines);
+
                     }
                 });
     }
@@ -157,6 +176,7 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
 
         }
     }
+
     /**
      * 显示时间对话框
      */

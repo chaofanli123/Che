@@ -193,7 +193,7 @@ public class SuitLines extends View {
     /**
      * 一组数据在可见区域中的最大可见点数，至少>=2
      */
-    private int maxOfVisible = 4;
+    private int maxOfVisible = 6;
     /**
      * 文本之间/图表之间的间距
      */
@@ -201,7 +201,7 @@ public class SuitLines extends View {
     /**
      * y轴刻度数，至少>=1
      */
-    private int countOfY = 5;
+    private int countOfY = 15;
 
     /**
      * y轴的缓存，提高移动效率
@@ -211,7 +211,7 @@ public class SuitLines extends View {
     /**
      * y轴的最大刻度值，保留一位小数
      */
-    private float maxValueOfY;
+    public  float maxValueOfY;
 
     /**
      * 根据可见点数计算出的两点之间的距离
@@ -880,8 +880,7 @@ public class SuitLines extends View {
         // 最后排序，得到最大值
         Collections.sort(bakUnits);
         Unit maxUnit = bakUnits.get(bakUnits.size() - 1);
-        maxValueOfY = Util.getCeil5(maxUnit.getValue()+10);
-//        maxValueOfY = 200;
+        maxValueOfY = Util.getCeil5(maxUnit.getValue());
     }
 
     /**

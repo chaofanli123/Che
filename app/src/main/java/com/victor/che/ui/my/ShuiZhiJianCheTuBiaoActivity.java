@@ -27,6 +27,8 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -79,8 +81,28 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
         sl.setXySize(textSize);
         sl.setDefaultOneLineColor(Color.WHITE);
     }
-
+    /**
+     * 获取前n天日期、后n天日期
+     *
+     * @param distanceDay 前几天 如获取前7天日期则传-7即可；如果后7天则传7
+     * @return
+     */
+    public static String getOldDate(int distanceDay) {
+        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+        Date beginDate = new Date();
+        Calendar date = Calendar.getInstance();
+        date.setTime(beginDate);
+        date.set(Calendar.DATE, date.get(Calendar.DATE) + distanceDay);
+        Date endDate = null;
+        try {
+            endDate = dft.parse(dft.format(date.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dft.format(endDate);
+    }
     private void init() {
+        begin = getOldDate(-7);
         final LayoutInflater mInflater = LayoutInflater.from(mContext);
         TagAdapter<String> stringTagAdapter = new TagAdapter<String>(mVals) {
             @Override
@@ -129,23 +151,32 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
     private void loadData() {
         MyParams params = new MyParams();
         if (!StringUtil.isEmpty(begin)) {
-            params.put("begin", begin);
+            params.put("beginTime", begin);
         }
         if (!StringUtil.isEmpty(end)) {
-            params.put("end", end);
+            params.put("endTime", end);
         }
         params.put("poolId", getIntent().getStringExtra("id"));
         params.put("channel", channel);
-        VictorHttpUtil.doPost(mContext, Define.URL_CaiJiXingXi + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
+        VictorHttpUtil.doPost(mContext, Define.URL_CaiJiXingXi + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         ShuiZhiJianCheTuBiao notify = JSON.parseObject(element.body, ShuiZhiJianCheTuBiao.class);
                         List<Unit> xinglvlines = new ArrayList<>();
                         if (notify.getIotList().size() > 0) {
+//                            if (channel.equals("11")){
+//                                xinglv.maxValueOfY=0.1f;
+//                            }
                             xinglv.setVisibility(View.VISIBLE);
                             for (ShuiZhiJianCheTuBiao.IotListBean data : notify.getIotList()) {
-                                xinglvlines.add(new Unit(Float.valueOf(String.valueOf(data.getVal())), data.getTime()));
+                                String[] split = data.getTime().split(" ");
+                                String[] split1 = split[0].split("-");
+                                String yr=split1[1]+"-"+split1[2];
+                                String[] split2 = split[1].split(":");
+                                String xf=split2[0]+":"+split2[1];
+                                String time=yr+" "+xf;
+                                xinglvlines.add(new Unit(Float.valueOf(String.valueOf(data.getVal())), time));
                             }
                             xinglv.feedWithAnim(xinglvlines);
                             tvShuju.setVisibility(View.GONE);

@@ -171,7 +171,7 @@ public class YuYingActivity extends AppCompatActivity {
                     downY = motionEvent.getY();
                     mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record_pressed));
                     mTvNotice.setText("向上滑动取消发送");
-                    mSoundData = dataPath + getRandomFileName() + ".amr";
+                    mSoundData = dataPath + getRandomFileName() + ".mp3";
                     // TODO 防止开权限后崩溃
                     if (mRecorder != null) {
                         mRecorder.reset();

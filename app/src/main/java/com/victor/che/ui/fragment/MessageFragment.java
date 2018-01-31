@@ -380,7 +380,6 @@ public class MessageFragment extends BaseFragment {
                     MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
                 }
             });
-
         }
     }
 

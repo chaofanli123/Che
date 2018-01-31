@@ -644,8 +644,8 @@ public class PublichaddActivity extends TakePhotoActivity {
                         mIvVoiceAnim.setVisibility(View.GONE);
                     } else {
                         startAnim();
-                    //  mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
-                     mMediaPlayUtil.play(mVoiceData);
+                    mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
+                        //  mMediaPlayUtil.play(mVoiceData);
                     }
                 }else {
                     startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);

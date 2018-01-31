@@ -6,9 +6,11 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -52,6 +54,12 @@ import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.ListDialogFragment;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -291,7 +299,7 @@ public class PublichaddActivity extends TakePhotoActivity {
      *
      * @param shopsCoupon
      */
-    private void showdata(com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
+    private void showdata(final com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
         etUnitname.setText(shopsCoupon.farm);
         tvFirsttime.setText(shopsCoupon.getLawTime());
 
@@ -412,15 +420,92 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
         //luyin
         if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
-            luyin=shopsCoupon.getUserName();
-            recordFile = new File(shopsCoupon.getUserName());
-            mRlVoiceLayout.setVisibility(View.VISIBLE);
+//            luyin=shopsCoupon.getUserName();
+//            recordFile = new File(shopsCoupon.getUserName());
+
             //语音
-            String username=Define.API_DOMAIN+shopsCoupon.getUserName().substring(6,shopsCoupon.getUserName().length());
-         mVoiceData = username.replaceAll("\\\\", "//");
+            final String username=Define.API_DOMAIN+shopsCoupon.getUserName().substring(6,shopsCoupon.getUserName().length());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mVoiceData = username.replaceAll("\\\\", "/");
+                    try{
+                        URL url = new URL(mVoiceData);
+                        //打开连接
+                        URLConnection conn = url.openConnection();
+                        //打开输入流
+                        InputStream is = conn.getInputStream();
+                        //获得长度
+                        int contentLength = conn.getContentLength();
+                        //创建文件夹 MyDownLoad，在存储卡下
+                        String dirName = getSDPath() + "/Che/";
+                        File file = new File(dirName);
+                        //不存在创建
+                        if (!file.exists()) {
+                            file.mkdir();
+                        }
+                        //下载后的文件名
+                        String fileName = dirName + shopsCoupon.getId() +".amr";
+                        File myCaptureFile = new File(fileName);
+                        if (myCaptureFile.exists()) {
+                            myCaptureFile.delete();
+                        }
+                        //创建字节流
+                        byte[] bs = new byte[1024];
+                        int len;
+                        OutputStream os = new FileOutputStream(fileName);
+                        //写数据
+                        while ((len = is.read(bs)) != -1) {
+                            os.write(bs, 0, len);
+                        }
+                        //完成后关闭流
+                        os.close();
+                        is.close();
+                        mVoiceData=encodeBase64File(myCaptureFile.getPath());
+                        MediaPlayer mediaPlayer = new MediaPlayer();
+                        mediaPlayer.setDataSource(fileName);
+                        mediaPlayer.prepare();
+                        int nDuration0 = mediaPlayer.getDuration();// 单位毫秒
+                        int i = nDuration0 / 1000;
+                        mTvTimeLengh.setText(i + "" + '"');
+                        mRlVoiceLayout.setVisibility(View.VISIBLE);
+
+                    }catch (Exception e){
+
+                    }
+
+                    System.out.println(mVoiceData+"******************");
+                }
+            }).start();
         } else {
             mRlVoiceLayout.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * 将文件转成base64字符串(用于发送语音文件)
+     * @param path
+     * @return
+     * @throws Exception
+     */
+    public static String encodeBase64File(String path) throws Exception {
+        File file = new File(path);
+        FileInputStream inputFile = new FileInputStream(file);
+        byte[] buffer = new byte[(int)file.length()];
+        inputFile.read(buffer);
+        inputFile.close();
+        return Base64.encodeToString(buffer, Base64.DEFAULT);
+    }
+
+
+    public static String getSDPath(){
+        File sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
+        if (sdCardExist)
+        {
+            sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        }
+        return sdDir.toString();
     }
 
     /**

@@ -558,7 +558,7 @@
                     <RelativeLayout
                         android:layout_centerInParent="true"
                         android:id="@+id/voice_layout"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_width="125dp"
                         android:layout_marginRight="6dp"
                         android:layout_height="wrap_content"
@@ -569,7 +569,6 @@
                             android:id="@+id/chat_tv_voice_len"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:layout_centerVertical="true"

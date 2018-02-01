@@ -1,6 +1,5 @@
 package com.victor.che.ui.my;
 
-import android.os.Bundle;
 import android.text.Html;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -21,7 +20,6 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.govPolicy;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ZhengCheFaGuiActivity extends BaseActivity {
 
@@ -126,11 +124,5 @@ public class ZhengCheFaGuiActivity extends BaseActivity {
                 " img.style.maxWidth = '100%';img.style.height='auto';" +
                 "}" +
                 "})()");
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

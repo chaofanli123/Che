@@ -18,6 +18,7 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.bean.fishDrug;
 import com.victor.che.domain.ShopsCoupon;
+import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.JingYongYvYaoActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
@@ -26,6 +27,8 @@ import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +96,21 @@ public class JingYongYvYaoFragment extends BaseFragment {
         });
         mPtrHelper.autoRefresh(false);
     }
+
+
+    @Subscribe
+    public void onSearch(SearchEvent event) {
+        if (event == null) {
+            return;
+        }
+        this.keywords = event.keywords;
+        this.type=event.type;
+        this.status=event.status;
+        if (currentPos == event.currentPos) {//只处理当前页事件
+            mPtrHelper.autoRefresh(true);
+        }
+    }
+
 
     /**
      * 获取商家优惠券

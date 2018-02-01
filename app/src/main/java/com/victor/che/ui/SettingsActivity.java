@@ -15,6 +15,7 @@ import com.victor.che.R;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
 import com.victor.che.api.Element;
+import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
@@ -87,7 +88,9 @@ public class SettingsActivity extends BaseActivity {
      */
     @OnClick(R.id.area_check_update)
     void checkUpdate() {
-        VictorHttpUtil.doPost(mContext, Define.URL_APP_VERSION+";JSESSIONID="+MyApplication.getUser().JSESSIONID, null, true, "查询中……",
+        MyParams params = new MyParams();
+        params.put("ver", AppUtil.getVersionCode(mContext));//当前版本的版本号
+        VictorHttpUtil.doPost(mContext, Define.URL_APP_VERSION+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "查询中……",
                 new BaseHttpCallbackListener<Element>() {
             @Override
             public void callbackSuccess(String url, Element element) {

@@ -18,7 +18,7 @@ android {
         applicationId "com.hnzh.che"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 0
+        versionCode 1
         versionName "1.0.0 "
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true

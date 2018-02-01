@@ -6,6 +6,7 @@
     android:background="@color/common_bg"
     android:orientation="vertical"
     android:id="@+id/rl_item"
+    android:descendantFocusability="blocksDescendants"
     >
     <RelativeLayout
         android:layout_width="match_parent"

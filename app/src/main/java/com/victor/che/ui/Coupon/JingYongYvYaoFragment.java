@@ -98,19 +98,6 @@ public class JingYongYvYaoFragment extends BaseFragment {
     }
 
 
-    @Subscribe
-    public void onSearch(SearchEvent event) {
-        if (event == null) {
-            return;
-        }
-        this.keywords = event.keywords;
-        this.type=event.type;
-        this.status=event.status;
-        if (currentPos == event.currentPos) {//只处理当前页事件
-            mPtrHelper.autoRefresh(true);
-        }
-    }
-
 
     /**
      * 获取商家优惠券
@@ -184,7 +171,18 @@ public class JingYongYvYaoFragment extends BaseFragment {
             holder.setText(R.id.tv_yinyongyiju, "引用依据: "+shopsCoupon.getReferenceBasis());
         }
     }
-
+    @Subscribe
+    public void onSearch(SearchEvent event) {
+        if (event == null) {
+            return;
+        }
+        this.keywords = event.keywords;
+        this.type=event.type;
+        this.status=event.status;
+        if (currentPos == event.currentPos) {//只处理当前页事件
+            mPtrHelper.autoRefresh(true);
+        }
+    }
     /**
      * 释放内存
      */

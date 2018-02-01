@@ -300,13 +300,12 @@ public class PublichaddActivity extends TakePhotoActivity {
      * @param shopsCoupon
      */
     private void showdata(final com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
-        etUnitname.setText(shopsCoupon.farm);
+        etUnitname.setText(shopsCoupon.getLawName());
         tvFirsttime.setText(shopsCoupon.getLawTime());
-
         if (shopsCoupon.getLawWaters() == 1) {
             tvLawWaters.setText("全民所有");
         } else if (shopsCoupon.getLawWaters() == 2) {
-            tvLawWaters.setText("集体所有 ");
+            tvLawWaters.setText("集体所有");
         }
         selectedlawWatersPos = shopsCoupon.getLawWaters();
         selectedLawAquPos = shopsCoupon.getLawAqu();
@@ -729,7 +728,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         mIvVoiceAnim.setVisibility(View.GONE);
                     } else {
                         startAnim();
-                    mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
+                        mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
                         //  mMediaPlayUtil.play(mVoiceData);
                     }
                 }else {

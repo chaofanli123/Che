@@ -293,10 +293,11 @@ public class MessageFragment extends BaseFragment {
                         MyApplication.showToast(element.msg);
                         linNotarize.setVisibility(View.GONE);
                         ischeckd = false;
+                        mList.remove(list);
                         mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
-                     // mPtrHelper.autoRefresh(true);
+                //     mPtrHelper.autoRefresh(true);
                     }
                 });
     }
@@ -324,7 +325,6 @@ public class MessageFragment extends BaseFragment {
             super(layoutResId, data);
             this.isdelete = isdelete;
         }
-
         @Override
         protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
             holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.getLawName());
@@ -358,6 +358,8 @@ public class MessageFragment extends BaseFragment {
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
             tv_coupon_time.setText("检查时间" + shopsCoupon.getLawTime());
             final ImageView select = holder.getView(R.id.img_select);
+
+            LinearLayout item = holder.getView(R.id.rl_item);
             if (isdelete) {
                 if (shopsCoupon.checked) {//选择状态
                     select.setImageResource(R.drawable.ic_select_compan_click);
@@ -367,7 +369,7 @@ public class MessageFragment extends BaseFragment {
             } else {
                 select.setImageResource(R.drawable.ic_arrow_right);
             }
-            LinearLayout item = holder.getView(R.id.rl_item);
+
             /**
              * 修改 进入详情
              */

@@ -164,6 +164,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private FarmListAdapter framListAdapter; //单位名称
     private List<YangZhiChangDanAn.PageBean.ListBean> framlist;
     private int selectedframPos = 0;
+    private String framid;//农场id
 
     private LawWatersListAdapter lawWatersListAdapter;
     private String[] lawWaters = {"全民所有", "集体所有"};
@@ -218,6 +219,7 @@ public class PublichaddActivity extends TakePhotoActivity {
 
     private com.victor.che.domain.Message.PageBean.ListBean shopsCoupon;//从列表界面传过来的对象
     private String type;
+
 
     private Handler handler = new Handler() {
         @Override
@@ -300,7 +302,7 @@ public class PublichaddActivity extends TakePhotoActivity {
      * @param shopsCoupon
      */
     private void showdata(final com.victor.che.domain.Message.PageBean.ListBean shopsCoupon) {
-        etUnitname.setText(shopsCoupon.getLawName());
+        etUnitname.setText(shopsCoupon.farm);
         tvFirsttime.setText(shopsCoupon.getLawTime());
         if (shopsCoupon.getLawWaters() == 1) {
             tvLawWaters.setText("全民所有");
@@ -707,6 +709,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         selectedframPos = position;
+                        framid=framlist.get(selectedframPos).getId()+"";
                         framListAdapter.notifyDataSetChanged();
                         etUnitname.setText(framlist.get(selectedframPos).getFarmName());
                       //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
@@ -1039,7 +1042,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         if ("list".equals(type)) { //修改执法
             params.put("id", shopsCoupon.getId());
         }
-        params.put("lawName", unitname);//单位名称
+        params.put("lawName",framid);//单位id
         params.put("lawTime", lawTime);//检查时间
         params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,
         params.put("lawAqu", selectedLawAquPos);////0 有1 应该持有但没有 2 不需办理
@@ -1179,7 +1182,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         }
                             etUnitname.setText(framlist.get(selectedframPos).getFarmName());
                             etUnitname.requestLayout();// 防止文字和图片覆盖
-                       // sale_user_id = framlist.get(selectedframPos).getId();
+                         framid = framlist.get(selectedframPos).getId();
                             /**
                              * 初始化适配器s
                              */

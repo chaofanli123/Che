@@ -327,7 +327,7 @@ public class MessageFragment extends BaseFragment {
         }
         @Override
         protected void convert(BaseViewHolder holder, final Message.PageBean.ListBean shopsCoupon) {
-            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.getLawName());
+            holder.setText(R.id.tv_title_name, "单位名称：" + shopsCoupon.farm);
 
             if (shopsCoupon.getLawQual() == 0) {
                 holder.setText(R.id.tv_lawQual_message, "质量管理制度:有");

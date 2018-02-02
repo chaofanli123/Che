@@ -322,10 +322,14 @@
         <activity android:name=".ui.my.JingYongYvYaoActivity" />
         <activity android:name=".ui.my.YangZhiChangDangAnActivity" />
         <activity android:name=".ui.my.YangZhiChangDangAnXiangQingActivity" />
-        <activity android:name=".ui.my.ShuiZhiJianCheJiLuActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.ShuiZhiJianCheTuBiaoActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".ui.my.ShuiZhiJianCheJiLuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.ShuiZhiJianCheTuBiaoActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".ui.my.BuTieJiLvctivity" />
+        <activity android:name=".ui.my.BuTieJiLuXiangQingActivity"></activity>
     </application>
 
 </manifest>

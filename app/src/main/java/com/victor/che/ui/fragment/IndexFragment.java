@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.victor.che.R;
 import com.victor.che.base.BaseFragment;
 import com.victor.che.domain.Banner;
+import com.victor.che.ui.my.BuTieJiLvctivity;
 import com.victor.che.ui.my.ShuiZhiJianCheJiLuActivity;
 import com.victor.che.ui.my.WoDeSheBeiListActivity;
 import com.victor.che.ui.my.YangZhiChangDangAnActivity;
@@ -82,6 +83,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
             case R.id.area_marketing: //营销
                 break;
             case R.id.area_myzhanghu: //我的账户
+
                 break;
             case R.id.area_shopping://商城
                 break;
@@ -90,6 +92,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
             case R.id.area_mendian://门店
                 break;
             case R.id.area_coupon_list://优惠券
+                startActivity(new Intent(mContext,BuTieJiLvctivity.class));
                 break;
         }
     }

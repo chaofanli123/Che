@@ -103,6 +103,16 @@ public class Define {
    */
   public static final String URL_ShuiZhiXingXi= API_DOMAIN + "a/comopinion/iotSensorData/firmTreeData";
 
+
+  /**
+   补贴记录接口
+   */
+  public static final String URL_BuTieJiLu= API_DOMAIN + "a/sta/staFirmSubsidy/list";
+
+  /**
+   补贴记录查看接口
+   */
+  public static final String URL_BuTieJiLuCaKan= API_DOMAIN + "a/sta/staFirmSubsidy/formRead";
   /**
    采集数据
    */

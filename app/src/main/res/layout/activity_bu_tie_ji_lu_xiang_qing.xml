@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/common_topbar"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:paddingBottom="10dp"
+        >
+        <TextView
+            android:layout_marginTop="15dp"
+            android:id="@+id/tv_qiye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="企业："
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            />
+        <TextView
+            android:id="@+id/tv_niandu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="年度:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:id="@+id/tv_butiedanwei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="补贴项目:"
+            android:textColor="@color/black_text"
+            android:layout_marginTop="15dp"
+            android:textSize="@dimen/font_size_28px"
+            />
+        <TextView
+            android:id="@+id/tv_butiejine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="补贴金额"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:id="@+id/tv_fafangdanwei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="发放单位:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_gengxingshijian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="备注:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="上传发票:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
+       <android.support.v7.widget.RecyclerView
+           android:layout_marginTop="15dp"
+           android:id="@+id/rv_tupian"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+
+       </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</LinearLayout>

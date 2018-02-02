@@ -6,33 +6,35 @@ package com.victor.che.bean;
 
 public class BuTieJiLuCaKan {
 
+
     /**
-     * staFirmSubsidy : {"id":"027fb3f1569346258e7232513685def9","isNewRecord":false,"remarks":"","createDate":"2018-02-02 02:11:15","updateDate":"2018-02-02 10:11:15","firm":{"id":"2e53f3b61e914a31a599cf97d087c269","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"farmName":"新乡原阳豫黄合作社","area":null,"address":null,"zipcode":null,"species":null,"farmMethod":null,"cultureArea":null,"source":null,"annualOutput":null,"companyType":null,"foundedTime":null,"telephone":null,"begin":null,"end":null},"year":"6666","subsidyItem":"事实上没有","subsidyMoney":"20000000.00","grantFirm":"中央","receipt":"|/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/u%3D1618097094%2C4154452434%26fm%3D77%26w_h%3D121_75%26cs%3D423647557%2C799948659.jpg"}
+     * govFirmSubsidy : {"id":"027fb3f1569346258e7232513685def9","isNewRecord":false,"remarks":"999","createDate":"2018-02-02 02:11:15","updateDate":"2018-02-02 14:16:10","firm":{"id":"2e53f3b61e914a31a599cf97d087c269","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"farmName":"新乡原阳豫黄合作社","area":null,"address":null,"zipcode":null,"species":null,"farmMethod":null,"cultureArea":null,"source":null,"annualOutput":null,"companyType":null,"foundedTime":null,"telephone":null,"begin":null,"end":null},"year":"2017","subsidyItem":"事实上没有","subsidyMoney":"2000.00","grantFirm":"中央","grantDate":1515340800000,"receipt":"|/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/u%3D1618097094%2C4154452434%26fm%3D77%26w_h%3D121_75%26cs%3D423647557%2C799948659.jpg|/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/fb_bg.png"}
      */
 
-    private StaFirmSubsidyBean staFirmSubsidy;
+    private GovFirmSubsidyBean govFirmSubsidy;
 
-    public StaFirmSubsidyBean getStaFirmSubsidy() {
-        return staFirmSubsidy;
+    public GovFirmSubsidyBean getGovFirmSubsidy() {
+        return govFirmSubsidy;
     }
 
-    public void setStaFirmSubsidy(StaFirmSubsidyBean staFirmSubsidy) {
-        this.staFirmSubsidy = staFirmSubsidy;
+    public void setGovFirmSubsidy(GovFirmSubsidyBean govFirmSubsidy) {
+        this.govFirmSubsidy = govFirmSubsidy;
     }
 
-    public static class StaFirmSubsidyBean {
+    public static class GovFirmSubsidyBean {
         /**
          * id : 027fb3f1569346258e7232513685def9
          * isNewRecord : false
-         * remarks :
+         * remarks : 999
          * createDate : 2018-02-02 02:11:15
-         * updateDate : 2018-02-02 10:11:15
+         * updateDate : 2018-02-02 14:16:10
          * firm : {"id":"2e53f3b61e914a31a599cf97d087c269","isNewRecord":false,"remarks":null,"createDate":null,"updateDate":null,"farmName":"新乡原阳豫黄合作社","area":null,"address":null,"zipcode":null,"species":null,"farmMethod":null,"cultureArea":null,"source":null,"annualOutput":null,"companyType":null,"foundedTime":null,"telephone":null,"begin":null,"end":null}
-         * year : 6666
+         * year : 2017
          * subsidyItem : 事实上没有
-         * subsidyMoney : 20000000.00
+         * subsidyMoney : 2000.00
          * grantFirm : 中央
-         * receipt : |/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/u%3D1618097094%2C4154452434%26fm%3D77%26w_h%3D121_75%26cs%3D423647557%2C799948659.jpg
+         * grantDate : 1515340800000
+         * receipt : |/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/u%3D1618097094%2C4154452434%26fm%3D77%26w_h%3D121_75%26cs%3D423647557%2C799948659.jpg|/aims/userfiles/1/images/sta/staFirmSubsidy/2018/02/fb_bg.png
          */
 
         private String id;
@@ -45,6 +47,7 @@ public class BuTieJiLuCaKan {
         private String subsidyItem;
         private String subsidyMoney;
         private String grantFirm;
+        private long grantDate;
         private String receipt;
 
         public String getId() {
@@ -125,6 +128,14 @@ public class BuTieJiLuCaKan {
 
         public void setGrantFirm(String grantFirm) {
             this.grantFirm = grantFirm;
+        }
+
+        public long getGrantDate() {
+            return grantDate;
+        }
+
+        public void setGrantDate(long grantDate) {
+            this.grantDate = grantDate;
         }
 
         public String getReceipt() {

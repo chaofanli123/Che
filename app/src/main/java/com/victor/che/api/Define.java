@@ -107,12 +107,12 @@ public class Define {
   /**
    补贴记录接口
    */
-  public static final String URL_BuTieJiLu= API_DOMAIN + "a/sta/staFirmSubsidy/list";
+  public static final String URL_BuTieJiLu= API_DOMAIN + "a/gov/govFirmSubsidy/list";
 
   /**
    补贴记录查看接口
    */
-  public static final String URL_BuTieJiLuCaKan= API_DOMAIN + "a/sta/staFirmSubsidy/formRead";
+  public static final String URL_BuTieJiLuCaKan= API_DOMAIN + "a/gov/govFirmSubsidy/formRead";
 
 
   /**

@@ -67,13 +67,13 @@ public class BuTieJiLuXiangQingActivity extends BaseActivity {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         BuTieJiLuCaKan Policy = JSON.parseObject(element.body, BuTieJiLuCaKan.class);
-                        tvQiye.setText("企业："+Policy.getStaFirmSubsidy().getFirm().getFarmName());
-                        tvNiandu.setText("年度: "+Policy.getStaFirmSubsidy().getYear());
-                        tvButiedanwei.setText("补贴项目: "+Policy.getStaFirmSubsidy().getSubsidyItem());
-                        tvButiejine.setText("补贴金额: "+Policy.getStaFirmSubsidy().getSubsidyMoney());
-                        tvFafangdanwei.setText("发放单位: "+Policy.getStaFirmSubsidy().getGrantFirm());
-                        tvGengxingshijian.setText("备注: "+Policy.getStaFirmSubsidy().getRemarks());
-                        String receipt = Policy.getStaFirmSubsidy().getReceipt();
+                        tvQiye.setText("企业："+Policy.getGovFirmSubsidy().getFirm().getFarmName());
+                        tvNiandu.setText("年度: "+Policy.getGovFirmSubsidy().getYear());
+                        tvButiedanwei.setText("补贴项目: "+Policy.getGovFirmSubsidy().getSubsidyItem());
+                        tvButiejine.setText("补贴金额: "+Policy.getGovFirmSubsidy().getSubsidyMoney());
+                        tvFafangdanwei.setText("发放单位: "+Policy.getGovFirmSubsidy().getGrantFirm());
+                        tvGengxingshijian.setText("备注: "+Policy.getGovFirmSubsidy().getRemarks());
+                        String receipt = Policy.getGovFirmSubsidy().getReceipt();
                         if (receipt.contains("|")){
                             List<String> imgList=new ArrayList<>();
                             receipt=receipt.substring(1,receipt.length());

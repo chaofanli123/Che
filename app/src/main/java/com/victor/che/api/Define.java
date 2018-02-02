@@ -113,6 +113,29 @@ public class Define {
    补贴记录查看接口
    */
   public static final String URL_BuTieJiLuCaKan= API_DOMAIN + "a/sta/staFirmSubsidy/formRead";
+
+
+  /**
+   违规记录接口
+   */
+  public static final String URL_WeiGuiJiLu= API_DOMAIN + "a/gov/govBreak/list";
+
+  /**
+   违规记录接口2、查看
+   */
+  public static final String URL_WeiGuiJiLuChaKan= API_DOMAIN + "a/gov/govBreak/form";
+
+  /**
+   巡检记录接口
+   */
+  public static final String URL_XunJianJiLu= API_DOMAIN + "a/gov/inspection/list";
+
+
+  /**
+   巡检记录接口2、查看
+   */
+  public static final String URL_XunJianJiLuChaKan= API_DOMAIN + "a/gov/inspection/form";
+
   /**
    采集数据
    */

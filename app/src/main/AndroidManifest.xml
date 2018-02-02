@@ -329,7 +329,11 @@
             android:name=".ui.my.ShuiZhiJianCheTuBiaoActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".ui.my.BuTieJiLvctivity" />
-        <activity android:name=".ui.my.BuTieJiLuXiangQingActivity"></activity>
+        <activity android:name=".ui.my.BuTieJiLuXiangQingActivity" />
+        <activity android:name=".ui.my.WeiGuiJiLuctivity" />
+        <activity android:name=".ui.my.WeiGuiJiLuChaKanActivity" />
+        <activity android:name=".ui.my.XunJianJiLuActivity" />
+        <activity android:name=".ui.my.XunJianJiLuChaKanActivity"></activity>
     </application>
 
 </manifest>

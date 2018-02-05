@@ -3,7 +3,6 @@ package com.victor.che.api;
 
 /**
  * 类说明: 定义网络请求的url
- *
  * @author Victor
  * @email 468034043@qq.com
  * @time 2016年10月29日 下午9:11:53
@@ -20,21 +19,15 @@ public class Define {
    * 视频
    */
   public static final String URL_SHIPING = API_DOMAIN + "a/comopinion/videoDataInformation/list";
-
-
   /**
    * 通知下达
    */
   public static final String URL_TONGZHIXIADALIST= API_DOMAIN + "a/oa/oaNotify/list";
 
-
   /**
    * 提示app更新---app最新版本信息
    */
   public static final String URL_APP_VERSION = API_DOMAIN + "a/setting/appDownload/appUpdate";
-
-
-
   /**
    * 查看通知
    */
@@ -64,7 +57,7 @@ public class Define {
    */
   public static final String URL_govAquLaw_list= API_DOMAIN + "a/gov/govAquLaw/list";
   /**
-   添加执法 修改执法
+   添加执法
    */
   public static final String URL_govAquLaw_save= API_DOMAIN + "a/gov/govAquLaw/save";
   /**

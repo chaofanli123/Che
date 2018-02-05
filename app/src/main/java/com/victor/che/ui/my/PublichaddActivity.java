@@ -1,5 +1,6 @@
 package com.victor.che.ui.my;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
@@ -23,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.jph.takephoto.model.TResult;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
@@ -717,7 +720,22 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
             case R.id.ll_add_yuyin:
-                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                new TedPermission(MyApplication.CONTEXT)
+                        .setPermissions(Manifest.permission.RECORD_AUDIO)
+                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .setDeniedMessage(R.string.rationale_luyin)
+                        .setGotoSettingButtonText("设置")
+                        .setPermissionListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted() {
+                                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                            }
+                            @Override
+                            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
+                            }
+                        }).check();
+
                 break;
             case R.id.ll_qianming:
                 startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);

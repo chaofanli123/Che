@@ -711,7 +711,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         selectedframPos = position;
                         framid=framlist.get(selectedframPos).getId()+"";
                         framListAdapter.notifyDataSetChanged();
-                        etUnitname.setText(framlist.get(selectedframPos).getFarmName());
+                        etUnitname.setText(framlist.get(selectedframPos).getAquFarm().getFarmName());
                       //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
                     }
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
@@ -1137,7 +1137,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         @Override
         public void bindView(int position, View view, YangZhiChangDanAn.PageBean.ListBean entity) {
             TextView textView = (TextView) view;
-            textView.setText(entity.getFarmName());
+            textView.setText(entity.getAquFarm().getFarmName());
             textView.setTextColor(getResources().getColor(selectedframPos == position ? R.color.theme_color : R.color.black_text));
         }
     }
@@ -1180,7 +1180,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                             MyApplication.showToast("单位名称列表为空");
                             return;
                         }
-                            etUnitname.setText(framlist.get(selectedframPos).getFarmName());
+                            etUnitname.setText(framlist.get(selectedframPos).getAquFarm().getFarmName());
                             etUnitname.requestLayout();// 防止文字和图片覆盖
                          framid = framlist.get(selectedframPos).getId();
                             /**

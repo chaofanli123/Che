@@ -65,7 +65,16 @@
             android:textSize="@dimen/font_size_28px"
             android:layout_marginTop="15dp"
             />
-
+        <TextView
+            android:id="@+id/tv_bokuanriqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="拨款日期:"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_28px"
+            android:layout_marginTop="15dp"
+            />
         <TextView
             android:id="@+id/tv_gengxingshijian"
             android:layout_width="wrap_content"

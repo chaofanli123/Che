@@ -1,6 +1,5 @@
 package com.victor.che.ui.my;
 
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,12 +13,7 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
-import com.victor.che.bean.YangZhiChangDanAn;
 import com.victor.che.bean.YangZhiChangXiangQing;
-import com.victor.che.util.CollectionUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -77,46 +71,46 @@ public class YangZhiChangDangAnXiangQingActivity extends BaseActivity {
                     public void callbackSuccess(String url, Element element) {
                         YangZhiChangXiangQing Policy = JSON.parseObject(element.body, YangZhiChangXiangQing.class);
                         YangZhiChangXiangQing.AppAquFarmBean appAquFarm = Policy.getAppAquFarm();
-                        tvYangzhichangmingcheng.setText(appAquFarm.getFarmName());
-                        tvDizhi.setText(appAquFarm.getArea().getName());
-                        tvXiangxidizhi.setText(appAquFarm.getAddress());
-                        tvYouzhengbianma.setText(appAquFarm.getZipcode());
-                        if (appAquFarm.getFarmMethod()!=null){
-                            if (appAquFarm.getFarmMethod().equals("1")){
+                        tvYangzhichangmingcheng.setText(appAquFarm.getAquFarm().getFarmName());
+                        tvDizhi.setText(appAquFarm.getAquFarm().getArea().getName());
+                        tvXiangxidizhi.setText(appAquFarm.getAquFarm().getAddress());
+                        tvYouzhengbianma.setText(appAquFarm.getAquFarm().getZipcode());
+                        if (appAquFarm.getAquFarm().getFarmMethod()!=null){
+                            if (appAquFarm.getAquFarm().getFarmMethod().equals("1")){
                                 tvYangzhimoshi.setText("池塘");
-                            }else if (appAquFarm.getFarmMethod().equals("2")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("2")){
                                 tvYangzhimoshi.setText("大水面放养");
-                            }else if (appAquFarm.getFarmMethod().equals("3")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("3")){
                                 tvYangzhimoshi.setText("围栏");
-                            }else if (appAquFarm.getFarmMethod().equals("4")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("4")){
                                 tvYangzhimoshi.setText("工厂化");
-                            }else if (appAquFarm.getFarmMethod().equals("5")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("5")){
                                 tvYangzhimoshi.setText("筏吊式");
-                            }else if (appAquFarm.getFarmMethod().equals("6")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("6")){
                                 tvYangzhimoshi.setText("滩涂底播");
-                            }else if (appAquFarm.getFarmMethod().equals("7")){
+                            }else if (appAquFarm.getAquFarm().getFarmMethod().equals("7")){
                                 tvYangzhimoshi.setText("网箱");
                             }
                         }
-                        tvYangzhimianji.setText(String.valueOf(appAquFarm.getCultureArea()));
-                        tvMiaozhonglaiyuan.setText(appAquFarm.getSource());
-                        tvNianshengchangnengli.setText(appAquFarm.getAnnualOutput());
+                        tvYangzhimianji.setText(String.valueOf(appAquFarm.getAquFarm().getCultureArea()));
+                        tvMiaozhonglaiyuan.setText(appAquFarm.getAquFarm().getSource());
+                        tvNianshengchangnengli.setText(appAquFarm.getAquFarm().getAnnualOutput());
 
-                        if (appAquFarm.getCompanyType()!=null){
-                            if (appAquFarm.getCompanyType().equals("1")){
+                        if (appAquFarm.getAquFarm().getCompanyType()!=null){
+                            if (appAquFarm.getAquFarm().getCompanyType().equals("1")){
                                 tvQiyeleixing.setText("私营独资企业");
-                            }else if (appAquFarm.getCompanyType().equals("2")){
+                            }else if (appAquFarm.getAquFarm().getCompanyType().equals("2")){
                                 tvQiyeleixing.setText("私营有限责任公司");
-                            }else if (appAquFarm.getCompanyType().equals("3")){
+                            }else if (appAquFarm.getAquFarm().getCompanyType().equals("3")){
                                 tvQiyeleixing.setText(" 其他有限责任公司");
-                            }else if (appAquFarm.getCompanyType().equals("4")){
+                            }else if (appAquFarm.getAquFarm().getCompanyType().equals("4")){
                                 tvQiyeleixing.setText("其他内资企业");
-                            }else if (appAquFarm.getCompanyType().equals("5")){
+                            }else if (appAquFarm.getAquFarm().getCompanyType().equals("5")){
                                 tvQiyeleixing.setText("中外合资经营企业");
                             }
                         }
-                        tvChenglishijian.setText(appAquFarm.getFoundedTime());
-                        tvLianxidianhua.setText(String.valueOf(appAquFarm.getTelephone()));
+                        tvChenglishijian.setText(appAquFarm.getAquFarm().getFoundedTime());
+                        tvLianxidianhua.setText(String.valueOf(appAquFarm.getAquFarm().getTelephone()));
                     }
                 });
 

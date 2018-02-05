@@ -1,14 +1,9 @@
 package com.victor.che.ui.my;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -29,7 +24,6 @@ import com.victor.che.bean.YangZhiChangDanAn;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.util.StringUtil;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -41,7 +35,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
@@ -105,7 +98,7 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
                 if (position == -1) {
                     return;
                 }
-                startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getAquFarm().getId()));
             }
         });
         mPtrHelper.autoRefresh(true);
@@ -220,39 +213,39 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
 
         @Override
         protected void convert(BaseViewHolder holder, final YangZhiChangDanAn.PageBean.ListBean shopsCoupon) {
-            holder.setText(R.id.tv_title_name, "养殖场名称："+shopsCoupon.getFarmName());
-            holder.setText(R.id.tv_xiangxidizhi, "详细地址: "+shopsCoupon.getAddress());
-            if (shopsCoupon.getFarmMethod()!=null){
-                if (shopsCoupon.getFarmMethod().equals("1")){
+            holder.setText(R.id.tv_title_name, "养殖场名称："+shopsCoupon.getAquFarm().getFarmName());
+            holder.setText(R.id.tv_xiangxidizhi, "详细地址: "+shopsCoupon.getAquFarm().getAddress());
+            if (shopsCoupon.getAquFarm().getFarmMethod()!=null){
+                if (shopsCoupon.getAquFarm().getFarmMethod().equals("1")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"池塘");
-                }else if (shopsCoupon.getFarmMethod().equals("2")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("2")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"大水面放养");
-                }else if (shopsCoupon.getFarmMethod().equals("3")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("3")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"围栏");
-                }else if (shopsCoupon.getFarmMethod().equals("4")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("4")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"工厂化");
-                }else if (shopsCoupon.getFarmMethod().equals("5")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("5")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"筏吊式");
-                }else if (shopsCoupon.getFarmMethod().equals("6")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("6")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"滩涂底播");
-                }else if (shopsCoupon.getFarmMethod().equals("7")){
+                }else if (shopsCoupon.getAquFarm().getFarmMethod().equals("7")){
                     holder.setText(R.id.tv_yangzhimoshi, "养殖模式: "+"网箱");
                 }
             }
-            if (shopsCoupon.getCompanyType()!=null){
-                if (shopsCoupon.getCompanyType().equals("1")){
+            if (shopsCoupon.getAquFarm().getCompanyType()!=null){
+                if (shopsCoupon.getAquFarm().getCompanyType().equals("1")){
                     holder.setText(R.id.tv_qiyeleixing, "企业类型: "+"私营独资企业");
-                }else if (shopsCoupon.getCompanyType().equals("2")){
+                }else if (shopsCoupon.getAquFarm().getCompanyType().equals("2")){
                     holder.setText(R.id.tv_qiyeleixing, "企业类型: "+"私营有限责任公司");
-                }else if (shopsCoupon.getCompanyType().equals("3")){
+                }else if (shopsCoupon.getAquFarm().getCompanyType().equals("3")){
                     holder.setText(R.id.tv_qiyeleixing, "企业类型: "+" 其他有限责任公司");
-                }else if (shopsCoupon.getCompanyType().equals("4")){
+                }else if (shopsCoupon.getAquFarm().getCompanyType().equals("4")){
                     holder.setText(R.id.tv_qiyeleixing, "企业类型: "+"其他内资企业");
-                }else if (shopsCoupon.getCompanyType().equals("5")){
+                }else if (shopsCoupon.getAquFarm().getCompanyType().equals("5")){
                     holder.setText(R.id.tv_qiyeleixing, "企业类型: "+"中外合资经营企业");
                 }
             }
-            holder.setText(R.id.tv_nianchangliang, "年产量: "+shopsCoupon.getAnnualOutput());
+            holder.setText(R.id.tv_nianchangliang, "年产量: "+shopsCoupon.getAquFarm().getAnnualOutput());
         }
     }
 

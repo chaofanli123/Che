@@ -178,18 +178,6 @@ public class SettingsActivity extends BaseActivity {
         MyApplication.openActivity(mContext, ChangePwdActivity.class);
     }
 
-    /**
-     * 去功能介绍
-     */
-    @OnClick(R.id.area_function)
-    void gotoFunction() {
-        Bundle bundle = new Bundle();
-        //        http://xtest.cheweifang.cn/web/upgrade-log/index.html
-        //        bundle.putString("mUrl",Define.MWEB_DOMAIN + "web/upgrade-log/index.html");
-        //        MyApplication.openActivity(mContext, WebViewActivity.class, bundle);
-        bundle.putString("mUrl", Define.MWEB_DOMAIN + "web/upgrade-log/index.html");
-        MyApplication.openActivity(mContext, GuanggaoWebActivity.class, bundle);
-    }
 
     /**
      * 联系我们

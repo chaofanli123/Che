@@ -167,7 +167,6 @@ dependencies {
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
-    compile 'com.werb.permissionschecker:permissionschecker:0.0.1-beta2'
     compile 'com.hyman:flowlayout-lib:1.1.2'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

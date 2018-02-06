@@ -5,7 +5,7 @@
     <string name="rationale_storage">请在设置中允许本应用使用存储权限</string>
     <string name="sdcard_storage">请在设置中允许本应用使用读取sdcard权限</string>
     <string name="rationale_shebei">请在设置中允许本应用访问设备信息权限</string>
-    <string name="rationale_luyin">请在设置中允许本应用使用录音,播放,存储权限</string>
+    <string name="rationale_luyin">请在设置中允许本应用使用麦克风权限</string>
 
 
     <string name="viewpager_indicator">%1$d/%2$d</string>

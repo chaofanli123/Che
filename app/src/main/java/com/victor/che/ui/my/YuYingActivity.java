@@ -1,14 +1,13 @@
 package com.victor.che.ui.my;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,23 +19,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
+import com.victor.che.base.BaseActivity;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * 录音
  */
-public class YuYingActivity extends AppCompatActivity {
+public class YuYingActivity extends BaseActivity {
 
     // 语音相关
     private ScaleAnimation mScaleBigAnimation;
@@ -60,26 +62,19 @@ public class YuYingActivity extends AppCompatActivity {
             super.handleMessage(msg);
         }
     };
-
     /**
      * Called when the activity is first created.
      */
-
     private TextView mTvTime, mTvNotice, mTvTimeLengh, tv_topbar_title;
     private ImageView mIvRecord, mIvVoice, mIvVoiceAnim, mFinish;
     private LinearLayout mSoundLengthLayout;
     private RelativeLayout mRlVoiceLayout;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yu_ying);
-        ButterKnife.bind(this);
-        initSoundData();
-        initView();
-    }
 
-    public void initView() {
+    @Override
+    protected void initView() {
+        super.initView();
+        initSoundData();
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -97,8 +92,21 @@ public class YuYingActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mIvRecord.setOnTouchListener(new VoiceTouch());
+        new TedPermission(mContext)
+                .setPermissions(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .setDeniedMessage(R.string.rationale_luyin)
+                .setGotoSettingButtonText("设置")
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        mIvRecord.setOnTouchListener(new VoiceTouch());
+                    }
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
 
+                    }
+                }).check();
         // TODO 播放录音
         mRlVoiceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +122,14 @@ public class YuYingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+
+
+    @Override
+    public int getContentView() {
+        return R.layout.activity_yu_ying;
     }
 
     /**
@@ -168,6 +184,7 @@ public class YuYingActivity extends AppCompatActivity {
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+
                     downY = motionEvent.getY();
                     mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record_pressed));
                     mTvNotice.setText("向上滑动取消发送");

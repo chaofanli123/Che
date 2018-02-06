@@ -35,7 +35,6 @@ public class Message implements Serializable {
          * firstResult : 0
          * html : <div class="fixed-table-pagination" style="display: block;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 1 条记录，总共 1 条记录</span><span class="page-list">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default  btn-outline dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li class="active"><a href="javascript:page(1,10,'');">10</a></li><li class=""><a href="javascript:page(1,25,'');">25</a></li><li class=""><a href="javascript:page(1,50,'');">50</a></li><li class=""><a href="javascript:page(1,100,'');">100</a></li></ul></span> 条记录</span></div><div class="pull-right pagination-roll"><ul class="pagination pagination-outline"><li class="paginate_button previous disabled"><a href="javascript:"><i class="fa fa-angle-double-left"></i></a></li> <li class="paginate_button previous disabled"><a href="javascript:"><i class="fa fa-angle-left"></i></a></li> <li class="paginate_button active"><a href="javascript:">1</a></li> <li class="paginate_button next disabled"><a href="javascript:"><i class="fa fa-angle-right"></i></a></li> <li class="paginate_button next disabled"><a href="javascript:"><i class="fa fa-angle-double-right"></i></a></li> </ul></div></div>
          */
-
         private int pageNo;
         private int pageSize;
         private int count;
@@ -155,7 +154,7 @@ public class Message implements Serializable {
             private String psonName;
             private String userName;
             private String lawTime;
-            private long lawDate;
+            private String lawDate;
             private Object begin;
             private Object end;
 
@@ -343,11 +342,11 @@ public class Message implements Serializable {
                 this.lawTime = lawTime;
             }
 
-            public long getLawDate() {
+            public String getLawDate() {
                 return lawDate;
             }
 
-            public void setLawDate(long lawDate) {
+            public void setLawDate(String lawDate) {
                 this.lawDate = lawDate;
             }
 

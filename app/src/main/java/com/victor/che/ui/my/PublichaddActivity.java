@@ -39,7 +39,7 @@ import com.victor.che.app.MyApplication;
 import com.victor.che.base.VictorBaseArrayAdapter;
 import com.victor.che.base.VictorBaseListAdapter;
 import com.victor.che.bean.Files;
-import com.victor.che.bean.YangZhiChangDanAn;
+import com.victor.che.bean.Form;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.BitmapUtil;
@@ -162,7 +162,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private AnimationDrawable mImageAnim;
 
     private FarmListAdapter framListAdapter; //单位名称
-    private List<YangZhiChangDanAn.PageBean.ListBean> framlist;
+    private List<Form.FarmsBean> framlist;
     private int selectedframPos = 0;
     private String framid;//农场id
 
@@ -379,7 +379,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         if (shopsCoupon.getLawTech() == 0) {
             tvLawTech.setText("是");
             linLawDate.setVisibility(View.VISIBLE);
-            tvLawDate.setText(shopsCoupon.getLawDate() + "");
+            tvLawDate.setText(shopsCoupon.getLawDate());
         } else if (shopsCoupon.getLawTech() == 1) {
             tvLawTech.setText("否");
             linLawDate.setVisibility(View.GONE);
@@ -709,7 +709,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         selectedframPos = position;
                         framid=framlist.get(selectedframPos).getId()+"";
                         framListAdapter.notifyDataSetChanged();
-                        etUnitname.setText(framlist.get(selectedframPos).getAquFarm().getFarmName());
+                        etUnitname.setText(framlist.get(selectedframPos).getFarmName());
                       //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
                     }
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
@@ -1131,16 +1131,16 @@ public class PublichaddActivity extends TakePhotoActivity {
     /**
      * 所有职工适配器
      */
-    private class FarmListAdapter extends VictorBaseListAdapter<YangZhiChangDanAn.PageBean.ListBean> {
+    private class FarmListAdapter extends VictorBaseListAdapter<Form.FarmsBean> {
 
-        public FarmListAdapter(Context context, int layoutResId, List<YangZhiChangDanAn.PageBean.ListBean> mList) {
+        public FarmListAdapter(Context context, int layoutResId, List<Form.FarmsBean> mList) {
             super(context, layoutResId, mList);
         }
 
         @Override
-        public void bindView(int position, View view, YangZhiChangDanAn.PageBean.ListBean entity) {
+        public void bindView(int position, View view, Form.FarmsBean entity) {
             TextView textView = (TextView) view;
-            textView.setText(entity.getAquFarm().getFarmName());
+            textView.setText(entity.getFarmName());
             textView.setTextColor(getResources().getColor(selectedframPos == position ? R.color.theme_color : R.color.black_text));
         }
     }
@@ -1171,20 +1171,19 @@ public class PublichaddActivity extends TakePhotoActivity {
         // 获取单位名称列表
             MyParams params = new MyParams();
             params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
-            VictorHttpUtil.doPost(mContext, Define.URL_YangZhiChangXingXi + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
+            VictorHttpUtil.doPost(mContext, Define.URL_form_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
-                            YangZhiChangDanAn Policy = JSON.parseObject(element.body, YangZhiChangDanAn.class);
-                            List<YangZhiChangDanAn.PageBean.ListBean> shopsCouponList = new ArrayList<>();
-                            framlist = Policy.getPage().getList();
-                         //   framlist.addAll(shopsCouponList);
+                            Form form = JSON.parseObject(element.body, Form.class);
+                         framlist = form.getFarms();
+                            //   framlist.addAll(shopsCouponList);
                         if (CollectionUtil.isEmpty(framlist)) {
                             MyApplication.showToast("单位名称列表为空");
                             return;
                         }
-                            etUnitname.setText(framlist.get(selectedframPos).getAquFarm().getFarmName());
-                            etUnitname.requestLayout();// 防止文字和图片覆盖
+//                            etUnitname.setText(framlist.get(selectedframPos).getFarmName());
+//                            etUnitname.requestLayout();// 防止文字和图片覆盖
                          framid = framlist.get(selectedframPos).getId();
                             /**
                              * 初始化适配器s

@@ -96,7 +96,6 @@ public class Define {
    */
   public static final String URL_ShuiZhiXingXi= API_DOMAIN + "a/comopinion/iotSensorData/firmTreeData";
 
-
   /**
    补贴记录接口
    */
@@ -133,6 +132,16 @@ public class Define {
    采集数据
    */
   public static final String URL_CaiJiXingXi= API_DOMAIN + "a/comopinion/iotSensorData/getDate";
+
+  /**
+   获取单位名称
+   */
+  public static final String URL_form_list= API_DOMAIN + "a/gov/govAquLaw/form";
+
+
+
+
+
 
     /**
      * 获取服务商商品列表

@@ -5,7 +5,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,8 +112,6 @@ public class AccountFragment extends TakePhoneFragment {
     public int getContentView() {
         return R.layout.fragment_account;
     }
-
-
 
     @Override
     protected void initView() {

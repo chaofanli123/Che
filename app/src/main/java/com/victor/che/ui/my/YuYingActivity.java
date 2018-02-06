@@ -2,12 +2,15 @@ package com.victor.che.ui.my;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,8 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.ui.my.util.MediaPlayUtil;
@@ -29,7 +30,6 @@ import com.victor.che.ui.my.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -74,7 +74,7 @@ public class YuYingActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        initSoundData();
+        permissionForM();
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -92,21 +92,38 @@ public class YuYingActivity extends BaseActivity {
                 finish();
             }
         });
-        new TedPermission(mContext)
-                .setPermissions(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                .setDeniedMessage(R.string.rationale_luyin)
-                .setGotoSettingButtonText("设置")
-                .setPermissionListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        mIvRecord.setOnTouchListener(new VoiceTouch());
-                    }
-                    @Override
-                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-
-                    }
-                }).check();
+        // 存储权限检查
+//        new TedPermission(mActivity)
+//                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
+//                .setDeniedMessage(getString(R.string.rationale_storage))
+//                .setDeniedCloseButtonText("取消")
+//                .setGotoSettingButtonText("设置")
+//                .setPermissionListener(new PermissionListener() {
+//                    @Override
+//                    public void onPermissionGranted() {
+//
+//                    }
+//                    @Override
+//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//                    }
+//
+//                }).check();
+        initSoundData();
+//        new TedPermission(mActivity)
+//                .setPermissions(Manifest.permission.RECORD_AUDIO)
+//                .setDeniedMessage(R.string.rationale_luyin)
+//                .setGotoSettingButtonText("设置")
+//                .setPermissionListener(new PermissionListener() {
+//                    @Override
+//                    public void onPermissionGranted() {
+//
+//                    }
+//                    @Override
+//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//
+//                    }
+//                }).check();
+        mIvRecord.setOnTouchListener(new VoiceTouch());
         // TODO 播放录音
         mRlVoiceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,15 +140,10 @@ public class YuYingActivity extends BaseActivity {
             }
         });
     }
-
-
-
-
     @Override
     public int getContentView() {
         return R.layout.activity_yu_ying;
     }
-
     /**
      * 语音播放效果
      */
@@ -184,7 +196,7 @@ public class YuYingActivity extends BaseActivity {
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-
+                    permissionForM();
                     downY = motionEvent.getY();
                     mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record_pressed));
                     mTvNotice.setText("向上滑动取消发送");
@@ -436,6 +448,18 @@ public class YuYingActivity extends BaseActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+
+    /******手机录音权限处理***************************/
+    private void permissionForM() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    211);
         }
     }
 }

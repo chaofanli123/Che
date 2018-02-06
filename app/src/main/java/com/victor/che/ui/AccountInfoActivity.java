@@ -106,11 +106,23 @@ public class AccountInfoActivity extends TakePhotoActivity {
     @OnClick(R.id.topbar_right)
     public void updateClicked() {
         String email = tvEmail.getText().toString().trim();
-
+        if (!com.victor.che.util.StringUtil.isEmail(email)) {
+            MyApplication.showToast("邮箱格式不正确");
+            tvEmail.requestFocus();
+            return;
+        }
         String phone = tvPhone.getText().toString().trim();
-
+        if (!StringUtil.isMobile(phone)) {
+            MyApplication.showToast("电话格式不正确");
+            tvEmail.requestFocus();
+            return;
+        }
         String mobile = tvMobile.getText().toString().trim();
-
+        if (!StringUtil.isPhone(mobile)) {
+            MyApplication.showToast("手机格式不正确");
+            tvEmail.requestFocus();
+            return;
+        }
         MyParams params = new MyParams();
         params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
         params.put("name", tv_name.getText().toString().trim());
@@ -131,9 +143,6 @@ public class AccountInfoActivity extends TakePhotoActivity {
                         MyApplication.showToast(element.msg);
                         StringEvent event=new StringEvent(tv_name.getText().toString().trim());
                         EventBus.getDefault().post(event);
-                        // 关闭本页
-                        finish();
-
                     }
                 });
     }

@@ -158,7 +158,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     private View parentView;
 
     private MediaPlayUtil mMediaPlayUtil;
-   private String mVoiceData; //语音string
+    private String mVoiceData; //语音string
     private AnimationDrawable mImageAnim;
 
     private FarmListAdapter framListAdapter; //单位名称
@@ -606,9 +606,9 @@ public class PublichaddActivity extends TakePhotoActivity {
                 Executors.cacheThreadExecutor(runnableHeaderImage);
                 break;
             case 66:
-              mVoiceData = data.getStringExtra("LYpath");
+                mVoiceData = data.getStringExtra("LYpath");
                 String time = data.getStringExtra("time");
-              String  mSoundData = data.getStringExtra("mSoundData");
+                String  mSoundData = data.getStringExtra("mSoundData");
                 if (mSoundData != null && mSoundData.length() > 0) {
                     mRlVoiceLayout.setVisibility(View.VISIBLE);
                     mTvTimeLengh.setText(time);
@@ -655,24 +655,24 @@ public class PublichaddActivity extends TakePhotoActivity {
         @Override
         public void run() {
             final Message msg = new Message();
-                /**
-                 * 给后台传图片，后台返回string 接口
-                 */
-                MyParams params=new MyParams();
-                params.put("file1",qianmingFile);
-                params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
-                VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
-                        new BaseHttpCallbackListener<Element>() {
-                            @Override
-                            public void callbackSuccess(String url, Element element) {
-                                super.callbackSuccess(url, element);
-                                Files files = JSON.parseObject(element.body, Files.class);
-                                pic = files.getFiles().get(0).getFilePath();
-                                //  MyApplication.showToast(element.msg);
-                                msg.what = 2;
-                                handler.sendMessage(msg);
-                            }
-                        });
+            /**
+             * 给后台传图片，后台返回string 接口
+             */
+            MyParams params=new MyParams();
+            params.put("file1",qianmingFile);
+            params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
+            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+                    new BaseHttpCallbackListener<Element>() {
+                        @Override
+                        public void callbackSuccess(String url, Element element) {
+                            super.callbackSuccess(url, element);
+                            Files files = JSON.parseObject(element.body, Files.class);
+                            pic = files.getFiles().get(0).getFilePath();
+                            //  MyApplication.showToast(element.msg);
+                            msg.what = 2;
+                            handler.sendMessage(msg);
+                        }
+                    });
 
         }
     };
@@ -710,7 +710,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         framid=framlist.get(selectedframPos).getId()+"";
                         framListAdapter.notifyDataSetChanged();
                         etUnitname.setText(framlist.get(selectedframPos).getFarmName());
-                      //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
+                        //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
                     }
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
@@ -994,8 +994,6 @@ public class PublichaddActivity extends TakePhotoActivity {
                 return;
             }
         }
-
-
         String lawold = tvLawOld.getText().toString().trim();
         if ("add".equals(type)) { //add执法
             if (TextUtils.isEmpty(lawold)) {
@@ -1169,28 +1167,27 @@ public class PublichaddActivity extends TakePhotoActivity {
      */
     private void _getorderWorker() {
         // 获取单位名称列表
-            MyParams params = new MyParams();
-            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
-            VictorHttpUtil.doPost(mContext, Define.URL_form_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
-                    new BaseHttpCallbackListener<Element>() {
-                        @Override
-                        public void callbackSuccess(String url, Element element) {
-                            Form form = JSON.parseObject(element.body, Form.class);
-                         framlist = form.getFarms();
-                            //   framlist.addAll(shopsCouponList);
+        MyParams params = new MyParams();
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
+        VictorHttpUtil.doPost(mContext, Define.URL_form_list + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
+                new BaseHttpCallbackListener<Element>() {
+                    @Override
+                    public void callbackSuccess(String url, Element element) {
+                        Form form = JSON.parseObject(element.body, Form.class);
+                        framlist = form.getFarms();
+                        //   framlist.addAll(shopsCouponList);
                         if (CollectionUtil.isEmpty(framlist)) {
                             MyApplication.showToast("单位名称列表为空");
                             return;
                         }
 //                            etUnitname.setText(framlist.get(selectedframPos).getFarmName());
 //                            etUnitname.requestLayout();// 防止文字和图片覆盖
-                         framid = framlist.get(selectedframPos).getId();
-                            /**
-                             * 初始化适配器s
-                             */
-                            framListAdapter = new FarmListAdapter(mContext, R.layout.item_bottom_dialog, framlist);
-
-                        }
-                    });
+                        framid = framlist.get(selectedframPos).getId();
+                        /**
+                         * 初始化适配器s
+                         */
+                        framListAdapter = new FarmListAdapter(mContext, R.layout.item_bottom_dialog, framlist);
+                    }
+                });
     }
 }

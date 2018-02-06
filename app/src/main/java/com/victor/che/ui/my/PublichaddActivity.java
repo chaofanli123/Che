@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
@@ -24,8 +25,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.jph.takephoto.model.TResult;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
@@ -55,6 +54,7 @@ import com.victor.che.util.PicassoUtils;
 import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.ListDialogFragment;
+import com.werb.permissionschecker.PermissionChecker;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -224,6 +224,12 @@ public class PublichaddActivity extends TakePhotoActivity {
     private String type;
 
 
+    static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+    private PermissionChecker permissionChecker;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -249,7 +255,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     @Override
     protected void initView() {
         super.initView();
-
+        permissionChecker = new PermissionChecker(this); // initialize，must need
         type = getIntent().getStringExtra("type");
         if ("list".equals(type)) { //修改执法
             setTitle("修改执法信息");
@@ -720,21 +726,26 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
             case R.id.ll_add_yuyin:
-                new TedPermission(MyApplication.CONTEXT)
-                        .setPermissions(Manifest.permission.RECORD_AUDIO)
-                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .setDeniedMessage(R.string.rationale_luyin)
-                        .setGotoSettingButtonText("设置")
-                        .setPermissionListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted() {
-                                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
-                            }
-                            @Override
-                            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-
-                            }
-                        }).check();
+                if (permissionChecker.isLackPermissions(PERMISSIONS)) {
+                    permissionChecker.requestPermissions();
+                } else {
+                    startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                }
+//                new TedPermission(MyApplication.CONTEXT)
+//                        .setPermissions(Manifest.permission.RECORD_AUDIO)
+//                        .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                        .setDeniedMessage(R.string.rationale_luyin)
+//                        .setGotoSettingButtonText("设置")
+//                        .setPermissionListener(new PermissionListener() {
+//                            @Override
+//                            public void onPermissionGranted() {
+//                                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+//                            }
+//                            @Override
+//                            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+//
+//                            }
+//                        }).check();
 
                 break;
             case R.id.ll_qianming:
@@ -897,7 +908,18 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionChecker.PERMISSION_REQUEST_CODE:
+                if (permissionChecker.hasAllPermissionsGranted(grantResults)) {
+                    startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                } else {
+                    permissionChecker.showDialog();
+                }
+                break;
+        }
+    }
 
     /**
      * 提交

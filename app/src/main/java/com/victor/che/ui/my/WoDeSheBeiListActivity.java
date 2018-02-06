@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -23,6 +24,7 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.ShiPing;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
+import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 
 import java.util.ArrayList;
@@ -43,7 +45,7 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     @BindView(R.id.mPtrFrame)
     PtrClassicFrameLayout PtrHelper;
     protected Context mContext;
-    private List<ShiPing.VideoListBean.ListBean> mList;
+    private List<ShiPing.VideoListBean.ListBean> mList= new ArrayList<>();
     private WoDeSheBeiListAdapter mAdapter;
     private PtrHelper<ShiPing.VideoListBean.ListBean> mPtrHelper;
     public static final String APPKEY = "AppKey";
@@ -64,7 +66,6 @@ public class WoDeSheBeiListActivity extends BaseActivity {
         init();
     }
     private void init() {
-        mList= new ArrayList<>();
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);//设置布局管理器
         mAdapter = new WoDeSheBeiListAdapter(R.layout.item_wodeshebei, mList);
@@ -79,13 +80,12 @@ public class WoDeSheBeiListActivity extends BaseActivity {
                 loadData(pullToRefresh, curpage, pageSize);
             }
         });
-        mPtrHelper.autoRefresh(true);
+        mPtrHelper.autoRefresh(false);
     }
 
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
-        int pageNo = curpage / pageSize + 1;
         MyParams params = new MyParams();
-        params.put("pageNo",pageNo);
+        params.put("pageNo",curpage / pageSize + 1);
         params.put("pageSize", pageSize);
         VictorHttpUtil.doPost(WoDeSheBeiListActivity.this, Define.URL_SHIPING + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new BaseHttpCallbackListener<Element>() {
@@ -106,14 +106,14 @@ public class WoDeSheBeiListActivity extends BaseActivity {
                                 mList.addAll(list);
                                 mAdapter.setNewData(mList);
                                 mAdapter.notifyDataSetChanged();
-                                if (CollectionUtil.getSize(mList) < pageSize) {
+                                if (CollectionUtil.getSize(list) < pageSize) {
                                     // 上拉加载无更多数据
                                     mPtrHelper.loadMoreEnd();
                                 }
                             }
                             mPtrHelper.refreshComplete();
                         } else {//加载更多
-                            mPtrHelper.processLoadMore(mList);
+                            mPtrHelper.processLoadMore(list);
                         }
 
                     }

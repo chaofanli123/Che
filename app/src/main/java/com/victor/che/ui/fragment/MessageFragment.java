@@ -153,7 +153,6 @@ public class MessageFragment extends BaseFragment {
                                 mList.addAll(temp);
                                 mAdapter.setNewData(mList);
                                 mAdapter.notifyDataSetChanged();
-
                                 if (CollectionUtil.getSize(temp) < pageSize) {
                                     // 上拉加载无更多数据
                                     mPtrHelper.loadMoreEnd();

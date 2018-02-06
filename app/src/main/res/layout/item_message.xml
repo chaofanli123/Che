@@ -8,6 +8,12 @@
     android:id="@+id/rl_item"
     android:descendantFocusability="blocksDescendants"
     >
+
+    <LinearLayout
+        android:id="@+id/ll_zhifa"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@color/white"
@@ -133,6 +139,8 @@
             android:text="修改"
             android:textColor="@color/textcolor_theme_color_pressed"
             android:textSize="26px"/>
+
+    </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

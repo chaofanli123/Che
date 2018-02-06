@@ -3,8 +3,6 @@ package com.victor.che.ui.fragment;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,9 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.jzxiang.pickerview.TimePickerDialog;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
@@ -38,6 +34,7 @@ import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
+import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -47,7 +44,6 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrFrameLayout;
@@ -62,7 +58,7 @@ public class MessageFragment extends BaseFragment {
     @BindView(R.id.mPtrFrame)
     PtrFrameLayout mPtrFrame;
     @BindView(R.id.mRecyclerView)
-    RecyclerView mRecyclerView;
+    MyRecyclerView mRecyclerView;
     Unbinder unbinder;
     @BindView(R.id.ed_tiem_start)
     TextView edTiemStart;
@@ -113,22 +109,6 @@ public class MessageFragment extends BaseFragment {
                 _reqData(pullToRefresh, curpage, pageSize);
             }
         });
-            mRecyclerView.addOnItemTouchListener(new OnItemClickListener() {
-                @Override
-                public void onSimpleItemClick(BaseQuickAdapter baseQuickAdapter, View view, int position) {
-                    select = position;
-                    Message.PageBean.ListBean listBean = mList.get(position);
-                    listBean.checked = !listBean.checked;
-                    if (listBean.checked) {
-                        list_id.add(listBean.getId() + "");
-                    } else {
-                        list_id.remove(listBean.getId() + "");
-                    }
-                    list = new ArrayList<>();
-                    list.add(listBean);
-                    mAdapter.notifyDataSetChanged();
-                }
-            });
         mPtrHelper.autoRefresh(false);
     }
 
@@ -186,14 +166,6 @@ public class MessageFragment extends BaseFragment {
                     }
 
                 });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
     }
 
     @Override
@@ -297,6 +269,7 @@ public class MessageFragment extends BaseFragment {
                         mAdapter = new CouponAdapter(R.layout.item_message, mList, ischeckd);  //
                         mRecyclerView.setAdapter(mAdapter);
                         mAdapter.notifyDataSetChanged();
+                        mPtrHelper.autoRefresh(true);
                 //     mPtrHelper.autoRefresh(true);
                     }
                 });
@@ -359,7 +332,40 @@ public class MessageFragment extends BaseFragment {
             tv_coupon_time.setText("检查时间" + shopsCoupon.getLawTime());
             final ImageView select = holder.getView(R.id.img_select);
 
-            LinearLayout item = holder.getView(R.id.rl_item);
+            /**
+             * 修改 进入详情
+             */
+            if (!ischeckd){
+                holder.getView(R.id.ll_zhifa).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("type", "list");
+                        bundle.putSerializable("shopsCoupon", shopsCoupon);
+                        MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
+                    }
+                });
+            }
+
+            /**
+             * 删除
+             */
+            if (ischeckd){
+                holder.getView(R.id.rl_item).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        shopsCoupon.checked = !shopsCoupon.checked;
+                        if (shopsCoupon.checked) {
+                            list_id.add(shopsCoupon.getId() + "");
+                        } else {
+                            list_id.remove(shopsCoupon.getId() + "");
+                        }
+                        list = new ArrayList<>();
+                        list.add(shopsCoupon);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
             if (isdelete) {
                 if (shopsCoupon.checked) {//选择状态
                     select.setImageResource(R.drawable.ic_select_compan_click);
@@ -369,19 +375,6 @@ public class MessageFragment extends BaseFragment {
             } else {
                 select.setImageResource(R.drawable.ic_arrow_right);
             }
-
-            /**
-             * 修改 进入详情
-             */
-            item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("type", "list");
-                    bundle.putSerializable("shopsCoupon", shopsCoupon);
-                    MyApplication.openActivity(mContext, PublichaddActivity.class, bundle);
-                }
-            });
         }
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,6 +23,7 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.ShiPing;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
+import com.victor.che.widget.MyRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +39,13 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     @BindView(R.id.topbar)
     RelativeLayout topbar;
     @BindView(R.id.mRecyclerView)
-    RecyclerView mRecyclerView;
+    MyRecyclerView mRecyclerView;
     @BindView(R.id.mPtrFrame)
     PtrClassicFrameLayout PtrHelper;
     protected Context mContext;
-    private List<ShiPing.VideoListBean> mList = new ArrayList<>();
+    private List<ShiPing.VideoListBean.ListBean> mList;
     private WoDeSheBeiListAdapter mAdapter;
-    private PtrHelper<ShiPing.VideoListBean> mPtrHelper;
+    private PtrHelper<ShiPing.VideoListBean.ListBean> mPtrHelper;
     public static final String APPKEY = "AppKey";
     public static final String AccessToekn = "AccessToekn";
     public static final String PLAY_URL = "play_url";
@@ -64,6 +64,7 @@ public class WoDeSheBeiListActivity extends BaseActivity {
         init();
     }
     private void init() {
+        mList= new ArrayList<>();
         final GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);//设置布局管理器
         mAdapter = new WoDeSheBeiListAdapter(R.layout.item_wodeshebei, mList);
@@ -82,8 +83,10 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     }
 
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
+        int pageNo = curpage / pageSize + 1;
         MyParams params = new MyParams();
-        params.put("mobileLogin", true);
+        params.put("pageNo",pageNo);
+        params.put("pageSize", pageSize);
         VictorHttpUtil.doPost(WoDeSheBeiListActivity.this, Define.URL_SHIPING + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
@@ -91,19 +94,18 @@ public class WoDeSheBeiListActivity extends BaseActivity {
                         ShiPing shiPing = JSON.parseObject(element.body, ShiPing.class);
                         MyApplication.getOpenSDK().setAccessToken(shiPing.getAccessToken());
                         ac = shiPing.getAccessToken();
-                        List<ShiPing.VideoListBean> videoList = shiPing.getVideoList();
+                        List<ShiPing.VideoListBean.ListBean> list = shiPing.getVideoList().getList();
                         if (pullToRefresh) {////刷新
                             mList.clear();//清空数据
-                            if (CollectionUtil.isEmpty(videoList)) {
+                            if (CollectionUtil.isEmpty(list)) {
                                 // 无数据
                                 View common_no_data = View.inflate(WoDeSheBeiListActivity.this, R.layout.common_no_data, null);
                                 mPtrHelper.setEmptyView(common_no_data);
                             } else {
                                 // 有数据
-                                mList.addAll(videoList);
+                                mList.addAll(list);
                                 mAdapter.setNewData(mList);
                                 mAdapter.notifyDataSetChanged();
-
                                 if (CollectionUtil.getSize(mList) < pageSize) {
                                     // 上拉加载无更多数据
                                     mPtrHelper.loadMoreEnd();
@@ -122,15 +124,15 @@ public class WoDeSheBeiListActivity extends BaseActivity {
     /**
      * 消息列表适配器
      */
-    private class WoDeSheBeiListAdapter extends QuickAdapter<ShiPing.VideoListBean> {
+    private class WoDeSheBeiListAdapter extends QuickAdapter<ShiPing.VideoListBean.ListBean> {
 
-        public WoDeSheBeiListAdapter(int layoutResId, List<ShiPing.VideoListBean> data) {
+        public WoDeSheBeiListAdapter(int layoutResId, List<ShiPing.VideoListBean.ListBean> data) {
             super(layoutResId, data);
         }
 
         @Override
-        protected void convert(final BaseViewHolder helper, final ShiPing.VideoListBean item) {
-            helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());//时间
+        protected void convert(final BaseViewHolder helper, final ShiPing.VideoListBean.ListBean item) {
+            helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());
                 helper.getView(R.id.ll_shiping).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

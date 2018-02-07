@@ -74,7 +74,8 @@ public class YuYingActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        permissionForM();
+      //  permissionForM();
+        initSoundData();
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -108,7 +109,7 @@ public class YuYingActivity extends BaseActivity {
 //                    }
 //
 //                }).check();
-        initSoundData();
+
 //        new TedPermission(mActivity)
 //                .setPermissions(Manifest.permission.RECORD_AUDIO)
 //                .setDeniedMessage(R.string.rationale_luyin)

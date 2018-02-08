@@ -119,7 +119,6 @@ public class PicassoUtils {
         }
         Glide.with(context).load(url).error(R.drawable.def_banner).fitCenter().into(imageView);
     }
-//
 //    /**
 //     * 列表加载多张图片，不变形
 //     *

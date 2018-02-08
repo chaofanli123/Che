@@ -24,6 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
@@ -31,6 +33,7 @@ import com.victor.che.ui.my.util.StringUtil;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -80,7 +83,22 @@ public class YuYingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yu_ying);
         ButterKnife.bind(this);
-        initSoundData();
+        //存储权限检查
+        new TedPermission(YuYingActivity.this)
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
+                .setDeniedMessage(getString(R.string.rationale_storage))
+                .setDeniedCloseButtonText("取消")
+                .setGotoSettingButtonText("设置")
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        initSoundData();
+                    }
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                    }
+
+                }).check();
         initView();
     }
 
@@ -103,38 +121,21 @@ public class YuYingActivity extends Activity {
                 finish();
             }
         });
-        // 存储权限检查
-//        new TedPermission(mActivity)
-//                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
-//                .setDeniedMessage(getString(R.string.rationale_storage))
-//                .setDeniedCloseButtonText("取消")
-//                .setGotoSettingButtonText("设置")
-//                .setPermissionListener(new PermissionListener() {
-//                    @Override
-//                    public void onPermissionGranted() {
-//
-//                    }
-//                    @Override
-//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-//                    }
-//
-//                }).check();
+        new TedPermission(YuYingActivity.this)
+                .setPermissions(Manifest.permission.RECORD_AUDIO)
+                .setDeniedMessage(R.string.rationale_luyin)
+                .setGotoSettingButtonText("设置")
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        mIvRecord.setOnTouchListener(new VoiceTouch());
+                    }
+                    @Override
+                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
 
-//        new TedPermission(mActivity)
-//                .setPermissions(Manifest.permission.RECORD_AUDIO)
-//                .setDeniedMessage(R.string.rationale_luyin)
-//                .setGotoSettingButtonText("设置")
-//                .setPermissionListener(new PermissionListener() {
-//                    @Override
-//                    public void onPermissionGranted() {
-//
-//                    }
-//                    @Override
-//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-//
-//                    }
-//                }).check();
-        mIvRecord.setOnTouchListener(new VoiceTouch());
+                    }
+                }).check();
+
         // TODO 播放录音
         mRlVoiceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +181,6 @@ public class YuYingActivity extends Activity {
         }
         mMediaPlayUtil = MediaPlayUtil.getInstance();
     }
-
     /**
      * 完成录音
      */
@@ -208,7 +208,7 @@ public class YuYingActivity extends Activity {
 
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    permissionForM();
+                    //permissionForM();
                     downY = motionEvent.getY();
                     mIvRecord.setImageDrawable(getResources().getDrawable(R.drawable.record_pressed));
                     mTvNotice.setText("向上滑动取消发送");
@@ -363,7 +363,6 @@ public class YuYingActivity extends Activity {
             // 不加  "" 空串 会出  Resources$NotFoundException 错误
             mTvTime.setText(mTime + "" + '"');
             Log.i("record_test", "录音成功");
-
         }
         //mRecorder.setOnErrorListener(null);
         try {

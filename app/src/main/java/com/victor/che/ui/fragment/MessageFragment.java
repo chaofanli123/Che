@@ -328,7 +328,7 @@ public class MessageFragment extends BaseFragment {
             }
 
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
-            tv_coupon_time.setText("检查时间" + shopsCoupon.getLawTime());
+            tv_coupon_time.setText("检查时间:" + shopsCoupon.getLawTime());
             final ImageView select = holder.getView(R.id.img_select);
 
             /**

@@ -1,11 +1,13 @@
 package com.victor.che.ui.my;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.victor.che.R;
-import com.victor.che.base.BaseActivity;
 import com.victor.che.ui.my.util.MediaPlayUtil;
 import com.victor.che.ui.my.util.StringUtil;
 
@@ -33,13 +34,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * 录音
  */
-public class YuYingActivity extends BaseActivity {
+public class YuYingActivity extends Activity {
 
+    @BindView(R.id.iv_finish)
+    ImageView ivFinish;
     // 语音相关
     private ScaleAnimation mScaleBigAnimation;
     private ScaleAnimation mScaleLittleAnimation;
@@ -70,12 +75,17 @@ public class YuYingActivity extends BaseActivity {
     private LinearLayout mSoundLengthLayout;
     private RelativeLayout mRlVoiceLayout;
 
-
     @Override
-    protected void initView() {
-        super.initView();
-      //  permissionForM();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_yu_ying);
+        ButterKnife.bind(this);
         initSoundData();
+        initView();
+    }
+
+    protected void initView() {
+        //  permissionForM();
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -141,10 +151,7 @@ public class YuYingActivity extends BaseActivity {
             }
         });
     }
-    @Override
-    public int getContentView() {
-        return R.layout.activity_yu_ying;
-    }
+
     /**
      * 语音播放效果
      */
@@ -167,7 +174,7 @@ public class YuYingActivity extends BaseActivity {
      */
     public void initSoundData() {
         dataPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AsRecrod/Sounds/";
-     folder = new File(mSoundData);
+        folder = new File(mSoundData);
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -187,9 +194,8 @@ public class YuYingActivity extends BaseActivity {
             setResult(66, intent);
             finish();
         }else {
-            Toast.makeText(mContext,"请先录音",Toast.LENGTH_SHORT).show();
+            Toast.makeText(YuYingActivity.this,"请先录音",Toast.LENGTH_SHORT).show();
         }
-
     }
 
     /**
@@ -214,11 +220,9 @@ public class YuYingActivity extends BaseActivity {
                         mRecorder = new MediaRecorder();
                     }
                     mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                   mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
-                   // mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
+                    mRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
                     mRecorder.setOutputFile(mSoundData);
-                   mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                    // mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                    mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
                     try {
                         mRecorder.prepare();
                     } catch (IOException e) {

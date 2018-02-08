@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,7 +23,6 @@ import com.victor.che.base.BaseActivity;
 import com.victor.che.bean.ShiPing;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 
 import java.util.ArrayList;
@@ -132,7 +130,7 @@ public class WoDeSheBeiListActivity extends BaseActivity {
 
         @Override
         protected void convert(final BaseViewHolder helper, final ShiPing.VideoListBean.ListBean item) {
-            helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName());
+            helper.setText(R.id.tv_video_jj, item.getFirmId().getFirmName()+" "+item.getPondId().getName());
                 helper.getView(R.id.ll_shiping).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

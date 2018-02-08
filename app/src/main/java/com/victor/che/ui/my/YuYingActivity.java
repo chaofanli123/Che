@@ -179,12 +179,17 @@ public class YuYingActivity extends BaseActivity {
      */
     @OnClick(R.id.iv_reload)
     public void onViewClicked() {
-        Intent intent = new Intent();
-        intent.putExtra("LYpath", mVoiceData);
-        intent.putExtra("time", mTvTimeLengh.getText().toString().trim());
-        intent.putExtra("mSoundData",mSoundData);
-        setResult(66, intent);
-        finish();
+        if(mSoundData.length()>0){
+            Intent intent = new Intent();
+            intent.putExtra("LYpath", mVoiceData);
+            intent.putExtra("time", mTvTimeLengh.getText().toString().trim());
+            intent.putExtra("mSoundData",mSoundData);
+            setResult(66, intent);
+            finish();
+        }else {
+            Toast.makeText(mContext,"请先录音",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     /**

@@ -175,7 +175,7 @@ public class YuYingActivity extends Activity {
      */
     public void initSoundData() {
         dataPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/AsRecrod/Sounds/";
-        folder = new File(mSoundData);
+        folder = new File(dataPath);
         if (!folder.exists()) {
             folder.mkdirs();
         }
@@ -366,9 +366,11 @@ public class YuYingActivity extends Activity {
         }
         //mRecorder.setOnErrorListener(null);
         try {
-            mRecorder.stop();
-            mRecorder.reset();
-            mRecorder.release();
+            if (mRecorder != null) {
+                mRecorder.stop();
+                mRecorder.reset();
+                mRecorder.release();
+            }
         } catch (Exception e) {
             Log.i("recoder", "stop() failed");
             isCanceled = true;

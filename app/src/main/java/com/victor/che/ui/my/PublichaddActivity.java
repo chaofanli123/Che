@@ -1,18 +1,26 @@
 package com.victor.che.ui.my;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,6 +56,7 @@ import com.victor.che.util.DateUtil;
 import com.victor.che.util.Executors;
 import com.victor.che.util.ListUtils;
 import com.victor.che.util.MaterialDialogUtils;
+import com.victor.che.util.PermissionsUtil;
 import com.victor.che.util.PicassoUtils;
 import com.victor.che.widget.BottomDialogFragment;
 import com.victor.che.widget.ClearEditText;
@@ -715,13 +724,18 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
             case R.id.ll_add_yuyin:
-//                if (permissionChecker.isLackPermissions(PERMISSIONS)) {
-//                    permissionChecker.requestPermissions();
-//                } else {
-//
-//                }
-                startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                PermissionsUtil.checkAndRequestPermissions(mActivity, new PermissionsUtil.PermissionCallbacks() {
+                    @Override
+                    public void onPermissionsGranted() {
+                        startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                    }
 
+                    @Override
+                    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+                    }
+
+                });
                 break;
             case R.id.ll_qianming:
                 startActivityForResult(new Intent(mContext, ShouXieQianMingActivity.class), 22);
@@ -881,6 +895,112 @@ public class PublichaddActivity extends TakePhotoActivity {
                 }).show(getSupportFragmentManager(), getClass().getSimpleName());
                 break;
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PermissionsUtil.REQUEST_STATUS_CODE) {
+
+            if (permissions[0].equals(Manifest.permission.READ_EXTERNAL_STORAGE)) {//读写权限
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意
+                    PermissionsUtil.checkAndRequestPermissions(this, new PermissionsUtil.PermissionCallbacks() {
+                        @Override
+                        public void onPermissionsGranted() {
+                            startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                        }
+
+                        @Override
+                        public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+                        }
+
+                    });//请求
+                } else {//不同意
+                    createLoadedAlertDialog("在设置-应用-"+ getString(R.string.app_name) +"-权限中开启存储空间权限，以正常使用App功能");
+                }
+            }
+
+            if (permissions[0].equals(Manifest.permission.RECORD_AUDIO)) {//语音权限
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意
+                    PermissionsUtil.checkAndRequestPermissions(this, new PermissionsUtil.PermissionCallbacks() {
+                        @Override
+                        public void onPermissionsGranted() {
+                            startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
+                        }
+
+                        @Override
+                        public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+                        }
+
+                    });
+                } else {//不同意
+                    createLoadedAlertDialog("在设置-应用-" + getString(R.string.app_name) + "-权限中开启录音权限，以正常使用App功能");
+                }
+            }
+
+//            if (permissions[0].equals(Manifest.permission.CAMERA)) {//电话权限
+//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意
+//                    //所有权限均获取
+//                    toMainActivity();
+//                } else {//不同意
+//                    createLoadedAlertDialog("在设置-应用-"+ getString(R.string.app_name) +"-权限中开启照相机权限，以正常使用App功能");
+//                }
+//            }
+        }
+
+    }
+
+
+    /**
+     * 去设置dialog
+     */
+    public void createLoadedAlertDialog(String title) {
+        final AlertDialog dialog = new AlertDialog.Builder(mContext).create();
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+        dialog.setCancelable(true);
+        final Window window = dialog.getWindow();
+
+        window.setContentView(R.layout.alert_dialog);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
+        TextView titleTv = (TextView) window.findViewById(R.id.title_tv);//内容
+        TextView titleNoticeTv = (TextView) window.findViewById(R.id.title_notice_tv);//标题
+        titleNoticeTv.setText("权限申请");
+        titleTv.setText(title);
+        TextView cancelTv = (TextView) window.findViewById(R.id.cancel_tv); // 取消点击
+        TextView okTv = (TextView) window.findViewById(R.id.ok_tv); // 确认点击
+
+        cancelTv.setText("取消");
+        okTv.setText("去设置");
+
+        // #1 取消键
+        cancelTv.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        // #2 确认键
+        okTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivityForResult(intent, PermissionsUtil.REQUEST_PERMISSION_SETTING);
+                finish();
+                dialog.cancel();
+            }
+
+        });
     }
 
 

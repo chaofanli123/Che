@@ -103,7 +103,6 @@ public class YuYingActivity extends Activity {
     }
 
     protected void initView() {
-        //  permissionForM();
         tv_topbar_title = (TextView) findViewById(R.id.tv_topbar_title);
         tv_topbar_title.setText("语音录制");
         mTvTime = (TextView) findViewById(R.id.chat_tv_sound_length);
@@ -205,7 +204,6 @@ public class YuYingActivity extends Activity {
 
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     //permissionForM();

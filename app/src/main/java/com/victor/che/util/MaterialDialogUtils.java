@@ -133,7 +133,23 @@ public class MaterialDialogUtils {
                 });
         builder.show();
     }
+    public static void maxInputNumberDialog(final Context context, String content, String hint, int num, MaterialDialog.InputCallback positiveClick) {
 
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(context)
+                .content(content)
+                .inputType(InputType.TYPE_CLASS_NUMBER)
+                .input(hint, "", positiveClick)
+                .inputMaxLength(num)
+                .positiveText("确定")
+                .negativeText("取消")
+                .onNegative(new SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
     /**
      * 只有一项条目的对话框
      *

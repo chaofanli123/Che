@@ -81,8 +81,6 @@ public class AccountInfoActivity extends TakePhotoActivity {
                     }
                 });
     }
-
-
     @OnClick(R.id.rl_name)
     public void onViewClicked() {
         MaterialDialog.InputCallback innputCallback;//输入
@@ -111,15 +109,15 @@ public class AccountInfoActivity extends TakePhotoActivity {
             tvEmail.requestFocus();
             return;
         }
-        String phone = tvPhone.getText().toString().trim();
+        String phone = tvMobile.getText().toString().trim();
         if (!StringUtil.isMobile(phone)) {
-            MyApplication.showToast("电话格式不正确");
+            MyApplication.showToast("手机格式不正确");
             tvEmail.requestFocus();
             return;
         }
-        String mobile = tvMobile.getText().toString().trim();
+        String mobile = tvPhone.getText().toString().trim();
         if (!StringUtil.isPhone(mobile)) {
-            MyApplication.showToast("手机格式不正确");
+            MyApplication.showToast("电话格式不正确");
             tvEmail.requestFocus();
             return;
         }
@@ -157,7 +155,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         if (!TextUtils.isEmpty(input)) {
-                            if (com.victor.che.util.StringUtil.isEmail(input.toString().trim())) {
+                            if (!com.victor.che.util.StringUtil.isEmail(input.toString().trim())) {
                                 MyApplication.showToast("请输入正确的email");
                                 return;
                             }
@@ -175,7 +173,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         if (!TextUtils.isEmpty(input)) {
-                            if (StringUtil.isPhone(input.toString().trim())) {
+                            if (!StringUtil.isPhone(input.toString().trim())) {
                                 MyApplication.showToast("电话格式不正确");
                                 return;
                             }
@@ -185,7 +183,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                         }
                     }
                 };
-                MaterialDialogUtils.baseInputDialog(mActivity, "修改电话", tvphone,innputCallback);
+                MaterialDialogUtils.maxInputNumberDialog(mActivity,  "修改电话",tvphone,12,innputCallback);
                 break;
             case R.id.rl_mobile:
                 final String tvmobile = tvMobile.getText().toString().trim();
@@ -193,8 +191,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         if (!TextUtils.isEmpty(input)) {
-
-                            if (StringUtil.isMobile(input.toString().trim())) {
+                            if (!StringUtil.isMobile(input.toString().trim())) {
                                 MyApplication.showToast("手机号格式不正确");
                                 return;
                             }
@@ -204,7 +201,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                         }
                     }
                 };
-                MaterialDialogUtils.baseInputDialog(mActivity, "修改手机号", tvmobile,innputCallback);
+                MaterialDialogUtils.maxInputNumberDialog(mActivity,"修改手机号",tvmobile,11,innputCallback);
                 break;
             case R.id.rl_remarks:
                 final String tvremarks = tvRemarks.getText().toString().trim();

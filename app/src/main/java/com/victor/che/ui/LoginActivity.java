@@ -1,6 +1,5 @@
 package com.victor.che.ui;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Selection;
@@ -17,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
@@ -29,10 +26,7 @@ import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.User;
-import com.victor.che.util.AppUtil;
 import com.victor.che.util.StringUtil;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +63,6 @@ public class LoginActivity extends BaseActivity {
     private boolean firstStartedApp;// 是否是第一次启动app
 
     private boolean mLoginByPwd = true;// 默认是密码登录
-    private String deviceId;
 
     private boolean isrember=false;//是否记住密码
 
@@ -82,23 +75,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        new TedPermission(MyApplication.CONTEXT)
-                .setPermissions(Manifest.permission.READ_PHONE_STATE)
-                .setDeniedMessage(R.string.rationale_shebei)
-                .setDeniedCloseButtonText("取消")
-                .setGotoSettingButtonText("设置")
-                .setPermissionListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted() {
-                        deviceId = AppUtil.getDeviceId(mContext);
-                    }
-
-                    @Override
-                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-
-                    }
-                }).check();
-
         firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
         if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) {//已登录进入首页
             isrember=MyApplication.getUser().isrember;

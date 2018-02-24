@@ -35,7 +35,7 @@
         <RadioButton
             android:id="@+id/tab_bottom_2"
             style="@style/tab_bottom"
-            android:drawableTop="@drawable/sl_tab_bottom1"
+            android:drawableTop="@drawable/sl_tab_bottom2"
             android:text="辖区档案"/>
 
         <RadioButton

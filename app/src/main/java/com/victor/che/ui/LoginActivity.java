@@ -1,5 +1,6 @@
 package com.victor.che.ui;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Selection;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
 import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
@@ -26,7 +29,10 @@ import com.victor.che.app.ConstantValue;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
 import com.victor.che.domain.User;
+import com.victor.che.ui.my.YuYingActivity;
 import com.victor.che.util.StringUtil;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +90,7 @@ public class LoginActivity extends BaseActivity {
                 et_username.setText("");
             }
         }
+
         mRedirectTargetClass = (Class<?>) getIntent().getSerializableExtra("mRedirectTargetClass");
         mBundle = getIntent().getBundleExtra("mBundle");
         et_pwd.setOnEditorActionListener(new TextView.OnEditorActionListener() {

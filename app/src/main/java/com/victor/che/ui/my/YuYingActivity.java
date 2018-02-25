@@ -70,7 +70,7 @@ public class YuYingActivity extends Activity {
             super.handleMessage(msg);
         }
     };
-    /**
+    /**+
      * Called when the activity is first created.
      */
     private TextView mTvTime, mTvNotice, mTvTimeLengh, tv_topbar_title;

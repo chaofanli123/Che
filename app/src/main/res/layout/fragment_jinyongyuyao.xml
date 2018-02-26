@@ -6,6 +6,10 @@
     android:orientation="vertical"
     android:background="@color/common_bg"
  >
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider"/>
     <LinearLayout
         android:id="@+id/lin_search"
         android:layout_width="match_parent"
@@ -18,9 +22,8 @@
             android:id="@+id/et_search_yaowuname"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginRight="16px"
             android:layout_weight="1"
-            android:background="@drawable/sl_search"
+            android:background="@drawable/bg_custom_edit"
             android:hint="药物名称"
             android:imeOptions="actionSearch"
             android:paddingLeft="30px"
@@ -33,9 +36,8 @@
             android:id="@+id/et_search_en_name"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginRight="16px"
             android:layout_weight="1"
-            android:background="@drawable/sl_search"
+            android:background="@drawable/bg_custom_edit"
             android:hint="英文名"
             android:imeOptions="actionSearch"
             android:paddingLeft="30px"
@@ -48,9 +50,8 @@
             android:id="@+id/et_search_another_name"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginRight="16px"
             android:layout_weight="1"
-            android:background="@drawable/sl_search"
+            android:background="@drawable/bg_custom_edit"
             android:hint="别名"
             android:imeOptions="actionSearch"
             android:paddingLeft="30px"
@@ -67,7 +68,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
-        android:layout_marginBottom="@dimen/item_margin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <com.victor.che.widget.ClearEditText
@@ -76,7 +76,7 @@
             android:layout_height="40dp"
             android:layout_marginRight="16px"
             android:layout_weight="8"
-            android:background="@drawable/sl_search"
+            android:background="@drawable/bg_custom_edit"
             android:hint="引用依据"
             android:imeOptions="actionSearch"
             android:paddingLeft="30px"
@@ -90,7 +90,8 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="2"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_text_search"
+            android:scaleType="center"
             />
     </LinearLayout>
 <View

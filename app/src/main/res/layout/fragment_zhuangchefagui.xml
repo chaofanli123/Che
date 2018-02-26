@@ -66,21 +66,41 @@
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"
             app:iconPadding="20px"/>
-        <com.victor.che.widget.ClearEditText
-            android:id="@+id/tv_time_gongshi"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_custom_edit"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:hint="公示时间"
-            android:textSize="@dimen/font_size_28px"
-            android:inputType="number"
-            android:textColor="@color/black_text"
-            android:gravity="center"
-            android:textColorHint="@color/light_gray_text"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            >
+            <TextView
+                android:id="@+id/tv_time_gongshi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="@color/white"
+               android:layout_marginRight="16dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="公示时间"
+                android:textSize="@dimen/font_size_28px"
+                android:textColor="@color/black_text"
+                android:gravity="center"
+                android:textColorHint="@color/light_gray_text"
+                />
+            <ImageView
+                android:id="@+id/img_clear"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/sl_edittext_clear"
+                android:layout_marginRight="16dp"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 <View
     android:layout_width="match_parent"

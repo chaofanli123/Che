@@ -7,5 +7,5 @@
         android:textAppearance="@style/CustomTabPageIndicator.Text"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:textSize="@dimen/middle_font_size"
+        android:textSize="15sp"
         android:layout_height="match_parent"/>

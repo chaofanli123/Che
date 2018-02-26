@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,7 +40,6 @@ import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
 import com.victor.che.util.ViewUtil;
-import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.ListDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
@@ -67,7 +67,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     @BindView(R.id.pcfl_user_car)
     PtrFrameLayout pcflUserCar;
     @BindView(R.id.tv_time_gongshi)
-    ClearEditText tvTimeGongshi;
+    TextView tvTimeGongshi;
     Unbinder unbinder;
 
 
@@ -77,6 +77,8 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     Button btn_order_type;
     @BindView(R.id.lin_search)
     LinearLayout linSearch;
+    @BindView(R.id.img_clear)
+    ImageView imgClear;
     /**
      * adapter
      */
@@ -93,7 +95,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     private OrderTypeListAdapter ordertypeListAdapter; //类型适配器
     private int selectedOrderStatePos = 0; //状态
     //类型 1会议通告 2奖惩通告 3活动通告
-    private String[] ORDER_TYPE = {"全部", "部门文件","法规规章","规范性文件","政策解读"};
+    private String[] ORDER_TYPE = {"全部", "部门文件", "法规规章", "规范性文件", "政策解读"};
 
     @Override
     public int getContentView() {
@@ -123,6 +125,17 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
                     _doSearch();
                 }
                 return false;
+            }
+        });
+        tvTimeGongshi.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                if (StringUtil.isEmpty(s.toString().trim())) {
+                    imgClear.setVisibility(View.GONE);
+                }else {
+                    imgClear.setVisibility(View.VISIBLE);
+                }
             }
         });
         messageArrayList = new ArrayList<>();
@@ -171,6 +184,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
 //            mPtrHelper.autoRefresh(true);
 //        }
 //    }
+
     /**
      * 开始搜索
      */
@@ -201,6 +215,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
             }
         }).show(getFragmentManager(), getClass().getSimpleName());
     }
+
     /**
      * 获取商家优惠券
      *
@@ -277,6 +292,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     public void ontimeClicked() {
         showDatePickerDialog(tvTimeGongshi);
     }
+
     /**
      * 显示时间对话框
      */
@@ -284,7 +300,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
         // 回显时间，展示选择框
         Calendar calendar = new GregorianCalendar();
         String text = tv.getText().toString().trim();
-        if (!com.victor.che.util.StringUtil.isEmpty(text)) {
+        if (!StringUtil.isEmpty(text)) {
             Date date = DateUtil.getDateByFormat(text, DateUtil.YMD);
             calendar.setTime(date == null ? new Date() : date);
         }
@@ -294,7 +310,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
                     @Override
                     public void onDateSet(TimePickerDialog timePickerView, long millseconds) {
                         tv.setText(DateUtil.getStringByFormat(millseconds, DateUtil.YMD));
-                        sendtime=tv.getText().toString().trim();
+                        sendtime = tv.getText().toString().trim();
                         _doSearch();
                     }
                 })
@@ -317,6 +333,18 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
                 .build();
         mDialogYearMonthDay.show(getFragmentManager(), getClass().getSimpleName());
     }
+
+    /**
+     * 清除时间
+     */
+    @OnClick(R.id.img_clear)
+    public void onViewClicked() {
+        imgClear.setVisibility(View.GONE);
+        tvTimeGongshi.setText("");
+        sendtime = "";
+        mPtrHelper.autoRefresh(true);
+    }
+
     /**
      * 订单列表适配器
      */

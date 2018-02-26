@@ -1132,19 +1132,19 @@ public class PublichaddActivity extends TakePhotoActivity {
             } else {
                 if ("不合格项或者需要整改的地方".equals(lawtrea)) {
                     lawprob = etLawProb.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
+                    if (TextUtils.isEmpty(lawprob)) {
                         MyApplication.showToast("责令整改项目不能为空");
                         etLawProb.requestFocus();
                         return;
                     }
-                    remarks = etRemarks.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
+                    lawprob = etRemarks.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawprob)) {
                         MyApplication.showToast("整改建议不能为空");
                         etRemarks.requestFocus();
                         return;
                     }
-                    lawOther = etLawOther.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawDate)) {
+                    lawprob = etLawOther.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawprob)) {
                         MyApplication.showToast("其他处罚或处置不能为空");
                         etLawOther.requestFocus();
                         return;

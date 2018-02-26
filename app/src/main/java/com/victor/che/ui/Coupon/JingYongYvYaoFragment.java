@@ -22,7 +22,6 @@ import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.JingYongYvYaoActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
-import com.victor.che.util.StringUtil;
 import com.victor.che.widget.AlertDialogFragment;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
@@ -100,7 +99,7 @@ public class JingYongYvYaoFragment extends BaseFragment {
 
 
     /**
-     * 获取商家优惠券
+     * 禁用渔药
      *
      * @param
      */
@@ -109,15 +108,15 @@ public class JingYongYvYaoFragment extends BaseFragment {
        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
         params.put("pageNo",curpage/pageSize+1);
         params.put("pageSize", pageSize);
-        if (!StringUtil.isEmpty(keywords)) {
-            params.put("title", keywords);
-        }
-        if (!StringUtil.isEmpty(type)) {
-            params.put("type", type);
-        }
-        if (!StringUtil.isEmpty(status)) {
-            params.put("status", status);
-        }
+//        if (!StringUtil.isEmpty(keywords)) {
+//            params.put("title", keywords);
+//        }
+//        if (!StringUtil.isEmpty(type)) {
+//            params.put("type", type);
+//        }
+//        if (!StringUtil.isEmpty(status)) {
+//            params.put("status", status);
+//        }
         VictorHttpUtil.doPost(mContext, Define.URL_JINGYONGYVYAO+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
@@ -176,9 +175,9 @@ public class JingYongYvYaoFragment extends BaseFragment {
         if (event == null) {
             return;
         }
-        this.keywords = event.keywords;
-        this.type=event.type;
-        this.status=event.status;
+    //    this.keywords = event.keywords;
+//        this.type=event.type;
+//        this.status=event.status;
         if (currentPos == event.currentPos) {//只处理当前页事件
             mPtrHelper.autoRefresh(true);
         }

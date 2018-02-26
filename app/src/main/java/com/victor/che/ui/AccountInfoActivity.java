@@ -111,7 +111,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
         }
         String phone = tvMobile.getText().toString().trim();
         if (!StringUtil.isMobile(phone)) {
-            MyApplication.showToast("手机格式不正确");
+            MyApplication.showToast("手机号格式不正确");
             tvEmail.requestFocus();
             return;
         }
@@ -177,7 +177,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                                 MyApplication.showToast("电话格式不正确");
                                 return;
                             }
-                            tvPhone.setText(input);
+                            tvPhone.setText(input.toString().trim());
                         } else {
                             MyApplication.showToast("电话不能为空");
                         }
@@ -195,7 +195,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                                 MyApplication.showToast("手机号格式不正确");
                                 return;
                             }
-                            tvMobile.setText(input);
+                            tvMobile.setText(input.toString().trim());
                         } else {
                             MyApplication.showToast("手机号不能为空");
                         }

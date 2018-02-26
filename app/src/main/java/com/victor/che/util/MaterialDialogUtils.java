@@ -137,7 +137,7 @@ public class MaterialDialogUtils {
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(context)
                 .content(content)
-                .inputType(InputType.TYPE_CLASS_NUMBER)
+                .inputType(InputType.TYPE_CLASS_PHONE)
                 .input(hint, "", positiveClick)
                 .inputMaxLength(num)
                 .positiveText("确定")

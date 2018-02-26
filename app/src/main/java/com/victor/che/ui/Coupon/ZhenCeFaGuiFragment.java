@@ -120,13 +120,13 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
         params.put("pageSize", pageSize);
         if (!StringUtil.isEmpty(keywords)) {
             params.put("title", keywords);
-
         }
         if (!StringUtil.isEmpty(type)) {
             params.put("type", type);
         }
+        //公示时间
         if (!StringUtil.isEmpty(status)) {
-            params.put("status", status);
+            params.put("sendtime", status);
         }
         VictorHttpUtil.doPost(mContext, Define.URL_ZHENGCHEFAGUI+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {

@@ -89,7 +89,6 @@ public class IndexFragment1 extends BaseFragment {
         return R.layout.fragment_shouye;
     }
 
-    @Override
     protected void initView() {
         super.initView();
         /**
@@ -205,7 +204,6 @@ public class IndexFragment1 extends BaseFragment {
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -226,11 +224,11 @@ public class IndexFragment1 extends BaseFragment {
                     fragment = new StartUsingCouponFragment();
                     break;
                 case 1:
-                    //禁用
+                    //政策法规
                     fragment = new ZhenCeFaGuiFragment();
                     break;
                 case 2:
-                    //过期
+                    //禁用渔药
                     fragment = new JingYongYvYaoFragment();
                     break;
 

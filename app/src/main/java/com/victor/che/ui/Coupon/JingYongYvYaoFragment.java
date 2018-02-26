@@ -2,8 +2,11 @@ package com.victor.che.ui.Coupon;
 
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -20,9 +23,11 @@ import com.victor.che.bean.fishDrug;
 import com.victor.che.domain.ShopsCoupon;
 import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.JingYongYvYaoActivity;
+import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.widget.AlertDialogFragment;
+import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -33,17 +38,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
- *通知下达列表
+ * 通知下达列表
  */
 public class JingYongYvYaoFragment extends BaseFragment {
     @BindView(R.id.recycler_usr_car)
     MyRecyclerView recycler;
     @BindView(R.id.pcfl_user_car)
     PtrFrameLayout pcflUserCar;
+    @BindView(R.id.et_search_yaowuname)
+    ClearEditText etSearchYaowuname;
+    @BindView(R.id.et_search_en_name)
+    ClearEditText etSearchEnName;
+    @BindView(R.id.et_search_another_name)
+    ClearEditText etSearchAnotherName;
+    @BindView(R.id.et_search_yinyongyiju)
+    ClearEditText etSearchYinyongyiju;
+    Unbinder unbinder;
     /**
      * adapter
      */
@@ -51,15 +68,17 @@ public class JingYongYvYaoFragment extends BaseFragment {
     private List<fishDrug.PageBean.ListBean> messageArrayList;
     private PtrHelper<fishDrug.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
-    public static String keywords = "";
-    private String type = "";// 搜索类型
-    private String status = "";// 搜索状态
+    public static String englishName = "";//英文名
+    private String medicineName = "";//药品名称
+    private String anotherName = "";// 别名
+    private String referenceBasis = "";// 引用凭据
     public static int currentPos = 0;//当前位置
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_usercar_history_values;
+        return R.layout.fragment_jinyongyuyao;
     }
+
     @Override
     protected void initView() {
         messageArrayList = new ArrayList<>();
@@ -90,12 +109,11 @@ public class JingYongYvYaoFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, JingYongYvYaoActivity.class).putExtra("id",messageArrayList.get(position).getId()));
+                startActivity(new Intent(mContext, JingYongYvYaoActivity.class).putExtra("id", messageArrayList.get(position).getId()));
             }
         });
         mPtrHelper.autoRefresh(false);
     }
-
 
 
     /**
@@ -104,27 +122,34 @@ public class JingYongYvYaoFragment extends BaseFragment {
      * @param
      */
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
+        medicineName=etSearchYaowuname.getText().toString().trim();
+        englishName=etSearchEnName.getText().toString().trim();
+        anotherName=etSearchAnotherName.getText().toString().trim();
+        referenceBasis=etSearchYinyongyiju.getText().toString().trim();
         MyParams params = new MyParams();
-       params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
-        params.put("pageNo",curpage/pageSize+1);
+        params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);//
+        params.put("pageNo", curpage / pageSize + 1);
         params.put("pageSize", pageSize);
-//        if (!StringUtil.isEmpty(keywords)) {
-//            params.put("title", keywords);
-//        }
-//        if (!StringUtil.isEmpty(type)) {
-//            params.put("type", type);
-//        }
-//        if (!StringUtil.isEmpty(status)) {
-//            params.put("status", status);
-//        }
-        VictorHttpUtil.doPost(mContext, Define.URL_JINGYONGYVYAO+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, false, null,
+        if (!StringUtil.isEmpty(medicineName)) {
+            params.put("medicineName", medicineName);
+        }
+        if (!StringUtil.isEmpty(englishName)) {
+            params.put("englishName", englishName);
+        }
+        if (!StringUtil.isEmpty(anotherName)) {
+            params.put("anotherName", anotherName);
+        }
+        if (!StringUtil.isEmpty(referenceBasis)) {
+            params.put("referenceBasis", referenceBasis);
+        }
+        VictorHttpUtil.doPost(mContext, Define.URL_JINGYONGYVYAO + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         fishDrug fishDrug = JSON.parseObject(element.body, fishDrug.class);
                         //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
-                       List<fishDrug.PageBean.ListBean> shopsCouponList=new ArrayList<>();
-                        shopsCouponList=fishDrug.getPage().getList();
+                        List<fishDrug.PageBean.ListBean> shopsCouponList = new ArrayList<>();
+                        shopsCouponList = fishDrug.getPage().getList();
 
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
@@ -152,6 +177,25 @@ public class JingYongYvYaoFragment extends BaseFragment {
 
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick(R.id.img_search)
+    public void onViewClicked() {
+        mPtrHelper.autoRefresh(true);
+    }
+
     /**
      * 订单列表适配器
      */
@@ -164,65 +208,67 @@ public class JingYongYvYaoFragment extends BaseFragment {
         @Override
         protected void convert(BaseViewHolder holder, final fishDrug.PageBean.ListBean shopsCoupon) {
 
-            holder.setText(R.id.tv_yaowumingcheng, "药物名称: "+shopsCoupon.getMedicineName());
-            holder.setText(R.id.tv_yingyuming, "英文名: "+shopsCoupon.getEnglishName());
-            holder.setText(R.id.tv_bieming, "别名: "+shopsCoupon.getAnotherName());
-            holder.setText(R.id.tv_yinyongyiju, "引用依据: "+shopsCoupon.getReferenceBasis());
+            holder.setText(R.id.tv_yaowumingcheng, "药物名称: " + shopsCoupon.getMedicineName());
+            holder.setText(R.id.tv_yingyuming, "英文名: " + shopsCoupon.getEnglishName());
+            holder.setText(R.id.tv_bieming, "别名: " + shopsCoupon.getAnotherName());
+            holder.setText(R.id.tv_yinyongyiju, "引用依据: " + shopsCoupon.getReferenceBasis());
         }
     }
+
     @Subscribe
     public void onSearch(SearchEvent event) {
         if (event == null) {
             return;
         }
-    //    this.keywords = event.keywords;
+        //    this.keywords = event.keywords;
 //        this.type=event.type;
 //        this.status=event.status;
         if (currentPos == event.currentPos) {//只处理当前页事件
             mPtrHelper.autoRefresh(true);
         }
     }
+
     /**
      * 释放内存
      */
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(messageListAdapter!=null)
-            messageListAdapter=null;
-        if(mPtrHelper!=null)
-            mPtrHelper=null;
+        if (messageListAdapter != null)
+            messageListAdapter = null;
+        if (mPtrHelper != null)
+            mPtrHelper = null;
     }
 
     /**
-     *禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
+     * 禁用优惠券 禁用成功以后去掉该item刷新列表 重新获取数据；
      */
-   private void  showdialog(final ShopsCoupon shopsCoupon, final int coupon_id){
-       AlertDialogFragment.newInstance(
-               "提示",
-               "禁用之后不可以再发放该优惠券，是否确定？",
-               "是",
-               "否",
-               new View.OnClickListener() {
-                   @Override
-                   public void onClick(View v) {
-                       MyParams params = new MyParams();
-                   //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
-                       params.put("coupon_id", coupon_id);//优惠券id
-                       params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
-                       VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
-                               new BaseHttpCallbackListener<Element>() {
-                                   @Override
-                                   public void callbackSuccess(String url, Element element) {
-                                       messageArrayList.remove(shopsCoupon);
-                                         messageListAdapter.notifyDataSetChanged();
-                                       MyApplication.showToast("禁用成功");
-                                   }
-                               });
-                   }
-               },
-               null)
-               .show(getFragmentManager(), getClass().getSimpleName());
+    private void showdialog(final ShopsCoupon shopsCoupon, final int coupon_id) {
+        AlertDialogFragment.newInstance(
+                "提示",
+                "禁用之后不可以再发放该优惠券，是否确定？",
+                "是",
+                "否",
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyParams params = new MyParams();
+                        //    params.put("provider_id", MyApplication.CURRENT_USER.provider_id);//服务商id
+                        params.put("coupon_id", coupon_id);//优惠券id
+                        params.put("status", 0);//要修改的状态值： 0-禁用 1-启用
+                        VictorHttpUtil.doPost(mContext, Define.url_coupon_change_status, params, false, null,
+                                new BaseHttpCallbackListener<Element>() {
+                                    @Override
+                                    public void callbackSuccess(String url, Element element) {
+                                        messageArrayList.remove(shopsCoupon);
+                                        messageListAdapter.notifyDataSetChanged();
+                                        MyApplication.showToast("禁用成功");
+                                    }
+                                });
+                    }
+                },
+                null)
+                .show(getFragmentManager(), getClass().getSimpleName());
     }
 //    @Subscribe
 //    public void onMessageEvent(MessageEvent event) {

@@ -1,12 +1,22 @@
 package com.victor.che.ui.Coupon;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.phillipcalvin.iconbutton.IconButton;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
 import com.victor.che.api.BaseHttpCallbackListener;
@@ -16,22 +26,24 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseFragment;
+import com.victor.che.base.SimpleTextWatcher;
+import com.victor.che.base.VictorBaseArrayAdapter;
 import com.victor.che.bean.Notify;
-import com.victor.che.event.SearchEvent;
 import com.victor.che.ui.my.TongZhiXiaDaActivity;
 import com.victor.che.util.CollectionUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
+import com.victor.che.util.ViewUtil;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
+import com.victor.che.widget.ListDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.iwgang.familiarrecyclerview.FamiliarRecyclerView;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
@@ -43,6 +55,15 @@ public class StartUsingCouponFragment extends BaseFragment {
     MyRecyclerView recycler;
     @BindView(R.id.pcfl_user_car)
     PtrFrameLayout pcflUserCar;
+
+    @BindView(R.id.et_search)
+    EditText et_search;
+    @BindView(R.id.btn_order_type)
+    Button btn_order_type;
+    @BindView(R.id.btn_order_state)
+    IconButton btnOrderstate;
+    @BindView(R.id.lin_search)
+    LinearLayout linSearch;
     /**
      * adapter
      */
@@ -50,10 +71,19 @@ public class StartUsingCouponFragment extends BaseFragment {
     private List<Notify.PageBean.ListBean> messageArrayList;
     private PtrHelper<Notify.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
-    public static String keywords = "";
     public static int currentPos = 0;//当前位置
+
+    private String keywords = "";// 搜索title
     private String type = "";// 搜索类型
     private String status = "";// 搜索状态
+    private int selectedOrderTypePos = 0; //类型
+    private OrderTypeListAdapter ordertypeListAdapter; //类型适配器
+    private OrderStateListAdapter orderStateListAdapter; //状态适配器
+    private int selectedOrderStatePos = 0; //状态
+    //类型 1会议通告 2奖惩通告 3活动通告
+    private String[] ORDER_TYPE = {"全部", "会议通告", "奖惩通告", "活动通告"};
+    //状态 1草稿2发布
+    private String[] ORDER_STATES = {"全部", "草稿", "发布"};
 
     @Override
     public int getContentView() {
@@ -61,6 +91,31 @@ public class StartUsingCouponFragment extends BaseFragment {
     }
     @Override
     protected void initView() {
+        /**
+         * 订单状态
+         */
+        ordertypeListAdapter = new OrderTypeListAdapter(mContext, R.layout.item_list_dialog, ORDER_TYPE);
+        orderStateListAdapter = new OrderStateListAdapter(mContext, R.layout.item_list_dialog, ORDER_STATES);
+        linSearch.setFocusable(true);
+        linSearch.setFocusableInTouchMode(true);
+        et_search.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                keywords = s.toString().trim();
+                _doSearch();
+            }
+        });
+        et_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    keywords = et_search.getText().toString().trim();
+                    _doSearch();
+                }
+                return false;
+            }
+        });
+
         messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_coupon_startusing, messageArrayList);
         recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
@@ -141,18 +196,71 @@ public class StartUsingCouponFragment extends BaseFragment {
 
     }
 
-    @Subscribe
-    public void onSearch(SearchEvent event) {
-        if (event == null) {
-            return;
-        }
-        this.keywords = event.keywords;
-        this.type=event.type;
-        this.status=event.status;
-        if (currentPos == event.currentPos) {//只处理当前页事件
-            mPtrHelper.autoRefresh(true);
-        }
+    /**
+     * 显示状态
+     */
+    @OnClick(R.id.btn_order_state)
+    void showOrderStateDialog() {
+        ListDialogFragment.newInstance(orderStateListAdapter, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedOrderStatePos = position;
+                orderStateListAdapter.notifyDataSetChanged();
+                btnOrderstate.setText(ORDER_STATES[position]);
+                btnOrderstate.requestLayout();// 防止文字和图片覆盖
+                //类型 1会议通告 2奖惩通告 3活动通告
+                if (selectedOrderStatePos == 0) {
+                    status = "";
+                } else {
+                    status = selectedOrderStatePos + "";
+                }
+                _doSearch();
+            }
+        }).show(getFragmentManager(), getClass().getSimpleName());
     }
+
+    /**
+     * 显示类型
+     */
+    @OnClick(R.id.btn_order_type)
+    void showOrdertypeDialog() {
+        ListDialogFragment.newInstance(ordertypeListAdapter, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selectedOrderTypePos = position;
+                ordertypeListAdapter.notifyDataSetChanged();
+                btn_order_type.setText(ORDER_TYPE[position]);
+                btn_order_type.requestLayout();// 防止文字和图片覆盖
+                //类型 1会议通告 2奖惩通告 3活动通告
+                if (selectedOrderTypePos == 0) {
+                    type = "";
+                } else {
+                    type = selectedOrderTypePos + "";
+                }
+                _doSearch();
+            }
+        }).show(getFragmentManager(), getClass().getSimpleName());
+    }
+
+    /**
+     * 开始搜索
+     */
+    private void _doSearch() {
+        mPtrHelper.autoRefresh(true);
+      //  EventBus.getDefault().post(new SearchEvent(keywords, type, status, currentPos));
+    }
+//    @Subscribe
+//    public void onSearch(SearchEvent event) {
+//        if (event == null) {
+//            return;
+//        }
+//        this.keywords = event.keywords;
+//        this.type=event.type;
+//        this.status=event.status;
+//        if (currentPos == event.currentPos) {//只处理当前页事件
+//            mPtrHelper.autoRefresh(true);
+//        }
+//    }
 
     /**
      * 订单列表适配器
@@ -177,7 +285,7 @@ public class StartUsingCouponFragment extends BaseFragment {
             }
             if (shopsCoupon.getStatus().equals("1")){
                 holder.setText(R.id.tv_zhuangtai, "状态: "+"草稿");
-            }else {
+            }else if (shopsCoupon.getStatus().equals("2")) {
                 holder.setText(R.id.tv_zhuangtai, "状态: "+"发布");
             }
             int total = Integer.valueOf(shopsCoupon.getReadNum()) + Integer.valueOf(shopsCoupon.getUnReadNum());
@@ -194,6 +302,41 @@ public class StartUsingCouponFragment extends BaseFragment {
             messageListAdapter=null;
         if(mPtrHelper!=null)
             mPtrHelper=null;
+    }
+
+
+    /**
+     * 订单类型适配器
+     */
+    private class OrderTypeListAdapter extends VictorBaseArrayAdapter<String> {
+
+        public OrderTypeListAdapter(Context context, int layoutResId, String[] array) {
+            super(context, layoutResId, array);
+        }
+
+        @Override
+        public void bindView(int position, View view, String entity) {
+            TextView textView = (TextView) view;
+            textView.setText(entity);
+            ViewUtil.setDrawableRight(mContext, textView, selectedOrderTypePos == position ? R.drawable.ic_checked : R.drawable.ic_unchecked);
+        }
+    }
+
+    /**
+     * 订单状态适配器
+     */
+    private class OrderStateListAdapter extends VictorBaseArrayAdapter<String> {
+
+        public OrderStateListAdapter(Context context, int layoutResId, String[] array) {
+            super(context, layoutResId, array);
+        }
+
+        @Override
+        public void bindView(int position, View view, String entity) {
+            TextView textView = (TextView) view;
+            textView.setText(entity);
+            ViewUtil.setDrawableRight(mContext, textView, selectedOrderStatePos == position ? R.drawable.ic_checked : R.drawable.ic_unchecked);
+        }
     }
 
 }

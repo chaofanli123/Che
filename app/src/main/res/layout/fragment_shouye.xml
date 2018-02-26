@@ -11,86 +11,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <LinearLayout
-            android:id="@+id/lin_search"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/common_topbar_height"
-            android:background="@color/theme_color"
-            android:gravity="center_vertical"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal">
-            <com.victor.che.widget.ClearEditText
-                android:id="@+id/et_search"
-                android:layout_width="0dp"
-                android:layout_height="70px"
-                android:layout_marginLeft="@dimen/common_padding2"
-                android:layout_marginRight="16px"
-                android:layout_weight="1"
-                android:background="@drawable/sl_search"
-                android:drawableLeft="@drawable/ic_search"
-                android:drawablePadding="15dp"
-                android:hint="@string/search_hint"
-                android:imeOptions="actionSearch"
-                android:maxLength="11"
-                android:paddingLeft="30px"
-                android:paddingRight="15px"
-                android:singleLine="true"
-                android:textColor="@color/black_text"
-                android:textColorHint="@color/text_color_hint"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/font_size_28px"/>
-
-            <ImageView
-                android:layout_width="@dimen/common_topbar_height"
-                android:layout_height="match_parent"
-                android:onClick="back"
-                android:scaleType="center"
-                android:visibility="gone"
-                android:src="@drawable/sl_topbar_close"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height"
-            android:layout_marginBottom="@dimen/item_margin"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.phillipcalvin.iconbutton.IconButton
-                android:id="@+id/btn_order_type"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/sl_common_white_btn"
-                android:drawableRight="@drawable/sl_dropdown"
-                android:maxLines="1"
-                android:text="类型"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/middle_font_size"
-                app:iconPadding="20px"/>
-
-            <com.phillipcalvin.iconbutton.IconButton
-                android:id="@+id/btn_order_state"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/sl_common_white_btn"
-                android:drawableRight="@drawable/sl_dropdown"
-                android:maxLines="1"
-                android:text="状态"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/middle_font_size"
-                app:iconPadding="20px"/>
-
-        </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@color/border"/>
         <com.ogaclejapan.smarttablayout.SmartTabLayout
             android:id="@+id/pager_tab"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="@dimen/common_topbar_height"
             android:background="@color/white"
             app:stl_indicatorAlwaysInCenter="false"
             app:stl_indicatorWithoutPadding="false"

@@ -167,26 +167,22 @@ public class VictorHttpUtil {
         progressDlg.setInverseBackgroundForced(false);
         progressDlg.setCanceledOnTouchOutside(false);
         progressDlg.setMax(100);
-        OkGo.get(url).tag(mContext)
-                .execute(new FileCallback() {
+        OkGo.get(url).tag(mContext).execute(new FileCallback() {
                     @Override
                     public void onBefore(BaseRequest request) {
                         super.onBefore(request);
                         progressDlg.show();
                     }
-
                     @Override
                     public void onAfter(File file, Exception e) {
                         super.onAfter(file, e);
                         AbDialogUtil.dismissDialog(progressDlg);
                     }
-
                     @Override
                     public void onSuccess(File file, Call call, Response response) {
                         // 开始安装最新版本
                         AppUtil.installApk(mContext, file);
                     }
-
                     @Override
                     public void downloadProgress(long currentSize, long totalSize, float progress, long networkSpeed) {
                         progressDlg.setProgress((int) (currentSize * 100.0 / totalSize));

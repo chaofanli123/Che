@@ -11,7 +11,10 @@
         <item name="android:windowBackground">@drawable/ic_welcom</item>
         <item name="android:windowNoTitle">true</item>
     </style>
-
+    <style name="Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!--修改AlertDialog按钮的颜色-->
+        <item name="colorAccent">#ff8200</item>
+    </style>
     <!-- 底部菜单栏Tab样式 -->
     <style name="tab_bottom">
         <item name="android:gravity">center</item>

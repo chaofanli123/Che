@@ -1,10 +1,14 @@
 package com.victor.che.ui;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.TextView;
 
@@ -107,20 +111,21 @@ public class SettingsActivity extends BaseActivity {
                     return;
                 }
                 // 有新版本
-                AlertDialogFragment alertDialogFragment = AlertDialogFragment.newInstance(
-                        "发现新版本",
-                        data.getRemarks(),
-                        "以后再说",
-                        "确定",
-                        null,
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                _doUpdate(data);
-                            }
-                        });
-                alertDialogFragment.setCancelable(false);// 不可取消
-                alertDialogFragment.show(getSupportFragmentManager(), getClass().getSimpleName());
+                _doUpdate(data);
+//                AlertDialogFragment alertDialogFragment = AlertDialogFragment.newInstance(
+//                        "发现新版本",
+//                        data.getRemarks(),
+//                        "以后再说",
+//                        "确定",
+//                        null,
+//                        new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                            }
+//                        });
+//                alertDialogFragment.setCancelable(false);// 不可取消
+//                alertDialogFragment.show(getSupportFragmentManager(), getClass().getSimpleName());
             }
         });
     }
@@ -142,15 +147,44 @@ public class SettingsActivity extends BaseActivity {
                         }
                         String path = Define.API_DOMAIN + version.getDownPath();
                         String s = path.replaceAll("\\\\", "//");
-                        VictorHttpUtil.downloadApk(mContext,s);
+                        showUpdataDialog(version.getRemarks(),s);
+                      //  VictorHttpUtil.downloadApk(mContext,s);
                     }
                     @Override
                     public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+
                     }
 
                 }).check();
     }
+    //版本更新弹框
+    protected void showUpdataDialog(String msg, final String loadurl) {
+        AlertDialog.Builder builer = new AlertDialog.Builder(this,R.style.Dialog_Alert_Self) ;
+        builer.setTitle("版本升级");
+        builer.setMessage(msg);
+        //当点确定按钮时从服务器上下载 新的apk 然后安装
+        builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(loadurl);
+                intent.setData(content_url);
+                startActivity(intent);
+            }
+        });
+        //当点取消按钮时进行登录
+        builer.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
+        AlertDialog dialog = builer.create();
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#00317e"));
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#666666"));
+    }
     /**
      * 去意见反馈界面
      */
@@ -171,7 +205,6 @@ public class SettingsActivity extends BaseActivity {
         bundle.putString("mUrl", "");
         MyApplication.openActivity(mContext, AboutusActivity.class);
     }
-
     /**
      * 修改密码
      */
@@ -179,7 +212,6 @@ public class SettingsActivity extends BaseActivity {
     void gotoChangePwd() {
         MyApplication.openActivity(mContext, ChangePwdActivity.class);
     }
-
 
     /**
      * 联系我们

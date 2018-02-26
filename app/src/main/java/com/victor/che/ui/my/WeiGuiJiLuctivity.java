@@ -89,7 +89,9 @@ public class WeiGuiJiLuctivity extends BaseActivity {
                 if (position == -1) {
                     return;
                 }
-                startActivity(new Intent(mContext, WeiGuiJiLuChaKanActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                if (!CollectionUtil.isEmpty(messageArrayList)){
+                    startActivity(new Intent(mContext, WeiGuiJiLuChaKanActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                }
             }
         });
         mPtrHelper.autoRefresh(true);

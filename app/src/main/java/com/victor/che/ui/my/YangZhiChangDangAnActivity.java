@@ -100,7 +100,9 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
                 if (position == -1) {
                     return;
                 }
-                startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getAquFarm().getId()));
+                if (!CollectionUtil.isEmpty(messageArrayList)){
+                    startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getAquFarm().getId()));
+                }
             }
         });
         begin = getOldDate(-7);

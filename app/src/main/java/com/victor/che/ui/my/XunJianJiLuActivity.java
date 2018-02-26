@@ -88,7 +88,9 @@ public class XunJianJiLuActivity extends BaseActivity {
                 if (position == -1) {
                     return;
                 }
-                startActivity(new Intent(mContext, XunJianJiLuChaKanActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                if (!CollectionUtil.isEmpty(messageArrayList)){
+                    startActivity(new Intent(mContext, XunJianJiLuChaKanActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                }
             }
         });
         mPtrHelper.autoRefresh(true);

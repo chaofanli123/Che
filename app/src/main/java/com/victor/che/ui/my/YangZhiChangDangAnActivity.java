@@ -28,6 +28,8 @@ import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.MyRecyclerView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -101,8 +103,34 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
                 startActivity(new Intent(mContext, YangZhiChangDangAnXiangQingActivity.class).putExtra("id", messageArrayList.get(position).getAquFarm().getId()));
             }
         });
+        begin = getOldDate(-7);
+        end = getOldDate(0);
+        edTiemStart.setText(begin);
+        etTimeEnd.setText(end);
         mPtrHelper.autoRefresh(true);
     }
+
+    /**
+     * 获取前n天日期、后n天日期
+     *
+     * @param distanceDay 前几天 如获取前7天日期则传-7即可；如果后7天则传7
+     * @return
+     */
+    public static String getOldDate(int distanceDay) {
+        SimpleDateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+        Date beginDate = new Date();
+        Calendar date = Calendar.getInstance();
+        date.setTime(beginDate);
+        date.set(Calendar.DATE, date.get(Calendar.DATE) + distanceDay);
+        Date endDate = null;
+        try {
+            endDate = dft.parse(dft.format(date.getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dft.format(endDate);
+    }
+
 
     private void loadData(final boolean pullToRefresh, int curpage, final int pageSize) {
         MyParams params = new MyParams();

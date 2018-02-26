@@ -103,6 +103,9 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
     }
     private void init() {
         begin = getOldDate(-7);
+        end = getOldDate(0);
+        edTiemStart.setText(begin);
+        etTimeEnd.setText(end);
         final LayoutInflater mInflater = LayoutInflater.from(mContext);
         TagAdapter<String> stringTagAdapter = new TagAdapter<String>(mVals) {
             @Override

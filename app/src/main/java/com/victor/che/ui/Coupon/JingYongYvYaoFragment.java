@@ -109,7 +109,10 @@ public class JingYongYvYaoFragment extends BaseFragment {
 //                bundle.putString("type","couponlist");
 //                bundle.putString("position",position+"");
 //                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, JingYongYvYaoActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                if (!CollectionUtil.isEmpty(messageArrayList)) {
+                    startActivity(new Intent(mContext, JingYongYvYaoActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                }
+
             }
         });
         mPtrHelper.autoRefresh(false);

@@ -125,7 +125,6 @@ public class IndexFragment1 extends BaseFragment {
                     //禁用渔药
                     fragment = new JingYongYvYaoFragment();
                     break;
-
                 default:
                     fragment = new StartUsingCouponFragment();
                     break;

@@ -2,7 +2,6 @@ package com.victor.che.ui.Coupon;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -40,6 +39,7 @@ import com.victor.che.util.DateUtil;
 import com.victor.che.util.PtrHelper;
 import com.victor.che.util.StringUtil;
 import com.victor.che.util.ViewUtil;
+import com.victor.che.widget.ClearEditText;
 import com.victor.che.widget.LinearLayoutManagerWrapper;
 import com.victor.che.widget.ListDialogFragment;
 import com.victor.che.widget.MyRecyclerView;
@@ -67,7 +67,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     @BindView(R.id.pcfl_user_car)
     PtrFrameLayout pcflUserCar;
     @BindView(R.id.tv_time_gongshi)
-    TextView tvTimeGongshi;
+    ClearEditText tvTimeGongshi;
     Unbinder unbinder;
 
 
@@ -93,7 +93,7 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
     private OrderTypeListAdapter ordertypeListAdapter; //类型适配器
     private int selectedOrderStatePos = 0; //状态
     //类型 1会议通告 2奖惩通告 3活动通告
-    private String[] ORDER_TYPE = {"全部", "部门文件", "法规规章", "规范性文件","政策解读"};
+    private String[] ORDER_TYPE = {"全部", "部门文件","法规规章","规范性文件","政策解读"};
 
     @Override
     public int getContentView() {
@@ -125,8 +125,6 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
                 return false;
             }
         });
-
-
         messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_coupon_zhengchefagui, messageArrayList);
         recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
@@ -151,11 +149,11 @@ public class ZhenCeFaGuiFragment extends BaseFragment {
                     return;
                 }
 //                ShopsCoupon shopsCoupon = messageArrayList.get(position);
-//                Bundle bundle=new Bundle();
-//                bundle.putString("type","couponlist");
-//                bundle.putString("position",position+"");
-//                bundle.putSerializable("shopsCoupon",shopsCoupon);
-                startActivity(new Intent(mContext, ZhengCheFaGuiActivity.class).putExtra("id", messageArrayList.get(position).getId()));
+                if (!CollectionUtil.isEmpty(messageArrayList)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", messageArrayList.get(position).getId());
+                    MyApplication.openActivity(mContext, ZhengCheFaGuiActivity.class, bundle);
+                }
             }
         });
         mPtrHelper.autoRefresh(false);

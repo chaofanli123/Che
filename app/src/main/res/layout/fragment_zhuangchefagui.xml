@@ -66,12 +66,14 @@
             android:textColor="@color/black_text"
             android:textSize="@dimen/font_size_28px"
             app:iconPadding="20px"/>
-        <TextView
+        <com.victor.che.widget.ClearEditText
             android:id="@+id/tv_time_gongshi"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/bg_custom_edit"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:hint="公示时间"
             android:textSize="@dimen/font_size_28px"
             android:inputType="number"

@@ -114,22 +114,24 @@ public class TabBottomActivity extends BaseActivity {
                     return;
                 }
                 final AppVersion version = JSON.parseObject(element.body, AppVersion.class);
-                if (version == null
-                        || version.ver+"" == null
-                        || version.ver+"".compareTo(MyApplication.versionName) <= 0) {
+                final AppVersion.DataBean data = version.getData();
+                if (data == null
+                        || data.getVer()+"" == null
+                        || data.getVer()+"".compareTo(MyApplication.versionCode) <= 0) {
+                    MyApplication.showToast("已经是最新版本");
                     return;
                 }
                 // 有新版本
                 AlertDialogFragment alertDialogFragment = AlertDialogFragment.newInstance(
                         "发现新版本",
-                        version.remarks,
+                        data.getRemarks(),
                         "以后再说",
                         "确定",
                         null,
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                _doUpdate(version);
+                                _doUpdate(data);
                             }
                         });
                 alertDialogFragment.setCancelable(false);// 不可取消
@@ -137,7 +139,7 @@ public class TabBottomActivity extends BaseActivity {
             }
         });
     }
-    private void _doUpdate(final AppVersion version) {
+    private void _doUpdate(final AppVersion.DataBean version) {
         // 存储权限检查
         new TedPermission(MyApplication.CONTEXT)
                 .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
@@ -152,7 +154,9 @@ public class TabBottomActivity extends BaseActivity {
                             MyApplication.showToast("没有sdcard，请安装上再试");
                             return;
                         }
-                        VictorHttpUtil.downloadApk(mContext, version.downPath);
+                        String path = Define.API_DOMAIN + version.getDownPath();
+                        String s = path.replaceAll("\\\\", "//");
+                        VictorHttpUtil.downloadApk(mContext,s);
                     }
 
                     @Override

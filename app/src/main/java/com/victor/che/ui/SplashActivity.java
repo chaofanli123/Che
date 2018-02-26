@@ -1,17 +1,17 @@
 package com.victor.che.ui;
 
+import android.Manifest;
 import android.content.Intent;
-import android.os.Handler;
-import android.view.View;
 
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
-import com.victor.che.app.ConstantValue;
 import com.victor.che.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.victor.che.app.MyApplication.spUtil;
 
 /**
  * 引导界面
@@ -20,7 +20,6 @@ import static com.victor.che.app.MyApplication.spUtil;
  * Time 2017/1/7 0007 18:48
  */
 public class SplashActivity extends BaseActivity {
-    Handler handler = new Handler();
 //    @BindView(R.id.lin_splsh)
 //    ImageView linSplsh;
     private int seconds = 3;
@@ -61,54 +60,14 @@ public class SplashActivity extends BaseActivity {
 //
 //                }).check();
 //    }
-    /**
-     * 获取存储权限后，展示启动图
-     */
-    private void displaySplashImage() {
-        firstStartedApp = spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP, true);
-        // 进入app
-        setViewData();
-    }
-    /**
-     * 点击图片，跳转链接
-     *
-     * @param view
-     */
-    public void gotoWebView(View view) {
-
-    }
-
-    @Override
-    public void onDestroy() {
-        if (handler != null) {
-            handler.removeCallbacksAndMessages(null);
-        }
-        super.onDestroy();
-    }
-
-    /**
-     * 进入App界面
-     */
-//    private void enterApp() {
-//
-//        handler.postDelayed(runnable, 1000);
-//    }
 
     /**
      * 三秒启动
      * */
     protected void setViewData() {
         final Intent intent;
-//        if (spUtil.getBoolean(ConstantValue.SP.FIRST_STARTED_APP)==true) { //已经登录过了
-//            //进入首页
-//            intent = new Intent(this, TabBottomActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        }else {
-//            intent=new Intent(this, LoginActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        }
         intent=new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Timer timer=new Timer();
         TimerTask task=new TimerTask()
         {

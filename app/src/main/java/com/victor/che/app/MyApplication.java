@@ -3,6 +3,7 @@ package com.victor.che.app;
 import android.Manifest;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.support.multidex.MultiDex;
 
 import com.gun0912.tedpermission.PermissionListener;
@@ -16,6 +17,7 @@ import com.victor.che.R;
 import com.victor.che.base.BaseApplication;
 import com.victor.che.domain.User;
 import com.victor.che.event.Region;
+import com.victor.che.ui.TabBottomActivity;
 import com.victor.che.util.AbActivityManager;
 import com.victor.che.util.AppUtil;
 import com.victor.che.util.SharedPreferencesUtil;
@@ -35,8 +37,8 @@ public class MyApplication extends BaseApplication {
     public static SharedPreferencesUtil spUtil;
     public static User CURRENT_USER;// 当前用户
     //  public static final boolean DEBUG = BuildConfig.DEBUG;// 是否debug， 开发和测试阶段使用
-     public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
-    //  public static final boolean DEBUG = false;// 生产环境使用
+    //    public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
+    public static final boolean DEBUG = false;// 生产环境使用
     public static String versionCode="1";// 版本号
     public static String versionName ="1.0.0";// 版本名称
 
@@ -55,6 +57,8 @@ public class MyApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        Thread.setDefaultUncaughtExceptionHandler(restartHandler); // 程序崩溃时触发线程  以下用来捕获程序崩溃异常
+
         // 获取版本信息
         context=getApplicationContext();
         versionName = AppUtil.getVersionName(context);
@@ -221,5 +225,19 @@ public class MyApplication extends BaseApplication {
     }
     public static EZOpenSDK getOpenSDK() {
         return EZOpenSDK.getInstance();
+    }
+
+    // 创建服务用于捕获崩溃异常
+    private Thread.UncaughtExceptionHandler restartHandler = new Thread.UncaughtExceptionHandler() {
+        public void uncaughtException(Thread thread, Throwable ex) {
+            restartApp();//发生崩溃异常时,重启应用
+        }
+    };
+    //重启App
+    public void restartApp(){
+        Intent intent = new Intent(this,TabBottomActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+        android.os.Process.killProcess(android.os.Process.myPid());  //结束进程之前可以把你程序的注销或者退出代码放在这段代码之前
     }
 }

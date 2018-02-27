@@ -334,6 +334,7 @@ public class TabBottomActivity extends BaseActivity {
             return;
         }
         event.finish();
+
     }
 
     @Override

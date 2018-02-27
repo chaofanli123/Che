@@ -330,6 +330,12 @@ public class MessageFragment extends BaseFragment {
 
             TextView tv_coupon_time = holder.getView(R.id.tv_coupon_time);//检查时间
             tv_coupon_time.setText("检查时间:" + shopsCoupon.getLawTime());
+            TextView tvstatus = holder.getView(R.id.tv_status);
+            if ("1".equals(shopsCoupon.status)) {//已审核
+                tvstatus.setText("审核状态：已审核");
+            }else if ("0".equals(shopsCoupon.status)) {//未审核
+                tvstatus.setText("审核状态：未审核");
+            }
             final ImageView select = holder.getView(R.id.img_select);
             /**
              * 修改 进入详情

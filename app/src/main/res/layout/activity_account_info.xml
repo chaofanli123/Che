@@ -43,7 +43,6 @@
                     android:layout_centerVertical="true"
                     android:drawableRight="@drawable/ic_arrow_right"
                     android:gravity="center_vertical|left"
-                    android:text="店小二"
                     android:textColor="@color/light_gray_text"
                     android:textSize="@dimen/little_font_size"/>
             </RelativeLayout>

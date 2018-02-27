@@ -128,6 +128,7 @@ public class Message implements Serializable {
              * lawDate : 1516636800000
              * begin : null
              * end : null
+             *  "status": "1",
              */
             public boolean checked = false;// 本地变量，是否被选中
             private String id;
@@ -149,6 +150,7 @@ public class Message implements Serializable {
             private int lawOld;
             private int lawTrea;
             public String farm;
+            public String status;
             private String lawProb;
             private String lawOther;
             private String psonName;

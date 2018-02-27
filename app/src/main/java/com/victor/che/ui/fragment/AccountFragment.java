@@ -121,16 +121,12 @@ public class AccountFragment extends TakePhoneFragment {
         initview();
     }
     private void initview() {
-        if (MyApplication.isLogined()) {
             // 当前用户名
             if (StringUtil.isEmpty(MyApplication.getUser().name)) {
                 tv_name.setText(MyApplication.getUser().username);
             }else {
                 tv_name.setText(MyApplication.getUser().name);
             }
-        } else {
-            tv_name.setText("请登录");
-        }
         getusermessage();
         showPicPick();
     }
@@ -314,5 +310,11 @@ public class AccountFragment extends TakePhoneFragment {
             return;
         }
         initView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getusermessage();
     }
 }

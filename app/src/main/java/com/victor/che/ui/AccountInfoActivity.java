@@ -109,14 +109,14 @@ public class AccountInfoActivity extends TakePhotoActivity {
             tvEmail.requestFocus();
             return;
         }
-        String phone = tvMobile.getText().toString().trim();
-        if (!StringUtil.isMobile(phone)) {
+        String mobile = tvMobile.getText().toString().trim();
+        if (!StringUtil.isMobile(mobile)) {
             MyApplication.showToast("手机号格式不正确");
             tvEmail.requestFocus();
             return;
         }
-        String mobile = tvPhone.getText().toString().trim();
-        if (!StringUtil.isPhone(mobile)) {
+        String phone = tvPhone.getText().toString().trim();
+        if (!StringUtil.isPhone(phone)) {
             MyApplication.showToast("电话格式不正确");
             tvEmail.requestFocus();
             return;
@@ -126,21 +126,17 @@ public class AccountInfoActivity extends TakePhotoActivity {
         params.put("name", tv_name.getText().toString().trim());
         params.put("email", email);
         params.put("phone", phone);
-        params.put("mobile", mobile);
+        params.put("mobile",mobile);
         params.put("remarks", tvRemarks.getText().toString().trim());
         VictorHttpUtil.doPost(mContext, Define.URL_infoEdit+ ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "上传中...",
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         // 登录成功
-                        // 保存用户信息（手机号和默认车辆）
-                        User user = new User();
-                        user.name=tv_name.getText().toString().trim();
-                        MyApplication.saveUser(user);
-                        spUtil.setObject("CURRENT_USER", user);
                         MyApplication.showToast(element.msg);
-                        StringEvent event=new StringEvent(tv_name.getText().toString().trim());
-                        EventBus.getDefault().post(event);
+                       // StringEvent event=new StringEvent(tv_name.getText().toString().trim());
+                     // EventBus.getDefault().post(event);
+                        finish();
                     }
                 });
     }

@@ -1137,14 +1137,14 @@ public class PublichaddActivity extends TakePhotoActivity {
                         etLawProb.requestFocus();
                         return;
                     }
-                    lawprob = etRemarks.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawprob)) {
+                    remarks = etRemarks.getText().toString().trim();
+                    if (TextUtils.isEmpty(remarks)) {
                         MyApplication.showToast("整改建议不能为空");
                         etRemarks.requestFocus();
                         return;
                     }
-                    lawprob = etLawOther.getText().toString().trim();
-                    if (TextUtils.isEmpty(lawprob)) {
+                    lawOther = etLawOther.getText().toString().trim();
+                    if (TextUtils.isEmpty(lawOther)) {
                         MyApplication.showToast("其他处罚或处置不能为空");
                         etLawOther.requestFocus();
                         return;
@@ -1182,9 +1182,9 @@ public class PublichaddActivity extends TakePhotoActivity {
         params.put("lawOld", selectedlawOldPos);//// 对以往检查发现问题的整改情况 0 整改彻底1 整改不彻底2 未整改
         params.put("lawTrea", selectedlawTreaPos);//// 处理情况 0 合格，没有发现违规行为1 不合格项或者需要整改的地方
         if ("不合格项或者需要整改的地方".equals(lawtrea)) {
-            params.put("lawProb", selectedlawStaPos);//责令整改项目
-            params.put("remarks", selectedlawOldPos);//整改建议
-            params.put("lawOther", selectedlawTreaPos);//其他处罚或处置
+            params.put("lawProb", lawprob);//责令整改项目
+            params.put("remarks", remarks);//整改建议
+            params.put("lawOther", lawOther);//其他处罚或处置
         }
         params.put("psonName", pic);//// 签名文件 File
         params.put("userName", luyin);//// 录音文件 File 可空

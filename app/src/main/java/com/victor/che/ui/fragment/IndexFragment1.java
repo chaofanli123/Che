@@ -136,7 +136,6 @@ public class IndexFragment1 extends BaseFragment {
             fragment.setArguments(args);
             fragments.add(position, fragment);
             return fragment;
-
         }
 
         @Override

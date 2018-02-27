@@ -286,9 +286,9 @@ public class StartUsingCouponFragment extends BaseFragment {
             }else if (shopsCoupon.getType().equals("3")){
                 holder.setText(R.id.tv_leixing,"类型: "+"活动通告" );
             }
-            if (shopsCoupon.getStatus().equals("1")){
+            if (shopsCoupon.getStatus().equals("0")){
                 holder.setText(R.id.tv_zhuangtai, "状态: "+"草稿");
-            }else if (shopsCoupon.getStatus().equals("2")) {
+            }else if (shopsCoupon.getStatus().equals("1")) {
                 holder.setText(R.id.tv_zhuangtai, "状态: "+"发布");
             }
             int total = Integer.valueOf(shopsCoupon.getReadNum()) + Integer.valueOf(shopsCoupon.getUnReadNum());

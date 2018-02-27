@@ -23,6 +23,8 @@ import com.videogo.openapi.EZOpenSDK;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+
 /**
  * 全局应用类
  * @author Victor
@@ -33,8 +35,8 @@ public class MyApplication extends BaseApplication {
     public static SharedPreferencesUtil spUtil;
     public static User CURRENT_USER;// 当前用户
     //  public static final boolean DEBUG = BuildConfig.DEBUG;// 是否debug， 开发和测试阶段使用
-    public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
-    //   public static final boolean DEBUG = false;// 生产环境使用
+     public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
+    //  public static final boolean DEBUG = false;// 生产环境使用
     public static String versionCode="1";// 版本号
     public static String versionName ="1.0.0";// 版本名称
 
@@ -119,7 +121,7 @@ public class MyApplication extends BaseApplication {
             OkGo.getInstance()
                     // 打开该调试开关,打印级别INFO,并不是异常,是为了显眼,不需要就不要加入该行
                     // 最后的true表示是否打印okgo的内部异常，一般打开方便调试错误
-                    //                    .debug("OkGo", Level.INFO, true)
+                                      .debug("OkGo", Level.INFO, true)
                     //如果使用默认的 60秒,以下三行也不需要传
                     .setConnectTimeout(10000L)  //全局的连接超时时间
                     .setReadTimeOut(OkGo.DEFAULT_MILLISECONDS)     //全局的读取超时时间

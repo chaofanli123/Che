@@ -275,6 +275,11 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
             holder.setText(R.id.tv_nianchangliang, "年产量: "+shopsCoupon.getAquFarm().getAnnualOutput());
         }
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPtrHelper.autoRefresh(true);
+    }
 
     /**
      * 释放内存

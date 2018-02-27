@@ -44,9 +44,6 @@ public class IndexFragment1 extends BaseFragment {
     private String provider_user_id;
 
     private Fragment fragment;
-
-
-
     private static final String[] CONTENT = new String[]{"通知下达", "政策法规", "禁用鱼药"};
     private int currentPos = 0;// 查询类型 1-通知下达 2-政策法规 3-禁用鱼药 ，默认为1
 
@@ -86,11 +83,6 @@ public class IndexFragment1 extends BaseFragment {
         });
 
     }
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view

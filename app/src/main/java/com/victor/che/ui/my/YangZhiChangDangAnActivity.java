@@ -13,10 +13,10 @@ import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
 import com.victor.che.R;
 import com.victor.che.adapter.QuickAdapter;
-import com.victor.che.api.BaseHttpCallbackListener;
 import com.victor.che.api.Define;
 import com.victor.che.api.Element;
 import com.victor.che.api.MyParams;
+import com.victor.che.api.RefreshLoadmoreCallbackListener;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.base.BaseActivity;
@@ -58,7 +58,7 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
      * adapter
      */
     private CouponAdapter messageListAdapter;
-    private List<YangZhiChangDanAn.PageBean.ListBean> messageArrayList;
+    private List<YangZhiChangDanAn.PageBean.ListBean> messageArrayList = new ArrayList<>();
     private PtrHelper<YangZhiChangDanAn.PageBean.ListBean> mPtrHelper;
     private int index;/*点击的愿望下标*/
     public static int currentPos = 0;//当前位置
@@ -77,7 +77,6 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
     }
 
     private void init() {
-        messageArrayList = new ArrayList<>();
         messageListAdapter = new CouponAdapter(R.layout.item_yangzhichangdangan, messageArrayList);
         recycler.setLayoutManager(new LinearLayoutManagerWrapper(mContext, LinearLayoutManager.VERTICAL, false));//设置布局管理器//
         recycler.addItemDecoration(new HorizontalDividerItemDecoration.Builder(mContext)
@@ -109,7 +108,7 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
         end = getOldDate(0);
         edTiemStart.setText(begin);
         etTimeEnd.setText(end);
-        mPtrHelper.autoRefresh(true);
+        mPtrHelper.autoRefresh(false);
     }
 
     /**
@@ -146,16 +145,14 @@ public class YangZhiChangDangAnActivity extends BaseActivity {
             params.put("end", end);
         }
         VictorHttpUtil.doPost(mContext, Define.URL_YangZhiChangXingXi + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, false, null,
-                new BaseHttpCallbackListener<Element>() {
+                new RefreshLoadmoreCallbackListener<Element>(mPtrHelper) {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         YangZhiChangDanAn Policy = JSON.parseObject(element.body, YangZhiChangDanAn.class);
-                        //                        List<QueryUserCarHistory> queryUserCarHistories = new ArrayList<QueryUserCarHistory>();
-                        List<YangZhiChangDanAn.PageBean.ListBean> shopsCouponList = new ArrayList<>();
-                        shopsCouponList = Policy.getPage().getList();
-
+                        List<YangZhiChangDanAn.PageBean.ListBean> shopsCouponList = Policy.getPage().getList();
                         if (pullToRefresh) {////刷新
                             messageArrayList.clear();//清空数据
+                            messageListAdapter.notifyDataSetChanged();
                             if (CollectionUtil.isEmpty(shopsCouponList)) {
                                 // 无数据
                                 View common_no_data = View.inflate(mContext, R.layout.common_no_data, null);

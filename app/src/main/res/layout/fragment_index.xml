@@ -10,7 +10,7 @@
 <include
     layout="@layout/top_bar_commom"
     android:id="@+id/rl_topbar"
-   /> >
+   />
     <include layout="@layout/item01"/>
     <include
         layout="@layout/item02"/>

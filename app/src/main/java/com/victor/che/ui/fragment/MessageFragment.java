@@ -144,6 +144,7 @@ public class MessageFragment extends BaseFragment {
                         List<Message.PageBean.ListBean> temp = message.getPage().getList();
                         if (pullToRefresh) {// 下拉刷新
                             mList.clear();//清空数据
+                            mAdapter.notifyDataSetChanged();
                             if (CollectionUtil.isEmpty(temp)) {
                                 // 无数据
                                 View common_no_data = View.inflate(mContext, R.layout.common_no_data, null);

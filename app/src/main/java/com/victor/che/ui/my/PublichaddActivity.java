@@ -154,13 +154,17 @@ public class PublichaddActivity extends TakePhotoActivity {
     EditText etLawOther;
     @BindView(R.id.lin_lawTrea)
     LinearLayout linLawTrea;
+    @BindView(R.id.tv_status)
+    TextView tvStatus;
+    @BindView(R.id.lin_status)
+    LinearLayout linStatus;
 
     private GridAdapter adapter;
     private ArrayList<String> imagePathList = new ArrayList<>();
     private List<UploadResultBean> upload = new ArrayList<>();
     private List<MediaBean> mediaBeanList;
     private String pic = ""; //签名路径
-    private String luyin="";//录音文件
+    private String luyin = "";//录音文件
 
     private PopupWindow pop = null;
     private LinearLayout ll_popup;
@@ -230,7 +234,6 @@ public class PublichaddActivity extends TakePhotoActivity {
     private String type;
 
 
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -248,6 +251,7 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
         }
     };
+
     @Override
     public int getContentView() {
         return R.layout.activity_follow_user;
@@ -258,11 +262,22 @@ public class PublichaddActivity extends TakePhotoActivity {
         super.initView();
         type = getIntent().getStringExtra("type");
         if ("list".equals(type)) { //修改执法
-            setTitle("修改执法信息");
             shopsCoupon = (com.victor.che.domain.Message.PageBean.ListBean) getIntent().getSerializableExtra("shopsCoupon");
             showdata(shopsCoupon);
+            if ("1".equals(shopsCoupon.status)) {//已经审核，只能查看
+                setTitle("查看执法信息");
+                topbarRight.setVisibility(View.GONE);
+                linStatus.setVisibility(View.VISIBLE);
+                tvStatus.setText("已审核");
+            } else if ("0".equals(shopsCoupon.status)) { //未审核
+                topbarRight.setVisibility(View.VISIBLE);
+                topbarRight.setText("提交");
+                setTitle("修改执法信息");
+                linStatus.setVisibility(View.GONE);
+            }
+        }else {
+            setTitle("添加执法信息");
         }
-        setTitle("添加执法信息");
         topbarRight.setText("提交");
         parentView = getLayoutInflater().inflate(R.layout.activity_follow_user, null);
         showpic();
@@ -423,10 +438,10 @@ public class PublichaddActivity extends TakePhotoActivity {
         }
         //签名文件
         if (!StringUtil.isEmpty(shopsCoupon.getPsonName())) {
-            pic=shopsCoupon.getPsonName();
-            String photo=Define.API_DOMAIN +shopsCoupon.getPsonName().substring(6,shopsCoupon.getPsonName().length());
+            pic = shopsCoupon.getPsonName();
+            String photo = Define.API_DOMAIN + shopsCoupon.getPsonName().substring(6, shopsCoupon.getPsonName().length());
             String s = photo.replaceAll("\\\\", "//");
-            PicassoUtils.loadImage(mContext,s,ivQianming);
+            PicassoUtils.loadImage(mContext, s, ivQianming);
         }
         //luyin
         if (!StringUtil.isEmpty(shopsCoupon.getUserName())) {
@@ -434,12 +449,12 @@ public class PublichaddActivity extends TakePhotoActivity {
 //            recordFile = new File(shopsCoupon.getUserName());
 
             //语音
-            final String username=Define.API_DOMAIN+shopsCoupon.getUserName().substring(6,shopsCoupon.getUserName().length());
+            final String username = Define.API_DOMAIN + shopsCoupon.getUserName().substring(6, shopsCoupon.getUserName().length());
             new Thread(new Runnable() {
                 @Override
                 public void run() {
                     mVoiceData = username.replaceAll("\\\\", "/");
-                    try{
+                    try {
                         URL url = new URL(mVoiceData);
                         //打开连接
                         URLConnection conn = url.openConnection();
@@ -455,7 +470,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                             file.mkdir();
                         }
                         //下载后的文件名
-                        String fileName = dirName + shopsCoupon.getId() +".amr";
+                        String fileName = dirName + shopsCoupon.getId() + ".amr";
                         File myCaptureFile = new File(fileName);
                         if (myCaptureFile.exists()) {
                             myCaptureFile.delete();
@@ -471,7 +486,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         //完成后关闭流
                         os.close();
                         is.close();
-                        mVoiceData=encodeBase64File(myCaptureFile.getPath());
+                        mVoiceData = encodeBase64File(myCaptureFile.getPath());
                         MediaPlayer mediaPlayer = new MediaPlayer();
                         mediaPlayer.setDataSource(fileName);
                         mediaPlayer.prepare();
@@ -480,11 +495,11 @@ public class PublichaddActivity extends TakePhotoActivity {
                         mTvTimeLengh.setText(i + "" + '"');
                         mRlVoiceLayout.setVisibility(View.VISIBLE);
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
 
-                    System.out.println(mVoiceData+"******************");
+                    System.out.println(mVoiceData + "******************");
                 }
             }).start();
         } else {
@@ -494,6 +509,7 @@ public class PublichaddActivity extends TakePhotoActivity {
 
     /**
      * 将文件转成base64字符串(用于发送语音文件)
+     *
      * @param path
      * @return
      * @throws Exception
@@ -501,16 +517,16 @@ public class PublichaddActivity extends TakePhotoActivity {
     public static String encodeBase64File(String path) throws Exception {
         File file = new File(path);
         FileInputStream inputFile = new FileInputStream(file);
-        byte[] buffer = new byte[(int)file.length()];
+        byte[] buffer = new byte[(int) file.length()];
         inputFile.read(buffer);
         inputFile.close();
         return Base64.encodeToString(buffer, Base64.DEFAULT);
     }
-    public static String getSDPath(){
+
+    public static String getSDPath() {
         File sdDir = null;
-        boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
-        if (sdCardExist)
-        {
+        boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED); //判断sd卡是否存在
+        if (sdCardExist) {
             sdDir = Environment.getExternalStorageDirectory();//获取跟目录
         }
         return sdDir.toString();
@@ -617,7 +633,7 @@ public class PublichaddActivity extends TakePhotoActivity {
             case 66:
                 mVoiceData = data.getStringExtra("LYpath");
                 String time = data.getStringExtra("time");
-                String  mSoundData = data.getStringExtra("mSoundData");
+                String mSoundData = data.getStringExtra("mSoundData");
                 if (mSoundData != null && mSoundData.length() > 0) {
                     mRlVoiceLayout.setVisibility(View.VISIBLE);
                     mTvTimeLengh.setText(time);
@@ -629,6 +645,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                 break;
         }
     }
+
     /**
      * 给后台传头像，后台返回头像字符串
      */
@@ -639,10 +656,10 @@ public class PublichaddActivity extends TakePhotoActivity {
             /**
              * 给后台传图片，后台返回string 接口
              */
-            MyParams params=new MyParams();
-            params.put("file1",recordFile);
-            params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
-            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+            MyParams params = new MyParams();
+            params.put("file1", recordFile);
+            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
@@ -667,10 +684,10 @@ public class PublichaddActivity extends TakePhotoActivity {
             /**
              * 给后台传图片，后台返回string 接口
              */
-            MyParams params=new MyParams();
-            params.put("file1",qianmingFile);
-            params.put("JSESSIONID",MyApplication.getUser().JSESSIONID);
-            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad+";JSESSIONID="+MyApplication.getUser().JSESSIONID, params, true, "加载中...",
+            MyParams params = new MyParams();
+            params.put("file1", qianmingFile);
+            params.put("JSESSIONID", MyApplication.getUser().JSESSIONID);
+            VictorHttpUtil.doPost(mContext, Define.URL_fileUpLoad + ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, params, true, "加载中...",
                     new BaseHttpCallbackListener<Element>() {
                         @Override
                         public void callbackSuccess(String url, Element element) {
@@ -685,6 +702,7 @@ public class PublichaddActivity extends TakePhotoActivity {
 
         }
     };
+
     /**
      * 语音播放效果
      */
@@ -705,7 +723,7 @@ public class PublichaddActivity extends TakePhotoActivity {
     @OnClick({R.id.tv_lawAqu, R.id.ll_add_yuyin, R.id.ll_qianming, R.id.rel_luyin, R.id.tv_firsttime,
             R.id.tv_lawWaters, R.id.topbar_right, R.id.tv_lawMed, R.id.tv_lawPro, R.id.tv_lawSal,
             R.id.tv_lawDeli, R.id.tv_lawMedi, R.id.tv_lawQual, R.id.tv_lawTech, R.id.tv_lawDate,
-            R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea,R.id.et_unitname})
+            R.id.tv_lawSta, R.id.tv_lawOld, R.id.tv_lawTrea, R.id.et_unitname})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.topbar_right://提交
@@ -716,7 +734,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         selectedframPos = position;
-                        framid=framlist.get(selectedframPos).getId()+"";
+                        framid = framlist.get(selectedframPos).getId() + "";
                         framListAdapter.notifyDataSetChanged();
                         etUnitname.setText(framlist.get(selectedframPos).getFarmName());
                         //  sale_user_id = orderWorkerList.get(selectedframPos).staff_user_id;
@@ -752,7 +770,7 @@ public class PublichaddActivity extends TakePhotoActivity {
                         mMediaPlayUtil.play(StringUtil.decoderBase64File(mVoiceData));
                         //  mMediaPlayUtil.play(mVoiceData);
                     }
-                }else {
+                } else {
                     startActivityForResult(new Intent(mContext, YuYingActivity.class), 33);
                 }
                 break;
@@ -918,7 +936,7 @@ public class PublichaddActivity extends TakePhotoActivity {
 
                     });//请求
                 } else {//不同意
-                    createLoadedAlertDialog("在设置-应用-"+ getString(R.string.app_name) +"-权限中开启存储空间权限，以正常使用App功能");
+                    createLoadedAlertDialog("在设置-应用-" + getString(R.string.app_name) + "-权限中开启存储空间权限，以正常使用App功能");
                 }
             }
 
@@ -1163,7 +1181,7 @@ public class PublichaddActivity extends TakePhotoActivity {
         if ("list".equals(type)) { //修改执法
             params.put("id", shopsCoupon.getId());
         }
-        params.put("lawName",framid);//单位id
+        params.put("lawName", framid);//单位id
         params.put("lawTime", lawTime);//检查时间
         params.put("lawWaters", selectedlawWatersPos + 1);//养殖水域属性 1 全民所有 2 集体所有 LawAquListAdapter lawAqu,
         params.put("lawAqu", selectedLawAquPos);////0 有1 应该持有但没有 2 不需办理

@@ -128,7 +128,8 @@ public class Message implements Serializable {
              * lawDate : 1516636800000
              * begin : null
              * end : null
-             *  "status": "1",
+             *    "status": "0", 也就是未审核的可以查看、修改、删除；
+             已审核的只能查看，不能修改，删除
              */
             public boolean checked = false;// 本地变量，是否被选中
             private String id;

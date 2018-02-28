@@ -358,15 +358,19 @@ public class MessageFragment extends BaseFragment {
                 holder.getView(R.id.rl_item).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        shopsCoupon.checked = !shopsCoupon.checked;
-                        if (shopsCoupon.checked) {
-                            list_id.add(shopsCoupon.getId() + "");
-                        } else {
-                            list_id.remove(shopsCoupon.getId() + "");
+                        if ("1".equals(shopsCoupon.status)) {//已经审核，不能删除
+                            MyApplication.showToast("该单位已经通过审核，不能删除");
+                        }else if ("0".equals(shopsCoupon.status)) { //未审核
+                            shopsCoupon.checked = !shopsCoupon.checked;
+                            if (shopsCoupon.checked) {
+                                list_id.add(shopsCoupon.getId() + "");
+                            } else {
+                                list_id.remove(shopsCoupon.getId() + "");
+                            }
+                            list = new ArrayList<>();
+                            list.add(shopsCoupon);
+                            mAdapter.notifyDataSetChanged();
                         }
-                        list = new ArrayList<>();
-                        list.add(shopsCoupon);
-                        mAdapter.notifyDataSetChanged();
                     }
                 });
             }

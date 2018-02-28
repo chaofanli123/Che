@@ -19,6 +19,26 @@
             android:background="@color/theme_color"
             >
             <LinearLayout
+                android:id="@+id/lin_status"
+                style="@style/style_receipt_liner"
+                >
+                <TextView
+                    style="@style/style_receipt_text"
+                    android:text="审核状态"
+                    />
+                <TextView
+                    android:id="@+id/tv_status"
+                    style="@style/common_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/theme_color"
+                    android:layout_marginRight="16dp"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/ll_use_name"
                 style="@style/style_receipt_liner"
                 >

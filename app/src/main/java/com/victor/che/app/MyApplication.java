@@ -37,8 +37,8 @@ public class MyApplication extends BaseApplication {
     public static SharedPreferencesUtil spUtil;
     public static User CURRENT_USER;// 当前用户
     //  public static final boolean DEBUG = BuildConfig.DEBUG;// 是否debug， 开发和测试阶段使用
-      public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
-    //  public static final boolean DEBUG = false;// 生产环境使用
+    //  public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
+     public static final boolean DEBUG = false;// 生产环境使用
     public static String versionCode="1";// 版本号
     public static String versionName ="1.0.0";// 版本名称
 
@@ -47,13 +47,10 @@ public class MyApplication extends BaseApplication {
 
     public static List<Region> RegionList;// 全局保存的 服务城市列表，首页请求一次
     public static Region CURRENT_REGION = null;// 当前的服务区域（// id<=0，服务器要定位到默认城市）
-
     public static  Context context;
-
 //    static {
 //        System.loadLibrary("appconfig");
 //    }
-
     @Override
     public void onCreate() {
         super.onCreate();

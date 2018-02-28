@@ -277,6 +277,7 @@ public class PublichaddActivity extends TakePhotoActivity {
             }
         }else {
             setTitle("添加执法信息");
+            linStatus.setVisibility(View.GONE);
         }
         topbarRight.setText("提交");
         parentView = getLayoutInflater().inflate(R.layout.activity_follow_user, null);
@@ -506,10 +507,8 @@ public class PublichaddActivity extends TakePhotoActivity {
             mRlVoiceLayout.setVisibility(View.GONE);
         }
     }
-
     /**
      * 将文件转成base64字符串(用于发送语音文件)
-     *
      * @param path
      * @return
      * @throws Exception
@@ -522,7 +521,6 @@ public class PublichaddActivity extends TakePhotoActivity {
         inputFile.close();
         return Base64.encodeToString(buffer, Base64.DEFAULT);
     }
-
     public static String getSDPath() {
         File sdDir = null;
         boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED); //判断sd卡是否存在

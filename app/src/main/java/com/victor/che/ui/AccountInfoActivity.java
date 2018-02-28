@@ -16,18 +16,12 @@ import com.victor.che.api.MyParams;
 import com.victor.che.api.VictorHttpUtil;
 import com.victor.che.app.MyApplication;
 import com.victor.che.bean.UserInfo;
-import com.victor.che.domain.User;
-import com.victor.che.event.StringEvent;
 import com.victor.che.ui.my.TakePhotoActivity;
 import com.victor.che.ui.my.util.StringUtil;
 import com.victor.che.util.MaterialDialogUtils;
 
-import org.greenrobot.eventbus.EventBus;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import static com.victor.che.app.MyApplication.spUtil;
 /**
  * 个人信息界面
  * Author Victor
@@ -75,7 +69,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                             tvEmail.setText(userInformation.getEmail());
                             tvPhone.setText(userInformation.getPhone());
                             tvMobile.setText(userInformation.getMobile());
-                            tvRemarks.setText(userInformation.getMobile());
+                            tvRemarks.setText(userInformation.getRemarks());
                         }
 //
                     }

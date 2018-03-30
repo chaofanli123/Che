@@ -81,7 +81,7 @@ dependencies {
     // 图片裁剪
     // Interactive paging indicator widget, compatible with the ViewPager from the Android Support Library.
     // 图表工具
-    //    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+        compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
     // 二维码扫描
     //    compile 'me.dm7.barcodescanner:zxing:1.9'
     // 圆形图片
@@ -167,6 +167,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
     compile 'com.hyman:flowlayout-lib:1.1.2'
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 

@@ -193,7 +193,7 @@ public class SuitLines extends View {
     /**
      * 一组数据在可见区域中的最大可见点数，至少>=2
      */
-    private int maxOfVisible = 6;
+    private int maxOfVisible = 100;
     /**
      * 文本之间/图表之间的间距
      */

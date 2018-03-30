@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:zhy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_bg"
-    android:orientation="vertical">
+   >
+
+    <LinearLayout
+        android:background="@color/common_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/common_topbar_height"
@@ -84,11 +89,18 @@
             xmlns:line="http://schemas.android.com/apk/res-auto"
             android:id="@+id/xinglv"
             android:layout_margin="10dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/bg_common"
             line:lineType="curve" />
-
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_margin="10dp"
+            android:background="@mipmap/bg_common"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
         <TextView
             android:visibility="gone"
             android:layout_centerInParent="true"
@@ -98,6 +110,6 @@
             android:layout_height="wrap_content" />
 
     </RelativeLayout>
+    </LinearLayout>
 
-
-</LinearLayout>
+</ScrollView>

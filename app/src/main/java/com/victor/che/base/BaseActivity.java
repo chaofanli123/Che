@@ -3,6 +3,7 @@ package com.victor.che.base;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -35,6 +36,8 @@ public abstract class BaseActivity extends AutoLayoutActivity {
 
     private static final int REQUEST_CODE_READ_EXTERNAL_STORAGE_PERMISSIONS = 1;
     private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 2;
+
+    protected Typeface mTfLight;
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -50,7 +53,7 @@ public abstract class BaseActivity extends AutoLayoutActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AbActivityManager.getInstance().addActivity(this);
-
+        mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
         mContext = this;
         mActivity = this;
         TAG = getClass().getSimpleName();

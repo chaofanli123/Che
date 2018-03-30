@@ -1,6 +1,7 @@
 package com.victor.che.ui.my;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +78,7 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
 
     private float textSize = 10;
     private String channel = 5 + "";
-
+    protected Typeface mTfLight;
     @Override
     public int getContentView() {
         return R.layout.activity_shui_zhi_jian_che_tu_biao;
@@ -117,6 +118,7 @@ public class ShuiZhiJianCheTuBiaoActivity extends BaseActivity {
     }
 
     private void init() {
+        mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
         begin = getOldDate(-3);
         end = getOldDate(0);
         edTiemStart.setText(begin);

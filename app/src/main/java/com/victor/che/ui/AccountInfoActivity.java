@@ -65,7 +65,7 @@ public class AccountInfoActivity extends TakePhotoActivity {
                         UserInfo userInfo = JSON.parseObject(element.body, UserInfo.class);
                         UserInfo.UserInformationBean userInformation = userInfo.getUserInformation();
                         if (userInformation != null) {
-                            tv_name.setText(userInformation.getName());
+                            tv_name.setText(userInformation.getLoginName());
                             tvEmail.setText(userInformation.getEmail());
                             tvPhone.setText(userInformation.getPhone());
                             tvMobile.setText(userInformation.getMobile());

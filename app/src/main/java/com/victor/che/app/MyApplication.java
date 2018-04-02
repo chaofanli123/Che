@@ -26,7 +26,6 @@ import com.videogo.openapi.EZOpenSDK;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-
 /**
  * 全局应用类
  * @author Victor
@@ -37,8 +36,8 @@ public class MyApplication extends BaseApplication {
     public static SharedPreferencesUtil spUtil;
     public static User CURRENT_USER;// 当前用户
     //  public static final boolean DEBUG = BuildConfig.DEBUG;// 是否debug， 开发和测试阶段使用
-    //  public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
-     public static final boolean DEBUG = false;// 生产环境使用
+    //    public static final boolean DEBUG = true;// 是否debug， 开发和测试阶段使用
+       public static final boolean DEBUG = false;// 生产环境使用
     public static String versionCode="1";// 版本号
     public static String versionName ="1.0.0";// 版本名称
 

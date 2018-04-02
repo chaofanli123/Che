@@ -43,7 +43,6 @@ public abstract class BaseActivity extends AutoLayoutActivity {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             setStatusBarColor(R.color.white);
         }
-
         // 绑定ButterKnife
         ButterKnife.bind(this);
     }

@@ -71,6 +71,8 @@ public class AccountFragment extends TakePhoneFragment {
     private String headPic = ""; //头像图片 需要上传的头像
     private List<UploadResultBean> uploadHeadImage;
 
+    String s;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -122,36 +124,37 @@ public class AccountFragment extends TakePhoneFragment {
     }
     private void initview() {
             // 当前用户名
-            if (StringUtil.isEmpty(MyApplication.getUser().name)) {
-                tv_name.setText(MyApplication.getUser().username);
-            }else {
-                tv_name.setText(MyApplication.getUser().name);
-            }
+//            if (StringUtil.isEmpty(MyApplication.getUser().name)) {
+//                tv_name.setText(MyApplication.getUser().username);
+//            }else {
+//                tv_name.setText(MyApplication.getUser().name);
+//            }
         getusermessage();
         showPicPick();
     }
-
     /**
      * 获取用户信息
      */
     private void getusermessage() {
         MyParams parms=new MyParams();
+
         VictorHttpUtil.doPost(mContext, Define.URL_info+ ";JSESSIONID=" + MyApplication.getUser().JSESSIONID, parms, false, null,
                 new BaseHttpCallbackListener<Element>() {
                     @Override
                     public void callbackSuccess(String url, Element element) {
                         UserInfo userInfo = JSON.parseObject(element.body, UserInfo.class);
-                        UserInfo.UserInformationBean userInformation = userInfo.getUserInformation();
+                        UserInfo.UserInformationBean userInformation = userInfo.getUserInformation();//
                         if (userInformation != null) {
-                            tv_name.setText(userInformation.getName());
-                            String photo=Define.API_DOMAIN +userInformation.getPhoto().substring(6,userInformation.getPhoto().length());
-                            String s = photo.replaceAll("\\\\", "//");
+                            tv_name.setText(userInformation.getLoginName());
+                            if (!StringUtil.isEmpty(userInformation.getPhoto())) {
+                                String photo=Define.API_DOMAIN +userInformation.getPhoto().substring(6,userInformation.getPhoto().length());
+                                s = photo.replaceAll("\\\\", "//");
+                            }
                             PicassoUtils.loadHeadImage(getActivity(),s,ivFgMineHead);
                         }
                     }
                 });
     }
-
     /**
      * 去修改个人资料界面
      */

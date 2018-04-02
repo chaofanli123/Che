@@ -115,18 +115,6 @@ public class ShuiZhiJianCheJiLuActivity extends BaseActivity {
         addressExpandableListview.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-//                CheckBox cb = (CheckBox) view.findViewById(R.id.id_cb_select_parent);
-//                if (contactPersonsList.get(i).get(i1).select){
-//                    cb.setChecked(false);
-//                    contactPersonsList.get(i).get(i1).select=false;
-//                    if (CanHuiRenYua.contains(contactPersonsList.get(i).get(i1).mName)){
-//                        CanHuiRenYua=CanHuiRenYua.replace(contactPersonsList.get(i).get(i1).mName+",","");
-//                    }
-//                }else {
-//                    cb.setChecked(true);
-//                    contactPersonsList.get(i).get(i1).select=true;
-//                    CanHuiRenYua=CanHuiRenYua+contactPersonsList.get(i).get(i1).mName+",";
-//                }
                 startActivity(new Intent(mContext,ShuiZhiJianCheTuBiaoActivity.class).putExtra("id",contactPersonsList.get(i).get(i1).getId()));
                 return true;
             }

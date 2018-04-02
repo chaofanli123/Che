@@ -79,7 +79,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener{
             case R.id.area_customer://用户
                 startActivity(new Intent(mContext,WoDeSheBeiListActivity.class));
                 break;
-            case R.id.area_order_list://订单界面
+            case R.id.area_order_list://水质监测
                 startActivity(new Intent(mContext,ShuiZhiJianCheJiLuActivity.class));
                 break;
             case R.id.area_marketing: //营销

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.victor.che">
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 获取设备信息 -->
@@ -14,7 +14,7 @@
     <!-- 获取MAC地址 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 获取日志 -->
-    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.READ_LOGS"/>
     <!-- 使用相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 震动权限 -->
@@ -43,13 +43,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:name=".app.MyApplication"
@@ -88,20 +85,18 @@
         <!-- android:windowSoftInputMode="stateAlwaysHidden|adjustResize" /> -->
         <activity
             android:name="com.victor.che.ui.SplashActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/LuchTheme"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-             <intent-filter>
+
+            <!-- <intent-filter>
              <action android:name="android.intent.action.VIEW" />
              <category android:name="android.intent.category.DEFAULT" />
              <data android:scheme="wxff87f02dac93ce58" />
-             </intent-filter>
+             </intent-filter>-->
         </activity>
         <!-- 底部导航菜单 -->
         <activity

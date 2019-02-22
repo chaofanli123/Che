@@ -83,32 +83,24 @@ public class ConstantValue {
          * 刷新会员卡列表
          */
         public static final String REFRESH_VIPCARD_LIST = "refresh_vipcard_list";
-
         /**
          * 删除购物车
          */
         public static final String DELETE_SHOPPING_CAR = "delete_shopping_car";
-
-
-
     }
-
     /**
      * 表示预约（预约支付结果界面不同）
      */
 
     public static final int APPOINT =-10001 ;
-
     /**
      * 支付方式---微信支付
      */
     public static final String PAY_TYPE_WXPAY = "wxpay";
-
     /**
      * 支付方式---支付宝支付
      */
     public static final String PAY_TYPE_ALIPAY = "alipay";
-
 
     /**
      * 获取区间的类型 1-会员卡到期区间 2-会员卡余额不足区间 3-会员卡余次不足区间 4-会员长期未到店区间 5-用户消费区间
@@ -118,7 +110,5 @@ public class ConstantValue {
     public static final int USER_CARD_END_TIMES = 3;
     public static final int USER_CARD_ON_COMMING = 4;
     public static final int USER_CARD_CONSUME = 5;
-
-
 
 }

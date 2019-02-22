@@ -8,8 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
     <style name="LuchTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/ic_welcom</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/ic_splash_bg</item>
+
     </style>
     <style name="Dialog.Alert.Self" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <!--修改AlertDialog按钮的颜色-->
@@ -27,7 +27,6 @@
         <item name="android:paddingTop">8px</item>
         <item name="android:textColor">@color/textcolor_tab_bottom</item>
     </style>
-
     <!-- 顶部菜单栏Tab样式 -->
     <style name="tab_bar">
         <item name="android:layout_width">0dp</item>

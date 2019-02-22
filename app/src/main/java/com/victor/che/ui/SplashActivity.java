@@ -1,14 +1,10 @@
 package com.victor.che.ui;
 
-import android.Manifest;
 import android.content.Intent;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.victor.che.R;
 import com.victor.che.base.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -28,38 +24,11 @@ public class SplashActivity extends BaseActivity {
     public int getContentView() {
         return R.layout.activity_splash;
     }
-
     @Override
     protected void initView() {
         super.initView();
-       // Picasso.with(mContext).load(R.drawable.ic_welcom).into(linSplsh);
         setViewData();
     }
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // 存储权限检查
-//        new TedPermission(mActivity)
-//                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)//存储权限
-//                .setDeniedMessage("您必须有存储权限正常使用app，请到\"设置->应用->权限\"中配置权限")
-//                .setDeniedCloseButtonText("取消")
-//                .setGotoSettingButtonText("设置")
-//                .setPermissionListener(new PermissionListener() {
-//                    @Override
-//                    public void onPermissionGranted() {
-//                        // 已获得授权--显示启动图
-//                        displaySplashImage();
-//                    }
-//                    @Override
-//                    public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-//                        // 设置本地默认启动图
-//                                          linSplsh.setBackgroundResource(R.drawable.ic_welcom);
-//                        // 倒计时进入主页
-//                        setViewData();
-//                    }
-//
-//                }).check();
-//    }
 
     /**
      * 三秒启动

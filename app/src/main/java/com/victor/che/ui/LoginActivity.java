@@ -177,7 +177,6 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,6 +196,5 @@ public class LoginActivity extends BaseActivity {
             isrember=true;
             tvCheck.setImageResource(R.drawable.ic_common_checked);
         }
-
     }
 }
